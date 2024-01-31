@@ -1,0 +1,10 @@
+name: EclipticEngineering
+version: '${project.version}'
+main: org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
+api-version: '1.20'
+authors: [MikkoAyaka]
+depend:
+  - EclipticStructure
+commands:
+  ecliptic-engineering:
+    aliases: ee
