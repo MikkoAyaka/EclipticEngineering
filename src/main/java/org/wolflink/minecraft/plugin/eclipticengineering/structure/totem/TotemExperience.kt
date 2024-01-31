@@ -1,4 +1,4 @@
-package org.wolflink.minecraft.plugin.eclipticengineering.structure
+package org.wolflink.minecraft.plugin.eclipticengineering.structure.totem
 
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
@@ -6,11 +6,11 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureBlueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureBuilder
 
-class GeneratorLog(builder: StructureBuilder) : Structure(blueprint,builder) {
+class TotemExperience(builder: StructureBuilder) : Structure(blueprint,builder) {
     companion object {
         val blueprint = StructureBlueprint(
-            "§a伐木场",
-            "generator_log.schem",
+            "§a经验图腾",
+            "${this::class.java.simpleName}.schem",
             30,
             ItemStack(Material.COBBLESTONE,128),
             ItemStack(Material.IRON_INGOT,16),
