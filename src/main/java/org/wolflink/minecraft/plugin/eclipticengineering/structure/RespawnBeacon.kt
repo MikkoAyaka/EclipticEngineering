@@ -6,11 +6,11 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureBlueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureBuilder
 
-class GeneratorOre(builder: StructureBuilder) : Structure(blueprint,builder) {
+class RespawnBeacon(builder: StructureBuilder) : Structure(blueprint,builder) {
     companion object {
         val blueprint = StructureBlueprint(
-            "§a采矿场",
-            "generator_ore.schem",
+            "§a重生信标",
+            "respawn_beacon.schem",
             30,
             ItemStack(Material.COBBLESTONE,128),
             ItemStack(Material.IRON_INGOT,16),

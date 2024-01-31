@@ -6,11 +6,11 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureBlueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureBuilder
 
-class GeneratorOre(builder: StructureBuilder) : Structure(blueprint,builder) {
+class GeneratorLog(builder: StructureBuilder) : Structure(blueprint,builder) {
     companion object {
         val blueprint = StructureBlueprint(
-            "§a采矿场",
-            "generator_ore.schem",
+            "§a伐木场",
+            "generator_log.schem",
             30,
             ItemStack(Material.COBBLESTONE,128),
             ItemStack(Material.IRON_INGOT,16),

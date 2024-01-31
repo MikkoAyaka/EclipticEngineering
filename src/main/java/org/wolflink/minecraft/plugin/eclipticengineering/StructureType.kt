@@ -1,18 +1,21 @@
 package org.wolflink.minecraft.plugin.eclipticengineering
 
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.GeneratorCrop
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.GeneratorLog
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.GeneratorOre
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.RespawnBeacon
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureBlueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureBuilder
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureRegistry
 
-enum class StructureType(val blueprint: StructureBlueprint,val supplier: (StructureBuilder)->Structure) {
+enum class StructureType(private val blueprint: StructureBlueprint, private val supplier: (StructureBuilder)->Structure) {
 
     GENERATOR_ORE(GeneratorOre.blueprint,{GeneratorOre(it)}),// 采矿场
-//    GENERATOR_LOG,// 伐木场
-//    GENERATOR_CROP,// 耕种场
+    GENERATOR_LOG(GeneratorLog.blueprint,{GeneratorLog(it)}),// 伐木场
+    GENERATOR_CROP(GeneratorCrop.blueprint,{GeneratorCrop(it)}),// 耕种场
 //
-//    RESPAWN_BEACON,// 重生信标
+    RESPAWN_BEACON(RespawnBeacon.blueprint,{RespawnBeacon(it)}),// 重生信标
 //    ENERGY_SOURCE,// 能源中心
 //    HOT_SPRING,// 温泉
 //
