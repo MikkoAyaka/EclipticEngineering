@@ -10,7 +10,7 @@ class HotSpring(builder: StructureBuilder) : Structure(blueprint,builder) {
     companion object {
         val blueprint = StructureBlueprint(
             "§a温泉",
-            "${this::class.java.simpleName}.schem",
+            "${this::class.java.enclosingClass.simpleName}.schem",
             30,
             ItemStack(Material.COBBLESTONE,128),
             ItemStack(Material.IRON_INGOT,16),
