@@ -14,11 +14,11 @@ import org.wolflink.minecraft.plugin.eclipticengineering.structure.tower.TowerLi
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.tower.TowerLookout
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.tower.TowerPotion
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
-import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureBlueprint
-import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureBuilder
-import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureRegistry
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.Blueprint
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.registry.StructureRegistry
 
-enum class StructureType(private val blueprint: StructureBlueprint, private val supplier: (StructureBuilder)->Structure) {
+enum class StructureType(private val blueprint: Blueprint, private val supplier: (Builder)->Structure) {
 
     GENERATOR_ORE(GeneratorOre.blueprint,{ GeneratorOre(it) }),// 采矿场
     GENERATOR_LOG(GeneratorLog.blueprint,{ GeneratorLog(it) }),// 伐木场

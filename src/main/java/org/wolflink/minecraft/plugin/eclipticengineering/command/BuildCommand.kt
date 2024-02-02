@@ -5,7 +5,7 @@ import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
-import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureBuilder
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
 object BuildCommand:CommandExecutor {
     fun register() {
@@ -15,7 +15,7 @@ object BuildCommand:CommandExecutor {
         if(sender !is Player) return false
         if(args.getOrNull(0) == "build" && args.getOrElse(1) { "" }.isNotEmpty()) {
             val structureTypeName = args[1].uppercase()
-            val builder = StructureBuilder(structureTypeName,sender.location,false)
+            val builder = Builder(structureTypeName,sender.location,false)
             builder.build(sender)
             return true
         }
