@@ -1,10 +1,13 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.block
 
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.block.data.BlockData
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
+import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.abilityTree
@@ -31,9 +34,6 @@ abstract class ResourceBlock(
 ) {
     companion object {
         private val random = Random()
-    }
-    init {
-        resourceCycle.number = random.nextDouble()
     }
     private var collectProgress = 0.0 // 采集进度(0.0~1.0)
     private var lastBreakTime = Calendar.getInstance().timeInMillis
@@ -63,25 +63,29 @@ abstract class ResourceBlock(
         collectProgress += 1.0 / collectSeconds
         if(collectProgress >= 1.0) collect()
     }
-
-    /**
-     * 资源方块被成功采集
-     */
-    private fun collect() {
+    suspend fun reset() {
         // 重置进度
         collectProgress = 0.0
         // 刷新时间
         lastAcquireTime = Calendar.getInstance().timeInMillis
-        // 生成资源
-        location.world.dropItemNaturally(location,resourceCycle.droppedItem)
         // 重置周期
         resourceCycle.number = random.nextDouble()
         // 重置方块
         location.block.simpleSet(resourceCycle.initialBlockData)
-
-        Bukkit.getScheduler().runTaskLater(EclipticEngineering.instance, Runnable {
-            location.block.simpleSet(resourceCycle.finalBlockData)
-        },20L * cooldownSeconds)
-
+        // 冷却时间结束后方块变更为最终状态
+        var count = 0
+        while (count < cooldownSeconds) {
+            delay(1000)
+            if(structure.available) count++
+        }
+        location.block.simpleSet(resourceCycle.finalBlockData)
+    }
+    /**
+     * 资源方块被成功采集
+     */
+    private fun collect() {
+        // 生成资源
+        location.world.dropItemNaturally(location,resourceCycle.droppedItem)
+        EEngineeringScope.launch { reset() }
     }
 }

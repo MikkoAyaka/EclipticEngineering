@@ -1,10 +1,13 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.structure.generator
 
+import kotlinx.coroutines.launch
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
+import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.block.OreResourceBlock
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureAvailableEvent
+import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureCompletedEvent
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureDurabilityDamageEvent
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.deepEquals
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Blueprint
@@ -54,6 +57,12 @@ class GeneratorOre(builder: Builder) : Structure(blueprint,builder),IStructureLi
         if(e.damageSourceType == DamageSource.PLAYER_BREAK) {
             val player = e.damageSource as? Player ?: return
             onBreakingStructure(player)
+        }
+    }
+
+    override fun completed(e: StructureCompletedEvent) {
+        oreResources.forEach {
+            EEngineeringScope.launch { it.reset()  }
         }
     }
 }

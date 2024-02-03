@@ -1,9 +1,11 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.extension
 
+import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.block.Block
 import org.bukkit.block.data.BlockData
 import org.bukkit.entity.Ageable
+import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 
 /**
  * 简单判断两种方块是否为同一类型
@@ -23,5 +25,7 @@ fun Block.simpleEquals(blockData: BlockData): Boolean {
     return false
 }
 fun Block.simpleSet(blockData: BlockData) {
-    this.blockData = blockData
+    Bukkit.getScheduler().runTask(EclipticEngineering.instance, Runnable {
+        this.blockData = blockData
+    })
 }

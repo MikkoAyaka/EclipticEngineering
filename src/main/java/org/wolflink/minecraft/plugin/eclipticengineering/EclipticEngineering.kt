@@ -1,8 +1,10 @@
 package org.wolflink.minecraft.plugin.eclipticengineering
 
+import kotlinx.coroutines.cancel
 import org.bukkit.plugin.java.JavaPlugin
 import org.wolflink.minecraft.plugin.eclipticengineering.command.BuildCommand
 import org.wolflink.minecraft.plugin.eclipticengineering.interaction.BuildToolListener
+import org.wolflink.minecraft.plugin.eclipticstructure.coroutine.EStructureScope
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.register
 import org.wolflink.minecraft.plugin.eclipticstructure.library.DynamicLibrary
 
@@ -25,5 +27,7 @@ class EclipticEngineering : JavaPlugin() {
     override fun onDisable() {
         // 取消注册可用的建筑结构
         StructureType.entries.forEach(StructureType::unregister)
+
+        EEngineeringScope.cancel()
     }
 }
