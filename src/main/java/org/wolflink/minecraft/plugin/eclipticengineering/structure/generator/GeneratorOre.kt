@@ -35,7 +35,7 @@ class GeneratorOre(builder: Builder) : Structure(blueprint,builder),IStructureLi
     init {
         addOreResource(-1.0,1.0,0.0)
         addOreResource(1.0,0.0,-1.0)
-        addOreResource(-2.0,2.0,-1.0)
+        addOreResource(-2.0,2.0,0.0)
         addOreResource(-1.0,3.0,-1.0)
     }
     private fun addOreResource(relativeX: Double,relativeY: Double,relativeZ: Double) {
@@ -49,14 +49,14 @@ class GeneratorOre(builder: Builder) : Structure(blueprint,builder),IStructureLi
         val targetLocationTriple = Triple(targetBlock.location.blockX,targetBlock.location.blockY,targetBlock.location.blockZ)
         return oreResources.firstOrNull { Triple(it.location.blockX,it.location.blockY,it.location.blockZ).deepEquals(targetLocationTriple) }
     }
-    private fun onBreakingStructure(player: Player) {
-        // 采集资源
-        getOreResourceBlock(player)?.breaking(player)
-    }
     override fun onDurabilityDamage(e: StructureDurabilityDamageEvent) {
         if(e.damageSourceType == DamageSource.PLAYER_BREAK) {
             val player = e.damageSource as? Player ?: return
-            onBreakingStructure(player)
+            val resource = getOreResourceBlock(player) ?: return
+            // 取消事件，防止玩家不小心损坏结构
+            e.isCancelled = true
+            // 采集资源
+            resource.breaking(player)
         }
     }
 

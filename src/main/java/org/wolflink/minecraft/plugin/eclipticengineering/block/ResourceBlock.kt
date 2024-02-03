@@ -2,18 +2,14 @@ package org.wolflink.minecraft.plugin.eclipticengineering.block
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.bukkit.Bukkit
 import org.bukkit.Location
-import org.bukkit.block.data.BlockData
+import org.bukkit.Sound
 import org.bukkit.entity.Player
-import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
-import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.abilityTree
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.simpleEquals
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.simpleSet
-import org.wolflink.minecraft.plugin.eclipticstructure.coroutine.EStructureScope
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 import java.util.Calendar
 import java.util.Random
@@ -28,7 +24,7 @@ abstract class ResourceBlock(
     val location: Location,
     @get:Synchronized private val resourceCycle: ResourceCycle,
     private val cooldownSeconds: Int,
-    private val collectSeconds: Int,
+    private val breakAmount: Int,
     private val requiredAbilityType: Ability,
     private val requiredAbilityLevel: Int
 ) {
@@ -53,14 +49,15 @@ abstract class ResourceBlock(
                 && player.abilityTree.hasAbility(requiredAbilityType,requiredAbilityLevel)
 
     /**
-     * 玩家尝试破坏资源方块(最快每秒触发一次)
+     * 玩家尝试破坏资源方块(最快每秒触发两次)
      */
     fun breaking(player: Player) {
         val now = Calendar.getInstance().timeInMillis
-        if(now - lastBreakTime < 1000) return
+        if(now - lastBreakTime < 500) return
         lastBreakTime = now
         if(!canBreak(player)) return
-        collectProgress += 1.0 / collectSeconds
+        collectProgress += 1.0 / breakAmount
+        player.playSound(player, Sound.BLOCK_AMETHYST_CLUSTER_BREAK,1f,0.5f)
         if(collectProgress >= 1.0) collect()
     }
     suspend fun reset() {
