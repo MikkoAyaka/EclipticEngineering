@@ -6,7 +6,7 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
-class TowerArrow(builder: Builder) : Structure(blueprint,builder) {
+class TowerArrow(builder: Builder) {
     companion object {
         val blueprint = Blueprint(
             "§a弓箭塔",

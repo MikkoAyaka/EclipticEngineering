@@ -4,9 +4,10 @@ import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Blueprint
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.IStructureListener
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
-class GeneratorLog(builder: Builder) : Structure(blueprint,builder) {
+class GeneratorLog(builder: Builder, override val customListener: IStructureListener?) : Structure(blueprint,builder) {
     companion object {
         val blueprint = Blueprint(
             "§a伐木场",

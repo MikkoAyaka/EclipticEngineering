@@ -4,6 +4,7 @@ import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Blueprint
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.IStructureListener
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
 class GeneratorCrop(builder: Builder) : Structure(blueprint,builder) {
@@ -18,4 +19,7 @@ class GeneratorCrop(builder: Builder) : Structure(blueprint,builder) {
             ItemStack(Material.GOLD_INGOT,8)
             )
     }
+
+    override val customListener: IStructureListener?
+        get() = TODO("Not yet implemented")
 }

@@ -6,7 +6,7 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
-class TotemExperience(builder: Builder) : Structure(blueprint,builder) {
+class TotemExperience(builder: Builder){
     companion object {
         val blueprint = Blueprint(
             "§a经验图腾",

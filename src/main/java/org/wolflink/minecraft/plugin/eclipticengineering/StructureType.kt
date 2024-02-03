@@ -21,21 +21,21 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.registry.Struct
 enum class StructureType(private val blueprint: Blueprint, private val supplier: (Builder)->Structure) {
 
     GENERATOR_ORE(GeneratorOre.blueprint,{ GeneratorOre(it) }),// 采矿场
-    GENERATOR_LOG(GeneratorLog.blueprint,{ GeneratorLog(it) }),// 伐木场
-    GENERATOR_CROP(GeneratorCrop.blueprint,{ GeneratorCrop(it) }),// 耕种场
-
-    RESPAWN_BEACON(RespawnBeacon.blueprint,{ RespawnBeacon(it) }),// 重生信标
-    ENERGY_SOURCE(EnergySource.blueprint,{ EnergySource(it) }),// 能源中心
-    HOT_SPRING(HotSpring.blueprint,{ HotSpring(it)}),// 温泉
-
-    TOTEM_EXPERIENCE(TotemExperience.blueprint,{TotemExperience(it)}),// 经验图腾
-    TOTEM_SPEED(TotemSpeed.blueprint,{TotemSpeed(it)}),// 速度图腾
-    TOTEM_STRENGTH(TotemStrength.blueprint,{TotemStrength(it)}),// 力量图腾
-
-    TOWER_ARROW(TowerArrow.blueprint,{TowerArrow(it)}),// 弓箭塔
-    TOWER_LOOKOUT(TowerLookout.blueprint,{TowerLookout(it)}),// 瞭望塔
-    TOWER_LIGHTNING(TowerLightning.blueprint,{TowerLightning(it)}),// 引雷塔
-    TOWER_POTION(TowerPotion.blueprint,{TowerPotion(it)}),// 药水塔
+//    GENERATOR_LOG(GeneratorLog.blueprint,{ GeneratorLog(it) }),// 伐木场
+//    GENERATOR_CROP(GeneratorCrop.blueprint,{ GeneratorCrop(it) }),// 耕种场
+//
+//    RESPAWN_BEACON(RespawnBeacon.blueprint,{ RespawnBeacon(it) }),// 重生信标
+//    ENERGY_SOURCE(EnergySource.blueprint,{ EnergySource(it) }),// 能源中心
+//    HOT_SPRING(HotSpring.blueprint,{ HotSpring(it)}),// 温泉
+//
+//    TOTEM_EXPERIENCE(TotemExperience.blueprint,{TotemExperience(it)}),// 经验图腾
+//    TOTEM_SPEED(TotemSpeed.blueprint,{TotemSpeed(it)}),// 速度图腾
+//    TOTEM_STRENGTH(TotemStrength.blueprint,{TotemStrength(it)}),// 力量图腾
+//
+//    TOWER_ARROW(TowerArrow.blueprint,{TowerArrow(it)}),// 弓箭塔
+//    TOWER_LOOKOUT(TowerLookout.blueprint,{TowerLookout(it)}),// 瞭望塔
+//    TOWER_LIGHTNING(TowerLightning.blueprint,{TowerLightning(it)}),// 引雷塔
+//    TOWER_POTION(TowerPotion.blueprint,{TowerPotion(it)}),// 药水塔
     ;
     fun register() {
         StructureRegistry.register(EclipticEngineering.instance,name,blueprint,supplier)

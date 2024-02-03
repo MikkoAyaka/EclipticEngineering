@@ -4,9 +4,10 @@ import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Blueprint
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.IStructureListener
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
-class EnergySource(builder: Builder) : Structure(blueprint,builder) {
+class EnergySource(builder: Builder){
     companion object {
         val blueprint = Blueprint(
             "§a能源中心",
