@@ -5,7 +5,7 @@ import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
-import org.wolflink.minecraft.plugin.eclipticengineering.block.OreResourceBlock
+import org.wolflink.minecraft.plugin.eclipticengineering.resource.OreResourceBlock
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureAvailableEvent
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureCompletedEvent
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureDurabilityDamageEvent
@@ -47,7 +47,9 @@ class GeneratorOre(builder: Builder) : Structure(blueprint,builder),IStructureLi
     private fun getOreResourceBlock(player: Player):OreResourceBlock? {
         val targetBlock = player.getTargetBlockExact(4) ?: return null
         val targetLocationTriple = Triple(targetBlock.location.blockX,targetBlock.location.blockY,targetBlock.location.blockZ)
-        return oreResources.firstOrNull { Triple(it.location.blockX,it.location.blockY,it.location.blockZ).deepEquals(targetLocationTriple) }
+        return oreResources.firstOrNull {
+            Triple(it.location.blockX,it.location.blockY,it.location.blockZ).deepEquals(targetLocationTriple)
+        }
     }
     override fun onDurabilityDamage(e: StructureDurabilityDamageEvent) {
         if(e.damageSourceType == DamageSource.PLAYER_BREAK) {

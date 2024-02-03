@@ -1,4 +1,4 @@
-package org.wolflink.minecraft.plugin.eclipticengineering.block
+package org.wolflink.minecraft.plugin.eclipticengineering.resource
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -7,9 +7,13 @@ import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
+import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.abilityTree
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.simpleEquals
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.simpleSet
+import org.wolflink.minecraft.plugin.eclipticengineering.extension.toRoma
+import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
+import org.wolflink.minecraft.plugin.eclipticstructure.extension.toHex
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 import java.util.Calendar
 import java.util.Random
@@ -38,16 +42,38 @@ abstract class ResourceBlock(
     /**
      * 玩家是否满足条件采集该方块
      */
-    private fun canBreak(player: Player) =
+    private fun breakCheck(player: Player):Boolean {
         // 建筑结构正常工作
-        structure.available
-                // 方块状态为最终态
-                && location.block.simpleEquals(resourceCycle.finalBlockData)
-                // 玩家当前使用的工具能够采集当前方块
-                && location.block.isPreferredTool(player.inventory.itemInMainHand)
-                // 拥有对应的能力
-                && player.abilityTree.hasAbility(requiredAbilityType,requiredAbilityLevel)
+        val structureAvailable = structure.available
+        if(!structureAvailable) {
+            player.playSound(player,Sound.ENTITY_VILLAGER_NO,1f,1f)
+            player.sendActionBar("$MESSAGE_PREFIX 建筑结构当前无法正常工作。".toComponent())
+            return false
+        }
+        // 方块状态为最终态
+        val blockIsFinal = location.block.simpleEquals(resourceCycle.finalBlockData)
+        if(!blockIsFinal) {
+            player.playSound(player,Sound.ENTITY_VILLAGER_NO,1f,1f)
+            player.sendActionBar("$MESSAGE_PREFIX 资源产出中，请耐心等待。".toComponent())
+            return false
+        }
+        // 玩家当前使用的工具能够采集当前方块
+        val hasTool = location.block.isPreferredTool(player.inventory.itemInMainHand)
+        if(!hasTool) {
+            player.playSound(player,Sound.ENTITY_VILLAGER_NO,1f,1f)
+            player.sendActionBar("$MESSAGE_PREFIX 需要使用正确的工具采集资源。".toComponent())
+            return false
+        }
+        // 拥有对应的能力
+        val hasAbility = player.abilityTree.hasAbility(requiredAbilityType,requiredAbilityLevel)
+        if(!hasAbility) {
+            player.playSound(player,Sound.ENTITY_VILLAGER_NO,1f,1f)
+            player.sendActionBar("$MESSAGE_PREFIX 需要能力 <#${requiredAbilityType.color.toHex()}>${requiredAbilityType.displayName} ${requiredAbilityLevel.toRoma()}".toComponent())
+            return false
+        }
 
+        return true
+    }
     /**
      * 玩家尝试破坏资源方块(最快每秒触发两次)
      */
@@ -55,7 +81,7 @@ abstract class ResourceBlock(
         val now = Calendar.getInstance().timeInMillis
         if(now - lastBreakTime < 500) return
         lastBreakTime = now
-        if(!canBreak(player)) return
+        if(!breakCheck(player)) return
         collectProgress += 1.0 / breakAmount
         player.playSound(player, Sound.BLOCK_AMETHYST_CLUSTER_BREAK,1f,0.5f)
         if(collectProgress >= 1.0) collect()

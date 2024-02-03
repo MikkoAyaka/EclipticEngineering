@@ -1,4 +1,4 @@
-package org.wolflink.minecraft.plugin.eclipticengineering.block
+package org.wolflink.minecraft.plugin.eclipticengineering.resource
 
 import org.bukkit.block.data.BlockData
 import org.bukkit.inventory.ItemStack

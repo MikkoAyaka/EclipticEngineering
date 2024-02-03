@@ -1,4 +1,4 @@
-package org.wolflink.minecraft.plugin.eclipticengineering.block
+package org.wolflink.minecraft.plugin.eclipticengineering.resource
 
 import org.bukkit.Location
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability

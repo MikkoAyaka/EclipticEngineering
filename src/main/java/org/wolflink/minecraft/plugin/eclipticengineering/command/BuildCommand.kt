@@ -9,7 +9,7 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
 object BuildCommand:CommandExecutor {
     fun register() {
-        Bukkit.getPluginCommand("ecliptic-engineering")?.setExecutor(this)
+        Bukkit.getPluginCommand("ee-build")?.setExecutor(this)
     }
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if(sender !is Player) return false

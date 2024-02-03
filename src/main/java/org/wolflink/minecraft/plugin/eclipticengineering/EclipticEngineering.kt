@@ -2,6 +2,7 @@ package org.wolflink.minecraft.plugin.eclipticengineering
 
 import kotlinx.coroutines.cancel
 import org.bukkit.plugin.java.JavaPlugin
+import org.wolflink.minecraft.plugin.eclipticengineering.command.AbilityCommand
 import org.wolflink.minecraft.plugin.eclipticengineering.command.BuildCommand
 import org.wolflink.minecraft.plugin.eclipticengineering.interaction.BuildToolListener
 import org.wolflink.minecraft.plugin.eclipticstructure.coroutine.EStructureScope
@@ -18,6 +19,7 @@ class EclipticEngineering : JavaPlugin() {
     override fun onEnable() {
         // 注册指令
         BuildCommand.register()
+        AbilityCommand.register()
         // 注册可用的建筑结构
         StructureType.entries.forEach(StructureType::register)
         // 注册事件监听器
