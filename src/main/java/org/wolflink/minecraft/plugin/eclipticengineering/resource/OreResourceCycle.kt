@@ -29,7 +29,7 @@ class OreResourceCycle(number: Double): ResourceCycle(number) {
                     Quality.EPIC,
                     "辉晶矿石",
                     true,
-                    listOf("    <reset>${PRIMARY_TEXT_COLOR}每一面切割都精准地捕捉到了天际的璀璨，","    <reset>${PRIMARY_TEXT_COLOR}仿佛夜空最明亮的星辰凝聚而成。")
+                    listOf("    ${PRIMARY_TEXT_COLOR}每一面切割都精准地捕捉到了天际的璀璨，","    ${PRIMARY_TEXT_COLOR}仿佛夜空最明亮的星辰凝聚而成。")
                 )
             }
             number <= 0.15 -> {
@@ -38,7 +38,7 @@ class OreResourceCycle(number: Double): ResourceCycle(number) {
                     Quality.EXQUISITE,
                     "闪金矿石",
                     false,
-                    listOf("    <reset>${PRIMARY_TEXT_COLOR}携带着星辰的记忆，","    <reset>${PRIMARY_TEXT_COLOR}每一粒金砂都闪烁着过往光年的辉煌。")
+                    listOf("    ${PRIMARY_TEXT_COLOR}携带着星辰的记忆，","    ${PRIMARY_TEXT_COLOR}每一粒金砂都闪烁着过往光年的辉煌。")
                 )
             }
             else -> {
@@ -47,7 +47,7 @@ class OreResourceCycle(number: Double): ResourceCycle(number) {
                     Quality.RARE,
                     "陨铁矿石",
                     false,
-                    listOf("    <reset>${PRIMARY_TEXT_COLOR}质地坚硬无比，","    <reset>${PRIMARY_TEXT_COLOR}散发着淡淡的星光。")
+                    listOf("    ${PRIMARY_TEXT_COLOR}质地坚硬无比，","    ${PRIMARY_TEXT_COLOR}散发着淡淡的星光。")
                 )
             }
         }
