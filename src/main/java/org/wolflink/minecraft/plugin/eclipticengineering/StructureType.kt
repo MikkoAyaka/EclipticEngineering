@@ -5,6 +5,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.structure.generator.Gen
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.generator.GeneratorOre
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.EnergySource
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.RespawnBeacon
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.tower.TowerArrow
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
@@ -27,7 +28,7 @@ enum class StructureType(
 //    TOTEM_SPEED(TotemSpeed.blueprint,{TotemSpeed(it)}),// 速度图腾
 //    TOTEM_STRENGTH(TotemStrength.blueprint,{TotemStrength(it)}),// 力量图腾
 //
-//    TOWER_ARROW(TowerArrow.blueprint,{TowerArrow(it)}),// 弓箭塔
+    TOWER_ARROW(TowerArrow.blueprints,TowerArrow::create),// 弓箭塔
 //    TOWER_LOOKOUT(TowerLookout.blueprint,{TowerLookout(it)}),// 瞭望塔
 //    TOWER_LIGHTNING(TowerLightning.blueprint,{TowerLightning(it)}),// 引雷塔
 //    TOWER_POTION(TowerPotion.blueprint,{TowerPotion(it)}),// 药水塔

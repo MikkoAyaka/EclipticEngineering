@@ -41,7 +41,3 @@ abstract class AbstractGenerator(blueprint: GeneratorBlueprint,builder: Builder)
         }
     }
 }
-
-fun test() {
-
-}
