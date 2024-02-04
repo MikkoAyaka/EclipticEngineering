@@ -1,4 +1,4 @@
-package org.wolflink.minecraft.plugin.eclipticengineering.resource
+package org.wolflink.minecraft.plugin.eclipticengineering.resource.ore
 
 import org.bukkit.Material
 import org.bukkit.block.data.BlockData
@@ -6,9 +6,10 @@ import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.Quality
 import org.wolflink.minecraft.plugin.eclipticengineering.SpecialItemType
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.createSpecialItem
+import org.wolflink.minecraft.plugin.eclipticengineering.resource.ResourceCycle
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.PRIMARY_TEXT_COLOR
 
-class OreResourceCycle(number: Double): ResourceCycle(number) {
+class OreResourceCycle: ResourceCycle() {
     override val finalBlockData: BlockData
         get() = when {
             number <= 0.03 -> {
@@ -25,7 +26,7 @@ class OreResourceCycle(number: Double): ResourceCycle(number) {
         get() = when {
             number <= 0.03 -> {
                 Material.DIAMOND.createSpecialItem(
-                    SpecialItemType.SPECIAL_ORE,
+                    SpecialItemType.SPECIAL_RESOURCE,
                     Quality.EPIC,
                     "辉晶矿石",
                     true,
@@ -34,7 +35,7 @@ class OreResourceCycle(number: Double): ResourceCycle(number) {
             }
             number <= 0.15 -> {
                 Material.RAW_GOLD.createSpecialItem(
-                    SpecialItemType.SPECIAL_ORE,
+                    SpecialItemType.SPECIAL_RESOURCE,
                     Quality.EXQUISITE,
                     "闪金矿石",
                     false,
@@ -43,7 +44,7 @@ class OreResourceCycle(number: Double): ResourceCycle(number) {
             }
             else -> {
                 Material.RAW_IRON.createSpecialItem(
-                    SpecialItemType.SPECIAL_ORE,
+                    SpecialItemType.SPECIAL_RESOURCE,
                     Quality.RARE,
                     "陨铁矿石",
                     false,

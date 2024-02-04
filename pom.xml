@@ -134,6 +134,12 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>org.wolflink.minecraft.wolfird</groupId>
+            <artifactId>wolfird-framework</artifactId>
+            <version>1.3.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>org.wolflink.minecraft.plugin</groupId>
             <artifactId>EclipticStructure</artifactId>
             <version>1.0.0</version>
