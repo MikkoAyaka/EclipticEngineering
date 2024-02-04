@@ -1,5 +1,6 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.structure.special
 
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.bukkit.Material
@@ -75,9 +76,8 @@ class EnergySource private constructor(blueprint: Blueprint,builder: Builder): S
             delay(1000)
         }
     }
+    private var effectJob: Job? = null
     override fun onAvailable(e: StructureAvailableEvent) {
-        EEngineeringScope.launch {
-            effectStructures()
-        }
+        if(effectJob == null || effectJob!!.isCompleted) effectJob = EEngineeringScope.launch { effectStructures() }
     }
 }
