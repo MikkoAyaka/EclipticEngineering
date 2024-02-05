@@ -65,13 +65,9 @@ abstract class ResourceBlock(
             return false
         }
         // 拥有对应的能力
-        val hasAbility = player.abilityTable.hasAbility(requiredAbilityType,requiredAbilityLevel)
-        if(!hasAbility) {
-            player.playSound(player,Sound.ENTITY_VILLAGER_NO,1f,1f)
-            player.sendActionBar("$MESSAGE_PREFIX 需要能力 <#${requiredAbilityType.color.toHex()}>${requiredAbilityType.displayName} ${requiredAbilityLevel.toRoma()}".toComponent())
+        if(!player.abilityTable.checkAbilityWithNotice(requiredAbilityType,requiredAbilityLevel)) {
             return false
         }
-
         return true
     }
     /**

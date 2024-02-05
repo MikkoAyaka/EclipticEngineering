@@ -44,7 +44,8 @@ object AuxiliaryBlockListener: Listener {
     fun onPlace(e: BlockPlaceEvent) {
         val blockType = e.block.type
         if(!blockType.isAuxiliaryBlock()) return
-        if(!e.player.abilityTable.hasAbility(Ability.BUILDING)) {
+        if(!e.player.abilityTable.checkAbilityWithNotice(Ability.BUILDING)) {
+            e.isCancelled = true
             return
         }
     }

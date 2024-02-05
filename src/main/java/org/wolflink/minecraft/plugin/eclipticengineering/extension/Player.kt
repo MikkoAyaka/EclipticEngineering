@@ -7,7 +7,7 @@ import java.util.UUID
 
 private val abilityTableMap = mutableMapOf<UUID,AbilityTable>()
 val UUID.abilityTable
-    get() = abilityTableMap.getOrPut(this) { AbilityTable() }
+    get() = abilityTableMap.getOrPut(this) { AbilityTable(this) }
 val Player.abilityTable
     get() = this.uniqueId.abilityTable
 val OfflinePlayer.abilityTable

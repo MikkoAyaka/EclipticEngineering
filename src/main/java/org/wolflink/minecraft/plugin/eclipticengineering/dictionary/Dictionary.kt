@@ -58,6 +58,11 @@ private val AUXILIARY_MATERIAL = setOf(
     Material.DETECTOR_RAIL,
     Material.POWERED_RAIL
 )
+private val REMOTE_WEAPON_MATERIAL = setOf(
+    Material.BOW,
+    Material.CROSSBOW
+)
+fun Material.isRemoteWeapon() = this in REMOTE_WEAPON_MATERIAL
 fun Material.isAuxiliaryBlock() = this in AUXILIARY_MATERIAL
 fun Material.isFurnace() = this in FURNACE_MATERIAL
 fun Material.isHoe() = this in HOE_MATERIAL
