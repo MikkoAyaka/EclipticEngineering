@@ -16,5 +16,5 @@ class AbilityTable {
     fun setAbility(abilityType: Ability,abilityLevel: Int) {
         map[abilityType] = abilityLevel
     }
-    fun hasAbility(abilityType: Ability,abilityLevel: Int) = map[abilityType]!! >= abilityLevel
+    fun hasAbility(abilityType: Ability,abilityLevel: Int = 1) = map[abilityType]!! >= abilityLevel
 }

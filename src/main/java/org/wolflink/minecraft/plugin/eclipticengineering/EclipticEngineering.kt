@@ -4,7 +4,9 @@ import kotlinx.coroutines.cancel
 import org.bukkit.plugin.java.JavaPlugin
 import org.wolflink.minecraft.plugin.eclipticengineering.command.AbilityCommand
 import org.wolflink.minecraft.plugin.eclipticengineering.command.BuildCommand
+import org.wolflink.minecraft.plugin.eclipticengineering.interaction.AuxiliaryBlockListener
 import org.wolflink.minecraft.plugin.eclipticengineering.interaction.BuildToolListener
+import org.wolflink.minecraft.plugin.eclipticengineering.interaction.WorkingToolListener
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.tower.TowerArrow
 import org.wolflink.minecraft.plugin.eclipticstructure.coroutine.EStructureScope
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.register
@@ -25,6 +27,8 @@ class EclipticEngineering : JavaPlugin() {
         StructureType.entries.forEach(StructureType::register)
         // 注册事件监听器
         BuildToolListener.register(this)
+        WorkingToolListener.register(this)
+        AuxiliaryBlockListener.register(this)
         // 注册防御塔监听器
         TowerArrow.BukkitListener.register(this)
     }
