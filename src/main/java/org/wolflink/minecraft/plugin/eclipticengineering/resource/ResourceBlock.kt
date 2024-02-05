@@ -8,7 +8,7 @@ import org.bukkit.entity.Player
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
-import org.wolflink.minecraft.plugin.eclipticengineering.extension.abilityTree
+import org.wolflink.minecraft.plugin.eclipticengineering.extension.abilityTable
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.simpleEquals
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.simpleSet
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.toRoma
@@ -65,7 +65,7 @@ abstract class ResourceBlock(
             return false
         }
         // 拥有对应的能力
-        val hasAbility = player.abilityTree.hasAbility(requiredAbilityType,requiredAbilityLevel)
+        val hasAbility = player.abilityTable.hasAbility(requiredAbilityType,requiredAbilityLevel)
         if(!hasAbility) {
             player.playSound(player,Sound.ENTITY_VILLAGER_NO,1f,1f)
             player.sendActionBar("$MESSAGE_PREFIX 需要能力 <#${requiredAbilityType.color.toHex()}>${requiredAbilityType.displayName} ${requiredAbilityLevel.toRoma()}".toComponent())

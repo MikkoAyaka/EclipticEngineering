@@ -2,13 +2,13 @@ package org.wolflink.minecraft.plugin.eclipticengineering.extension
 
 import org.bukkit.OfflinePlayer
 import org.bukkit.entity.Player
-import org.wolflink.minecraft.plugin.eclipticengineering.ability.AbilityTree
+import org.wolflink.minecraft.plugin.eclipticengineering.ability.AbilityTable
 import java.util.UUID
 
-private val abilityTreeMap = mutableMapOf<UUID,AbilityTree>()
-val UUID.abilityTree
-    get() = abilityTreeMap.getOrPut(this) { AbilityTree() }
-val Player.abilityTree
-    get() = this.uniqueId.abilityTree
-val OfflinePlayer.abilityTree
-    get() = this.uniqueId.abilityTree
+private val abilityTableMap = mutableMapOf<UUID,AbilityTable>()
+val UUID.abilityTable
+    get() = abilityTableMap.getOrPut(this) { AbilityTable() }
+val Player.abilityTable
+    get() = this.uniqueId.abilityTable
+val OfflinePlayer.abilityTable
+    get() = this.uniqueId.abilityTable
