@@ -21,7 +21,7 @@ class AncientWood(structure: Structure, location: Location): ResourceBlock(
     AncientWoodResourceCycle(),
     75,
     8,
-    Ability.MINING,
+    Ability.LOGGING,
     2
 )
 private class AncientWoodResourceCycle: ResourceCycle() {

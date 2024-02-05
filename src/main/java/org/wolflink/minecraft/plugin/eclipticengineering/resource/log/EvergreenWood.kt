@@ -20,7 +20,7 @@ class EvergreenWood(structure: Structure, location: Location): ResourceBlock(
     EvergreenWoodResourceCycle(),
     75,
     10,
-    Ability.MINING,
+    Ability.LOGGING,
     2
 )
 
