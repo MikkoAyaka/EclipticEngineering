@@ -66,6 +66,6 @@ fun Material.isRemoteWeapon() = this in REMOTE_WEAPON_MATERIAL
 fun Material.isAuxiliaryBlock() = this in AUXILIARY_MATERIAL
 fun Material.isFurnace() = this in FURNACE_MATERIAL
 fun Material.isHoe() = this in HOE_MATERIAL
-fun Material.isAXe() = this in AXE_MATERIAL
+fun Material.isAxe() = this in AXE_MATERIAL
 fun Material.isPickaxe() = this in PICKAXE_MATERIAL
 fun Material.isOre() = this in ORE_MATERIAL

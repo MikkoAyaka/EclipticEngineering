@@ -18,7 +18,7 @@ object WorkingToolListener: Listener {
         // 左键与工具交互
         if(e.action.isLeftClick && e.item != null) {
             val itemType = e.item!!.type
-            if(itemType.isAXe() && !e.player.abilityTable.checkAbilityWithNotice(Ability.LOGGING)) {
+            if(itemType.isAxe() && !e.player.abilityTable.checkAbilityWithNotice(Ability.LOGGING)) {
                 e.isCancelled = true
                 return
             }
@@ -35,6 +35,10 @@ object WorkingToolListener: Listener {
         if(e.action.isRightClick && e.item != null) {
             val itemType = e.item!!.type
             if(itemType.isRemoteWeapon() && !e.player.abilityTable.checkAbilityWithNotice(Ability.COMBAT)) {
+                e.isCancelled = true
+                return
+            }
+            if(itemType.isHoe() && !e.player.abilityTable.checkAbilityWithNotice(Ability.FARMING)) {
                 e.isCancelled = true
                 return
             }
