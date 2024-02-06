@@ -17,7 +17,7 @@ abstract class AbstractGenerator(blueprint: GeneratorBlueprint,builder: Builder)
     override val customListener by lazy { this }
     // 矿物资源方块
     private val resourceBlocks by lazy { blueprint.resourceBlocksSupplier(this,builder.buildLocation) }
-    private fun getOreResourceBlock(player: Player): ResourceBlock? {
+    private fun getResourceBlock(player: Player): ResourceBlock? {
         val targetBlock = player.getTargetBlockExact(4) ?: return null
         val targetLocationTriple = Triple(targetBlock.location.blockX,targetBlock.location.blockY,targetBlock.location.blockZ)
         return resourceBlocks.firstOrNull {
@@ -27,7 +27,7 @@ abstract class AbstractGenerator(blueprint: GeneratorBlueprint,builder: Builder)
     override fun onDurabilityDamage(e: StructureDurabilityDamageEvent) {
         if(e.damageSourceType == DamageSource.PLAYER_BREAK) {
             val player = e.damageSource as? Player ?: return
-            val resource = getOreResourceBlock(player) ?: return
+            val resource = getResourceBlock(player) ?: return
             // 取消事件，防止玩家不小心损坏结构
             e.isCancelled = true
             // 采集资源
