@@ -15,8 +15,8 @@ import org.wolflink.minecraft.plugin.eclipticengineering.extension.abilityTable
 object WorkingToolListener: Listener {
     @EventHandler
     fun checkTool(e: PlayerInteractEvent) {
-        // 与工具交互
-        if(e.action == Action.LEFT_CLICK_BLOCK && e.item != null) {
+        // 左键与工具交互
+        if(e.action.isLeftClick && e.item != null) {
             val itemType = e.item!!.type
             if(itemType.isAXe() && !e.player.abilityTable.checkAbilityWithNotice(Ability.LOGGING)) {
                 e.isCancelled = true
@@ -30,6 +30,10 @@ object WorkingToolListener: Listener {
                 e.isCancelled = true
                 return
             }
+        }
+        // 右键与工具交互
+        if(e.action.isRightClick && e.item != null) {
+            val itemType = e.item!!.type
             if(itemType.isRemoteWeapon() && !e.player.abilityTable.checkAbilityWithNotice(Ability.COMBAT)) {
                 e.isCancelled = true
                 return

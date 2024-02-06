@@ -41,7 +41,7 @@ class TowerArrow private constructor(blueprint: TowerArrowBlueprint, builder: Bu
                 val arrowTower = ZoneRepository.findByLocation(player.location)
                     .map { StructureZoneRelationRepository.find1(it) }
                     .filterIsInstance<TowerArrow>()
-                    .first()
+                    .firstOrNull() ?: return
                 arrowTower.playerShoot(player,e.shouldConsumeItem(),e.projectile)
             }
         }
