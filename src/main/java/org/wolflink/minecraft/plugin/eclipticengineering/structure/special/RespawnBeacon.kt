@@ -33,7 +33,7 @@ class RespawnBeacon private constructor(blueprint: RespawnBeaconBlueprint,builde
             ItemStack(Material.GOLD_INGOT,8)
             ))
         fun create(structureLevel: Int, builder: Builder): RespawnBeacon {
-            val blueprint = blueprints.getOrNull(structureLevel)
+            val blueprint = blueprints.getOrNull(structureLevel-1)
                 ?: throw IllegalArgumentException("不支持的建筑等级：${structureLevel}")
             return RespawnBeacon(blueprint, builder)
         }

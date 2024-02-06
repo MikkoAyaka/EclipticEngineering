@@ -35,7 +35,7 @@ class EnergySource private constructor(blueprint: Blueprint,builder: Builder): S
         )
 
         fun create(structureLevel: Int, builder: Builder): EnergySource {
-            val blueprint = blueprints.getOrNull(structureLevel)
+            val blueprint = blueprints.getOrNull(structureLevel-1)
                 ?: throw IllegalArgumentException("不支持的建筑等级：${structureLevel}")
             return EnergySource(blueprint, builder)
         }

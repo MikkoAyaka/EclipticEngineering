@@ -71,7 +71,7 @@ class TowerArrow private constructor(blueprint: TowerArrowBlueprint, builder: Bu
         )
 
         fun create(structureLevel: Int, builder: Builder): TowerArrow {
-            val blueprint = blueprints.getOrNull(structureLevel)
+            val blueprint = blueprints.getOrNull(structureLevel-1)
                 ?: throw IllegalArgumentException("不支持的建筑等级：${structureLevel}")
             return TowerArrow(blueprint, builder)
         }

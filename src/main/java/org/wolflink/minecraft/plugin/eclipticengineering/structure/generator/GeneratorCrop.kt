@@ -35,7 +35,7 @@ class GeneratorCrop private constructor(blueprint: GeneratorBlueprint, builder: 
         )
 
         fun create(structureLevel: Int, builder: Builder): GeneratorCrop {
-            val blueprint = blueprints.getOrNull(structureLevel)
+            val blueprint = blueprints.getOrNull(structureLevel-1)
                 ?: throw IllegalArgumentException("不支持的建筑等级：${structureLevel}")
             return GeneratorCrop(blueprint, builder)
         }

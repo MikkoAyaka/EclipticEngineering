@@ -48,7 +48,7 @@ class GeneratorLog private constructor(blueprint: GeneratorBlueprint, builder: B
         )
 
         fun create(structureLevel: Int, builder: Builder): GeneratorLog {
-            val blueprint = blueprints.getOrNull(structureLevel)
+            val blueprint = blueprints.getOrNull(structureLevel-1)
                 ?: throw IllegalArgumentException("不支持的建筑等级：${structureLevel}")
             return GeneratorLog(blueprint, builder)
         }
