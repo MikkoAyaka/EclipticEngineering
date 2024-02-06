@@ -13,9 +13,10 @@ object BuildCommand:CommandExecutor {
     }
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if(sender !is Player) return false
-        if(args.getOrNull(0) == "build" && args.getOrElse(1) { "" }.isNotEmpty()) {
-            val structureTypeName = args[1].uppercase()
-            val builder = Builder(structureTypeName,sender.location,false)
+        if(args.getOrNull(0) == "build") {
+            val structureTypeName = args.getOrNull(1)?.uppercase() ?: return false
+            val structureLevel = args.getOrNull(2)?.toIntOrNull() ?: return false
+            val builder = Builder(structureLevel,structureTypeName,sender.location,false)
             builder.build(sender)
             return true
         }
