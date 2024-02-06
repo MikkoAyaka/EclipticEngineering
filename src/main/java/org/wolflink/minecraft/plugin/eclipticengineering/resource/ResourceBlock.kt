@@ -29,6 +29,7 @@ abstract class ResourceBlock(
     @get:Synchronized private val resourceCycle: ResourceCycle,
     private val cooldownSeconds: Int,
     private val breakAmount: Int,
+    private val harvestSound: Sound,
     private val requiredAbilityType: Ability,
     private val requiredAbilityLevel: Int
 ) {
@@ -79,7 +80,7 @@ abstract class ResourceBlock(
         lastBreakTime = now
         if(!breakCheck(player)) return
         collectProgress += 1.0 / breakAmount
-        player.playSound(player, Sound.BLOCK_AMETHYST_CLUSTER_BREAK,1f,0.5f)
+        player.playSound(player, harvestSound,1f,0.5f)
         if(collectProgress >= 1.0) collect()
     }
     suspend fun reset() {

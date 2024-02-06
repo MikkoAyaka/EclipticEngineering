@@ -2,6 +2,7 @@ package org.wolflink.minecraft.plugin.eclipticengineering.resource.log
 
 import org.bukkit.Location
 import org.bukkit.Material
+import org.bukkit.Sound
 import org.bukkit.block.data.BlockData
 import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.Quality
@@ -20,6 +21,7 @@ class EvergreenWood(structure: Structure, location: Location): ResourceBlock(
     EvergreenWoodResourceCycle(),
     75,
     10,
+    Sound.ENTITY_VILLAGER_YES,
     Ability.LOGGING,
     2
 )
