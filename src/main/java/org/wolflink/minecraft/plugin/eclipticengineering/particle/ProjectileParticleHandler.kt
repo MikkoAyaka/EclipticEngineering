@@ -1,6 +1,5 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.particle
 
-import com.destroystokyo.paper.ParticleBuilder
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.bukkit.Particle

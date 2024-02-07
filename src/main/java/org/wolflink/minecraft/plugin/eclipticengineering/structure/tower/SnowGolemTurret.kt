@@ -2,6 +2,7 @@ package org.wolflink.minecraft.plugin.eclipticengineering.structure.tower
 
 import org.bukkit.Material
 import org.bukkit.Particle
+import org.bukkit.Sound
 import org.bukkit.entity.Entity
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.LivingEntity
@@ -19,6 +20,7 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 class SnowGolemTurret private constructor(blueprint: ElementalTurretBlueprint, builder: Builder) : ElementalTurret(blueprint, builder) {
     private val displayEntityRelativeVector = blueprint.displayEntityRelativeVector
     override fun attack(enemy: Entity,damage: Int) {
+        displayEntity.location.world.playSound(displayEntity.location, Sound.ENTITY_SNOWBALL_THROW,2f,1f)
         // 从展示实体指向敌人的向量
         val vector = enemy.location.add(-displayEntity.location.x,-displayEntity.location.y,-displayEntity.location.z).toVector()
         displayEntity.world.spawnEntity(
