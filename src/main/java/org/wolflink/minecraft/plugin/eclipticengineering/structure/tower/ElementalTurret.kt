@@ -11,6 +11,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ElementalTurretBlueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureAvailableEvent
+import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureDestroyedEvent
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureUnavailableEvent
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.IStructureListener
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
@@ -63,5 +64,9 @@ abstract class ElementalTurret(blueprint: ElementalTurretBlueprint, builder: Bui
 
     override fun onUnavailable(e: StructureUnavailableEvent) {
         if(job != null) job!!.cancel()
+    }
+
+    override fun destroyed(e: StructureDestroyedEvent) {
+        displayEntity.remove()
     }
 }

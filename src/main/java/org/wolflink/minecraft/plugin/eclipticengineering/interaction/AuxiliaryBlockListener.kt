@@ -13,6 +13,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.isAuxiliaryBlock
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.abilityTable
+import javax.naming.Name
 
 object AuxiliaryBlockListener: Listener {
     init {
@@ -32,7 +33,10 @@ object AuxiliaryBlockListener: Listener {
                             val targetBlockType = it.getTargetBlockExact(4)?.type
                             if(targetBlockType != null) {
                                 val item = it.inventory.itemInMainHand
-                                val newMeta = item.itemMeta.apply { this.setPlaceableKeys(mutableSetOf<Namespaced>(targetBlockType.key)) }
+                                val newMeta = item.itemMeta.apply {
+                                    setPlaceableKeys(mutableSetOf<Namespaced>(targetBlockType.key))
+                                    setDestroyableKeys(mutableSetOf<Namespaced>(item.type.key))
+                                }
                                 item.setItemMeta(newMeta)
                             }
                         })
