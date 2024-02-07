@@ -11,9 +11,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.abilityTable
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.simpleEquals
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.simpleSet
-import org.wolflink.minecraft.plugin.eclipticengineering.extension.toRoma
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
-import org.wolflink.minecraft.plugin.eclipticstructure.extension.toHex
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 import java.util.Calendar
 import java.util.Random
@@ -71,6 +69,14 @@ abstract class ResourceBlock(
         }
         return true
     }
+
+    /**
+     * 催熟
+     * @param seconds 使提前成熟的时间(秒)
+     */
+    fun speedUp(seconds: Int) {
+        nowCooldown += seconds
+    }
     /**
      * 玩家尝试破坏资源方块(最快每秒触发两次)
      */
@@ -83,6 +89,11 @@ abstract class ResourceBlock(
         player.playSound(player, harvestSound,1f,0.5f)
         if(collectProgress >= 1.0) collect()
     }
+    // 冷却时间结束后方块变更为最终状态
+    private var nowCooldown = 0
+        @Synchronized get
+        @Synchronized set
+
     suspend fun reset() {
         // 重置进度
         collectProgress = 0.0
@@ -92,11 +103,9 @@ abstract class ResourceBlock(
         resourceCycle.number = random.nextDouble()
         // 重置方块
         location.block.simpleSet(resourceCycle.initialBlockData)
-        // 冷却时间结束后方块变更为最终状态
-        var count = 0
-        while (count < cooldownSeconds) {
+        while (nowCooldown < cooldownSeconds) {
             delay(1000)
-            if(structure.available) count++
+            if(structure.available) nowCooldown++
         }
         location.block.simpleSet(resourceCycle.finalBlockData)
     }
