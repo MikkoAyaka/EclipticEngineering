@@ -24,6 +24,7 @@ class SnowGolemTurret private constructor(blueprint: ElementalTurretBlueprint, b
             EntityType.SNOWBALL
         ).apply {
             this as Snowball
+            setGravity(false)
             velocity = vector.normalize().multiply(0.8)
             MetadataModifier.modifyEffect(this, PotionEffect(PotionEffectType.SLOW,40,1,false,false))
         }
