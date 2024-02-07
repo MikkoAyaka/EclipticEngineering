@@ -69,3 +69,6 @@ fun Material.isHoe() = this in HOE_MATERIAL
 fun Material.isAxe() = this in AXE_MATERIAL
 fun Material.isPickaxe() = this in PICKAXE_MATERIAL
 fun Material.isOre() = this in ORE_MATERIAL
+
+@SuppressWarnings("只应该被 MetadataHandler 和 MetadataModifier 使用")
+const val META_PROJECTILE_EXTRA_DAMAGE = "EclipticStructure-ExtraDamage"

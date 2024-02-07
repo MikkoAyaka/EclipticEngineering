@@ -8,6 +8,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.interaction.AuxiliaryBl
 import org.wolflink.minecraft.plugin.eclipticengineering.interaction.BuildToolListener
 import org.wolflink.minecraft.plugin.eclipticengineering.interaction.HitMonsterListener
 import org.wolflink.minecraft.plugin.eclipticengineering.interaction.WorkingToolListener
+import org.wolflink.minecraft.plugin.eclipticengineering.metadata.MetadataHandler
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.tower.TowerArrow
 import org.wolflink.minecraft.plugin.eclipticstructure.coroutine.EStructureScope
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.register
@@ -31,6 +32,7 @@ class EclipticEngineering : JavaPlugin() {
         WorkingToolListener.register(this)
         AuxiliaryBlockListener.register(this)
         HitMonsterListener.register(this)
+        MetadataHandler.register(this)
         // 注册防御塔监听器
         TowerArrow.BukkitListener.register(this)
     }

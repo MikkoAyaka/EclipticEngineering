@@ -5,6 +5,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.structure.generator.Gen
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.generator.GeneratorOre
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.EnergySource
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.RespawnBeacon
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.tower.BlazeTurret
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.tower.TowerArrow
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Blueprint
@@ -32,6 +33,8 @@ enum class StructureType(
 //    TOWER_LOOKOUT(TowerLookout.blueprint,{TowerLookout(it)}),// 瞭望塔
 //    TOWER_LIGHTNING(TowerLightning.blueprint,{TowerLightning(it)}),// 引雷塔
 //    TOWER_POTION(TowerPotion.blueprint,{TowerPotion(it)}),// 药水塔
+
+    TURRET_BLAZE(BlazeTurret.blueprints,BlazeTurret::create)// 烈焰防御塔台
     ;
 
     fun register() {

@@ -17,6 +17,8 @@ import org.bukkit.metadata.FixedMetadataValue
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.TowerArrowBlueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.META_PROJECTILE_EXTRA_DAMAGE
+import org.wolflink.minecraft.plugin.eclipticengineering.metadata.MetadataModifier
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureInitializedEvent
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureZoneRelationRepository
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.ZoneRepository
@@ -45,15 +47,8 @@ class TowerArrow private constructor(blueprint: TowerArrowBlueprint, builder: Bu
                 arrowTower.playerShoot(player,e.shouldConsumeItem(),e.projectile)
             }
         }
-        @EventHandler
-        fun onProjectileHit(e: ProjectileHitEvent) {
-            val hitEntity = e.hitEntity
-            val damage = e.entity.getMetadata(EXTRA_DAMAGE_TAG).firstOrNull()?.asInt()?.toDouble() ?: return
-            if(hitEntity is Damageable) hitEntity.damage(damage)
-        }
     }
     companion object {
-        private const val EXTRA_DAMAGE_TAG = "EclipticStructure-ExtraDamage"
         val random = Random()
         val blueprints = listOf(
             TowerArrowBlueprint(
@@ -93,11 +88,9 @@ class TowerArrow private constructor(blueprint: TowerArrowBlueprint, builder: Bu
             })
         }
         // 修改箭矢实体，附加伤害标签
-        modifyProjectile(projectile)
+        MetadataModifier.modifyProjectile(projectile,extraDamageRange.random())
     }
-    private fun modifyProjectile(projectile: Entity) {
-        projectile.setMetadata(EXTRA_DAMAGE_TAG,FixedMetadataValue(EclipticEngineering.instance,extraDamageRange.random()))
-    }
+
     private suspend fun shooterLeaveCheck() {
         while (!destroyed) {
            shooters
