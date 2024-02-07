@@ -1,19 +1,27 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.metadata
 
 import org.bukkit.entity.Entity
+import org.bukkit.entity.Projectile
 import org.bukkit.metadata.FixedMetadataValue
+import org.bukkit.potion.PotionEffect
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.META_PROJECTILE_EXTRA_DAMAGE
+import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.META_PROJECTILE_POTION_EFFECT
 
 object MetadataModifier {
-    const val META_PROJECTILE_EXTRA_DAMAGE = "EclipticStructure-ExtraDamage"
-    fun modifyProjectile(projectile: Entity,damage: Double) {
+    fun modifyEffect(projectile: Projectile,potion: PotionEffect) {
+        projectile.setMetadata(
+            META_PROJECTILE_POTION_EFFECT,
+            FixedMetadataValue(EclipticEngineering.instance,potion)
+        )
+    }
+    fun modifyDamage(projectile: Entity, damage: Double) {
         projectile.setMetadata(
             META_PROJECTILE_EXTRA_DAMAGE,
             FixedMetadataValue(EclipticEngineering.instance,damage)
         )
     }
-    fun modifyProjectile(projectile: Entity,damage: Int) {
-        modifyProjectile(projectile,damage.toDouble())
+    fun modifyDamage(projectile: Entity, damage: Int) {
+        modifyDamage(projectile,damage.toDouble())
     }
 }

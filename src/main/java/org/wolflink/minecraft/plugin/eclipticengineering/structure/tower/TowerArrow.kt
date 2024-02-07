@@ -4,20 +4,16 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.bukkit.Bukkit
 import org.bukkit.Material
-import org.bukkit.entity.Damageable
 import org.bukkit.entity.Entity
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityShootBowEvent
-import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.inventory.ItemStack
-import org.bukkit.metadata.FixedMetadataValue
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.TowerArrowBlueprint
-import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.META_PROJECTILE_EXTRA_DAMAGE
 import org.wolflink.minecraft.plugin.eclipticengineering.metadata.MetadataModifier
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureInitializedEvent
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureZoneRelationRepository
@@ -88,7 +84,7 @@ class TowerArrow private constructor(blueprint: TowerArrowBlueprint, builder: Bu
             })
         }
         // 修改箭矢实体，附加伤害标签
-        MetadataModifier.modifyProjectile(projectile,extraDamageRange.random())
+        MetadataModifier.modifyDamage(projectile,extraDamageRange.random())
     }
 
     private suspend fun shooterLeaveCheck() {
