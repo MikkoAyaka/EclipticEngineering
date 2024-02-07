@@ -19,7 +19,7 @@ class BlazeTurret private constructor(blueprint: ElementalTurretBlueprint,builde
     override fun attack(enemy: Entity,damage: Int) {
         displayEntity.location.world.playSound(displayEntity.location, Sound.ENTITY_BLAZE_SHOOT,2f,1f)
         // 从展示实体指向敌人的向量
-        val vector = enemy.location.add(-displayEntity.location.x,-displayEntity.location.y,-displayEntity.location.z).toVector()
+        val vector = enemy.location.add(-displayEntity.location.x,-1-displayEntity.location.y,-displayEntity.location.z).toVector()
         displayEntity.world.spawnEntity(
             displayEntity.location.clone().add(0.0,2.0,0.0),
             EntityType.SMALL_FIREBALL
