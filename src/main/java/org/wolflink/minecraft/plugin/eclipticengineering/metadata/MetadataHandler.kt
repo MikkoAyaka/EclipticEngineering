@@ -23,7 +23,7 @@ object MetadataHandler: Listener {
     @EventHandler
     fun potionEffect(e: ProjectileHitEvent) {
         val hitEntity = e.hitEntity
-        val potionEffects = e.entity.getMetadata(META_PROJECTILE_POTION_EFFECT).map { it as PotionEffect }
+        val potionEffects = e.entity.getMetadata(META_PROJECTILE_POTION_EFFECT).map { it.value() as PotionEffect }
         if(potionEffects.isEmpty()) return
         if(hitEntity is LivingEntity) hitEntity.addPotionEffects(potionEffects)
     }

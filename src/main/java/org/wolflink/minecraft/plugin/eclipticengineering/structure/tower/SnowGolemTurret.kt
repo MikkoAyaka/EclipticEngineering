@@ -1,6 +1,7 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.structure.tower
 
 import org.bukkit.Material
+import org.bukkit.Particle
 import org.bukkit.entity.Entity
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.LivingEntity
@@ -12,6 +13,7 @@ import org.bukkit.potion.PotionEffectType
 import org.bukkit.util.Vector
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ElementalTurretBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.metadata.MetadataModifier
+import org.wolflink.minecraft.plugin.eclipticengineering.particle.withParticle
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
 class SnowGolemTurret private constructor(blueprint: ElementalTurretBlueprint, builder: Builder) : ElementalTurret(blueprint, builder) {
@@ -25,7 +27,8 @@ class SnowGolemTurret private constructor(blueprint: ElementalTurretBlueprint, b
         ).apply {
             this as Snowball
             setGravity(false)
-            velocity = vector.normalize().multiply(0.8)
+            velocity = vector.normalize().multiply(1.2)
+            withParticle(Particle.SNOWFLAKE)
             MetadataModifier.modifyEffect(this, PotionEffect(PotionEffectType.SLOW,40,1,false,false))
         }
     }
@@ -47,8 +50,8 @@ class SnowGolemTurret private constructor(blueprint: ElementalTurretBlueprint, b
                 5,
                 1000,
                 Vector(0,11,0),
-                2,
-                6..8,
+                1,
+                4..6,
                 20,
                 ItemStack(Material.COBBLESTONE, 128),
                 ItemStack(Material.IRON_INGOT, 16),

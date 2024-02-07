@@ -43,7 +43,7 @@ abstract class ElementalTurret(blueprint: ElementalTurretBlueprint, builder: Bui
      */
     private suspend fun searchEnemy() {
         while (true) {
-            delay(1000)
+            delay(500)
             // 攻击冷却中
             if(Calendar.getInstance().timeInMillis - lastAttackTime < attackCooldownSeconds * 1000) continue
             // 重置CD

@@ -1,6 +1,7 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.structure.tower
 
 import org.bukkit.Material
+import org.bukkit.Particle
 import org.bukkit.entity.Entity
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.LivingEntity
@@ -9,6 +10,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.util.Vector
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ElementalTurretBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.metadata.MetadataModifier
+import org.wolflink.minecraft.plugin.eclipticengineering.particle.withParticle
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
 class BlazeTurret private constructor(blueprint: ElementalTurretBlueprint,builder: Builder) : ElementalTurret(blueprint, builder) {
@@ -21,9 +23,10 @@ class BlazeTurret private constructor(blueprint: ElementalTurretBlueprint,builde
             EntityType.SMALL_FIREBALL
         ).apply {
             this as SmallFireball
-            direction = vector.normalize().multiply(0.8)
+            direction = vector.normalize().multiply(1.2)
             yield = 0f
             MetadataModifier.modifyDamage(this,damage)
+            withParticle(Particle.SMALL_FLAME)
         }
     }
     override fun spawnDisplayEntity(): Entity {
@@ -44,8 +47,8 @@ class BlazeTurret private constructor(blueprint: ElementalTurretBlueprint,builde
                 5,
                 1000,
                 Vector(0,11,0),
-                2,
-                6..8,
+                1,
+                4..6,
                 20,
                 ItemStack(Material.COBBLESTONE, 128),
                 ItemStack(Material.IRON_INGOT, 16),
