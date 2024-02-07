@@ -43,7 +43,7 @@ class BlazeTurret private constructor(blueprint: ElementalTurretBlueprint,builde
                 "烈焰防御塔台",
                 5,
                 1000,
-                Vector(0,10,0),
+                Vector(0,11,0),
                 2,
                 6..8,
                 20,

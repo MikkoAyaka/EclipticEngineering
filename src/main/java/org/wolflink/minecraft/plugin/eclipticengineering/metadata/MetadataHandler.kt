@@ -17,13 +17,14 @@ object MetadataHandler: Listener {
     fun extraDamage(e: ProjectileHitEvent) {
         val hitEntity = e.hitEntity
         // 计算总附加伤害
-        val extraDamages = e.entity.getMetadata(META_PROJECTILE_EXTRA_DAMAGE).map { it.asDouble() }.reduce(Double::plus)
+        val extraDamages = e.entity.getMetadata(META_PROJECTILE_EXTRA_DAMAGE).map { it.asDouble() }.reduceOrNull(Double::plus) ?: return
         if(hitEntity is Damageable) hitEntity.damage(extraDamages)
     }
     @EventHandler
     fun potionEffect(e: ProjectileHitEvent) {
         val hitEntity = e.hitEntity
         val potionEffects = e.entity.getMetadata(META_PROJECTILE_POTION_EFFECT).map { it as PotionEffect }
+        if(potionEffects.isEmpty()) return
         if(hitEntity is LivingEntity) hitEntity.addPotionEffects(potionEffects)
     }
 }
