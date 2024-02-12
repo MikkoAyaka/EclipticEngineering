@@ -4,13 +4,15 @@ import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.GeneratorBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.ore.OreResourceBlock
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompanion
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
 class GeneratorOre private constructor(blueprint: GeneratorBlueprint, builder: Builder) :
     AbstractGenerator(blueprint, builder) {
-    companion object {
+    companion object : StructureCompanion<GeneratorOre>(){
         private const val STRUCTURE_NAME = "精炼矿场"
-        val blueprints = listOf(
+        override val clazz: Class<GeneratorOre> = GeneratorOre::class.java
+        override val blueprints = listOf(
             GeneratorBlueprint(
                 1,
                 STRUCTURE_NAME,
@@ -46,11 +48,5 @@ class GeneratorOre private constructor(blueprint: GeneratorBlueprint, builder: B
                 ItemStack(Material.GOLD_INGOT, 8)
             )
         )
-
-        fun create(structureLevel: Int, builder: Builder): GeneratorOre {
-            val blueprint = blueprints.getOrNull(structureLevel-1)
-                ?: throw IllegalArgumentException("不支持的建筑等级：${structureLevel}")
-            return GeneratorOre(blueprint, builder)
-        }
     }
 }

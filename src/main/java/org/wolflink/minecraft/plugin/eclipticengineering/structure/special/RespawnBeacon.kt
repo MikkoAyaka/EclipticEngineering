@@ -13,6 +13,7 @@ import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.Structure
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.IStructureListener
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompanion
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
 class RespawnBeacon private constructor(blueprint: RespawnBeaconBlueprint,builder: Builder): Structure(blueprint,builder),IStructureListener {
@@ -20,8 +21,8 @@ class RespawnBeacon private constructor(blueprint: RespawnBeaconBlueprint,builde
     private val chargeSeconds = blueprint.chargeSeconds
     private val maxChargeAmount = blueprint.chargeAmount
     private var nowChargeAmount = 0
-    companion object {
-        val blueprints = listOf(RespawnBeaconBlueprint(
+    companion object : StructureCompanion<RespawnBeacon>(){
+        override val blueprints = listOf(RespawnBeaconBlueprint(
             1,
             "幽光充能信标",
             5,
@@ -31,12 +32,8 @@ class RespawnBeacon private constructor(blueprint: RespawnBeaconBlueprint,builde
             ItemStack(Material.COBBLESTONE,128),
             ItemStack(Material.IRON_INGOT,16),
             ItemStack(Material.GOLD_INGOT,8)
-            ))
-        fun create(structureLevel: Int, builder: Builder): RespawnBeacon {
-            val blueprint = blueprints.getOrNull(structureLevel-1)
-                ?: throw IllegalArgumentException("不支持的建筑等级：${structureLevel}")
-            return RespawnBeacon(blueprint, builder)
-        }
+        ))
+        override val clazz: Class<RespawnBeacon> = RespawnBeacon::class.java
     }
 
     private suspend fun charge() {

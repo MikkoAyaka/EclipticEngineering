@@ -20,6 +20,7 @@ import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureZoneR
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.ZoneRepository
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.IStructureListener
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompanion
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 import java.util.Random
 
@@ -44,9 +45,10 @@ class TowerArrow private constructor(blueprint: TowerArrowBlueprint, builder: Bu
             }
         }
     }
-    companion object {
+    companion object : StructureCompanion<TowerArrow>(){
+        override val clazz: Class<TowerArrow> = TowerArrow::class.java
         val random = Random()
-        val blueprints = listOf(
+        override val blueprints = listOf(
             TowerArrowBlueprint(
                 1,
                 "弓箭高台",
@@ -60,12 +62,6 @@ class TowerArrow private constructor(blueprint: TowerArrowBlueprint, builder: Bu
                 ItemStack(Material.GOLD_INGOT, 8)
             )
         )
-
-        fun create(structureLevel: Int, builder: Builder): TowerArrow {
-            val blueprint = blueprints.getOrNull(structureLevel-1)
-                ?: throw IllegalArgumentException("不支持的建筑等级：${structureLevel}")
-            return TowerArrow(blueprint, builder)
-        }
     }
     private fun inValidZone(player: Player) = (player.location.y - builder.buildLocation.y) in 2.0..5.0
     // 正在该防御塔进行射击的玩家 - 被记录的箭矢

@@ -5,13 +5,15 @@ import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.GeneratorBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.log.EvergreenWood
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.ore.OreResourceBlock
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompanion
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
 class GeneratorLog private constructor(blueprint: GeneratorBlueprint, builder: Builder) :
     AbstractGenerator(blueprint, builder) {
-    companion object {
+    companion object : StructureCompanion<GeneratorLog>(){
         private const val STRUCTURE_NAME = "优质木场"
-        val blueprints = listOf(
+        override val clazz: Class<GeneratorLog> = GeneratorLog::class.java
+        override val blueprints = listOf(
             GeneratorBlueprint(
                 1,
                 STRUCTURE_NAME,
@@ -46,11 +48,5 @@ class GeneratorLog private constructor(blueprint: GeneratorBlueprint, builder: B
                 ItemStack(Material.GOLD_INGOT, 8)
             )
         )
-
-        fun create(structureLevel: Int, builder: Builder): GeneratorLog {
-            val blueprint = blueprints.getOrNull(structureLevel-1)
-                ?: throw IllegalArgumentException("不支持的建筑等级：${structureLevel}")
-            return GeneratorLog(blueprint, builder)
-        }
     }
 }

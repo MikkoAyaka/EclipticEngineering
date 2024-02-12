@@ -10,19 +10,17 @@ import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.Structure
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureRepository
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureZoneRelationRepository
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.ZoneRepository
-import org.wolflink.minecraft.plugin.eclipticstructure.structure.Blueprint
-import org.wolflink.minecraft.plugin.eclipticstructure.structure.IStructureListener
-import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
-import org.wolflink.minecraft.plugin.eclipticstructure.structure.Zone
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.*
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
 class EnergySource private constructor(blueprint: Blueprint,builder: Builder): Structure(blueprint,builder),IStructureListener{
     override val customListener by lazy { this }
-    companion object {
+    companion object : StructureCompanion<EnergySource>(){
         // 影响半径(格)
         private const val EFFECT_RADIUS = 30
         private const val STRUCTURE_NAME = "幽光能量发生场"
-        val blueprints = listOf(
+        override val clazz: Class<EnergySource> = EnergySource::class.java
+        override val blueprints = listOf(
             Blueprint(
                 1,
                 STRUCTURE_NAME,
@@ -33,12 +31,6 @@ class EnergySource private constructor(blueprint: Blueprint,builder: Builder): S
                 ItemStack(Material.GOLD_INGOT, 8)
             )
         )
-
-        fun create(structureLevel: Int, builder: Builder): EnergySource {
-            val blueprint = blueprints.getOrNull(structureLevel-1)
-                ?: throw IllegalArgumentException("不支持的建筑等级：${structureLevel}")
-            return EnergySource(blueprint, builder)
-        }
     }
 
     /**

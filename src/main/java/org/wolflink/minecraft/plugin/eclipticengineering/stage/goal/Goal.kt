@@ -33,7 +33,7 @@ abstract class Goal(private val prepareTimeSeconds: Int) {
     /**
      * 进入当前任务
      */
-    open fun into() {
+    fun into() {
         status = Status.PREPARING
         EEngineeringScope.launch {
             delay(prepareTimeSeconds * 1000L)
@@ -41,11 +41,14 @@ abstract class Goal(private val prepareTimeSeconds: Int) {
             intoStory?.broadcast()
             startCheck()
         }
+        afterInto()
     }
+    open fun afterInto(){}
 
     private suspend fun startCheck() {
         EEngineeringScope.launch { finishCheck() }
         EEngineeringScope.launch { failedCheck() }
+        EEngineeringScope.launch { timerTask() }
     }
 
     /**
@@ -65,6 +68,7 @@ abstract class Goal(private val prepareTimeSeconds: Int) {
         status = Status.FAILED
     }
 
+    open suspend fun timerTask(){}
     abstract suspend fun finishCheck()
     abstract suspend fun failedCheck()
 

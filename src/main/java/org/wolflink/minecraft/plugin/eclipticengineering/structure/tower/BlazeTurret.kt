@@ -12,6 +12,7 @@ import org.bukkit.util.Vector
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ElementalTurretBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.metadata.MetadataModifier
 import org.wolflink.minecraft.plugin.eclipticengineering.particle.withParticle
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompanion
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
 class BlazeTurret private constructor(blueprint: ElementalTurretBlueprint,builder: Builder) : ElementalTurret(blueprint, builder) {
@@ -41,8 +42,9 @@ class BlazeTurret private constructor(blueprint: ElementalTurretBlueprint,builde
         }
     }
 
-    companion object {
-        val blueprints = listOf(
+    companion object : StructureCompanion<BlazeTurret>(){
+        override val clazz: Class<BlazeTurret> = BlazeTurret::class.java
+        override val blueprints = listOf(
             ElementalTurretBlueprint(
                 1,
                 "烈焰防御塔台",
@@ -57,11 +59,5 @@ class BlazeTurret private constructor(blueprint: ElementalTurretBlueprint,builde
                 ItemStack(Material.GOLD_INGOT, 8)
             )
         )
-
-        fun create(structureLevel: Int, builder: Builder): BlazeTurret {
-            val blueprint = blueprints.getOrNull(structureLevel - 1)
-                ?: throw IllegalArgumentException("不支持的建筑等级：${structureLevel}")
-            return BlazeTurret(blueprint, builder)
-        }
     }
 }
