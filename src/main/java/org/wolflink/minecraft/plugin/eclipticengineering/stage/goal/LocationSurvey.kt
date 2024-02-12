@@ -17,9 +17,8 @@ object LocationSurvey : Goal(300) {
     override val nextGoal: Goal = CollectResource
     override var intoStory: Story? = null
     override var leaveStory: Story? = null
-    private var location: Location? = null
     override fun afterInto() {
-        location = randomSurveyLocation(SURVEY_DISTANCE)
+        GoalHolder.specialLocation = randomSurveyLocation(SURVEY_DISTANCE)
     }
 
     /**
@@ -51,8 +50,8 @@ object LocationSurvey : Goal(300) {
     override suspend fun timerTask() {
         // 勘察范围提示
         while (status == Status.IN_PROGRESS) {
-            if (location != null) {
-                gamingPlayers.filter { it.location.distance(location!!) < 50 }
+            if (GoalHolder.specialLocation != null) {
+                gamingPlayers.filter { it.location.distance(GoalHolder.specialLocation!!) < 50 }
                     .forEach { it.sendActionBar("<green>已进入勘察范围".toComponent()) }
             }
             delay(1000)
@@ -61,9 +60,9 @@ object LocationSurvey : Goal(300) {
 
     override suspend fun finishCheck() {
         while (status == Status.IN_PROGRESS) {
-            if(location != null) {
+            if(GoalHolder.specialLocation != null) {
                 val result = StructureRepository
-                    .findBy { it is Lighthouse && it.builder.buildLocation.distance(location!!) < 50}.any()
+                    .findBy { it is Lighthouse && it.builder.buildLocation.distance(GoalHolder.specialLocation!!) < 50}.any()
                 if (result) {
                     finish()
                     break

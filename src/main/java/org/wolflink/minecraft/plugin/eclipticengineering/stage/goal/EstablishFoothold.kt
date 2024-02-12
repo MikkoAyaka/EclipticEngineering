@@ -21,6 +21,9 @@ object EstablishFoothold : Goal(0) {
         while (status == Status.IN_PROGRESS) {
             val result = StructureRepository.findBy { it is EnergySource }.any()
             if (result) {
+                val energySource = StructureRepository.findBy { it is EnergySource }.first()
+                // 更新据点坐标
+                GoalHolder.footholdLocation = energySource.builder.buildLocation
                 finish()
                 break
             }
