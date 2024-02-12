@@ -11,3 +11,5 @@ commands:
     aliases: eeb
   ee-ability:
     aliases: eea
+  ee-stage:
+    aliases: ees
