@@ -1,6 +1,7 @@
 package org.wolflink.minecraft.plugin.eclipticengineering
 
 import kotlinx.coroutines.cancel
+import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 import org.wolflink.minecraft.plugin.eclipticengineering.command.AbilityCommand
 import org.wolflink.minecraft.plugin.eclipticengineering.command.BuildCommand
@@ -9,6 +10,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.interaction.BuildToolLi
 import org.wolflink.minecraft.plugin.eclipticengineering.interaction.HitMonsterListener
 import org.wolflink.minecraft.plugin.eclipticengineering.interaction.WorkingToolListener
 import org.wolflink.minecraft.plugin.eclipticengineering.metadata.MetadataHandler
+import org.wolflink.minecraft.plugin.eclipticengineering.stage.StageHolder
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.tower.TowerArrow
 import org.wolflink.minecraft.plugin.eclipticstructure.coroutine.EStructureScope
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.register
@@ -17,6 +19,9 @@ import org.wolflink.minecraft.plugin.eclipticstructure.library.DynamicLibrary
 class EclipticEngineering : JavaPlugin() {
     companion object {
         lateinit var instance: EclipticEngineering
+        fun runTask(block: ()->Unit) {
+            Bukkit.getScheduler().runTask(instance,block)
+        }
     }
     override fun onLoad() {
         instance = this
@@ -35,6 +40,9 @@ class EclipticEngineering : JavaPlugin() {
         MetadataHandler.register(this)
         // 注册防御塔监听器
         TowerArrow.BukkitListener.register(this)
+
+        // 初始化阶段
+        StageHolder.init()
     }
 
     override fun onDisable() {
