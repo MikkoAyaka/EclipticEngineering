@@ -22,6 +22,9 @@ class RespawnBeacon private constructor(blueprint: RespawnBeaconBlueprint,builde
     private val maxChargeAmount = blueprint.chargeAmount
     private var nowChargeAmount = 0
     companion object : StructureCompanion<RespawnBeacon>(){
+        override fun supplier(blueprint: Blueprint, builder: Builder): RespawnBeacon {
+            return RespawnBeacon(blueprint as RespawnBeaconBlueprint, builder)
+        }
         override val blueprints = listOf(RespawnBeaconBlueprint(
             1,
             "幽光充能信标",

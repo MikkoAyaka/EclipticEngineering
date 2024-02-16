@@ -12,6 +12,7 @@ import org.bukkit.util.Vector
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ElementalTurretBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.metadata.MetadataModifier
 import org.wolflink.minecraft.plugin.eclipticengineering.particle.withParticle
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompanion
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
@@ -44,6 +45,10 @@ class BlazeTurret private constructor(blueprint: ElementalTurretBlueprint,builde
 
     companion object : StructureCompanion<BlazeTurret>(){
         override val clazz: Class<BlazeTurret> = BlazeTurret::class.java
+        override fun supplier(blueprint: Blueprint, builder: Builder): BlazeTurret {
+            return BlazeTurret(blueprint as ElementalTurretBlueprint,builder)
+        }
+
         override val blueprints = listOf(
             ElementalTurretBlueprint(
                 1,

@@ -4,6 +4,7 @@ import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.GeneratorBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.crop.CropResourceBlock
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompanion
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
@@ -12,6 +13,10 @@ class GeneratorCrop private constructor(blueprint: GeneratorBlueprint, builder: 
     companion object : StructureCompanion<GeneratorCrop>(){
         private const val STRUCTURE_NAME = "精培农场"
         override val clazz: Class<GeneratorCrop> = GeneratorCrop::class.java
+        override fun supplier(blueprint: Blueprint, builder: Builder): GeneratorCrop {
+            return GeneratorCrop(blueprint as GeneratorBlueprint,builder)
+        }
+
         override val blueprints = listOf(
             GeneratorBlueprint(
                 1,

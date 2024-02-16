@@ -23,6 +23,10 @@ class PipelineInterface private constructor(blueprint: Blueprint, builder: Build
     }
     companion object : StructureCompanion<PipelineInterface>(){
         override val clazz: Class<PipelineInterface> = PipelineInterface::class.java
+        override fun supplier(blueprint: Blueprint, builder: Builder): PipelineInterface {
+            return PipelineInterface(blueprint, builder)
+        }
+
         override val blueprints = listOf(
             Blueprint(
                 1,

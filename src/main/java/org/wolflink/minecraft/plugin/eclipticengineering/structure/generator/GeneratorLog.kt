@@ -5,6 +5,7 @@ import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.GeneratorBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.log.EvergreenWood
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.ore.OreResourceBlock
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompanion
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
@@ -12,6 +13,9 @@ class GeneratorLog private constructor(blueprint: GeneratorBlueprint, builder: B
     AbstractGenerator(blueprint, builder) {
     companion object : StructureCompanion<GeneratorLog>(){
         private const val STRUCTURE_NAME = "优质木场"
+        override fun supplier(blueprint: Blueprint, builder: Builder): GeneratorLog {
+            return GeneratorLog(blueprint as GeneratorBlueprint,builder)
+        }
         override val clazz: Class<GeneratorLog> = GeneratorLog::class.java
         override val blueprints = listOf(
             GeneratorBlueprint(

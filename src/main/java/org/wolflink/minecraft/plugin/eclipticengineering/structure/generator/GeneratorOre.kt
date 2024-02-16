@@ -4,6 +4,7 @@ import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.GeneratorBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.ore.OreResourceBlock
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompanion
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
@@ -12,6 +13,9 @@ class GeneratorOre private constructor(blueprint: GeneratorBlueprint, builder: B
     companion object : StructureCompanion<GeneratorOre>(){
         private const val STRUCTURE_NAME = "精炼矿场"
         override val clazz: Class<GeneratorOre> = GeneratorOre::class.java
+        override fun supplier(blueprint: Blueprint, builder: Builder): GeneratorOre {
+            return GeneratorOre(blueprint as GeneratorBlueprint,builder)
+        }
         override val blueprints = listOf(
             GeneratorBlueprint(
                 1,

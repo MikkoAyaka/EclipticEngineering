@@ -13,11 +13,13 @@ import org.bukkit.event.entity.EntityShootBowEvent
 import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
+import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ElementalTurretBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.TowerArrowBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.metadata.MetadataModifier
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureInitializedEvent
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureZoneRelationRepository
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.ZoneRepository
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.IStructureListener
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompanion
@@ -47,6 +49,9 @@ class TowerArrow private constructor(blueprint: TowerArrowBlueprint, builder: Bu
     }
     companion object : StructureCompanion<TowerArrow>(){
         override val clazz: Class<TowerArrow> = TowerArrow::class.java
+        override fun supplier(blueprint: Blueprint, builder: Builder): TowerArrow {
+            return TowerArrow(blueprint as TowerArrowBlueprint,builder)
+        }
         val random = Random()
         override val blueprints = listOf(
             TowerArrowBlueprint(

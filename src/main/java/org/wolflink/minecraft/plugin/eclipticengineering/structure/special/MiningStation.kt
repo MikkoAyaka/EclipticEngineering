@@ -26,5 +26,8 @@ class MiningStation private constructor(blueprint: Blueprint, builder: Builder) 
             )
         )
         override val clazz: Class<MiningStation> = MiningStation::class.java
+        override fun supplier(blueprint: Blueprint, builder: Builder): MiningStation {
+            return MiningStation(blueprint,builder)
+        }
     }
 }
