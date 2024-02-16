@@ -10,11 +10,15 @@ import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureRepos
 object UpgradeFoothold : Goal(0) {
     override val nextGoal = LocationSurvey
     override var intoStory: Story? = Story(
-        "<green>孩子们，这里还是剧情",
-        "<green>请尽快扩大你们的据点，",
-        "<green>建造伐木场、采矿场、农场。",
+        "尽管我们已经初步建立了据点",
+        "但仍需要扩大并巩固这里",
+        "怪物们正在黑暗之中伺机而动",
+        "抓紧时间吧！",
     )
-    override var leaveStory: Story? = null
+    override var leaveStory: Story? = Story(
+        "这个据点看上去已经能够正常运作了",
+        "稍作整顿，接下来将有困难的任务等待着你们",
+    )
     override suspend fun finishCheck() {
         while (status == Status.IN_PROGRESS) {
             val result1 = StructureRepository.findBy { it is GeneratorLog }.any()

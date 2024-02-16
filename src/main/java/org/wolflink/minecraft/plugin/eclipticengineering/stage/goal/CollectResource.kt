@@ -8,8 +8,17 @@ import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureRepos
 
 object CollectResource : Goal(60) {
     override val nextGoal: Goal = WaveDefense
-    override var intoStory: Story? = null
-    override var leaveStory: Story? = null
+    override var intoStory: Story? = Story(
+        "资源是生存和发展的基础",
+        "现在，我们必须出发",
+        "收集这片土地上的宝贵物资",
+    )
+    override var leaveStory: Story? = Story(
+        "经过一番辛勤劳动",
+        "我们收集到了足够的资源",
+        "这将支持我们的下一步行动",
+        "让我们的据点更加坚固",
+    )
 
     override suspend fun finishCheck() {
         whileTag@ while (status == Status.IN_PROGRESS) {

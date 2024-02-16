@@ -11,12 +11,23 @@ import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureRepos
 object EstablishFoothold : Goal(0) {
     override val nextGoal: Goal = UpgradeFoothold
     override var intoStory: Story? = Story(
-        "<green>孩子们，这里是剧情",
-        "<green>时间紧任务重，你们的目标是",
-        "<green>寻找一处合适的地点作为据点，",
-        "<green>尽快建造能源中心。",
+        "在这个被幽匿感染侵蚀的世界里",
+        "你们，无畏的开拓者",
+        "被选中重建家园的重任",
+        "带着希望和决心",
+        "踏上了地面之旅",
+        "地面充满了重重险境",
+        "但你们的目标只有一个",
+        "找到一片净土",
+        "重建我们的家园",
     )
-    override var leaveStory: Story? = null
+    override var leaveStory: Story? = Story(
+        "随着你的决心和勇气",
+        "新的旅程正式开始",
+        "在这片荒凉之地上",
+        "寻找生存和重建的希望",
+        "就是你现在的使命",
+    )
     override suspend fun finishCheck() {
         while (status == Status.IN_PROGRESS) {
             val result = StructureRepository.findBy { it is EnergySource }.any()

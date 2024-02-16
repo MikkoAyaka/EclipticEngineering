@@ -15,8 +15,14 @@ import kotlin.math.sin
 object LocationSurvey : Goal(300) {
     private const val SURVEY_DISTANCE = 500
     override val nextGoal: Goal = CollectResource
-    override var intoStory: Story? = null
-    override var leaveStory: Story? = null
+    override var intoStory: Story? = Story(
+        "为了确保我们的安全和发展",
+        "我们需要对周围的地区进行详细的勘察",
+    )
+    override var leaveStory: Story? = Story(
+        "勘察完成，我们发现了新的资源和潜在的威胁",
+        "这些信息对我们的未来发展至关重要",
+    )
     override fun afterInto() {
         GoalHolder.specialLocation = randomSurveyLocation(SURVEY_DISTANCE)
     }
