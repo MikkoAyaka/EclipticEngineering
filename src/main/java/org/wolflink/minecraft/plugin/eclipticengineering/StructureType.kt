@@ -1,9 +1,11 @@
 package org.wolflink.minecraft.plugin.eclipticengineering
 
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.decoration.Lighthouse
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.generator.GeneratorCrop
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.generator.GeneratorLog
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.generator.GeneratorOre
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.EnergySource
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.MiningStation
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.RespawnBeacon
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.tower.BlazeTurret
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.tower.SnowGolemTurret
@@ -22,8 +24,10 @@ enum class StructureType(
     GENERATOR_LOG(GeneratorLog.blueprints, GeneratorLog::create),// 伐木场
     GENERATOR_CROP(GeneratorCrop.blueprints, GeneratorCrop::create),// 耕种场
 
+    LIGHT_HOUSE(Lighthouse.blueprints,Lighthouse::create),// 灯塔
     RESPAWN_BEACON(RespawnBeacon.blueprints,RespawnBeacon::create),// 重生信标
     ENERGY_SOURCE(EnergySource.blueprints,EnergySource::create),// 能源中心
+    MINING_STATION(MiningStation.blueprints,MiningStation::create),
 //    HOT_SPRING(HotSpring.blueprint,{ HotSpring(it)}),// 温泉
 //
 //    TOTEM_EXPERIENCE(TotemExperience.blueprint,{TotemExperience(it)}),// 经验图腾
