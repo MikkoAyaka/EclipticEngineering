@@ -22,7 +22,7 @@ object StagePapi: PlaceholderExpansion() {
 
     override fun onRequest(player: OfflinePlayer?, params: String): String {
         if(params == "stage") return StageHolder.thisStage?.displayName ?: "未初始化"
-        if(params == "goal") return GoalHolder.nowGoal.displayName
+        if(params == "goal") return GoalHolder.nowGoal?.displayName ?: "未初始化"
         if(params == "special_location") return GoalHolder.specialLocation?.toVector()?.toString() ?: "暂无"
         if(params == "foothold_location") return GoalHolder.footholdLocation?.toVector()?.toString() ?: "暂无"
         return "未知变量"
