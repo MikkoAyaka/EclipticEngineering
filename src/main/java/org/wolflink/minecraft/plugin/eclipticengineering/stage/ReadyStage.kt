@@ -19,7 +19,7 @@ class ReadyStage(stageHolder: StageHolder) : Stage("准备阶段", stageHolder) 
             repeat(maxCount) {
                 val title = Title.title(
                     "".toComponent(),
-                    "${(RED_COLOR to GREEN_COLOR ofGradient count.toDouble()/maxCount).toHexFormat()}<bold>${count--}".toComponent(),
+                    "${(RED_COLOR to GREEN_COLOR ofGradient count.toDouble()/maxCount).toHexFormat()}<bold>$count".toComponent(),
                     Title.Times.times(
                         Duration.ofMillis(150),
                         Duration.ofMillis(700),

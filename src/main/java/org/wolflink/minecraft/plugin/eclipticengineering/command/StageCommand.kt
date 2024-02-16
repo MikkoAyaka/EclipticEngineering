@@ -15,6 +15,7 @@ object StageCommand: CommandExecutor {
         if(!sender.isOp) return false
         if(args.getOrNull(0) == "start") {
             if(StageHolder.thisStage is WaitStage) {
+                sender.sendMessage("你已触发开始游戏")
                 StageHolder.next()
                 return true
             }
