@@ -45,7 +45,7 @@ abstract class Goal(val displayName: String,private val prepareTimeSeconds: Int)
         }
         afterInto()
     }
-    open fun afterInto(){}
+    protected open fun afterInto(){}
 
     /**
      * 进入下一个任务
@@ -56,7 +56,7 @@ abstract class Goal(val displayName: String,private val prepareTimeSeconds: Int)
         nextGoal.into()
     }
 
-    open fun beforeFinish(){}
+    protected open fun beforeFinish(){}
     fun finish() {
         beforeFinish()
         status = Status.FINISHED
@@ -66,9 +66,9 @@ abstract class Goal(val displayName: String,private val prepareTimeSeconds: Int)
         status = Status.FAILED
     }
 
-    open suspend fun timerTask(){}
+    protected open suspend fun timerTask(){}
     /**
      * 根据完成状态发放奖励
      */
-    abstract fun giveRewards()
+    protected abstract fun giveRewards()
 }
