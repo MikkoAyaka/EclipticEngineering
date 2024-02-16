@@ -8,11 +8,11 @@ import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.Quality
 import org.wolflink.minecraft.plugin.eclipticengineering.SpecialItemType
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
+import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.PRIMARY_TEXT_COLOR
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.createSpecialItem
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.ResourceBlock
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.ResourceCycle
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.ore.OreResourceCycle
-import org.wolflink.minecraft.plugin.eclipticstructure.extension.PRIMARY_TEXT_COLOR
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 
 class EvergreenWood(structure: Structure, location: Location): ResourceBlock(

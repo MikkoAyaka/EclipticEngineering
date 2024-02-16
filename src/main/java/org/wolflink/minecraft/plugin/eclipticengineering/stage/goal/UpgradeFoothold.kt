@@ -19,23 +19,18 @@ object UpgradeFoothold : Goal("据点扩张",0) {
         "这个据点看上去已经能够正常运作了",
         "稍作整顿，接下来将有困难的任务等待着你们",
     )
-    override suspend fun finishCheck() {
-        while (status == Status.IN_PROGRESS) {
-            val result1 = StructureRepository.findBy { it is GeneratorLog }.any()
-            val result2 = StructureRepository.findBy { it is GeneratorCrop }.any()
-            val result3 = StructureRepository.findBy { it is GeneratorOre }.any()
-            if (result1 && result2 && result3) {
-                finish()
-                break
-            }
-            delay(5000)
+    override val finishConditions: List<GoalCondition> = listOf(
+        GoalCondition("建造伐木场"){
+            StructureRepository.findBy { it is GeneratorLog }.any()
+        },
+        GoalCondition("建造农场"){
+            StructureRepository.findBy { it is GeneratorCrop }.any()
+        },
+        GoalCondition("建造采矿场"){
+            StructureRepository.findBy { it is GeneratorOre }.any()
         }
-    }
-
-    override suspend fun failedCheck() {
-
-    }
-
+    )
+    override val failedConditions: List<GoalCondition> = listOf()
     /**
      * 根据完成状态发放奖励
      */

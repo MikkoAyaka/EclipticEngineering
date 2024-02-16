@@ -10,6 +10,8 @@ abstract class Goal(val displayName: String,private val prepareTimeSeconds: Int)
     abstract val nextGoal: Goal
     protected abstract var intoStory: Story?
     protected abstract var leaveStory: Story?
+    abstract val finishConditions: List<GoalCondition>
+    abstract val failedConditions: List<GoalCondition>
 
     // 任务完成状态
     protected var status = Status.NOT_STARTED
@@ -39,17 +41,11 @@ abstract class Goal(val displayName: String,private val prepareTimeSeconds: Int)
             delay(prepareTimeSeconds * 1000L)
             status = Status.IN_PROGRESS
             intoStory?.broadcast()
-            startCheck()
+            EEngineeringScope.launch { timerTask() }
         }
         afterInto()
     }
     open fun afterInto(){}
-
-    private suspend fun startCheck() {
-        EEngineeringScope.launch { finishCheck() }
-        EEngineeringScope.launch { failedCheck() }
-        EEngineeringScope.launch { timerTask() }
-    }
 
     /**
      * 进入下一个任务
@@ -60,7 +56,9 @@ abstract class Goal(val displayName: String,private val prepareTimeSeconds: Int)
         nextGoal.into()
     }
 
+    open fun beforeFinish(){}
     fun finish() {
+        beforeFinish()
         status = Status.FINISHED
     }
 
@@ -69,9 +67,6 @@ abstract class Goal(val displayName: String,private val prepareTimeSeconds: Int)
     }
 
     open suspend fun timerTask(){}
-    abstract suspend fun finishCheck()
-    abstract suspend fun failedCheck()
-
     /**
      * 根据完成状态发放奖励
      */

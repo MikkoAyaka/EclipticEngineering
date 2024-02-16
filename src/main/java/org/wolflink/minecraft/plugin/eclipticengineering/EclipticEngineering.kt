@@ -13,6 +13,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.interaction.WorkingTool
 import org.wolflink.minecraft.plugin.eclipticengineering.metadata.MetadataHandler
 import org.wolflink.minecraft.plugin.eclipticengineering.papi.StagePapi
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.VirtualTeamInventory
+import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.TaskBook
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.StageHolder
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.tower.TowerArrow
 import org.wolflink.minecraft.plugin.eclipticstructure.coroutine.EStructureScope
@@ -46,6 +47,8 @@ class EclipticEngineering : JavaPlugin() {
         TowerArrow.BukkitListener.register(this)
         // 注册背包监听器
         VirtualTeamInventory.register(this)
+        // 注册任务书监听器
+        TaskBook.register(this)
         // 注册变量
         StagePapi.register()
         // 初始化阶段

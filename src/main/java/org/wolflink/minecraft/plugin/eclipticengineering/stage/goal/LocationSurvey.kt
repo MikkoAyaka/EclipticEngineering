@@ -23,6 +23,13 @@ object LocationSurvey : Goal("定点勘察",300) {
         "勘察完成，我们发现了新的资源和潜在的威胁",
         "这些信息对我们的未来发展至关重要",
     )
+    override val finishConditions: List<GoalCondition> = listOf(
+        GoalCondition("在勘察坐标附近建造灯塔"){
+            StructureRepository.findBy { it is Lighthouse && it.builder.buildLocation.distance(GoalHolder.specialLocation!!) < 50}.any()
+        }
+    )
+    override val failedConditions: List<GoalCondition> = listOf()
+
     override fun afterInto() {
         GoalHolder.specialLocation = randomSurveyLocation(SURVEY_DISTANCE)
     }
@@ -62,23 +69,6 @@ object LocationSurvey : Goal("定点勘察",300) {
             }
             delay(1000)
         }
-    }
-
-    override suspend fun finishCheck() {
-        while (status == Status.IN_PROGRESS) {
-            if(GoalHolder.specialLocation != null) {
-                val result = StructureRepository
-                    .findBy { it is Lighthouse && it.builder.buildLocation.distance(GoalHolder.specialLocation!!) < 50}.any()
-                if (result) {
-                    finish()
-                    break
-                }
-            }
-            delay(3000)
-        }
-    }
-
-    override suspend fun failedCheck() {
     }
 
     /**

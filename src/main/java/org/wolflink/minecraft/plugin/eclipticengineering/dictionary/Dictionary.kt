@@ -125,3 +125,7 @@ fun Material.isOre() = this in ORE_MATERIAL
 const val META_PROJECTILE_EXTRA_DAMAGE = "EclipticStructure-ExtraDamage"
 @SuppressWarnings("只应该被 MetadataHandler 和 MetadataModifier 使用")
 const val META_PROJECTILE_POTION_EFFECT = "EclipticStructure-PotionEffect"
+
+const val SPLITER_COLOR = "<#9C9C9C>"
+const val SECONDARY_TEXT_COLOR = "<#E8E8E8>"
+const val PRIMARY_TEXT_COLOR = "<#FFFAFA>"

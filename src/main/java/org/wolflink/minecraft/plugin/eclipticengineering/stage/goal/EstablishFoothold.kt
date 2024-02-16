@@ -1,6 +1,5 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.stage.goal
 
-import kotlinx.coroutines.delay
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
@@ -28,24 +27,17 @@ object EstablishFoothold : Goal("建立据点",0) {
         "寻找生存和重建的希望",
         "就是你现在的使命",
     )
-    override suspend fun finishCheck() {
-        while (status == Status.IN_PROGRESS) {
-            val result = StructureRepository.findBy { it is EnergySource }.any()
-            if (result) {
-                val energySource = StructureRepository.findBy { it is EnergySource }.first()
-                // 更新据点坐标
-                GoalHolder.footholdLocation = energySource.builder.buildLocation
-                finish()
-                break
-            }
-            delay(3000)
+    override val finishConditions: List<GoalCondition> = listOf(
+        GoalCondition("建立幽光能量发生场"){
+            StructureRepository.findBy { it is EnergySource }.any()
         }
+    )
+    override val failedConditions: List<GoalCondition> = listOf()
+    override fun beforeFinish() {
+        val energySource = StructureRepository.findBy { it is EnergySource }.first()
+        // 更新据点坐标
+        GoalHolder.footholdLocation = energySource.builder.buildLocation
     }
-
-    override suspend fun failedCheck() {
-        // Nothing
-    }
-
     /**
      * 根据完成状态发放奖励
      */

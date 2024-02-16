@@ -13,13 +13,8 @@ object WaveDefense : Goal("尸潮来袭",480) {
         "我们成功抵御了怪物的进攻",
         "它们暂时退去了"
     )
-
-    override suspend fun finishCheck() {
-    }
-
-    override suspend fun failedCheck() {
-    }
-
+    override val finishConditions: List<GoalCondition> = listOf()
+    override val failedConditions: List<GoalCondition> = listOf()
     override fun giveRewards() {
     }
 }

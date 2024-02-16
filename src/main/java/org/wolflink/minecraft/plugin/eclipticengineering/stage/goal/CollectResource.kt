@@ -19,37 +19,33 @@ object CollectResource : Goal("物资收集",60) {
         "这将支持我们的下一步行动",
         "让我们的据点更加坚固",
     )
-
-    override suspend fun finishCheck() {
-        whileTag@ while (status == Status.IN_PROGRESS) {
-            // 开采站是否建立
-            val result1 = StructureRepository.findBy { it is MiningStation && it.builder.buildLocation.distance(GoalHolder.specialLocation!!) < 50 }.any()
+    override val finishConditions: List<GoalCondition> = listOf(
+        GoalCondition("在指定坐标附近建立开采站"){
+            StructureRepository.findBy { it is MiningStation && it.builder.buildLocation.distance(GoalHolder.specialLocation!!) < 50 }.any()
+        },
+        GoalCondition("在开采站附近建立运输接口"){
+            StructureRepository.findBy { it is PipelineInterface && it.builder.buildLocation.distance(GoalHolder.specialLocation!!) < 50}.any()
+        },
+        GoalCondition("在据点附近建立运输接口"){
+            StructureRepository.findBy { it is PipelineInterface && it.builder.buildLocation.distance(GoalHolder.footholdLocation!!) < 50}.any()
+        },
+        GoalCondition("端口是否连接"){
             // 开采站端口列表
             val miningStationPipelines = StructureRepository.findBy { it is PipelineInterface && it.builder.buildLocation.distance(GoalHolder.specialLocation!!) < 50}.map { it as PipelineInterface }
-            // 开采站端口是否建立
-            val result2 = miningStationPipelines.isNotEmpty()
             // 基地端口列表
             val footholdPipelines = StructureRepository.findBy { it is PipelineInterface && it.builder.buildLocation.distance(GoalHolder.footholdLocation!!) < 50}.map { it as PipelineInterface }
-            // 基地端口是否建立
-            val result3 = footholdPipelines.isNotEmpty()
-            // TODO 缺少虚拟物品检查
-            if (result1 && result2 && result3) {
-                for (miningStationPipeline in miningStationPipelines) {
-                    for (footholdPipeline in footholdPipelines) {
-                        // 存在至少一个基地的端口与开采站端口有连接
-                        if(miningStationPipeline.hasConnection(footholdPipeline)){
-                            finish()
-                            break@whileTag
-                        }
+            for (miningStationPipeline in miningStationPipelines) {
+                for (footholdPipeline in footholdPipelines) {
+                    // 存在至少一个基地的端口与开采站端口有连接
+                    if(miningStationPipeline.hasConnection(footholdPipeline)){
+                        return@GoalCondition true
                     }
                 }
             }
-            delay(3000)
+            return@GoalCondition false
         }
-    }
-
-    override suspend fun failedCheck() {
-    }
+    )
+    override val failedConditions: List<GoalCondition> = listOf()
     override fun giveRewards() {
     }
 }
