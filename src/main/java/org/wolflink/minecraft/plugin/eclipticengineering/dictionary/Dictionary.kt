@@ -62,6 +62,57 @@ private val REMOTE_WEAPON_MATERIAL = setOf(
     Material.BOW,
     Material.CROSSBOW
 )
+private val WOOD_MATERIAL = setOf(
+    // 原木
+    Material.OAK_WOOD,
+    Material.SPRUCE_WOOD,
+    Material.BIRCH_WOOD,
+    Material.JUNGLE_WOOD,
+    Material.ACACIA_WOOD,
+    Material.CHERRY_WOOD,
+    Material.DARK_OAK_WOOD,
+    Material.MANGROVE_WOOD,
+    // 去皮原木
+    Material.STRIPPED_OAK_WOOD,
+    Material.STRIPPED_SPRUCE_WOOD,
+    Material.STRIPPED_BIRCH_WOOD,
+    Material.STRIPPED_JUNGLE_WOOD,
+    Material.STRIPPED_ACACIA_WOOD,
+    Material.STRIPPED_CHERRY_WOOD,
+    Material.STRIPPED_DARK_OAK_WOOD,
+    Material.STRIPPED_MANGROVE_WOOD,
+)
+private val VIRTUAL_RESOURCE_MATERIAL = setOf(
+    // 金属
+    Material.IRON_INGOT,
+    Material.GOLD_INGOT,
+    Material.DIAMOND,
+    // 石材
+    Material.STONE,
+    Material.COBBLESTONE,
+    Material.DEEPSLATE,
+    Material.COBBLED_DEEPSLATE,
+    // 原木
+    Material.OAK_WOOD,
+    Material.SPRUCE_WOOD,
+    Material.BIRCH_WOOD,
+    Material.JUNGLE_WOOD,
+    Material.ACACIA_WOOD,
+    Material.CHERRY_WOOD,
+    Material.DARK_OAK_WOOD,
+    Material.MANGROVE_WOOD,
+    // 去皮原木
+    Material.STRIPPED_OAK_WOOD,
+    Material.STRIPPED_SPRUCE_WOOD,
+    Material.STRIPPED_BIRCH_WOOD,
+    Material.STRIPPED_JUNGLE_WOOD,
+    Material.STRIPPED_ACACIA_WOOD,
+    Material.STRIPPED_CHERRY_WOOD,
+    Material.STRIPPED_DARK_OAK_WOOD,
+    Material.STRIPPED_MANGROVE_WOOD,
+)
+fun Material.isWood() = this in WOOD_MATERIAL
+fun Material.isVirtualResource() = this in VIRTUAL_RESOURCE_MATERIAL
 fun Material.isRemoteWeapon() = this in REMOTE_WEAPON_MATERIAL
 fun Material.isAuxiliaryBlock() = this in AUXILIARY_MATERIAL
 fun Material.isFurnace() = this in FURNACE_MATERIAL
