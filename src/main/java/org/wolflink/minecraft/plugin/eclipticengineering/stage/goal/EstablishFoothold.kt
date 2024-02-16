@@ -8,7 +8,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.stage.story.Story
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.EnergySource
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureRepository
 
-object EstablishFoothold : Goal(0) {
+object EstablishFoothold : Goal("建立据点",0) {
     override val nextGoal: Goal = UpgradeFoothold
     override var intoStory: Story? = Story(
         "在这个被幽匿感染侵蚀的世界里",

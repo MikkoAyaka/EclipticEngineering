@@ -12,7 +12,7 @@ import java.util.*
 import kotlin.math.cos
 import kotlin.math.sin
 
-object LocationSurvey : Goal(300) {
+object LocationSurvey : Goal("定点勘察",300) {
     private const val SURVEY_DISTANCE = 500
     override val nextGoal: Goal = CollectResource
     override var intoStory: Story? = Story(

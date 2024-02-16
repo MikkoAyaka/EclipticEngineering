@@ -5,7 +5,7 @@ import kotlinx.coroutines.launch
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.story.Story
 
-abstract class Goal(private val prepareTimeSeconds: Int) {
+abstract class Goal(val displayName: String,private val prepareTimeSeconds: Int) {
     // 下一个目标
     abstract val nextGoal: Goal
     protected abstract var intoStory: Story?

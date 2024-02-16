@@ -7,7 +7,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.structure.generator.Gen
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.generator.GeneratorOre
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureRepository
 
-object UpgradeFoothold : Goal(0) {
+object UpgradeFoothold : Goal("据点扩张",0) {
     override val nextGoal = LocationSurvey
     override var intoStory: Story? = Story(
         "尽管我们已经初步建立了据点",

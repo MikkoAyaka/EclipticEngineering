@@ -6,7 +6,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.Minin
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.PipelineInterface
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureRepository
 
-object CollectResource : Goal(60) {
+object CollectResource : Goal("物资收集",60) {
     override val nextGoal: Goal = WaveDefense
     override var intoStory: Story? = Story(
         "资源是生存和发展的基础",
