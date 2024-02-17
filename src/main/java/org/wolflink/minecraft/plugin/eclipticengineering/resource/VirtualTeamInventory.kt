@@ -54,7 +54,7 @@ object VirtualTeamInventory: Listener {
             Material.COBBLED_DEEPSLATE -> add(VirtualResourceType.STONE,2 * itemStack.amount)
             else -> {
                 if(material.isWood()) add(VirtualResourceType.WOOD,1 * itemStack.amount)
-                else throw IllegalStateException("开发时缺省虚拟资源：${material.name}")
+                else return
             }
         }
         player.inventory.removeItem(itemStack)
