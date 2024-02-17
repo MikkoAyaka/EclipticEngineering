@@ -3,8 +3,8 @@ package org.wolflink.minecraft.plugin.eclipticengineering.extension
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.block.Block
+import org.bukkit.block.data.Ageable
 import org.bukkit.block.data.BlockData
-import org.bukkit.entity.Ageable
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 
 /**

@@ -20,7 +20,7 @@ class EvergreenWood(structure: Structure, location: Location): ResourceBlock(
     EvergreenWoodResourceCycle(),
     75,
     10,
-    Sound.ENTITY_VILLAGER_YES,
+    Sound.ITEM_AXE_WAX_OFF,
     Ability.LOGGING,
     2
 )

@@ -21,7 +21,7 @@ class AncientWood(structure: Structure, location: Location): ResourceBlock(
     AncientWoodResourceCycle(),
     75,
     8,
-    Sound.ENTITY_VILLAGER_YES,
+    Sound.ITEM_AXE_WAX_OFF,
     Ability.LOGGING,
     2
 )

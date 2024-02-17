@@ -14,7 +14,7 @@ class CropResourceCycle: ResourceCycle() {
     override val finalBlockData: BlockData
         get() = when {
             number <= 0.25 -> {
-                Material.WHEAT_SEEDS.createBlockData().apply {
+                Material.WHEAT.createBlockData().apply {
                     (this as Ageable).age = maximumAge
                 }
             }
@@ -58,9 +58,9 @@ class CropResourceCycle: ResourceCycle() {
                 Material.CARROT.createSpecialItem(
                     SpecialItemType.SPECIAL_RESOURCE,
                     Quality.RARE,
-                    "泥芋",
+                    "赤珊瑚",
                     false,
-                    listOf("    ${PRIMARY_TEXT_COLOR}隐于泥土之下，","    ${PRIMARY_TEXT_COLOR}蕴藏着朴实无华却滋养万物的力量。")
+                    listOf("    ${PRIMARY_TEXT_COLOR}如海底珊瑚般鲜艳，","    ${PRIMARY_TEXT_COLOR}蕴含着自然界的活力与营养。")
                 )
             }
             else -> {

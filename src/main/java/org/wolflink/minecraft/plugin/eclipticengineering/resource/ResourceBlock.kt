@@ -95,6 +95,8 @@ abstract class ResourceBlock(
         @Synchronized set
 
     suspend fun reset() {
+        // 重置冷却
+        nowCooldown = 0
         // 重置进度
         collectProgress = 0.0
         // 刷新时间
