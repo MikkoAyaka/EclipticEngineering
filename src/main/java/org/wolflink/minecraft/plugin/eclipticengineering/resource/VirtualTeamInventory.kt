@@ -45,15 +45,15 @@ object VirtualTeamInventory: Listener {
 
     private fun interactVirtualItemHandler(player: Player, itemStack: ItemStack) {
         when(val material = itemStack.type) {
-            Material.IRON_INGOT -> add(VirtualResourceType.METAL,5)
-            Material.GOLD_INGOT -> add(VirtualResourceType.METAL,10)
-            Material.DIAMOND -> add(VirtualResourceType.METAL,30)
-            Material.STONE -> add(VirtualResourceType.STONE,1)
-            Material.COBBLESTONE -> add(VirtualResourceType.STONE,1)
-            Material.DEEPSLATE -> add(VirtualResourceType.STONE,2)
-            Material.COBBLED_DEEPSLATE -> add(VirtualResourceType.STONE,2)
+            Material.IRON_INGOT -> add(VirtualResourceType.METAL,5 * itemStack.amount)
+            Material.GOLD_INGOT -> add(VirtualResourceType.METAL,10 * itemStack.amount)
+            Material.DIAMOND -> add(VirtualResourceType.METAL,30 * itemStack.amount)
+            Material.STONE -> add(VirtualResourceType.STONE,1 * itemStack.amount)
+            Material.COBBLESTONE -> add(VirtualResourceType.STONE,1 * itemStack.amount)
+            Material.DEEPSLATE -> add(VirtualResourceType.STONE,2 * itemStack.amount)
+            Material.COBBLED_DEEPSLATE -> add(VirtualResourceType.STONE,2 * itemStack.amount)
             else -> {
-                if(material.isWood()) add(VirtualResourceType.WOOD,1)
+                if(material.isWood()) add(VirtualResourceType.WOOD,1 * itemStack.amount)
                 else throw IllegalStateException("开发时缺省虚拟资源：${material.name}")
             }
         }
