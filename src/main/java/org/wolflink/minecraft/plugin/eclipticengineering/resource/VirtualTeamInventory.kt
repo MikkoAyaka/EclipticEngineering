@@ -2,10 +2,9 @@ package org.wolflink.minecraft.plugin.eclipticengineering.resource
 
 import org.bukkit.Material
 import org.bukkit.Sound
-import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
-import org.bukkit.event.player.PlayerInteractEvent
+import org.bukkit.event.player.PlayerDropItemEvent
 import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.isVirtualResource
@@ -44,7 +43,7 @@ object VirtualTeamInventory: Listener {
         } else false
     }
 
-    private fun interactVirtualItemHandler(player: Player, itemStack: ItemStack) {
+    private fun interactVirtualItemHandler(itemStack: ItemStack) {
         when(val material = itemStack.type) {
             Material.IRON_INGOT -> add(VirtualResourceType.METAL,5 * itemStack.amount)
             Material.GOLD_INGOT -> add(VirtualResourceType.METAL,10 * itemStack.amount)
@@ -55,17 +54,18 @@ object VirtualTeamInventory: Listener {
             Material.COBBLED_DEEPSLATE -> add(VirtualResourceType.STONE,2 * itemStack.amount)
             else -> {
                 if(material.isWood()) add(VirtualResourceType.WOOD,1 * itemStack.amount)
-                else return
             }
         }
-        player.inventory.removeItem(itemStack)
+
     }
     @EventHandler
-    fun onInteract(e: PlayerInteractEvent) {
-        if(e.hasItem() && e.action.isRightClick && e.player.isSneaking) {
-            e.isCancelled = true
-            val itemStack = e.item!!
-            if(itemStack.type.isVirtualResource()) interactVirtualItemHandler(e.player,itemStack)
+    fun onInteract(e: PlayerDropItemEvent) {
+        if(e.player.isSneaking) {
+            val itemStack = e.itemDrop.itemStack
+            if(itemStack.type.isVirtualResource()) {
+                interactVirtualItemHandler(itemStack)
+                e.itemDrop.remove()
+            }
         }
     }
 }

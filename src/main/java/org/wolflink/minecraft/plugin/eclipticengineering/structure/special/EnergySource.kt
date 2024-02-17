@@ -35,9 +35,9 @@ class EnergySource private constructor(blueprint: Blueprint, builder: Builder): 
                 60,
                 3000,
                 ItemRequirement("需要 1 圆石", ItemStack(Material.COBBLESTONE)),
-                ItemRequirement("需要 1 铁锭", ItemStack(Material.COBBLESTONE)),
+                ItemRequirement("需要 1 铁锭", ItemStack(Material.IRON_INGOT)),
                 VirtualRequirement("需要 15 石料",VirtualResourceType.STONE,15),
-                VirtualRequirement("需要 40 木材",VirtualResourceType.STONE,40)
+                VirtualRequirement("需要 40 木材",VirtualResourceType.WOOD,40)
             )
         )
     }

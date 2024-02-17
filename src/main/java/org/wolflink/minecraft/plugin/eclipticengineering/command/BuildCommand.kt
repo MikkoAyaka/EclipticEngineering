@@ -34,7 +34,7 @@ object BuildCommand:CommandExecutor {
                 }
                 if(pass) blueprint.conditions.forEach { if(it is Requirement)it.delivery(sender) }
                 else {
-                    sender.sendMessage("$MESSAGE_PREFIX 无法建造${blueprint.structureName} <hover:show_text:'<newline>${conditionText.joinToString(separator = "<newline>")}<newline><newline>'><yellow>[详情]".toComponent())
+                    sender.sendMessage("$MESSAGE_PREFIX 无法建造${blueprint.structureName} <hover:show_text:'<newline>${conditionText.joinToString(separator = "<newline>")}<newline>'><yellow>[详情]".toComponent())
                     return false
                 }
             } else Bukkit.getLogger().warning("$MESSAGE_PREFIX 建筑结构 $structureTypeName 的蓝图类型为非资源型蓝图，这是不应该的，请检查代码。")
