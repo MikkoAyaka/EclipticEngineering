@@ -2,7 +2,8 @@ package org.wolflink.minecraft.plugin.eclipticengineering.blueprint
 
 import org.bukkit.inventory.ItemStack
 import org.bukkit.util.Vector
-import org.wolflink.minecraft.plugin.eclipticstructure.structure.Blueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.Condition
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
 
 class ElementalTurretBlueprint(
     structureLevel: Int,
@@ -13,5 +14,5 @@ class ElementalTurretBlueprint(
     val attackCooldownSeconds: Int,
     val attackDamage: IntRange,
     val attackRange: Int,
-    vararg requiredItems: ItemStack
-): Blueprint(structureLevel,structureName, buildSeconds, maxDurability, *requiredItems)
+    vararg conditions: Condition
+): ConditionBlueprint(structureLevel,structureName, buildSeconds, maxDurability, *conditions)

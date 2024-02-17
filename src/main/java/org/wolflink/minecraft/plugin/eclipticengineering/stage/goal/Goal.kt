@@ -3,6 +3,7 @@ package org.wolflink.minecraft.plugin.eclipticengineering.stage.goal
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.Condition
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.story.Story
 
 abstract class Goal(val displayName: String,private val prepareTimeSeconds: Int) {
@@ -12,8 +13,8 @@ abstract class Goal(val displayName: String,private val prepareTimeSeconds: Int)
     abstract val nextGoal: Goal
     protected abstract var intoStory: Story?
     protected abstract var leaveStory: Story?
-    abstract val finishConditions: List<GoalCondition>
-    abstract val failedConditions: List<GoalCondition>
+    abstract val finishConditions: List<Condition>
+    abstract val failedConditions: List<Condition>
 
     // 任务完成状态
     var status = Status.NOT_STARTED

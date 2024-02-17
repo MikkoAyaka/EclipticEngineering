@@ -6,7 +6,6 @@ import org.bukkit.Sound
 import org.bukkit.entity.Entity
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.LivingEntity
-import org.bukkit.entity.SmallFireball
 import org.bukkit.entity.Snowball
 import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffect
@@ -15,7 +14,8 @@ import org.bukkit.util.Vector
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ElementalTurretBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.metadata.MetadataModifier
 import org.wolflink.minecraft.plugin.eclipticengineering.particle.withParticle
-import org.wolflink.minecraft.plugin.eclipticstructure.structure.Blueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompanion
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
@@ -62,9 +62,8 @@ class SnowGolemTurret private constructor(blueprint: ElementalTurretBlueprint, b
                 1,
                 4..6,
                 20,
-                ItemStack(Material.COBBLESTONE, 128),
-                ItemStack(Material.IRON_INGOT, 16),
-                ItemStack(Material.GOLD_INGOT, 8)
+                ItemRequirement("需要 1 圆石", ItemStack(Material.COBBLESTONE)),
+                ItemRequirement("需要 1 铁锭", ItemStack(Material.COBBLESTONE))
             )
         )
     }

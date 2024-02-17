@@ -1,5 +1,6 @@
-package org.wolflink.minecraft.plugin.eclipticengineering
+package org.wolflink.minecraft.plugin.eclipticengineering.dictionary
 
+import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.decoration.Lighthouse
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.generator.GeneratorCrop
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.generator.GeneratorLog
@@ -11,7 +12,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.structure.tower.BlazeTu
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.tower.SnowGolemTurret
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.tower.TowerArrow
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
-import org.wolflink.minecraft.plugin.eclipticstructure.structure.Blueprint
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.registry.StructureRegistry
 

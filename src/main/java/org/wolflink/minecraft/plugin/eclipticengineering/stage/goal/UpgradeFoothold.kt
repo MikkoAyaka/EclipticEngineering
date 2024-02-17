@@ -1,6 +1,7 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.stage.goal
 
-import kotlinx.coroutines.delay
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.Condition
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.FunctionalCondition
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.story.Story
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.generator.GeneratorCrop
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.generator.GeneratorLog
@@ -19,18 +20,18 @@ object UpgradeFoothold : Goal("据点扩张",0) {
         "这个据点看上去已经能够正常运作了",
         "稍作整顿，接下来将有困难的任务等待着你们",
     )
-    override val finishConditions: List<GoalCondition> = listOf(
-        GoalCondition("建造伐木场"){
+    override val finishConditions: List<Condition> = listOf(
+        FunctionalCondition("建造伐木场"){
             StructureRepository.findBy { it is GeneratorLog }.any()
         },
-        GoalCondition("建造农场"){
+        FunctionalCondition("建造农场"){
             StructureRepository.findBy { it is GeneratorCrop }.any()
         },
-        GoalCondition("建造采矿场"){
+        FunctionalCondition("建造采矿场"){
             StructureRepository.findBy { it is GeneratorOre }.any()
         }
     )
-    override val failedConditions: List<GoalCondition> = listOf()
+    override val failedConditions: List<Condition> = listOf()
     /**
      * 根据完成状态发放奖励
      */

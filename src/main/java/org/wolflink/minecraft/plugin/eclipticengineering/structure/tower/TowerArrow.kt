@@ -13,13 +13,13 @@ import org.bukkit.event.entity.EntityShootBowEvent
 import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
-import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ElementalTurretBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.TowerArrowBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.metadata.MetadataModifier
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureInitializedEvent
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureZoneRelationRepository
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.ZoneRepository
-import org.wolflink.minecraft.plugin.eclipticstructure.structure.Blueprint
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.IStructureListener
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompanion
@@ -62,9 +62,8 @@ class TowerArrow private constructor(blueprint: TowerArrowBlueprint, builder: Bu
                 2..5,
                 1,
                 0.5,
-                ItemStack(Material.COBBLESTONE, 128),
-                ItemStack(Material.IRON_INGOT, 16),
-                ItemStack(Material.GOLD_INGOT, 8)
+                ItemRequirement("需要 1 圆石", ItemStack(Material.COBBLESTONE)),
+                ItemRequirement("需要 1 铁锭", ItemStack(Material.COBBLESTONE))
             )
         )
     }

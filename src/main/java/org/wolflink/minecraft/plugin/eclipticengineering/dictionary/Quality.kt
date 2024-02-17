@@ -1,4 +1,4 @@
-package org.wolflink.minecraft.plugin.eclipticengineering
+package org.wolflink.minecraft.plugin.eclipticengineering.dictionary
 
 import org.bukkit.Color
 

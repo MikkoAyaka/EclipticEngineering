@@ -3,8 +3,9 @@ package org.wolflink.minecraft.plugin.eclipticengineering.structure.generator
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.GeneratorBlueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.crop.CropResourceBlock
-import org.wolflink.minecraft.plugin.eclipticstructure.structure.Blueprint
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompanion
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
@@ -35,9 +36,8 @@ class GeneratorCrop private constructor(blueprint: GeneratorBlueprint, builder: 
                         CropResourceBlock(structure, buildLocation.clone().add(1.0, 1.0, -1.0)),
                     )
                 },
-                ItemStack(Material.COBBLESTONE, 128),
-                ItemStack(Material.IRON_INGOT, 16),
-                ItemStack(Material.GOLD_INGOT, 8)
+                ItemRequirement("需要 1 圆石", ItemStack(Material.COBBLESTONE)),
+                ItemRequirement("需要 1 铁锭", ItemStack(Material.COBBLESTONE))
             )
         )
     }

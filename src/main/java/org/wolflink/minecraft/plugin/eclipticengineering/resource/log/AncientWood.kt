@@ -5,14 +5,13 @@ import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.block.data.BlockData
 import org.bukkit.inventory.ItemStack
-import org.wolflink.minecraft.plugin.eclipticengineering.Quality
-import org.wolflink.minecraft.plugin.eclipticengineering.SpecialItemType
+import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.Quality
+import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.SpecialItemType
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.PRIMARY_TEXT_COLOR
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.createSpecialItem
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.ResourceBlock
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.ResourceCycle
-import org.wolflink.minecraft.plugin.eclipticengineering.resource.ore.OreResourceCycle
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 
 // TODO 需要重新制作建筑结构

@@ -4,6 +4,8 @@ import kotlinx.coroutines.delay
 import org.bukkit.Location
 import org.bukkit.World
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.Condition
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.FunctionalCondition
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.story.Story
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.decoration.Lighthouse
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
@@ -23,12 +25,12 @@ object LocationSurvey : Goal("定点勘察",300) {
         "勘察完成，我们发现了新的资源和潜在的威胁",
         "这些信息对我们的未来发展至关重要",
     )
-    override val finishConditions: List<GoalCondition> = listOf(
-        GoalCondition("在勘察坐标附近建造灯塔"){
+    override val finishConditions: List<Condition> = listOf(
+        FunctionalCondition("在勘察坐标附近建造灯塔"){
             StructureRepository.findBy { it is Lighthouse && it.builder.buildLocation.distance(GoalHolder.specialLocation!!) < 50}.any()
         }
     )
-    override val failedConditions: List<GoalCondition> = listOf()
+    override val failedConditions: List<Condition> = listOf()
 
     override fun afterInto() {
         GoalHolder.specialLocation = randomSurveyLocation(SURVEY_DISTANCE)

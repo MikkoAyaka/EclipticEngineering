@@ -1,6 +1,5 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.resource.item
 
-import net.kyori.adventure.text.Component
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.entity.Player
@@ -9,8 +8,8 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.ItemMeta
-import org.wolflink.minecraft.plugin.eclipticengineering.Quality
-import org.wolflink.minecraft.plugin.eclipticengineering.SpecialItemType
+import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.Quality
+import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.SpecialItemType
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.PRIMARY_TEXT_COLOR
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.SECONDARY_TEXT_COLOR
@@ -50,14 +49,14 @@ object TaskBook: Listener {
             "任务书",
             true,
             goal.finishConditions.map {
-                if(it.check()) "<green>☑ ${SECONDARY_TEXT_COLOR}<st><italic>${it.description}</italic></st>"
+                if(it.isSatisfy()) "<green>☑ ${SECONDARY_TEXT_COLOR}<st><italic>${it.description}</italic></st>"
                 else "<white>☐ ${PRIMARY_TEXT_COLOR}${it.description}"
             }
         ).itemMeta
         bookItem.itemMeta = newMeta
         lastUpdateMeta = newMeta
         // 所有条件通过
-        if(goal.finishConditions.all { it.check() }) goal.finish()
+        if(goal.finishConditions.all { it.isSatisfy() }) goal.finish()
 
         player.sendActionBar("$MESSAGE_PREFIX <green>任务书已刷新".toComponent())
         player.playSound(player, Sound.ENTITY_VILLAGER_AMBIENT,1f,1.5f)

@@ -1,5 +1,6 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.stage.goal
 
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.Condition
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.story.Story
 
 object WaveDefense : Goal("尸潮来袭",480) {
@@ -13,8 +14,8 @@ object WaveDefense : Goal("尸潮来袭",480) {
         "我们成功抵御了怪物的进攻",
         "它们暂时退去了"
     )
-    override val finishConditions: List<GoalCondition> = listOf()
-    override val failedConditions: List<GoalCondition> = listOf()
+    override val finishConditions: List<Condition> = listOf()
+    override val failedConditions: List<Condition> = listOf()
     override fun giveRewards() {
     }
 }

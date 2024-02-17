@@ -6,32 +6,38 @@ import kotlinx.coroutines.launch
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
+import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureAvailableEvent
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureRepository
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureZoneRelationRepository
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.ZoneRepository
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.*
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
-class EnergySource private constructor(blueprint: Blueprint,builder: Builder): Structure(blueprint,builder),IStructureListener{
+class EnergySource private constructor(blueprint: Blueprint, builder: Builder): Structure(blueprint,builder),IStructureListener{
     override val customListener by lazy { this }
     companion object : StructureCompanion<EnergySource>(){
         // 影响半径(格)
-        private const val EFFECT_RADIUS = 30
+        private const val EFFECT_RADIUS = 35
         private const val STRUCTURE_NAME = "幽光能量发生场"
         override val clazz: Class<EnergySource> = EnergySource::class.java
         override fun supplier(blueprint: Blueprint, builder: Builder): EnergySource {
             return EnergySource(blueprint,builder)
         }
         override val blueprints = listOf(
-            Blueprint(
+            ConditionBlueprint(
                 1,
                 STRUCTURE_NAME,
                 60,
                 3000,
-                ItemStack(Material.COBBLESTONE, 128),
-                ItemStack(Material.IRON_INGOT, 16),
-                ItemStack(Material.GOLD_INGOT, 8)
+                ItemRequirement("需要 1 圆石", ItemStack(Material.COBBLESTONE)),
+                ItemRequirement("需要 1 铁锭", ItemStack(Material.COBBLESTONE)),
+                VirtualRequirement("需要 15 石料",VirtualResourceType.STONE,15),
+                VirtualRequirement("需要 40 木材",VirtualResourceType.STONE,40)
             )
         )
     }

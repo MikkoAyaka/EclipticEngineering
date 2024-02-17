@@ -2,9 +2,10 @@ package org.wolflink.minecraft.plugin.eclipticengineering.structure.special
 
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
+import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.hasConnection
-import org.wolflink.minecraft.plugin.eclipticengineering.structure.decoration.Lighthouse
-import org.wolflink.minecraft.plugin.eclipticstructure.structure.Blueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.IStructureListener
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompanion
@@ -28,14 +29,13 @@ class PipelineInterface private constructor(blueprint: Blueprint, builder: Build
         }
 
         override val blueprints = listOf(
-            Blueprint(
+            ConditionBlueprint(
                 1,
                 "管道接口",
                 5,
                 3000,
-                ItemStack(Material.COBBLESTONE, 128),
-                ItemStack(Material.IRON_INGOT, 16),
-                ItemStack(Material.GOLD_INGOT, 8)
+                ItemRequirement("需要 1 圆石", ItemStack(Material.COBBLESTONE)),
+                ItemRequirement("需要 1 铁锭", ItemStack(Material.COBBLESTONE))
             )
         )
     }

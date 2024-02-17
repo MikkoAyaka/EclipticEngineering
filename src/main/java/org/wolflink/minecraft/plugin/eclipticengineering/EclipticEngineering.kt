@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin
 import org.wolflink.minecraft.plugin.eclipticengineering.command.AbilityCommand
 import org.wolflink.minecraft.plugin.eclipticengineering.command.BuildCommand
 import org.wolflink.minecraft.plugin.eclipticengineering.command.StageCommand
+import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.interaction.AuxiliaryBlockListener
 import org.wolflink.minecraft.plugin.eclipticengineering.interaction.BuildToolListener
 import org.wolflink.minecraft.plugin.eclipticengineering.interaction.HitMonsterListener
@@ -16,9 +17,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.resource.VirtualTeamInv
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.TaskBook
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.StageHolder
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.tower.TowerArrow
-import org.wolflink.minecraft.plugin.eclipticstructure.coroutine.EStructureScope
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.register
-import org.wolflink.minecraft.plugin.eclipticstructure.library.DynamicLibrary
 
 class EclipticEngineering : JavaPlugin() {
     companion object {

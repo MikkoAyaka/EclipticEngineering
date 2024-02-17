@@ -9,9 +9,10 @@ import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.RespawnBeaconBlueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureAvailableEvent
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
-import org.wolflink.minecraft.plugin.eclipticstructure.structure.Blueprint
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.IStructureListener
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompanion
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
@@ -32,9 +33,8 @@ class RespawnBeacon private constructor(blueprint: RespawnBeaconBlueprint,builde
             1000,
             180,
             4,
-            ItemStack(Material.COBBLESTONE,128),
-            ItemStack(Material.IRON_INGOT,16),
-            ItemStack(Material.GOLD_INGOT,8)
+            ItemRequirement("需要 1 圆石", ItemStack(Material.COBBLESTONE)),
+            ItemRequirement("需要 1 铁锭", ItemStack(Material.COBBLESTONE))
         ))
         override val clazz: Class<RespawnBeacon> = RespawnBeacon::class.java
     }

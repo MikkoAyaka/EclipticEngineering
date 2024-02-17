@@ -3,6 +3,8 @@ package org.wolflink.minecraft.plugin.eclipticengineering.stage.goal
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.Condition
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.FunctionalCondition
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.story.Story
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.EnergySource
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureRepository
@@ -27,12 +29,12 @@ object EstablishFoothold : Goal("建立据点",0) {
         "寻找生存和重建的希望",
         "就是你现在的使命",
     )
-    override val finishConditions: List<GoalCondition> = listOf(
-        GoalCondition("建立幽光能量发生场"){
+    override val finishConditions: List<Condition> = listOf(
+        FunctionalCondition("建立幽光能量发生场"){
             StructureRepository.findBy { it is EnergySource }.any()
         }
     )
-    override val failedConditions: List<GoalCondition> = listOf()
+    override val failedConditions: List<Condition> = listOf()
     override fun beforeFinish() {
         val energySource = StructureRepository.findBy { it is EnergySource }.first()
         // 更新据点坐标

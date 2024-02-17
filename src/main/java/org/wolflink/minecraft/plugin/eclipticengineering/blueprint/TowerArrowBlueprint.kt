@@ -1,8 +1,8 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.blueprint
 
-import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
-import org.wolflink.minecraft.plugin.eclipticstructure.structure.Blueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.Condition
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
 
 class TowerArrowBlueprint(
     structureLevel: Int,
@@ -12,5 +12,5 @@ class TowerArrowBlueprint(
     val extraDamageRange: IntRange,
     val maxShooterAmount: Int,
     val returnArrowPercent: Double,
-    vararg requiredItems: ItemStack
-): Blueprint(structureLevel,structureName, buildSeconds, maxDurability, *requiredItems)
+    vararg conditions: Condition
+): ConditionBlueprint(structureLevel,structureName, buildSeconds, maxDurability, *conditions)

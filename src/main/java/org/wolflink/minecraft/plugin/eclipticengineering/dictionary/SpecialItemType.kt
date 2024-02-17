@@ -1,4 +1,4 @@
-package org.wolflink.minecraft.plugin.eclipticengineering
+package org.wolflink.minecraft.plugin.eclipticengineering.dictionary
 
 enum class SpecialItemType(val displayName: String) {
     SPECIAL_RESOURCE("特殊资源"),
