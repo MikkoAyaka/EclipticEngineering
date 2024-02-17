@@ -29,6 +29,7 @@ object VirtualTeamInventory: Listener {
             player.playSound(player, Sound.BLOCK_CHEST_OPEN,1f,1.5f)
         }
     }
+    fun get(type: VirtualResourceType): Int = resourceMap[type]!!.get()
     fun has(type: VirtualResourceType,amount: Int): Boolean {
         return resourceMap[type]!!.get() >= amount
     }

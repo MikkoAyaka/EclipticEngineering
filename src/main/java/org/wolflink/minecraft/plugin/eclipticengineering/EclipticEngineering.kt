@@ -13,6 +13,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.interaction.HitMonsterL
 import org.wolflink.minecraft.plugin.eclipticengineering.interaction.WorkingToolListener
 import org.wolflink.minecraft.plugin.eclipticengineering.metadata.MetadataHandler
 import org.wolflink.minecraft.plugin.eclipticengineering.papi.StagePapi
+import org.wolflink.minecraft.plugin.eclipticengineering.papi.VirtualResourcePapi
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.VirtualTeamInventory
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.TaskBook
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.StageHolder
@@ -50,6 +51,7 @@ class EclipticEngineering : JavaPlugin() {
         TaskBook.register(this)
         // 注册变量
         StagePapi.register()
+        VirtualResourcePapi.register()
         // 初始化阶段
         StageHolder.init()
     }
