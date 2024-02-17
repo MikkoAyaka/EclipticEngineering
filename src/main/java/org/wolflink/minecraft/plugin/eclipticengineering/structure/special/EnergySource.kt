@@ -27,7 +27,7 @@ class EnergySource private constructor(blueprint: Blueprint,builder: Builder): S
             Blueprint(
                 1,
                 STRUCTURE_NAME,
-                5,
+                10,
                 3000,
                 ItemStack(Material.COBBLESTONE, 128),
                 ItemStack(Material.IRON_INGOT, 16),

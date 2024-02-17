@@ -76,7 +76,7 @@ class CropResourceCycle: ResourceCycle() {
     override val initialBlockData: BlockData
         get() = when {
             number <= 0.25 -> {
-                Material.WHEAT_SEEDS.createBlockData()
+                Material.WHEAT.createBlockData()
             }
             number <= 0.5 -> {
                 Material.POTATOES.createBlockData()

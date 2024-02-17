@@ -4,6 +4,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import net.kyori.adventure.title.Title
 import org.bukkit.Bukkit
+import org.bukkit.GameMode
 import org.bukkit.Sound
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
@@ -13,6 +14,9 @@ import java.time.Duration
 
 class ReadyStage(stageHolder: StageHolder) : Stage("准备阶段", stageHolder) {
     override fun onEnter() {
+        Bukkit.getOnlinePlayers().forEach {
+            it.gameMode = GameMode.ADVENTURE
+        }
         EEngineeringScope.launch {
             val maxCount = 30
             var count = maxCount
