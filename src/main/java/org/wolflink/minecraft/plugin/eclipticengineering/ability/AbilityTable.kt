@@ -34,7 +34,7 @@ class AbilityTable(val ownerUuid: UUID) {
             val player = Bukkit.getPlayer(ownerUuid) ?: return false
             if(!player.isOnline) return false
             player.playSound(player, Sound.ENTITY_VILLAGER_NO,1f,1f)
-            player.sendMessage("$MESSAGE_PREFIX 需要能力 ${abilityType.color.toHexFormat()}${abilityType.displayName} ${abilityLevel.toRoma()}".toComponent())
+            player.sendActionBar("$MESSAGE_PREFIX 需要能力 ${abilityType.color.toHexFormat()}${abilityType.displayName} ${abilityLevel.toRoma()}".toComponent())
         }
         return result
     }

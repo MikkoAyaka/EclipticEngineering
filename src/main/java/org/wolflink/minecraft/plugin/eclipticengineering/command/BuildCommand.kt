@@ -8,6 +8,7 @@ import org.bukkit.entity.Player
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.Requirement
+import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.registry.StructureRegistry
 
@@ -32,7 +33,10 @@ object BuildCommand:CommandExecutor {
                     }
                 }
                 if(pass) blueprint.conditions.forEach { if(it is Requirement)it.delivery(sender) }
-                else sender.sendMessage("$MESSAGE_PREFIX 无法建造${blueprint.structureName} <hover:show_text:${conditionText.joinToString(separator = "\\n")}><yellow>[详情]")
+                else {
+                    sender.sendMessage("$MESSAGE_PREFIX 无法建造${blueprint.structureName} <hover:show_text:'<newline>${conditionText.joinToString(separator = "<newline>")}<newline><newline>'><yellow>[详情]".toComponent())
+                    return false
+                }
             } else Bukkit.getLogger().warning("$MESSAGE_PREFIX 建筑结构 $structureTypeName 的蓝图类型为非资源型蓝图，这是不应该的，请检查代码。")
             val builder = Builder(structureLevel,structureMeta,sender.location,false)
             builder.build(sender)
