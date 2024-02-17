@@ -6,6 +6,8 @@ import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.story.Story
 
 abstract class Goal(val displayName: String,private val prepareTimeSeconds: Int) {
+    var prepareTimeLeft = prepareTimeSeconds
+        private set
     // 下一个目标
     abstract val nextGoal: Goal
     protected abstract var intoStory: Story?
@@ -14,13 +16,13 @@ abstract class Goal(val displayName: String,private val prepareTimeSeconds: Int)
     abstract val failedConditions: List<GoalCondition>
 
     // 任务完成状态
-    protected var status = Status.NOT_STARTED
+    var status = Status.NOT_STARTED
         private set(value) {
             if (value == field) return
             field = value
             if (field == Status.FINISHED || field == Status.FAILED) {
                 giveRewards()
-                EEngineeringScope.launch { next() }
+                EEngineeringScope.launch { leave() }
             }
         }
 
@@ -38,7 +40,7 @@ abstract class Goal(val displayName: String,private val prepareTimeSeconds: Int)
     fun into() {
         status = Status.PREPARING
         EEngineeringScope.launch {
-            delay(prepareTimeSeconds * 1000L)
+            while (prepareTimeLeft-- > 0) delay(1000)
             status = Status.IN_PROGRESS
             intoStory?.broadcast()
             EEngineeringScope.launch { timerTask() }
@@ -48,22 +50,22 @@ abstract class Goal(val displayName: String,private val prepareTimeSeconds: Int)
     protected open fun afterInto(){}
 
     /**
-     * 进入下一个任务
+     * 离开当前目标
      */
-    private suspend fun next() {
+    suspend fun leave() {
         leaveStory?.broadcast()
-        GoalHolder.nowGoal = nextGoal
-        nextGoal.into()
     }
 
     protected open fun beforeFinish(){}
     fun finish() {
         beforeFinish()
         status = Status.FINISHED
+        GoalHolder.next()
     }
 
     fun failed() {
         status = Status.FAILED
+        GoalHolder.next()
     }
 
     protected open suspend fun timerTask(){}

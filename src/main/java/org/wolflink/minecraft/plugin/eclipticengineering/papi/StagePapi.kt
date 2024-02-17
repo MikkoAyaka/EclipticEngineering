@@ -12,6 +12,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.stage.goal.GoalHolder
  * %eestage_goal% 当前目标
  * %eestage_special_location% 当前特殊行动坐标
  * %eestage_foothold_location% 当前据点坐标
+ * %eestage_prepare_time% 下一阶段剩余准备时间
  */
 object StagePapi: PlaceholderExpansion() {
     override fun getIdentifier() = "eestage"
@@ -25,6 +26,7 @@ object StagePapi: PlaceholderExpansion() {
         if(params == "goal") return GoalHolder.nowGoal?.displayName ?: "未初始化"
         if(params == "special_location") return GoalHolder.specialLocation?.toVector()?.toString() ?: "暂无"
         if(params == "foothold_location") return GoalHolder.footholdLocation?.toVector()?.toString() ?: "暂无"
+        if(params == "prepare_time") return "${GoalHolder.prepareTimeLeft}"
         return "未知变量"
     }
 }

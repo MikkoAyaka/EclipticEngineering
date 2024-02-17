@@ -43,6 +43,7 @@ object TaskBook: Listener {
         }
         lastUpdateTime = Calendar.getInstance().timeInMillis
         val goal = GoalHolder.nowGoal ?: return
+        if(goal.status == Goal.Status.PREPARING) return
         val newMeta = Material.BOOK.createSpecialItem(
             SpecialItemType.SPECIAL_ITEM,
             Quality.UNIQUE,

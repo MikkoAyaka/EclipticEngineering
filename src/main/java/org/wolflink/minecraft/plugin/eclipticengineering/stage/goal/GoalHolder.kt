@@ -1,6 +1,8 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.stage.goal
 
+import kotlinx.coroutines.launch
 import org.bukkit.Location
+import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.TaskBook
 
@@ -11,10 +13,18 @@ object GoalHolder {
     var specialLocation: Location? = null
     // 据点坐标
     var footholdLocation: Location? = null
+    // 剩余准备时间
+    val prepareTimeLeft get() = nowGoal?.prepareTimeLeft ?: -1
     fun init() {
         nowGoal = EstablishFoothold
         // 发放任务书给随机一名正在游戏中的玩家
         TaskBook.give(gamingPlayers.random())
         nowGoal!!.into()
+    }
+    fun next() {
+        EEngineeringScope.launch {
+            nowGoal?.leave()
+            nowGoal = nowGoal?.nextGoal
+        }
     }
 }
