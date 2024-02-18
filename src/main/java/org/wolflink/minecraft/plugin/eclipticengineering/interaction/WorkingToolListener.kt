@@ -1,10 +1,14 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.interaction
 
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
 import org.bukkit.event.player.PlayerInteractEvent
+import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
+import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.*
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.abilityTable
@@ -13,6 +17,14 @@ import org.wolflink.minecraft.plugin.eclipticengineering.extension.abilityTable
  * 检查玩家是否有能力使用对应的工具
  */
 object WorkingToolListener: Listener {
+    init {
+        EEngineeringScope.launch {
+            while (EclipticEngineering.instance.isEnabled) {
+                // 每0.3秒检查一次
+                delay(300)
+            }
+        }
+    }
     @EventHandler
     fun checkTool(e: PlayerInteractEvent) {
         // 左键与工具交互

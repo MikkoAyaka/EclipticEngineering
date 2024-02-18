@@ -19,7 +19,7 @@ class OceanSpawnStrategy(spawnerAttribute: SpawnerAttribute) : SpawnStrategy(spa
         return BlockAPI.checkIsOcean(player.location)
     }
 
-    public override fun spawn(player: Player, triedCount: Int) {
+    override fun spawn(player: Player, triedCount: Int) {
         if (triedCount <= 0) return
         val world = player.world
         val x = player.location.blockX

@@ -5,6 +5,7 @@
 *.ipr
 *.iws
 
+.paper-nms
 # IntelliJ
 out/
 

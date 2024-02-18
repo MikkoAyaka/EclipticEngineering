@@ -10,6 +10,8 @@ class SpecialSpawnEntityEvent(val belongPlayer: Player, val entity: Entity) : Ev
         return handlerList
     }
     companion object {
-        val handlerList = HandlerList()
+        private val handlerList = HandlerList()
+        @JvmStatic
+        fun getHandlerList() = handlerList
     }
 }

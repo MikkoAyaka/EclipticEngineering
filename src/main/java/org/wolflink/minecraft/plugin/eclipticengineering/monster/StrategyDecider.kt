@@ -59,23 +59,23 @@ object StrategyDecider {
     fun enable() {
         init()
         gamingPlayers.forEach {
-            it.showTitle(Title.title("<yellow>怪物们将在90秒后来袭，请做好准备...".toComponent(),"".toComponent(),
+            it.showTitle(Title.title("".toComponent(),"<yellow>怪物们将在90秒后来袭，请做好准备...".toComponent(),
                 Title.Times.times(Duration.ofMillis(400), Duration.ofMillis(1000), Duration.ofMillis(400))))
             it.playSound(it,Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 1f, 0.8f)
         }
-        subScheduler.runTaskLaterAsync(Runnable {
+        subScheduler.runTaskLaterAsync({
             subScheduler.runTaskTimerAsync(
-                Runnable { updateStrategyMap() },
+                { updateStrategyMap() },
                 20L * DECIDE_PERIOD_SECS,
                 20L * DECIDE_PERIOD_SECS
             )
             subScheduler.runTaskTimerAsync(
-                Runnable { spawnTask() },
+                { spawnTask() },
                 20L * spawnPeriodSecs,
                 20L * spawnPeriodSecs
             )
             subScheduler.runTaskTimerAsync(
-                Runnable { updateAttribute() },
+                { updateAttribute() },
                 20L * 60, 20L * 60
             )
             gamingPlayers.forEach {
@@ -122,7 +122,7 @@ object StrategyDecider {
     private fun spawnTask() {
         for ((key, value) in playerStrategyMap) {
             val player: Player = Bukkit.getPlayer(key) ?: continue
-            if (!player.isOnline || player.gameMode == GameMode.SPECTATOR) continue
+            if (!player.isOnline || player !in gamingPlayers) continue
             val location = player.location
             val nearbyPlayerAmount = getHuddlePlayersAmount(location)
             if (Math.random() >= getEfficiencyReduction(nearbyPlayerAmount)) value.spawn(player)
