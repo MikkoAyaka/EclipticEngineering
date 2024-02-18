@@ -10,6 +10,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.stage.story.Story
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.decoration.Lighthouse
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureRepository
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 import java.util.*
 import kotlin.math.cos
 import kotlin.math.sin
@@ -27,7 +28,7 @@ object LocationSurvey : Goal("定点勘察",300) {
     )
     override val finishConditions: List<Condition> = listOf(
         FunctionalCondition("在勘察坐标附近建造灯塔"){
-            StructureRepository.findBy { it is Lighthouse && it.builder.buildLocation.distance(GoalHolder.specialLocation!!) < 50}.any()
+            StructureRepository.findBy { it is Lighthouse && it.builder.buildLocation.distance(GoalHolder.specialLocation!!) < 50 && it.builder.status == Builder.Status.COMPLETED}.any()
         }
     )
     override val failedConditions: List<Condition> = listOf()

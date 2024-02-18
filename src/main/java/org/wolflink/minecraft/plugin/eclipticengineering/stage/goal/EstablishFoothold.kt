@@ -8,6 +8,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.requirement.FunctionalC
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.story.Story
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.EnergySource
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureRepository
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
 object EstablishFoothold : Goal("建立据点",0) {
     override val nextGoal: Goal = UpgradeFoothold
@@ -31,7 +32,7 @@ object EstablishFoothold : Goal("建立据点",0) {
     )
     override val finishConditions: List<Condition> = listOf(
         FunctionalCondition("建立幽光能量发生场"){
-            StructureRepository.findBy { it is EnergySource }.any()
+            StructureRepository.findBy { it is EnergySource && it.builder.status == Builder.Status.COMPLETED }.any()
         }
     )
     override val failedConditions: List<Condition> = listOf()

@@ -6,6 +6,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.stage.story.Story
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.MiningStation
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.PipelineInterface
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureRepository
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
 object CollectResource : Goal("物资收集",60) {
     override val nextGoal: Goal = WaveDefense
@@ -22,19 +23,19 @@ object CollectResource : Goal("物资收集",60) {
     )
     override val finishConditions: List<Condition> = listOf(
         FunctionalCondition("在指定坐标附近建立开采站"){
-            StructureRepository.findBy { it is MiningStation && it.builder.buildLocation.distance(GoalHolder.specialLocation!!) < 50 }.any()
+            StructureRepository.findBy { it is MiningStation && it.builder.buildLocation.distance(GoalHolder.specialLocation!!) < 50 && it.builder.status == Builder.Status.COMPLETED}.any()
         },
         FunctionalCondition("在开采站附近建立运输接口"){
-            StructureRepository.findBy { it is PipelineInterface && it.builder.buildLocation.distance(GoalHolder.specialLocation!!) < 50}.any()
+            StructureRepository.findBy { it is PipelineInterface && it.builder.buildLocation.distance(GoalHolder.specialLocation!!) < 50 && it.builder.status == Builder.Status.COMPLETED}.any()
         },
         FunctionalCondition("在据点附近建立运输接口"){
-            StructureRepository.findBy { it is PipelineInterface && it.builder.buildLocation.distance(GoalHolder.footholdLocation!!) < 50}.any()
+            StructureRepository.findBy { it is PipelineInterface && it.builder.buildLocation.distance(GoalHolder.footholdLocation!!) < 50 && it.builder.status == Builder.Status.COMPLETED}.any()
         },
         FunctionalCondition("端口是否连接"){
             // 开采站端口列表
-            val miningStationPipelines = StructureRepository.findBy { it is PipelineInterface && it.builder.buildLocation.distance(GoalHolder.specialLocation!!) < 50}.map { it as PipelineInterface }
+            val miningStationPipelines = StructureRepository.findBy { it is PipelineInterface && it.builder.buildLocation.distance(GoalHolder.specialLocation!!) < 50 && it.builder.status == Builder.Status.COMPLETED}.map { it as PipelineInterface }
             // 基地端口列表
-            val footholdPipelines = StructureRepository.findBy { it is PipelineInterface && it.builder.buildLocation.distance(GoalHolder.footholdLocation!!) < 50}.map { it as PipelineInterface }
+            val footholdPipelines = StructureRepository.findBy { it is PipelineInterface && it.builder.buildLocation.distance(GoalHolder.footholdLocation!!) < 50 && it.builder.status == Builder.Status.COMPLETED}.map { it as PipelineInterface }
             for (miningStationPipeline in miningStationPipelines) {
                 for (footholdPipeline in footholdPipelines) {
                     // 存在至少一个基地的端口与开采站端口有连接

@@ -7,6 +7,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.structure.generator.Gen
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.generator.GeneratorLog
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.generator.GeneratorOre
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureRepository
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
 object UpgradeFoothold : Goal("据点扩张",0) {
     override val nextGoal = LocationSurvey
@@ -22,13 +23,13 @@ object UpgradeFoothold : Goal("据点扩张",0) {
     )
     override val finishConditions: List<Condition> = listOf(
         FunctionalCondition("建造伐木场"){
-            StructureRepository.findBy { it is GeneratorLog }.any()
+            StructureRepository.findBy { it is GeneratorLog && it.builder.status == Builder.Status.COMPLETED }.any()
         },
         FunctionalCondition("建造农场"){
-            StructureRepository.findBy { it is GeneratorCrop }.any()
+            StructureRepository.findBy { it is GeneratorCrop && it.builder.status == Builder.Status.COMPLETED }.any()
         },
         FunctionalCondition("建造采矿场"){
-            StructureRepository.findBy { it is GeneratorOre }.any()
+            StructureRepository.findBy { it is GeneratorOre && it.builder.status == Builder.Status.COMPLETED }.any()
         }
     )
     override val failedConditions: List<Condition> = listOf()
