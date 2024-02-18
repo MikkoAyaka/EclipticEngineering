@@ -7,9 +7,10 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractEvent
 import org.wolflink.minecraft.plugin.eclipticengineering.config.BUILD_MENU_CMD
+import org.wolflink.minecraft.plugin.eclipticengineering.config.MAIN_MENU_CMD
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.parsePapi
 
-object BuildToolListener: Listener {
+object MenuListener: Listener {
     /**
      * 玩家是否在使用建筑魔杖
      */
@@ -22,10 +23,19 @@ object BuildToolListener: Listener {
     private fun openBuildMenu(player: Player) {
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), BUILD_MENU_CMD.parsePapi(player))
     }
+    private fun openMainMenu(player: Player) {
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), MAIN_MENU_CMD.parsePapi(player))
+    }
+    private fun isUsingMenuItem(e: PlayerInteractEvent) =
+        e.action.isRightClick && e.player.inventory.itemInMainHand.type == Material.SCULK_SHRIEKER
     @EventHandler
     fun on(e: PlayerInteractEvent) {
         if(isUsingBuildTool(e)) {
             openBuildMenu(e.player)
+            e.isCancelled = true
+        }
+        if(isUsingMenuItem(e)) {
+            openMainMenu(e.player)
             e.isCancelled = true
         }
     }

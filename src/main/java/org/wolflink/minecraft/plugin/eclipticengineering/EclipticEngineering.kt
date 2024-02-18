@@ -8,7 +8,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.command.BuildCommand
 import org.wolflink.minecraft.plugin.eclipticengineering.command.StageCommand
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.interaction.AuxiliaryBlockListener
-import org.wolflink.minecraft.plugin.eclipticengineering.interaction.BuildToolListener
+import org.wolflink.minecraft.plugin.eclipticengineering.interaction.MenuListener
 import org.wolflink.minecraft.plugin.eclipticengineering.interaction.HitMonsterListener
 import org.wolflink.minecraft.plugin.eclipticengineering.interaction.WorkingToolListener
 import org.wolflink.minecraft.plugin.eclipticengineering.metadata.MetadataHandler
@@ -38,7 +38,7 @@ class EclipticEngineering : JavaPlugin() {
         // 注册可用的建筑结构
         StructureType.entries.forEach(StructureType::register)
         // 注册事件监听器
-        BuildToolListener.register(this)
+        MenuListener.register(this)
         WorkingToolListener.register(this)
         AuxiliaryBlockListener.register(this)
         HitMonsterListener.register(this)
