@@ -8,14 +8,14 @@ import org.wolflink.minecraft.plugin.eclipticengineering.stage.goal.GoalHolder
 /**
  * 关于游戏阶段的变量
  *
- * %eestage_stage% 当前阶段
- * %eestage_goal% 当前目标
- * %eestage_special_location% 当前特殊行动坐标
- * %eestage_foothold_location% 当前据点坐标
- * %eestage_prepare_time% 下一阶段剩余准备时间
+ * %ees_stage% 当前阶段
+ * %ees_goal% 当前目标
+ * %ees_special_location% 当前特殊行动坐标
+ * %ees_foothold_location% 当前据点坐标
+ * %ees_prepare_time% 下一阶段剩余准备时间
  */
 object StagePapi: PlaceholderExpansion() {
-    override fun getIdentifier() = "eestage"
+    override fun getIdentifier() = "ees"
 
     override fun getAuthor() = "MikkoAyaka"
 
