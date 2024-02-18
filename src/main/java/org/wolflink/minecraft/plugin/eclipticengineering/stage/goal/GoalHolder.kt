@@ -25,6 +25,7 @@ object GoalHolder {
         EEngineeringScope.launch {
             nowGoal?.leave()
             nowGoal = nowGoal?.nextGoal
+            nowGoal?.into()
         }
     }
 }

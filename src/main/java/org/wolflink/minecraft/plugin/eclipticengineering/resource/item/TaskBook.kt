@@ -35,6 +35,11 @@ object TaskBook: Listener {
     private var lastUpdateTime = 0L
     private var lastUpdateMeta: ItemMeta = defaultItem.itemMeta
     private fun update(player: Player,bookItem: ItemStack) {
+        if(GoalHolder.nowGoal?.status == Goal.Status.PREPARING) {
+            player.sendActionBar("$MESSAGE_PREFIX <yellow>新的目标将在准备时间结束后到来".toComponent())
+            player.playSound(player, Sound.ENTITY_VILLAGER_NO,1f,1.5f)
+            return
+        }
         if(Calendar.getInstance().timeInMillis - lastUpdateTime <= 10 * 1000) {
             player.sendActionBar("$MESSAGE_PREFIX <yellow>任务书刷新冷却中，请稍后再尝试".toComponent())
             player.playSound(player, Sound.ENTITY_VILLAGER_NO,1f,1.5f)
