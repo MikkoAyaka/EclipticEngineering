@@ -12,6 +12,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.interaction.MenuListene
 import org.wolflink.minecraft.plugin.eclipticengineering.interaction.HitMonsterListener
 import org.wolflink.minecraft.plugin.eclipticengineering.interaction.WorkingToolListener
 import org.wolflink.minecraft.plugin.eclipticengineering.metadata.MetadataHandler
+import org.wolflink.minecraft.plugin.eclipticengineering.monster.CreatureSpawnListener
 import org.wolflink.minecraft.plugin.eclipticengineering.papi.StagePapi
 import org.wolflink.minecraft.plugin.eclipticengineering.papi.VirtualResourcePapi
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.VirtualTeamInventory
@@ -43,6 +44,7 @@ class EclipticEngineering : JavaPlugin() {
         AuxiliaryBlockListener.register(this)
         HitMonsterListener.register(this)
         MetadataHandler.register(this)
+        CreatureSpawnListener.register(this)
         // 注册防御塔监听器
         TowerArrow.BukkitListener.register(this)
         // 注册背包监听器
