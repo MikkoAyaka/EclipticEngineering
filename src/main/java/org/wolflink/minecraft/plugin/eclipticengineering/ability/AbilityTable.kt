@@ -15,6 +15,9 @@ import java.util.UUID
 class AbilityTable(val ownerUuid: UUID) {
     private val totalPoints = 9
     private val map = EnumMap<Ability,Int>(Ability::class.java)
+    init {
+        Ability.entries.forEach { map[it] = 0 }
+    }
     /**
      * 判断玩家是否有剩余能力点数
      */
