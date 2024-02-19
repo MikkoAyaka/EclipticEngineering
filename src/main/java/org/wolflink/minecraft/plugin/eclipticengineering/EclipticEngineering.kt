@@ -7,10 +7,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.command.AbilityCommand
 import org.wolflink.minecraft.plugin.eclipticengineering.command.BuildCommand
 import org.wolflink.minecraft.plugin.eclipticengineering.command.StageCommand
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
-import org.wolflink.minecraft.plugin.eclipticengineering.interaction.AuxiliaryBlockListener
-import org.wolflink.minecraft.plugin.eclipticengineering.interaction.MenuListener
-import org.wolflink.minecraft.plugin.eclipticengineering.interaction.HitMonsterListener
-import org.wolflink.minecraft.plugin.eclipticengineering.interaction.WorkingToolListener
+import org.wolflink.minecraft.plugin.eclipticengineering.interaction.*
 import org.wolflink.minecraft.plugin.eclipticengineering.metadata.MetadataHandler
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.CreatureSpawnListener
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.smartai.SmartAIListener
@@ -47,6 +44,7 @@ class EclipticEngineering : JavaPlugin() {
         MetadataHandler.register(this)
         CreatureSpawnListener.register(this)
         SmartAIListener.register(this)
+        FertilizeListener.register(this)
         // 注册防御塔监听器
         TowerArrow.BukkitListener.register(this)
         // 注册背包监听器
