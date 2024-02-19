@@ -45,6 +45,7 @@ class EclipticEngineering : JavaPlugin() {
         CreatureSpawnListener.register(this)
         SmartAIListener.register(this)
         FertilizeListener.register(this)
+        PlayerDeathListener.register(this)
         // 注册防御塔监听器
         TowerArrow.BukkitListener.register(this)
         // 注册背包监听器
