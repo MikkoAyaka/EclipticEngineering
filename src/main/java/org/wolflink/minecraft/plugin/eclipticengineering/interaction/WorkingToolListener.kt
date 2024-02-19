@@ -12,9 +12,11 @@ import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.*
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.abilityTable
+import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
 
 /**
  * 检查玩家是否有能力使用对应的工具
+ * 刷新工具破坏表
  */
 object WorkingToolListener: Listener {
     init {
@@ -22,6 +24,14 @@ object WorkingToolListener: Listener {
             while (EclipticEngineering.instance.isEnabled) {
                 // 每0.3秒检查一次
                 delay(300)
+                gamingPlayers
+                    .forEach {
+                        val item = it.inventory.itemInMainHand
+                        val destroyKeys = DestroyableMap.get(item.type)
+                        if(destroyKeys.isNotEmpty()) item.itemMeta = item.itemMeta.apply {
+                            setDestroyableKeys(destroyKeys)
+                        }
+                    }
             }
         }
     }

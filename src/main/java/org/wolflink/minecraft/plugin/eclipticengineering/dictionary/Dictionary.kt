@@ -1,8 +1,7 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.dictionary
 
 import org.bukkit.Material
-
-private val ORE_MATERIAL = setOf(
+val ORE_MATERIAL = setOf(
     Material.COAL_ORE,
     Material.DEEPSLATE_COAL_ORE,
     Material.IRON_ORE,
@@ -22,7 +21,7 @@ private val ORE_MATERIAL = setOf(
     Material.NETHER_GOLD_ORE,
     Material.NETHER_QUARTZ_ORE
 )
-private val PICKAXE_MATERIAL = setOf(
+val PICKAXE_MATERIAL = setOf(
     Material.DIAMOND_PICKAXE,
     Material.IRON_PICKAXE,
     Material.GOLDEN_PICKAXE,
@@ -30,7 +29,7 @@ private val PICKAXE_MATERIAL = setOf(
     Material.WOODEN_PICKAXE,
     Material.STONE_PICKAXE
 )
-private val AXE_MATERIAL = setOf(
+val AXE_MATERIAL = setOf(
     Material.DIAMOND_AXE,
     Material.IRON_AXE,
     Material.GOLDEN_AXE,
@@ -38,7 +37,7 @@ private val AXE_MATERIAL = setOf(
     Material.WOODEN_AXE,
     Material.STONE_AXE,
 )
-private val HOE_MATERIAL = setOf(
+val HOE_MATERIAL = setOf(
     Material.DIAMOND_HOE,
     Material.IRON_HOE,
     Material.GOLDEN_HOE,
@@ -46,11 +45,11 @@ private val HOE_MATERIAL = setOf(
     Material.WOODEN_HOE,
     Material.STONE_HOE,
 )
-private val FURNACE_MATERIAL = setOf(
+val FURNACE_MATERIAL = setOf(
     Material.FURNACE,
     Material.BLAST_FURNACE
 )
-private val AUXILIARY_MATERIAL = setOf(
+val AUXILIARY_MATERIAL = setOf(
     Material.SCAFFOLDING,
     Material.LADDER,
     Material.RAIL,
@@ -58,11 +57,20 @@ private val AUXILIARY_MATERIAL = setOf(
     Material.DETECTOR_RAIL,
     Material.POWERED_RAIL
 )
-private val REMOTE_WEAPON_MATERIAL = setOf(
+val REMOTE_WEAPON_MATERIAL = setOf(
     Material.BOW,
     Material.CROSSBOW
 )
-private val WOOD_MATERIAL = setOf(
+val HARVESTABLE_CROP_MATERIAL = setOf(
+    Material.WHEAT,
+    Material.CARROTS,
+    Material.POTATOES,
+    Material.BEETROOTS,
+    Material.MELON,
+    Material.PUMPKIN,
+    Material.SWEET_BERRY_BUSH
+)
+val WOOD_MATERIAL = setOf(
     // 原木
     Material.OAK_LOG,
     Material.SPRUCE_LOG,
