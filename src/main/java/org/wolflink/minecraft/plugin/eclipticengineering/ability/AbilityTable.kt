@@ -6,23 +6,25 @@ import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.toRoma
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toHexFormat
+import java.util.EnumMap
 import java.util.UUID
 
 /**
  * 存放关于玩家的能力数据
  */
 class AbilityTable(val ownerUuid: UUID) {
-    private val totalPoints = 6
-    private val map = mutableMapOf<Ability,Int>()
-    init {
-        Ability.entries.forEach { map[it] = 0 }
-    }
+    private val totalPoints = 9
+    private val map = EnumMap<Ability,Int>(Ability::class.java)
     /**
      * 判断玩家是否有剩余能力点数
      */
     fun hasPoint() = map.values.reduce(Int::plus) < totalPoints
     fun setAbility(abilityType: Ability,abilityLevel: Int) {
         map[abilityType] = abilityLevel
+    }
+    fun getLevel(abilityType: Ability) = map[abilityType]!!
+    fun addAbility(abilityType: Ability) {
+        map[abilityType] = map.getOrDefault(abilityType,0) + 1
     }
 
     /**
