@@ -1,15 +1,19 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.monster.smartai.customgoals
 
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.entity.monster.Zombie
 import net.minecraft.world.phys.Vec3
 import org.bukkit.Bukkit
+import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.block.Block
 import org.bukkit.entity.Entity
 import org.bukkit.util.Vector
+import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import java.util.stream.Stream
 import kotlin.math.sqrt
@@ -92,16 +96,23 @@ class ZombieBlockGoal(zombie: Zombie) : Goal() {
 
     private fun jumpAndPlaceBlock() {
         val footBlock = zombieEntity.location.block
-        zombie.getJumpControl().jump()
-        Bukkit.getScheduler().runTaskLater(EclipticEngineering.instance, Runnable {
-            if (zombieEntity.isDead) return@Runnable
+        zombie.jumpControl.jump()
+        EEngineeringScope.launch {
+            if(zombieEntity.isDead) return@launch
             if (footBlock.getRelative(0, -1, 0).isSolid) {
-                footBlock.type = Material.COBBLESTONE
-                footBlock.world.playSound(footBlock.location, Sound.BLOCK_STONE_PLACE, 1f, 1f)
+                delay(250)
+                placeBlock(footBlock.location)
             }
-        },5)
+            delay(1000 * 15)
+            if(footBlock.type == Material.COBBLESTONE) breakBlock(footBlock)
+        }
     }
-
+    private fun placeBlock(location: Location) {
+        EclipticEngineering.runTask {
+            location.block.type = Material.COBBLESTONE
+            location.world.playSound(location,Sound.BLOCK_STONE_PLACE, 0.5f, 1f)
+        }
+    }
     private fun breakBlock(block: Block) {
         EclipticEngineering.runTask {
             if (block.isSolid) {
