@@ -13,11 +13,13 @@ import java.util.UUID
  * 存放关于玩家的能力数据
  */
 class AbilityTable(val ownerUuid: UUID) {
-    private val totalPoints = 9
+    val totalPoints = 9
     private val map = EnumMap<Ability,Int>(Ability::class.java)
     init {
         Ability.entries.forEach { map[it] = 0 }
     }
+    fun usedPoints() = map.values.reduce(Int::plus)
+    fun usablePoints() = totalPoints - usedPoints()
     /**
      * 判断玩家是否有剩余能力点数
      */

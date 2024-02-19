@@ -4,11 +4,15 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion
 import org.bukkit.OfflinePlayer
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.abilityTable
+import org.wolflink.minecraft.plugin.eclipticstructure.extension.toHex
 
 /**
  * 玩家能力变量
  * %eea_level_xxxxx%
  * %eea_maxlevel_xxxxx%
+ * %eea_displayname_xxxxx%
+ * %eea_points_used%
+ * %eea_points_usable%
  */
 object AbilityPapi: PlaceholderExpansion() {
     override fun getIdentifier() = "eea"
@@ -38,6 +42,26 @@ object AbilityPapi: PlaceholderExpansion() {
                 } catch (_: Exception) {
                     "未知天赋"
                 }
+            }
+            "displayname" -> {
+                val abilityName = args.getOrNull(1)?.uppercase()
+                return try {
+                    val ability = Ability.valueOf( abilityName ?: "")
+                    "&#${ability.color.toHex()}${ability.displayName}"
+                } catch (_: Exception) {
+                    "未知天赋"
+                }
+            }
+        }
+        when(params) {
+            "points_total" -> {
+                return player.abilityTable.totalPoints.toString()
+            }
+            "points_used" -> {
+                return player.abilityTable.usedPoints().toString()
+            }
+            "points_usable" -> {
+                return player.abilityTable.usablePoints().toString()
             }
         }
         return "未知变量"
