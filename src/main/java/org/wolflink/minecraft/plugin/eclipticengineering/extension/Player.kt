@@ -5,6 +5,7 @@ import org.bukkit.GameMode
 import org.bukkit.OfflinePlayer
 import org.bukkit.entity.Player
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.AbilityTable
+import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
 import java.util.UUID
 
 private val abilityTableMap = mutableMapOf<UUID,AbilityTable>()
@@ -15,5 +16,5 @@ val Player.abilityTable
 val OfflinePlayer.abilityTable
     get() = this.uniqueId.abilityTable
 
-fun Player.isGaming() = gameMode == GameMode.ADVENTURE && world.name != "main"
+fun Player.isGaming() = gameMode == GameMode.ADVENTURE && world.name != Config.lobbyWorldName
 val gamingPlayers get() = Bukkit.getOnlinePlayers().filter { it.isGaming() }

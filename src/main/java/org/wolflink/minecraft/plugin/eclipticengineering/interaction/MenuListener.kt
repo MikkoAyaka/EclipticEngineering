@@ -6,8 +6,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractEvent
-import org.wolflink.minecraft.plugin.eclipticengineering.config.BUILD_MENU_CMD
-import org.wolflink.minecraft.plugin.eclipticengineering.config.MAIN_MENU_CMD
+import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.parsePapi
 
 object MenuListener: Listener {
@@ -21,10 +20,10 @@ object MenuListener: Listener {
      * 打开建筑菜单
      */
     private fun openBuildMenu(player: Player) {
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), BUILD_MENU_CMD.parsePapi(player))
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), Config.buildMenuCmd.parsePapi(player))
     }
     private fun openMainMenu(player: Player) {
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), MAIN_MENU_CMD.parsePapi(player))
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), Config.mainMenuCmd.parsePapi(player))
     }
     private fun isUsingMenuItem(e: PlayerInteractEvent) =
         e.action.isRightClick && e.player.inventory.itemInMainHand.type == Material.SCULK_SHRIEKER
