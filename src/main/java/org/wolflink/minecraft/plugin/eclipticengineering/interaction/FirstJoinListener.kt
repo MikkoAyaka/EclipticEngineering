@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
+import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.MainMenuItem
 import java.util.UUID
 
 object FirstJoinListener: Listener {
@@ -21,6 +22,7 @@ object FirstJoinListener: Listener {
         player.foodLevel = 20
         player.inventory.clear()
         player.activePotionEffects.clear()
+        MainMenuItem.give(player)
     }
     @EventHandler
     fun on(e: PlayerJoinEvent) {

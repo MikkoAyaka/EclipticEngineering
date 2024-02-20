@@ -17,6 +17,8 @@ import org.wolflink.minecraft.plugin.eclipticengineering.papi.AbilityPapi
 import org.wolflink.minecraft.plugin.eclipticengineering.papi.StagePapi
 import org.wolflink.minecraft.plugin.eclipticengineering.papi.VirtualResourcePapi
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.VirtualTeamInventory
+import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.BuildMenuItem
+import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.MainMenuItem
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.TaskBook
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.StageHolder
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.tower.TowerArrow
@@ -42,7 +44,6 @@ class EclipticEngineering : JavaPlugin() {
         // 注册可用的建筑结构
         StructureType.entries.forEach(StructureType::register)
         // 注册事件监听器
-        MenuListener.register(this)
         WorkingToolListener.register(this)
         AuxiliaryBlockListener.register(this)
         HitMonsterListener.register(this)
@@ -58,6 +59,8 @@ class EclipticEngineering : JavaPlugin() {
         VirtualTeamInventory.register(this)
         // 注册任务书监听器
         TaskBook.register(this)
+        MainMenuItem.register(this)
+        BuildMenuItem.register(this)
         // 注册变量
         StagePapi.register()
         VirtualResourcePapi.register()
