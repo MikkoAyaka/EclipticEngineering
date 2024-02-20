@@ -1,10 +1,12 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.stage
 
 import kotlinx.coroutines.launch
+import net.citizensnpcs.api.event.NPCClickEvent
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.block.Container
 import org.bukkit.event.EventHandler
+import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
@@ -37,7 +39,7 @@ class PreGameStage(stageHolder: StageHolder) : Stage("搜集阶段", stageHolder
     }
     override fun onEnter() {
         removeWalls()
-        ChestListener.register(EclipticEngineering.instance)
+        PreGameListener.register(EclipticEngineering.instance)
         onlinePlayers.forEach {
             it.teleport(Config.lobbyLocation)
             it.sendActionBar("$MESSAGE_PREFIX 在倒计时结束前，尽量多搜集些物资吧，接下来就要正式出发了。".toComponent())
@@ -51,8 +53,8 @@ class PreGameStage(stageHolder: StageHolder) : Stage("搜集阶段", stageHolder
 
     override fun onLeave() {
         placeWalls()
-        ChestListener.clearChest()
-        ChestListener.unregister()
+        PreGameListener.clearChest()
+        PreGameListener.unregister()
     }
 }
 // 随机概率表 概率(0.0~1.0，在每个箱子中出现1次的概率) 物品
@@ -115,7 +117,7 @@ private val chestItemRandomTable = setOf(
     0.08 to ItemStack(Material.GOLDEN_SHOVEL, 1),
     0.01 to ItemStack(Material.DIAMOND_SHOVEL, 1)
 )
-private object ChestListener : Listener {
+private object PreGameListener : Listener {
     private val cacheChest = mutableSetOf<Container>()
     @EventHandler
     fun on(e: PlayerInteractEvent) {
@@ -139,5 +141,9 @@ private object ChestListener : Listener {
             it.inventory.clear()
         }
         cacheChest.clear()
+    }
+    @EventHandler
+    fun on(e: NPCClickEvent) {
+        e.isCancelled = true
     }
 }
