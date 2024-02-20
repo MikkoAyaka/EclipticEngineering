@@ -2,6 +2,7 @@ package org.wolflink.minecraft.plugin.eclipticengineering
 
 import kotlinx.coroutines.cancel
 import org.bukkit.Bukkit
+import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.plugin.java.JavaPlugin
 import org.wolflink.minecraft.plugin.eclipticengineering.command.AbilityCommand
 import org.wolflink.minecraft.plugin.eclipticengineering.command.BuildCommand
@@ -47,6 +48,7 @@ class EclipticEngineering : JavaPlugin() {
         SmartAIListener.register(this)
         FertilizeListener.register(this)
         PlayerDeathListener.register(this)
+        FirstJoinListener.register(this)
         // 注册防御塔监听器
         TowerArrow.BukkitListener.register(this)
         // 注册背包监听器
