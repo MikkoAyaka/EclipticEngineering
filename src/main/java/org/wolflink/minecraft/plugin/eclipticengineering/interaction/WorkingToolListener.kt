@@ -19,22 +19,23 @@ import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
  * 刷新工具破坏表
  */
 object WorkingToolListener: Listener {
-    init {
-        EEngineeringScope.launch {
-            while (EclipticEngineering.instance.isEnabled) {
-                // 每0.3秒检查一次
-                delay(300)
-                gamingPlayers
-                    .forEach {
-                        val item = it.inventory.itemInMainHand
-                        val destroyKeys = DestroyableMap.get(item.type)
-                        if(destroyKeys.isNotEmpty()) item.itemMeta = item.itemMeta.apply {
-                            setDestroyableKeys(destroyKeys)
-                        }
-                    }
-            }
-        }
-    }
+    // 已由冒险模式改为生存模式
+//    init {
+//        EEngineeringScope.launch {
+//            while (EclipticEngineering.instance.isEnabled) {
+//                // 每0.3秒检查一次
+//                delay(300)
+//                gamingPlayers
+//                    .forEach {
+//                        val item = it.inventory.itemInMainHand
+//                        val destroyKeys = DestroyableMap.get(item.type)
+//                        if(destroyKeys.isNotEmpty()) item.itemMeta = item.itemMeta.apply {
+//                            setDestroyableKeys(destroyKeys)
+//                        }
+//                    }
+//            }
+//        }
+//    }
     @EventHandler
     fun checkTool(e: PlayerInteractEvent) {
         // 左键与工具交互

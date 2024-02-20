@@ -21,7 +21,7 @@ object FirstJoinListener: Listener {
         player.health = player.getAttribute(Attribute.GENERIC_MAX_HEALTH)?.value!!
         player.foodLevel = 20
         player.inventory.clear()
-        player.activePotionEffects.clear()
+        player.activePotionEffects.forEach { player.removePotionEffect(it.type) }
         MainMenuItem.give(player)
     }
     @EventHandler
