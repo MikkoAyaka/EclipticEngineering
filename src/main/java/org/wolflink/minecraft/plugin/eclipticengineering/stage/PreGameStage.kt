@@ -35,6 +35,7 @@ class PreGameStage(stageHolder: StageHolder) : Stage("搜集阶段", stageHolder
     }
 
     override fun onLeave() {
+        ChestListener.clearChest()
         ChestListener.unregister()
     }
 }
@@ -99,10 +100,12 @@ private val chestItemRandomTable = setOf(
     0.01 to ItemStack(Material.DIAMOND_SHOVEL, 1)
 )
 private object ChestListener : Listener {
+    private val cacheChest = mutableSetOf<Container>()
     @EventHandler
     fun on(e: PlayerInteractEvent) {
         if (e.hasBlock() && e.clickedBlock?.state is Container) {
             val chestBlock = e.clickedBlock!! as Container
+            if(chestBlock in cacheChest) return
             chestBlock.inventory.contents = chestBlock.inventory
                 .apply {
                     chestItemRandomTable
@@ -110,7 +113,13 @@ private object ChestListener : Listener {
                         .forEach { this.addItem(it.second) }
                 }
                 .contents.apply { this.shuffle() }
+            cacheChest.add(chestBlock)
         }
-
+    }
+    fun clearChest() {
+        cacheChest.forEach {
+            it.inventory.clear()
+        }
+        cacheChest.clear()
     }
 }
