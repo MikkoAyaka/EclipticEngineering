@@ -2,6 +2,7 @@ package org.wolflink.minecraft.plugin.eclipticengineering.resource.item
 
 import org.bukkit.Bukkit
 import org.bukkit.Material
+import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.PRIMARY_TEXT_COLOR
@@ -20,6 +21,8 @@ object MainMenuItem: InteractiveItem(
     )
 ){
     private fun openMainMenu(player: Player) {
+        player.playSound(player, Sound.BLOCK_SCULK_SHRIEKER_SHRIEK,0.4f,1f)
+        player.playSound(player, Sound.BLOCK_AMETHYST_BLOCK_RESONATE,1f,1f)
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), Config.mainMenuCmd.parsePapi(player))
     }
     override fun onInteract(player: Player) {

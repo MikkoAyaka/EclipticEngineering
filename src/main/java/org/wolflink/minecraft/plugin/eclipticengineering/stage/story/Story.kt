@@ -12,12 +12,12 @@ class Story(vararg text: String) {
     private val textList = text.toList()
     suspend fun broadcast() {
         for (text in textList) {
-            val delayMills = 300 + 60 * text.length + 500
+            val delayMills = 600 + 60 * text.length + 500
             EclipticEngineering.runTask {
                 Bukkit.getOnlinePlayers().forEach {
                     it.playSound(it, Sound.ENTITY_VILLAGER_AMBIENT,1.2f,0.8f)
-                    it.showTitle(Title.title("".toComponent(),text.toComponent(), Title.Times.times(Duration.ofMillis(150),
-                        Duration.ofMillis(50L * text.length), Duration.ofMillis(150))))
+                    it.showTitle(Title.title("".toComponent(),text.toComponent(), Title.Times.times(Duration.ofMillis(300),
+                        Duration.ofMillis(50L * text.length), Duration.ofMillis(300))))
                 }
             }
             delay(delayMills.toLong())

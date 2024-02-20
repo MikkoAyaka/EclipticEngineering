@@ -2,6 +2,8 @@ package org.wolflink.minecraft.plugin.eclipticengineering.stage
 
 import kotlinx.coroutines.launch
 import net.citizensnpcs.api.event.NPCClickEvent
+import net.citizensnpcs.api.event.NPCLeftClickEvent
+import net.citizensnpcs.api.event.NPCRightClickEvent
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.block.Container
@@ -144,7 +146,11 @@ private object PreGameListener : Listener {
         cacheChest.clear()
     }
     @EventHandler
-    fun on(e: NPCClickEvent) {
+    fun on(e: NPCLeftClickEvent) {
+        e.isCancelled = true
+    }
+    @EventHandler
+    fun on(e: NPCRightClickEvent) {
         e.isCancelled = true
     }
 }
