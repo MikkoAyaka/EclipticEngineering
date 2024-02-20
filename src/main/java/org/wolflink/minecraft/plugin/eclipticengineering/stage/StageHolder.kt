@@ -7,6 +7,7 @@ object StageHolder: LinearStageHolder(false) {
         bindStages(arrayOf(
             WaitStage(this),
             ReadyStage(this),
+            PreGameStage(this),
             GameStage(this),
             EndStage(this)
         ))

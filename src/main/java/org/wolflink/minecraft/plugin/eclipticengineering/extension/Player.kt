@@ -17,4 +17,5 @@ val OfflinePlayer.abilityTable
     get() = this.uniqueId.abilityTable
 
 fun Player.isGaming() = gameMode == GameMode.ADVENTURE && world.name != Config.lobbyWorldName
-val gamingPlayers get() = Bukkit.getOnlinePlayers().filter { it.isGaming() }
+val gamingPlayers: Collection<Player> get() = onlinePlayers.filter { it.isGaming() }
+val onlinePlayers: Collection<Player> get() = Bukkit.getOnlinePlayers()

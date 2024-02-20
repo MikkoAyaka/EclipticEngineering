@@ -8,37 +8,19 @@ import org.bukkit.GameMode
 import org.bukkit.Sound
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
+import org.wolflink.minecraft.plugin.eclipticengineering.extension.onlinePlayers
+import org.wolflink.minecraft.plugin.eclipticengineering.interaction.Counter
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.*
 import org.wolflink.minecraft.wolfird.framework.gamestage.stage.Stage
 import java.time.Duration
 
 class ReadyStage(stageHolder: StageHolder) : Stage("准备阶段", stageHolder) {
     override fun onEnter() {
-        Bukkit.getOnlinePlayers().forEach {
+        onlinePlayers.forEach {
             it.gameMode = GameMode.ADVENTURE
         }
         EEngineeringScope.launch {
-            val maxCount = 30
-            var count = maxCount
-            repeat(maxCount) {
-                val title = Title.title(
-                    "".toComponent(),
-                    "${(RED_COLOR to GREEN_COLOR ofGradient count.toDouble()/maxCount).toHexFormat()}<bold>$count".toComponent(),
-                    Title.Times.times(
-                        Duration.ofMillis(150),
-                        Duration.ofMillis(700),
-                        Duration.ofMillis(150)
-                    )
-                )
-                EclipticEngineering.runTask {
-                    Bukkit.getOnlinePlayers().forEach {
-                        it.showTitle(title)
-                        it.playSound(it, Sound.BLOCK_NOTE_BLOCK_BELL,1f,1.4f)
-                    }
-                }
-                count--
-                delay(1000)
-            }
+            Counter.count(15,"<green>准备搜刮物资吧！".toComponent())
             EclipticEngineering.runTask { stageHolder.next() }
         }
     }
