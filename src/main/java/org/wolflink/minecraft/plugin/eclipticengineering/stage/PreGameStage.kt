@@ -12,6 +12,8 @@ import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
+import org.bukkit.potion.PotionEffect
+import org.bukkit.potion.PotionEffectType
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
@@ -46,9 +48,10 @@ class PreGameStage(stageHolder: StageHolder) : Stage("搜集阶段", stageHolder
             it.teleport(Config.lobbyLocation)
             it.sendActionBar("$MESSAGE_PREFIX 在倒计时结束前，尽量多搜集些物资吧，接下来就要正式出发了。".toComponent())
             it.playSound(it, Sound.ENTITY_VILLAGER_AMBIENT, 1f, 1f)
+            it.addPotionEffect(PotionEffect(PotionEffectType.SPEED,20 * 60,1,false,false))
         }
         EEngineeringScope.launch {
-            Counter.count(90)
+            Counter.count(60)
             EclipticEngineering.runTask { stageHolder.next() }
         }
     }
