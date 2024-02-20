@@ -21,7 +21,22 @@ import org.wolflink.minecraft.plugin.eclipticstructure.extension.unregister
 import org.wolflink.minecraft.wolfird.framework.gamestage.stage.Stage
 
 class PreGameStage(stageHolder: StageHolder) : Stage("搜集阶段", stageHolder) {
+    private fun removeWalls() {
+        Config.lobbyWalls.forEach {
+            it.forEach { world, x, y, z ->
+                world.setBlockData(x,y,z,Material.AIR.createBlockData())
+            }
+        }
+    }
+    private fun placeWalls() {
+        Config.lobbyWalls.forEach {
+            it.forEach { world, x, y, z ->
+                world.setBlockData(x,y,z,Material.DEEPSLATE_BRICK_WALL.createBlockData())
+            }
+        }
+    }
     override fun onEnter() {
+        removeWalls()
         ChestListener.register(EclipticEngineering.instance)
         onlinePlayers.forEach {
             it.teleport(Config.lobbyLocation)
@@ -35,6 +50,7 @@ class PreGameStage(stageHolder: StageHolder) : Stage("搜集阶段", stageHolder
     }
 
     override fun onLeave() {
+        placeWalls()
         ChestListener.clearChest()
         ChestListener.unregister()
     }
@@ -104,15 +120,17 @@ private object ChestListener : Listener {
     @EventHandler
     fun on(e: PlayerInteractEvent) {
         if (e.hasBlock() && e.clickedBlock?.state is Container) {
-            val chestBlock = e.clickedBlock!! as Container
+            val chestBlock = e.clickedBlock!!.state as Container
             if(chestBlock in cacheChest) return
-            chestBlock.inventory.contents = chestBlock.inventory
-                .apply {
-                    chestItemRandomTable
-                        .filter { RandomAPI.nextDouble() <= it.first }
-                        .forEach { this.addItem(it.second) }
-                }
-                .contents.apply { this.shuffle() }
+            EEngineeringScope.launch {
+                chestBlock.inventory.contents = chestBlock.inventory
+                    .apply {
+                        chestItemRandomTable
+                            .filter { RandomAPI.nextDouble() <= it.first }
+                            .forEach { this.addItem(it.second) }
+                    }
+                    .contents.apply { this.shuffle() }
+            }
             cacheChest.add(chestBlock)
         }
     }
