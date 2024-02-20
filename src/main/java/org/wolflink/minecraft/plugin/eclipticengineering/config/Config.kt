@@ -8,6 +8,7 @@ object Config {
     val buildMenuCmd = "dm open 建造菜单 %player_name%"
     val mainMenuCmd = "dm open 据点看板 %player_name%"
     val lobbyWorldName = "spawn"
+    val gameWorldName = "world"
     val lobbyWallStrings = listOf(
         "33,100,-9 33,95,-14",
         "24,95,15 19,103,15",
@@ -24,6 +25,7 @@ object Config {
         }
         return result
     }
+    val gameLocation get() = Bukkit.getWorld(gameWorldName)?.spawnLocation!!
     val lobbyLocation get() = Location(Bukkit.getWorld(lobbyWorldName),-25.0,91.0,2.0)
 }
 private fun String.toPairLocation(worldName: String): Pair<Location,Location> {
