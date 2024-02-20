@@ -7,6 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin
 import org.wolflink.minecraft.plugin.eclipticengineering.command.AbilityCommand
 import org.wolflink.minecraft.plugin.eclipticengineering.command.BuildCommand
 import org.wolflink.minecraft.plugin.eclipticengineering.command.StageCommand
+import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.interaction.*
 import org.wolflink.minecraft.plugin.eclipticengineering.metadata.MetadataHandler
@@ -19,6 +20,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.resource.VirtualTeamInv
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.TaskBook
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.StageHolder
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.tower.TowerArrow
+import org.wolflink.minecraft.plugin.eclipticengineering.utils.WorldAPI
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.register
 
 class EclipticEngineering : JavaPlugin() {
@@ -32,6 +34,7 @@ class EclipticEngineering : JavaPlugin() {
         instance = this
     }
     override fun onEnable() {
+        WorldAPI.regen(Config.gameWorldName)
         // 注册指令
         BuildCommand.register()
         AbilityCommand.register()
