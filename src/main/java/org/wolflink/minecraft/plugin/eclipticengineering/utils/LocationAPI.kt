@@ -21,7 +21,7 @@ object LocationAPI {
         val deltaZ = sin(radian) * distance
 
         // 获取中心坐标的世界、X、Y、Z值
-        val world = center.getWorld()
+        val world = center.world
         val centerX = center.x
         val centerY = center.y
         val centerZ = center.z
@@ -57,8 +57,8 @@ object LocationAPI {
     fun getNearestSolid(location: Location, deltaY: Int): Location? {
         val center = location.block
         for (i in 1..deltaY) {
-            if (center.getRelative(0, i, 0).type.isSolid()) return location.clone().add(0.0, i.toDouble(), 0.0)
-            if (center.getRelative(0, -i, 0).type.isSolid()) return location.clone().add(0.0, -i.toDouble(), 0.0)
+            if (center.getRelative(0, i, 0).type.isSolid) return location.clone().add(0.0, i.toDouble(), 0.0)
+            if (center.getRelative(0, -i, 0).type.isSolid) return location.clone().add(0.0, -i.toDouble(), 0.0)
         }
         return null
     }

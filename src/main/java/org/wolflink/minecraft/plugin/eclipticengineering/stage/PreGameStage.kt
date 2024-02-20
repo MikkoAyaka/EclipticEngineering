@@ -57,65 +57,66 @@ class PreGameStage(stageHolder: StageHolder) : Stage("搜集阶段", stageHolder
         PreGameListener.unregister()
     }
 }
-// 随机概率表 概率(0.0~1.0，在每个箱子中出现1次的概率) 物品
-private val chestItemRandomTable = setOf(
-    0.3 to ItemStack(Material.COBWEB),
-    0.3 to ItemStack(Material.ROTTEN_FLESH),
-    0.3 to ItemStack(Material.SPIDER_EYE),
-    0.3 to ItemStack(Material.DRIED_KELP,4),
-    0.3 to ItemStack(Material.SWEET_BERRIES,4),
-    0.3 to ItemStack(Material.APPLE,2),
-
-    0.01 to ItemStack(Material.DIAMOND_SWORD, 1),
-    0.02 to ItemStack(Material.IRON_SWORD, 1),
-    0.05 to ItemStack(Material.STONE_SWORD, 1),
-    0.05 to ItemStack(Material.LEATHER_HELMET, 1),
-    0.05 to ItemStack(Material.LEATHER_CHESTPLATE, 1),
-    0.05 to ItemStack(Material.LEATHER_LEGGINGS, 1),
-    0.05 to ItemStack(Material.LEATHER_BOOTS, 1),
-    0.04 to ItemStack(Material.CHAINMAIL_HELMET, 1),
-    0.04 to ItemStack(Material.CHAINMAIL_CHESTPLATE, 1),
-    0.04 to ItemStack(Material.CHAINMAIL_LEGGINGS, 1),
-    0.04 to ItemStack(Material.CHAINMAIL_BOOTS, 1),
-    0.025 to ItemStack(Material.IRON_HELMET, 1),
-    0.025 to ItemStack(Material.IRON_CHESTPLATE, 1),
-    0.025 to ItemStack(Material.IRON_LEGGINGS, 1),
-    0.025 to ItemStack(Material.IRON_BOOTS, 1),
-    0.005 to ItemStack(Material.DIAMOND_HELMET, 1),
-    0.005 to ItemStack(Material.DIAMOND_CHESTPLATE, 1),
-    0.005 to ItemStack(Material.DIAMOND_LEGGINGS, 1),
-    0.005 to ItemStack(Material.DIAMOND_BOOTS, 1),
-    0.2 to ItemStack(Material.APPLE, 5),
-    0.1 to ItemStack(Material.BREAD, 3),
-    0.05 to ItemStack(Material.COOKED_PORKCHOP, 2),
-    0.03 to ItemStack(Material.COOKED_BEEF, 2),
-    0.2 to ItemStack(Material.POTATO, 4),
-    0.15 to ItemStack(Material.CARROT, 4),
-    0.05 to ItemStack(Material.GOLDEN_CARROT, 1),
-    0.05 to ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 1),
-    0.2 to ItemStack(Material.OAK_LOG, 5),
-    0.15 to ItemStack(Material.COBBLESTONE, 20),
-    0.05 to ItemStack(Material.IRON_INGOT, 2),
-    0.03 to ItemStack(Material.GOLD_INGOT, 1),
-    0.01 to ItemStack(Material.DIAMOND, 1),
-    0.07 to ItemStack(Material.TORCH, 16),
-    0.05 to ItemStack(Material.WATER_BUCKET, 1),
-    0.03 to ItemStack(Material.LAVA_BUCKET, 1),
-    0.15 to ItemStack(Material.WOODEN_PICKAXE, 1),
-    0.1 to ItemStack(Material.STONE_PICKAXE, 1),
-    0.05 to ItemStack(Material.IRON_PICKAXE, 1),
-    0.08 to ItemStack(Material.GOLDEN_PICKAXE, 1),
-    0.01 to ItemStack(Material.DIAMOND_PICKAXE, 1),
-    0.15 to ItemStack(Material.WOODEN_AXE, 1),
-    0.1 to ItemStack(Material.STONE_AXE, 1),
-    0.05 to ItemStack(Material.IRON_AXE, 1),
-    0.08 to ItemStack(Material.GOLDEN_AXE, 1),
-    0.01 to ItemStack(Material.DIAMOND_AXE, 1),
-    0.15 to ItemStack(Material.WOODEN_SHOVEL, 1),
-    0.1 to ItemStack(Material.STONE_SHOVEL, 1),
-    0.05 to ItemStack(Material.IRON_SHOVEL, 1),
-    0.08 to ItemStack(Material.GOLDEN_SHOVEL, 1),
-    0.01 to ItemStack(Material.DIAMOND_SHOVEL, 1)
+// 玩家平均开箱数量，用于计算概率
+private val averChestAmount = 30
+// 随机概率表 数量(在每次游戏中期望出现的次数) 物品(堆叠)
+private val chestItemRandomTable: Set<Pair<Double,ItemStack>> = setOf(
+    15.0 to ItemStack(Material.COBWEB),
+    15.0 to ItemStack(Material.ROTTEN_FLESH),
+    15.0 to ItemStack(Material.SPIDER_EYE),
+    3.0 to ItemStack(Material.DRIED_KELP,2),
+    3.0 to ItemStack(Material.SWEET_BERRIES,2),
+    3.0 to ItemStack(Material.APPLE,2),
+    0.05 to ItemStack(Material.DIAMOND_SWORD, 1),
+    0.1 to ItemStack(Material.IRON_SWORD, 1),
+    0.25 to ItemStack(Material.STONE_SWORD, 1),
+    0.4 to ItemStack(Material.WOODEN_SWORD,1),
+    0.7 to ItemStack(Material.LEATHER_HELMET, 1),
+    0.7 to ItemStack(Material.LEATHER_CHESTPLATE, 1),
+    0.7 to ItemStack(Material.LEATHER_LEGGINGS, 1),
+    0.7 to ItemStack(Material.LEATHER_BOOTS, 1),
+    0.25 to ItemStack(Material.CHAINMAIL_HELMET, 1),
+    0.25 to ItemStack(Material.CHAINMAIL_CHESTPLATE, 1),
+    0.25 to ItemStack(Material.CHAINMAIL_LEGGINGS, 1),
+    0.25 to ItemStack(Material.CHAINMAIL_BOOTS, 1),
+    0.05 to ItemStack(Material.IRON_HELMET, 1),
+    0.05 to ItemStack(Material.IRON_CHESTPLATE, 1),
+    0.05 to ItemStack(Material.IRON_LEGGINGS, 1),
+    0.05 to ItemStack(Material.IRON_BOOTS, 1),
+    0.01 to ItemStack(Material.DIAMOND_HELMET, 1),
+    0.01 to ItemStack(Material.DIAMOND_CHESTPLATE, 1),
+    0.01 to ItemStack(Material.DIAMOND_LEGGINGS, 1),
+    0.01 to ItemStack(Material.DIAMOND_BOOTS, 1),
+    1.0 to ItemStack(Material.BREAD, 3),
+    0.5 to ItemStack(Material.COOKED_PORKCHOP, 2),
+    0.5 to ItemStack(Material.COOKED_BEEF, 2),
+    0.5 to ItemStack(Material.POTATO, 4),
+    0.5 to ItemStack(Material.CARROT, 4),
+    0.5 to ItemStack(Material.GOLDEN_CARROT, 1),
+    0.1 to ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 1),
+    1.0 to ItemStack(Material.OAK_LOG, 5),
+    1.0 to ItemStack(Material.COBBLESTONE, 20),
+    1.0 to ItemStack(Material.IRON_INGOT, 2),
+    0.8 to ItemStack(Material.GOLD_INGOT, 2),
+    0.25 to ItemStack(Material.DIAMOND, 1),
+    2.0 to ItemStack(Material.TORCH, 16),
+    0.3 to ItemStack(Material.WATER_BUCKET, 1),
+    0.2 to ItemStack(Material.LAVA_BUCKET, 1),
+    0.4 to ItemStack(Material.WOODEN_PICKAXE, 1),
+    0.3 to ItemStack(Material.STONE_PICKAXE, 1),
+    0.1 to ItemStack(Material.IRON_PICKAXE, 1),
+    0.4 to ItemStack(Material.GOLDEN_PICKAXE, 1),
+    0.05 to ItemStack(Material.DIAMOND_PICKAXE, 1),
+    0.4 to ItemStack(Material.WOODEN_AXE, 1),
+    0.3 to ItemStack(Material.STONE_AXE, 1),
+    0.1 to ItemStack(Material.IRON_AXE, 1),
+    0.4 to ItemStack(Material.GOLDEN_AXE, 1),
+    0.05 to ItemStack(Material.DIAMOND_AXE, 1),
+    0.4 to ItemStack(Material.WOODEN_SHOVEL, 1),
+    0.3 to ItemStack(Material.STONE_SHOVEL, 1),
+    0.1 to ItemStack(Material.IRON_SHOVEL, 1),
+    0.4 to ItemStack(Material.GOLDEN_SHOVEL, 1),
+    0.05 to ItemStack(Material.DIAMOND_SHOVEL, 1)
 )
 private object PreGameListener : Listener {
     private val cacheChest = mutableSetOf<Container>()
@@ -124,16 +125,16 @@ private object PreGameListener : Listener {
         if (e.hasBlock() && e.clickedBlock?.state is Container) {
             val chestBlock = e.clickedBlock!!.state as Container
             if(chestBlock in cacheChest) return
+            cacheChest.add(chestBlock)
             EEngineeringScope.launch {
                 chestBlock.inventory.contents = chestBlock.inventory
                     .apply {
                         chestItemRandomTable
-                            .filter { RandomAPI.nextDouble() <= it.first }
+                            .filter { RandomAPI.nextDouble() <= it.first / averChestAmount }
                             .forEach { this.addItem(it.second) }
                     }
                     .contents.apply { this.shuffle() }
             }
-            cacheChest.add(chestBlock)
         }
     }
     fun clearChest() {
