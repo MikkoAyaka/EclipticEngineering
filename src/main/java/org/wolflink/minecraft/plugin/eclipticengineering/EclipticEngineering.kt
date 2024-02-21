@@ -53,6 +53,7 @@ class EclipticEngineering : JavaPlugin() {
         FertilizeListener.register(this)
         PlayerDeathListener.register(this)
         FirstJoinListener.register(this)
+        BlockPlaceListener.register(this)
         // 注册防御塔监听器
         TowerArrow.BukkitListener.register(this)
         // 注册背包监听器
