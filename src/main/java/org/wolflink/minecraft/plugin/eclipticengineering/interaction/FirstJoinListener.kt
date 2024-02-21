@@ -2,12 +2,14 @@ package org.wolflink.minecraft.plugin.eclipticengineering.interaction
 
 import org.bukkit.GameMode
 import org.bukkit.attribute.Attribute
+import org.bukkit.attribute.AttributeModifier
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.MainMenuItem
+import org.wolflink.minecraft.wolfird.framework.bukkit.attribute.ModifierData
 import java.util.UUID
 
 object FirstJoinListener: Listener {
@@ -20,6 +22,11 @@ object FirstJoinListener: Listener {
         player.gameMode = GameMode.ADVENTURE
         player.health = player.getAttribute(Attribute.GENERIC_MAX_HEALTH)?.value!!
         player.foodLevel = 20
+        player.getAttribute(Attribute.GENERIC_MAX_HEALTH)?.run {
+            if(getModifier(UUID.fromString("C1BE8DB2-148F-CA78-7C32-7C7D206C3DD2")) == null) {
+                addModifier(AttributeModifier(UUID.fromString("C1BE8DB2-148F-CA78-7C32-7C7D206C3DD2"),"额外初始生命值",20.0,AttributeModifier.Operation.ADD_NUMBER))
+            }
+        }
         player.inventory.clear()
         player.activePotionEffects.forEach { player.removePotionEffect(it.type) }
         MainMenuItem.give(player)
