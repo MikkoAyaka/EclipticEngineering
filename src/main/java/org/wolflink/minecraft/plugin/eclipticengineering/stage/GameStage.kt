@@ -9,6 +9,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.abilityTable
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.StrategyDecider
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.BuildMenuItem
+import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DayNightHandler
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.goal.GoalHolder
 import org.wolflink.minecraft.wolfird.framework.gamestage.stage.Stage
 
@@ -21,6 +22,7 @@ class GameStage(stageHolder: StageHolder): Stage("游戏阶段",stageHolder) {
     }
     override fun onEnter() {
         initGameWorld()
+        DayNightHandler.start()
         Bukkit.getOnlinePlayers()
             .filter { it.gameMode == GameMode.ADVENTURE }
             .forEach {
