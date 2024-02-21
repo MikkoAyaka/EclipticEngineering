@@ -2,7 +2,6 @@ package org.wolflink.minecraft.plugin.eclipticengineering
 
 import kotlinx.coroutines.cancel
 import org.bukkit.Bukkit
-import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.plugin.java.JavaPlugin
 import org.wolflink.minecraft.plugin.eclipticengineering.command.AbilityCommand
 import org.wolflink.minecraft.plugin.eclipticengineering.command.BuildCommand
@@ -21,6 +20,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.BuildMenu
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.MainMenuItem
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.TaskBook
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.StageHolder
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.listener.BuilderListener
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.tower.TowerArrow
 import org.wolflink.minecraft.plugin.eclipticengineering.utils.WorldAPI
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.register
@@ -54,6 +54,7 @@ class EclipticEngineering : JavaPlugin() {
         PlayerDeathListener.register(this)
         FirstJoinListener.register(this)
         BlockPlaceListener.register(this)
+        BuilderListener.register(this)
         // 注册防御塔监听器
         TowerArrow.BukkitListener.register(this)
         // 注册背包监听器

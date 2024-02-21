@@ -5,27 +5,36 @@ import org.bukkit.entity.Player
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.GeneratorBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.ResourceBlock
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructureTag
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureCompletedEvent
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureDurabilityDamageEvent
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.deepEquals
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.IStructureListener
-import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
 
-abstract class AbstractGenerator(blueprint: GeneratorBlueprint,builder: Builder): Structure(blueprint,builder), IStructureListener {
-    override val customListener by lazy { this }
+abstract class AbstractGenerator(blueprint: GeneratorBlueprint, builder: Builder) :
+    GameStructure(blueprint, builder, 1), IStructureListener {
+    override val tags = setOf(
+        GameStructureTag.AMOUNT_LIMITED,
+        GameStructureTag.SPECIAL_RESOURCE_GENERATOR
+    )
+    override val customListeners by lazy { listOf(this) }
+
     // 矿物资源方块
-    private val resourceBlocks by lazy { blueprint.resourceBlocksSupplier(this,builder.buildLocation) }
+    private val resourceBlocks by lazy { blueprint.resourceBlocksSupplier(this, builder.buildLocation) }
     private fun getResourceBlock(player: Player): ResourceBlock? {
         val targetBlock = player.getTargetBlockExact(4) ?: return null
-        val targetLocationTriple = Triple(targetBlock.location.blockX,targetBlock.location.blockY,targetBlock.location.blockZ)
+        val targetLocationTriple =
+            Triple(targetBlock.location.blockX, targetBlock.location.blockY, targetBlock.location.blockZ)
         return resourceBlocks.firstOrNull {
-            Triple(it.location.blockX,it.location.blockY,it.location.blockZ).deepEquals(targetLocationTriple)
+            Triple(it.location.blockX, it.location.blockY, it.location.blockZ).deepEquals(targetLocationTriple)
         }
     }
+
     override fun onDurabilityDamage(e: StructureDurabilityDamageEvent) {
-        if(e.damageSourceType == DamageSource.PLAYER_BREAK) {
+        if (e.damageSourceType == DamageSource.PLAYER_BREAK) {
             val player = e.damageSource as? Player ?: return
             val resource = getResourceBlock(player) ?: return
             // 取消事件，防止玩家不小心损坏结构
