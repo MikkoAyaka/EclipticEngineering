@@ -1,6 +1,7 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.stage
 
 import org.bukkit.Bukkit
+import org.bukkit.Difficulty
 import org.bukkit.GameRule
 import org.wolflink.minecraft.wolfird.framework.gamestage.stage.Stage
 
@@ -23,6 +24,7 @@ class WaitStage(stageHolder: StageHolder): Stage("等待阶段",stageHolder) {
             it.setGameRule(GameRule.DO_MOB_SPAWNING,false) // 无自然刷怪
             it.setGameRule(GameRule.SHOW_DEATH_MESSAGES,false) // 无死亡通知(插件接管
             it.setGameRule(GameRule.PLAYERS_SLEEPING_PERCENTAGE,200) // 睡觉无法跳过夜晚
+            it.difficulty = Difficulty.PEACEFUL
         }
     }
 }

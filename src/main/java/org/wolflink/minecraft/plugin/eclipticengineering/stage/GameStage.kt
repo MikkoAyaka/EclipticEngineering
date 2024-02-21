@@ -1,6 +1,7 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.stage
 
 import org.bukkit.Bukkit
+import org.bukkit.Difficulty
 import org.bukkit.GameMode
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
@@ -13,6 +14,7 @@ import org.wolflink.minecraft.wolfird.framework.gamestage.stage.Stage
 
 class GameStage(stageHolder: StageHolder): Stage("游戏阶段",stageHolder) {
     override fun onEnter() {
+        Bukkit.getWorld(Config.gameWorldName)?.difficulty = Difficulty.NORMAL
         Bukkit.getOnlinePlayers()
             .filter { it.gameMode == GameMode.ADVENTURE }
             .forEach {
