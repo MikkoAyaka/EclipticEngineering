@@ -3,6 +3,7 @@ package org.wolflink.minecraft.plugin.eclipticengineering.stage.goal
 import kotlinx.coroutines.launch
 import org.bukkit.Location
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
+import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.TaskBook
 
@@ -22,6 +23,8 @@ object GoalHolder {
         nowGoal!!.into()
     }
     fun next() {
+        val gameWorldBorder = Config.gameWorld.worldBorder
+        gameWorldBorder.setSize(gameWorldBorder.size + 100,15)
         EEngineeringScope.launch {
             nowGoal?.leave()
             nowGoal = nowGoal?.nextGoal

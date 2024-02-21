@@ -1,9 +1,12 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.structure.listener
 
+import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.Requirement
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructureCounter
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructureTag
@@ -33,6 +36,27 @@ object BuilderListener: Listener, IBuilderListener {
         }
         return true
     }
+    private fun conditionCheck(structure: GameStructure,player: Player): Boolean {
+        val blueprint = structure.blueprint
+        if(blueprint is ConditionBlueprint) {
+            val conditionText = mutableListOf<String>()
+            var pass = true
+            for (condition in blueprint.conditions) {
+                if(!condition.isSatisfy(player)) {
+                    pass = false
+                    conditionText.add(condition.description)
+                }
+            }
+            return if(pass) {
+                blueprint.conditions.forEach { if(it is Requirement)it.delivery(player) }
+                true
+            } else {
+                player.sendMessage("$MESSAGE_PREFIX 无法建造${blueprint.structureName} <hover:show_text:'<newline>${conditionText.joinToString(separator = "<newline>")}<newline>'><yellow>[详情]".toComponent())
+                false
+            }
+        } else Bukkit.getLogger().warning("$MESSAGE_PREFIX 建筑结构 ${structure.blueprint.structureName} 的蓝图类型为非资源型蓝图，这是不应该的，请检查代码。")
+        return true
+    }
     @EventHandler
     override fun preBuild(e: BuilderPreBuildEvent) {
         val structure = e.builder.structure
@@ -46,6 +70,10 @@ object BuilderListener: Listener, IBuilderListener {
                     e.isCancelled = true
                     return
                 }
+            }
+            if(!conditionCheck(structure,e.player)) {
+                e.isCancelled = true
+                return
             }
         }
     }

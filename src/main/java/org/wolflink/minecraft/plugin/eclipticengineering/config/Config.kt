@@ -25,6 +25,7 @@ object Config {
         }
         return result
     }
+    val gameWorld get() = Bukkit.getWorld(Config.gameWorldName) ?: throw IllegalArgumentException("未找到游戏世界 $gameWorldName")
     val gameLocation get() = Bukkit.getWorld(gameWorldName)?.spawnLocation!!
     val lobbyLocation get() = Location(Bukkit.getWorld(lobbyWorldName),-25.0,91.0,2.0)
 }

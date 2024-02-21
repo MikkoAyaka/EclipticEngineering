@@ -16,7 +16,7 @@ import kotlin.math.cos
 import kotlin.math.sin
 
 object LocationSurvey : Goal("定点勘察",300) {
-    private const val SURVEY_DISTANCE = 500
+    private const val SURVEY_DISTANCE = 275
     override val nextGoal: Goal = CollectResource
     override var intoStory: Story? = Story(
         "为了确保我们的安全和发展",
@@ -39,7 +39,7 @@ object LocationSurvey : Goal("定点勘察",300) {
 
     /**
      * 随机生成勘察坐标
-     * 以所有玩家的平均坐标为中心，在半径 800m 的圆的边上选取一点
+     * 以所有玩家的平均坐标为中心，在半径 SURVEY_DISTANCE 的圆的边上选取一点
      */
     private fun randomSurveyLocation(radius: Int): Location {
         var world: World? = null

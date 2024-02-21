@@ -13,8 +13,14 @@ import org.wolflink.minecraft.plugin.eclipticengineering.stage.goal.GoalHolder
 import org.wolflink.minecraft.wolfird.framework.gamestage.stage.Stage
 
 class GameStage(stageHolder: StageHolder): Stage("游戏阶段",stageHolder) {
+    private fun initGameWorld() {
+        val gameWorld = Config.gameWorld
+        gameWorld.difficulty = Difficulty.NORMAL
+        gameWorld.worldBorder.size = 800.0
+        gameWorld.worldBorder.setCenter(0.0,0.0)
+    }
     override fun onEnter() {
-        Bukkit.getWorld(Config.gameWorldName)?.difficulty = Difficulty.NORMAL
+        initGameWorld()
         Bukkit.getOnlinePlayers()
             .filter { it.gameMode == GameMode.ADVENTURE }
             .forEach {

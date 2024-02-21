@@ -22,22 +22,6 @@ object BuildCommand:CommandExecutor {
             val structureTypeName = args.getOrNull(1)?.uppercase() ?: return false
             val structureLevel = args.getOrNull(2)?.toIntOrNull() ?: return false
             val structureMeta = StructureRegistry.get(structureTypeName)
-            if(structureMeta.blueprints.firstOrNull() is ConditionBlueprint) {
-                val conditionText = mutableListOf<String>()
-                val blueprint = structureMeta.blueprints[structureLevel-1] as ConditionBlueprint
-                var pass = true
-                for (condition in blueprint.conditions) {
-                    if(!condition.isSatisfy(sender)) {
-                        pass = false
-                        conditionText.add(condition.description)
-                    }
-                }
-                if(pass) blueprint.conditions.forEach { if(it is Requirement)it.delivery(sender) }
-                else {
-                    sender.sendMessage("$MESSAGE_PREFIX 无法建造${blueprint.structureName} <hover:show_text:'<newline>${conditionText.joinToString(separator = "<newline>")}<newline>'><yellow>[详情]".toComponent())
-                    return false
-                }
-            } else Bukkit.getLogger().warning("$MESSAGE_PREFIX 建筑结构 $structureTypeName 的蓝图类型为非资源型蓝图，这是不应该的，请检查代码。")
             val builder = Builder(structureLevel,structureMeta,sender.location,false)
             builder.build(sender)
             return true

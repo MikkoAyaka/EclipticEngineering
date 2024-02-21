@@ -1,7 +1,11 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.stage.goal
 
+import kotlinx.coroutines.launch
+import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
+import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
+import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.Condition
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.FunctionalCondition
@@ -38,8 +42,14 @@ object EstablishFoothold : Goal("建立据点",0) {
     override val failedConditions: List<Condition> = listOf()
     override fun beforeFinish() {
         val energySource = StructureRepository.findBy { it is EnergySource }.first()
+        val footholdLocation = energySource.builder.buildLocation
         // 更新据点坐标
-        GoalHolder.footholdLocation = energySource.builder.buildLocation
+        GoalHolder.footholdLocation = footholdLocation
+        // 更新边界
+        val gameWorld = Config.gameWorld
+        gameWorld.worldBorder.size = 1600.0
+        gameWorld.worldBorder.setCenter(footholdLocation.x,footholdLocation.z)
+        gameWorld.worldBorder.setSize(200.0,300)
     }
     /**
      * 根据完成状态发放奖励
