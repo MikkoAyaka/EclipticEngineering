@@ -9,6 +9,9 @@ import org.wolflink.minecraft.plugin.eclipticengineering.structure.generator.Gen
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.EnergySource
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.MiningStation
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.RespawnBeacon
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.survival.EnchantRoom
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.survival.ForgeRoom
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.survival.LargeCampfire
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.tower.BlazeTurret
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.tower.SnowGolemTurret
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.tower.TowerArrow
@@ -43,7 +46,11 @@ enum class StructureType(
 //    TOWER_POTION(TowerPotion.blueprint,{TowerPotion(it)}),// 药水塔
 
     TURRET_BLAZE(BlazeTurret::class.java,BlazeTurret.blueprints,BlazeTurret::create),// 烈焰防御塔台
-    TURRET_SNOW_GOLEM(SnowGolemTurret::class.java,SnowGolemTurret.blueprints,SnowGolemTurret::create)// 雪人防御塔台
+    TURRET_SNOW_GOLEM(SnowGolemTurret::class.java,SnowGolemTurret.blueprints,SnowGolemTurret::create),// 雪人防御塔台
+
+    ENCHANT_ROOM(EnchantRoom::class.java,EnchantRoom.blueprints,EnchantRoom::create),
+    FORGE_ROOM(ForgeRoom::class.java,ForgeRoom.blueprints,ForgeRoom::create),
+    LARGE_CAMPFIRE(LargeCampfire::class.java,LargeCampfire.blueprints,LargeCampfire::create),
     ;
 
     fun register() {
