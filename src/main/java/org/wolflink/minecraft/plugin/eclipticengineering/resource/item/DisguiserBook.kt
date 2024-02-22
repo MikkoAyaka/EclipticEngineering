@@ -43,10 +43,6 @@ object DisguiserBook : InteractiveItem(
         }
         lastUpdateTime = Calendar.getInstance().timeInMillis
 
-//        playerGoal.description.map {
-//            if(it.isSatisfy()) "<green>☑ $SECONDARY_TEXT_COLOR<st><italic>${it.description}</italic></st>"
-//            else "<white>☐ ${PRIMARY_TEXT_COLOR}${it.description}"
-//        }
         val playerGoal: PlayerGoal = PlayerGoalHolder.getPlayerGoal(player) ?: run {
             PlayerGoalHolder.refreshPlayerGoal(player)
             PlayerGoalHolder.getPlayerGoal(player)

@@ -40,7 +40,7 @@ class GameStage(stageHolder: StageHolder): Stage("游戏阶段",stageHolder) {
         StrategyDecider.enable()
         Bukkit.getScheduler().runTaskLater(EclipticEngineering.instance, Runnable {
             GoalHolder.init()
-        },20 * 3)
+        },20 * 7)
     }
     override fun onLeave() {
         StrategyDecider.disable()

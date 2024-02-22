@@ -10,6 +10,10 @@ import org.bukkit.inventory.meta.ItemMeta
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 
+/**
+ * 可交互物品
+ * 需要注册监听器
+ */
 abstract class InteractiveItem(private val defaultItem: ItemStack): Listener {
     protected var lastUpdateMeta: ItemMeta = defaultItem.itemMeta
     protected open fun onInteract(player: Player) {}

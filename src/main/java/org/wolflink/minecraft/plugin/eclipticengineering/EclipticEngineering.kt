@@ -18,6 +18,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.papi.StagePapi
 import org.wolflink.minecraft.plugin.eclipticengineering.papi.VirtualResourcePapi
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.VirtualTeamInventory
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.BuildMenuItem
+import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.DisguiserBook
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.MainMenuItem
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.TaskBook
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.StageHolder
@@ -65,6 +66,7 @@ class EclipticEngineering : JavaPlugin() {
         TaskBook.register(this)
         MainMenuItem.register(this)
         BuildMenuItem.register(this)
+        DisguiserBook.register(this)
         // 注册变量
         StagePapi.register()
         VirtualResourcePapi.register()
