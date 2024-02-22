@@ -5,6 +5,7 @@ import org.bukkit.OfflinePlayer
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.GameStructureBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
+import org.wolflink.minecraft.plugin.eclipticengineering.utils.ReflectionAPI
 
 /**
  * %eegs_xxxxx_x_conditions% 类型名称为 xxxxx 等级为 x 的建筑的建造条件(如果有下划线，用连字符代替-)
@@ -20,7 +21,7 @@ object GameStructurePapi: PlaceholderExpansion()  {
 
     private val regexConditions = "[A-Za-z-]+_\\d+_conditions".toRegex()
     private val regexTags = "[A-Za-z-]+_tags".toRegex()
-    private val regexBlueprint = "eegs_[A-Za-z-]+_\\d+_blueprint_[A-Za-z]+".toRegex()
+    private val regexBlueprint = "[A-Za-z-]+_\\d+_blueprint_[A-Za-z]+".toRegex()
     override fun onRequest(player: OfflinePlayer?, params: String): String {
         val args = params.split('_')
         try {
@@ -29,21 +30,23 @@ object GameStructurePapi: PlaceholderExpansion()  {
                     val structureType = StructureType.valueOf(args[0].uppercase().replace('-','_'))
                     val level = args[1].toInt()
                     val blueprint = structureType.blueprints[level-1] as ConditionBlueprint
-                    return blueprint.conditions.map { it.description }.joinToString { "\n" }
+                    if(blueprint.conditions.isEmpty()) return "    &#E8E8E8无"
+                    return blueprint.conditions.joinToString(separator = "\n") { "    &#E8E8E8"+it.description }
                 }
                 params.matches(regexTags) -> {
                     val structureType = StructureType.valueOf(args[0].uppercase().replace('-','_'))
                     val tags = structureType.blueprints
                         .filterIsInstance<GameStructureBlueprint>()
                         .firstOrNull()?.tags ?: return "未找到 $structureType 相关蓝图数据"
-                    return tags.map { it.displayName }.joinToString { "\n" }
+                    if(tags.isEmpty()) return "    &#E8E8E8无"
+                    return tags.joinToString(separator = "\n") { "    &#E8E8E8"+it.displayName }
                 }
                 params.matches(regexBlueprint) -> {
                     val structureType = StructureType.valueOf(args[0].uppercase().replace('-','_'))
                     val level = args[1].toInt()
                     val blueprintAttribute = args[3]
                     val blueprint = structureType.blueprints[level-1]
-                    return blueprint::class.java.getField(blueprintAttribute).toString()
+                    return ReflectionAPI.getFieldValue(blueprint,blueprintAttribute).toString()
                 }
             }
         } catch (e: Exception) {
