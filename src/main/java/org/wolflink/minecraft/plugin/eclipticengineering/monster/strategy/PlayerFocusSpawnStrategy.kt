@@ -107,7 +107,7 @@ class PlayerFocusSpawnStrategy(spawnerAttribute: SpawnerAttribute) : SpawnStrate
     }
 
     companion object {
-        private const val SAFE_RADIUS = 15
-        private const val MAX_RADIUS = 25
+        private const val SAFE_RADIUS = 20
+        private const val MAX_RADIUS = 35
     }
 }
