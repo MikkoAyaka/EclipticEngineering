@@ -1,12 +1,16 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.roleplay.playergoal
 
 import org.bukkit.entity.Player
+import org.bukkit.event.EventHandler
+import org.bukkit.event.Listener
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.isDisguiser
+import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DayNightEvent
+import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DayNightHandler
 import java.util.UUID
 import java.util.concurrent.atomic.AtomicInteger
 
-object PlayerGoalHolder {
+object PlayerGoalHolder : Listener {
     private val randomPlayerGoals = setOf(
         CantJump::class.java,
         DeathOfFalling::class.java,
@@ -23,9 +27,13 @@ object PlayerGoalHolder {
     private val disguiserGoals = mutableMapOf<UUID,PlayerGoal>()
     // 今日已刷新过目标的玩家，每日重置
     private val refreshCache = mutableSetOf<UUID>()
-    fun clearCache() {
+    private fun clearCache() {
         disguiserGoals.clear()
         refreshCache.clear()
+    }
+    @EventHandler
+    fun on(e: DayNightEvent) {
+        if(e.nowTime == DayNightHandler.Status.DAY) clearCache()
     }
     fun getPlayerGoal(player: Player) = disguiserGoals[player.uniqueId]
 
@@ -39,7 +47,16 @@ object PlayerGoalHolder {
             return
         }
         refreshCache.add(player.uniqueId)
-        val playerGoal = randomPlayerGoals.random().getConstructor(Player::class.java).newInstance(player)
+        val playerGoal:PlayerGoal = run {
+            var tempGoal = randomPlayerGoals.random().getConstructor(Player::class.java).newInstance(player)
+            repeat(10) {
+                if(!tempGoal.available()) tempGoal = randomPlayerGoals.random().getConstructor(Player::class.java).newInstance(player)
+            }
+            if(tempGoal.available()) tempGoal else null
+        } ?: run {
+            player.sendMessage("$MESSAGE_PREFIX 多次尝试后仍未获取到可用的目标，请汇报给开发者。")
+            return
+        }
         disguiserGoals[player.uniqueId] = playerGoal
         playerGoal.enable()
     }

@@ -20,13 +20,20 @@ abstract class PlayerGoal(val disguiser: Player) : Listener {
         FAILED
     }
     abstract val description: String
-    var available = false
+
+    /**
+     * 该目标是否可以正常使用
+     */
+    open fun available(): Boolean {
+        return true
+    }
+    protected var enabled = false
         private set
     var status = Status.IN_PROGRESS
         private set
     fun enable() {
-        if(available) return
-        available = true
+        if(enabled) return
+        enabled = true
         triggerTime = Calendar.getInstance()
         disguiser.sendMessage("$MESSAGE_PREFIX 将在20秒后开始进行目标检测，请做好准备。".toComponent())
         init()
@@ -39,8 +46,8 @@ abstract class PlayerGoal(val disguiser: Player) : Listener {
      * 一旦禁用后不允许再次启用
      */
     private fun disable() {
-        if(!available) return
-        available = false
+        if(!enabled) return
+        enabled = false
         this.unregister()
     }
 

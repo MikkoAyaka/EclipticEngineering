@@ -15,8 +15,12 @@ class StayAtStructure(disguiser: Player): PlayerGoal(disguiser) {
         structure = StructureRepository.findBy { it.available }.random()
         EEngineeringScope.launch { timerTask() }
     }
+
+    override fun available(): Boolean {
+        return StructureRepository.findAll().size >= 3
+    }
     private suspend fun timerTask() {
-        while (available) {
+        while (enabled) {
             if(disguiser.location in structure.builder.zone) {
                 counter--
                 noticeInProgress()

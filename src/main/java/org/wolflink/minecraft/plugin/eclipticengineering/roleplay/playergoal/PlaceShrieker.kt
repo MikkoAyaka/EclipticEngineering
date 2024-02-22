@@ -17,6 +17,9 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 class PlaceShrieker(disguiser: Player): PlayerGoal(disguiser) {
     override val description = "在日落之前放置5个幽匿尖啸体在不同的建筑结构中"
     private val structureSet = mutableSetOf<Structure>()
+    override fun available(): Boolean {
+        return StructureRepository.findAll().size >= 8
+    }
     override fun init() {
         disguiser.inventory.addItem(ItemStack(Material.SCULK_SHRIEKER,5))
     }
