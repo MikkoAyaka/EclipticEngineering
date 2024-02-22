@@ -20,7 +20,7 @@ class PlaceShrieker(disguiser: Player): PlayerGoal(disguiser) {
     override fun init() {
         disguiser.inventory.addItem(ItemStack(Material.SCULK_SHRIEKER,5))
     }
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.LOWEST)
     fun on(e: BlockPlaceEvent) {
         if(e.player == disguiser && e.block.type == Material.SCULK_SHRIEKER) {
             val structures = ZoneRepository.findByLocation(e.block.location).mapNotNull {

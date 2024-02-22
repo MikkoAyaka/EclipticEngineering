@@ -22,7 +22,6 @@ class GameStage(stageHolder: StageHolder): Stage("游戏阶段",stageHolder) {
     }
     override fun onEnter() {
         initGameWorld()
-        DayNightHandler.start()
         Bukkit.getOnlinePlayers()
             .filter { it.gameMode == GameMode.ADVENTURE }
             .forEach {
@@ -39,8 +38,11 @@ class GameStage(stageHolder: StageHolder): Stage("游戏阶段",stageHolder) {
         // 启用刷怪
         StrategyDecider.enable()
         Bukkit.getScheduler().runTaskLater(EclipticEngineering.instance, Runnable {
+            DayNightHandler.start()
+        },20 * 5)
+        Bukkit.getScheduler().runTaskLater(EclipticEngineering.instance, Runnable {
             GoalHolder.init()
-        },20 * 7)
+        },20 * 8)
     }
     override fun onLeave() {
         StrategyDecider.disable()

@@ -36,6 +36,7 @@ object DayNightHandler {
         days = 1
         available = true
         status = Status.DAY
+        Config.gameWorld.time = 6000
         EEngineeringScope.launch { toggleDayNight() }
     }
     private suspend fun toggleDayNight() {
