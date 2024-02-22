@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin
 import org.wolflink.minecraft.plugin.eclipticengineering.command.AbilityCommand
 import org.wolflink.minecraft.plugin.eclipticengineering.command.BuildCommand
 import org.wolflink.minecraft.plugin.eclipticengineering.command.StageCommand
+import org.wolflink.minecraft.plugin.eclipticengineering.command.VoteCommand
 import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.interaction.*
@@ -41,6 +42,7 @@ class EclipticEngineering : JavaPlugin() {
         BuildCommand.register()
         AbilityCommand.register()
         StageCommand.register()
+        VoteCommand.register()
         // 注册可用的建筑结构
         StructureType.entries.forEach(StructureType::register)
         // 注册事件监听器
