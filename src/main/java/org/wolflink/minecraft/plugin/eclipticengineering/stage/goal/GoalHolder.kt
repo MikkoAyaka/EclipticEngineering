@@ -3,9 +3,12 @@ package org.wolflink.minecraft.plugin.eclipticengineering.stage.goal
 import kotlinx.coroutines.launch
 import org.bukkit.Location
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
+import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
+import org.wolflink.minecraft.plugin.eclipticengineering.extension.abilityTable
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.asDisguiser
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
+import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.BuildMenuItem
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.PioneerBook
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.TaskBook
 
@@ -28,6 +31,10 @@ object GoalHolder {
         }
         // 随机一名玩家作为内鬼
         gamingPlayers.random().asDisguiser()
+        // 达到建筑2级发放建造工具
+        gamingPlayers.forEach{
+            if(it.abilityTable.hasAbility(Ability.BUILDING,2)) BuildMenuItem.give(it)
+        }
         nowGoal!!.into()
     }
     fun next() {

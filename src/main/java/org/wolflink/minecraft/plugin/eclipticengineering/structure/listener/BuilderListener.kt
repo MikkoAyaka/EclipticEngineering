@@ -16,13 +16,13 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.IBuilde
 
 object BuilderListener: Listener, IBuilderListener {
     private fun amountCheck(structure: GameStructure,player: Player): Boolean {
-        val atomicInteger = GameStructureCounter.counter[structure::class.java] ?: throw IllegalArgumentException("未注册到计数器的建筑结构类：${structure::class.java.name}")
+        val atomicInteger = GameStructureCounter.getAtomicCount(structure::class.java)
         val amount = atomicInteger.get()
         // 达到建筑数量限制
         if(amount >= structure.maxAmount) {
             player.sendMessage("$MESSAGE_PREFIX <yellow>该类型建筑已达到建筑数量限制，无法建造更多。".toComponent())
             return false
-        } else atomicInteger.incrementAndGet()
+        }
         return true
     }
     private fun energyCheck(structure: GameStructure,player: Player): Boolean {
@@ -88,13 +88,15 @@ object BuilderListener: Listener, IBuilderListener {
     }
     @EventHandler
     override fun started(e: BuilderStartedEvent) {
+        if(e.builder.structure !is GameStructure) return
+        GameStructureCounter.getAtomicCount((e.builder.structure as GameStructure)::class.java).incrementAndGet()
     }
     @EventHandler
     override fun toggleStatus(e: BuilderStatusEvent) {
     }
 
     private fun amountDecrement(structure: GameStructure) {
-        val atomicInteger = GameStructureCounter.counter[structure::class.java] ?: throw IllegalArgumentException("未注册到计数器的建筑结构类：${structure::class.java.name}")
+        val atomicInteger = GameStructureCounter.getAtomicCount(structure::class.java)
         val amount = atomicInteger.decrementAndGet()
         if(amount < 0) throw IllegalStateException("建筑数量被更改为 $amount 而最少应该是 0")
     }

@@ -35,8 +35,6 @@ class GameStage(stageHolder: StageHolder): Stage("游戏阶段",stageHolder) {
                 it.activePotionEffects.forEach { potion -> it.removePotionEffect(potion.type) }
                 it.addPotionEffect(PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,20 * 10,4,false,false))
                 it.addPotionEffect(PotionEffect(PotionEffectType.REGENERATION,20 * 10,4,false,false))
-                // 达到建筑2级发放建造工具
-                if(it.abilityTable.hasAbility(Ability.BUILDING,2)) BuildMenuItem.give(it)
             }
 
         // 启用刷怪
