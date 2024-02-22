@@ -52,7 +52,6 @@ class TowerArrow private constructor(blueprint: TowerArrowBlueprint, builder: Bu
         }
     }
     companion object : StructureCompanion<TowerArrow>(){
-        override val clazz: Class<TowerArrow> = TowerArrow::class.java
         override fun supplier(blueprint: Blueprint, builder: Builder): TowerArrow {
             return TowerArrow(blueprint as TowerArrowBlueprint,builder)
         }

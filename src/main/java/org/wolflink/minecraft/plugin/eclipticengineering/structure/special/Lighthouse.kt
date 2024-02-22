@@ -34,6 +34,5 @@ class Lighthouse private constructor(
                 ItemRequirement("需要 1 铁锭", ItemStack(Material.COBBLESTONE))
             )
         )
-        override val clazz: Class<Lighthouse> = Lighthouse::class.java
     }
 }

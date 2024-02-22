@@ -17,7 +17,6 @@ class GeneratorLog private constructor(blueprint: GeneratorBlueprint, builder: B
         override fun supplier(blueprint: Blueprint, builder: Builder): GeneratorLog {
             return GeneratorLog(blueprint as GeneratorBlueprint,builder)
         }
-        override val clazz: Class<GeneratorLog> = GeneratorLog::class.java
         override val blueprints = listOf(
             GeneratorBlueprint(
                 1,

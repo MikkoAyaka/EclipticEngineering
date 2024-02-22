@@ -13,7 +13,6 @@ class GeneratorOre private constructor(blueprint: GeneratorBlueprint, builder: B
     AbstractGenerator(blueprint, builder) {
     companion object : StructureCompanion<GeneratorOre>(){
         private const val STRUCTURE_NAME = "精炼矿场"
-        override val clazz: Class<GeneratorOre> = GeneratorOre::class.java
         override fun supplier(blueprint: Blueprint, builder: Builder): GeneratorOre {
             return GeneratorOre(blueprint as GeneratorBlueprint,builder)
         }

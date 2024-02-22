@@ -47,7 +47,6 @@ class SnowGolemTurret private constructor(blueprint: ElementalTurretBlueprint, b
     }
 
     companion object : StructureCompanion<SnowGolemTurret>(){
-        override val clazz: Class<SnowGolemTurret> = SnowGolemTurret::class.java
         override fun supplier(blueprint: Blueprint, builder: Builder): SnowGolemTurret {
             return SnowGolemTurret(blueprint as ElementalTurretBlueprint,builder)
         }

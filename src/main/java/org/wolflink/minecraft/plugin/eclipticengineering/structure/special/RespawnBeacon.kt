@@ -48,7 +48,6 @@ class RespawnBeacon private constructor(blueprint: RespawnBeaconBlueprint, build
                 ItemRequirement("需要 1 铁锭", ItemStack(Material.COBBLESTONE))
             )
         )
-        override val clazz: Class<RespawnBeacon> = RespawnBeacon::class.java
     }
 
     private suspend fun charge() {

@@ -40,7 +40,6 @@ class LargeCampfire private constructor(
                 ItemRequirement("需要 1 铁锭", ItemStack(Material.COBBLESTONE))
             )
         )
-        override val clazz: Class<LargeCampfire> = LargeCampfire::class.java
     }
 
     private suspend fun healTask() {

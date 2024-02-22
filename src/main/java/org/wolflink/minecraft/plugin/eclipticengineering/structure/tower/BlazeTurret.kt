@@ -45,7 +45,6 @@ class BlazeTurret private constructor(blueprint: ElementalTurretBlueprint,builde
     }
 
     companion object : StructureCompanion<BlazeTurret>(){
-        override val clazz: Class<BlazeTurret> = BlazeTurret::class.java
         override fun supplier(blueprint: Blueprint, builder: Builder): BlazeTurret {
             return BlazeTurret(blueprint as ElementalTurretBlueprint,builder)
         }

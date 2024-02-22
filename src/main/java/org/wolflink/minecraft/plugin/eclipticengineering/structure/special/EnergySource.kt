@@ -34,7 +34,6 @@ class EnergySource private constructor(blueprint: Blueprint, builder: Builder) :
         // 影响半径(格)
         private const val EFFECT_RADIUS = 35
         private const val STRUCTURE_NAME = "幽光能量发生场"
-        override val clazz: Class<EnergySource> = EnergySource::class.java
         override fun supplier(blueprint: Blueprint, builder: Builder): EnergySource {
             return EnergySource(blueprint, builder)
         }

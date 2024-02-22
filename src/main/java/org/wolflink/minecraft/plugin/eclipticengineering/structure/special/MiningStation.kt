@@ -32,7 +32,6 @@ class MiningStation private constructor(blueprint: Blueprint, builder: Builder) 
                 ItemRequirement("需要 1 铁锭", ItemStack(Material.COBBLESTONE))
             )
         )
-        override val clazz: Class<MiningStation> = MiningStation::class.java
         override fun supplier(blueprint: Blueprint, builder: Builder): MiningStation {
             return MiningStation(blueprint, builder)
         }

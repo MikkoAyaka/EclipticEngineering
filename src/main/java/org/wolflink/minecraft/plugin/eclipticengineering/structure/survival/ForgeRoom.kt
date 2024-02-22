@@ -31,6 +31,5 @@ class ForgeRoom private constructor(
                 ItemRequirement("需要 1 铁锭", ItemStack(Material.COBBLESTONE))
             )
         )
-        override val clazz: Class<ForgeRoom> = ForgeRoom::class.java
     }
 }

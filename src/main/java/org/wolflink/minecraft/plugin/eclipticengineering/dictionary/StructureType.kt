@@ -3,13 +3,10 @@ package org.wolflink.minecraft.plugin.eclipticengineering.dictionary
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.decoration.SpinTieMeme
-import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.Lighthouse
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.generator.GeneratorCrop
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.generator.GeneratorLog
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.generator.GeneratorOre
-import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.EnergySource
-import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.MiningStation
-import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.RespawnBeacon
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.*
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.survival.EnchantRoom
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.survival.ForgeRoom
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.survival.LargeCampfire
@@ -54,7 +51,8 @@ enum class StructureType(
     FORGE_ROOM("锻造站台",ForgeRoom::class.java,ForgeRoom.blueprints,ForgeRoom::create),
     LARGE_CAMPFIRE("大型营火",LargeCampfire::class.java,LargeCampfire.blueprints,LargeCampfire::create),
 
-    SPIN_TIE_MEME("非常好建筑，使我的领带旋转",SpinTieMeme::class.java,SpinTieMeme.blueprints,SpinTieMeme::create)
+    SPIN_TIE_MEME("非常好建筑，使我的领带旋转",SpinTieMeme::class.java,SpinTieMeme.blueprints,SpinTieMeme::create),
+    MEETING_PLACE("会议大厅",MeetingPlace::class.java,MeetingPlace.blueprints,MeetingPlace::create)
     ;
 
     fun register() {

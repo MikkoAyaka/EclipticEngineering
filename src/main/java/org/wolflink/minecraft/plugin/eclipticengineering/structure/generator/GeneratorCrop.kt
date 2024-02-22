@@ -13,7 +13,6 @@ class GeneratorCrop private constructor(blueprint: GeneratorBlueprint, builder: 
     AbstractGenerator(blueprint, builder) {
     companion object : StructureCompanion<GeneratorCrop>(){
         private const val STRUCTURE_NAME = "精培农场"
-        override val clazz: Class<GeneratorCrop> = GeneratorCrop::class.java
         override fun supplier(blueprint: Blueprint, builder: Builder): GeneratorCrop {
             return GeneratorCrop(blueprint as GeneratorBlueprint,builder)
         }

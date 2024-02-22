@@ -2,7 +2,6 @@ package org.wolflink.minecraft.plugin.eclipticengineering.roleplay
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.plus
 import net.kyori.adventure.title.Title
 import net.kyori.adventure.title.Title.Times
 import org.bukkit.Bukkit
@@ -25,7 +24,7 @@ object DayNightHandler {
     enum class Status(val minutes: Int) {
         DAY(16),NIGHT(8)
     }
-    private var timeStatus = Status.DAY
+    var status = Status.DAY
         private set(value) {
             if(value == field) return
             field = value
@@ -36,37 +35,37 @@ object DayNightHandler {
     fun start() {
         days = 1
         available = true
-        timeStatus = Status.DAY
+        status = Status.DAY
         EEngineeringScope.launch { toggleDayNight() }
     }
     private suspend fun toggleDayNight() {
         if(available)
-        delay(1000L * 60 * timeStatus.minutes - 1)
-        if(timeStatus == Status.DAY) {
+        delay(1000L * 60 * status.minutes - 1)
+        if(status == Status.DAY) {
             Config.gameWorld.time = 12800
             Bukkit.broadcast("$MESSAGE_PREFIX 太阳落山了，开拓者们，是时候回去休息了。".toComponent())
             delay(1000 * 60)
             Config.gameWorld.time = 18000
-            timeStatus = Status.NIGHT
+            status = Status.NIGHT
             gamingPlayers.forEach{
                 it.showTitle(Title.title(
                     "<#003366>深夜".toComponent(),
-                    "<#E0E0E0>距离白天到来还有 <white>${timeStatus.minutes} <#E0E0E0>分钟".toComponent(),
+                    "<#E0E0E0>距离白天到来还有 <white>${status.minutes} <#E0E0E0>分钟".toComponent(),
                     Times.times(Duration.ofMillis(500), Duration.ofMillis(1500),Duration.ofMillis(500)))
                 )
                 it.playSound(it, Sound.ENTITY_WOLF_HOWL,1f,1f)
             }
         }
-        if(timeStatus == Status.NIGHT) {
+        if(status == Status.NIGHT) {
             Config.gameWorld.time = 23500
             Bukkit.broadcast("$MESSAGE_PREFIX 太阳升起，新的一天就要到来了。".toComponent())
             delay(1000 * 60)
             Config.gameWorld.time = 6000
-            timeStatus = Status.DAY
+            status = Status.DAY
             gamingPlayers.forEach{
                 it.showTitle(Title.title(
                     "<#FFFFFF>白昼".toComponent(),
-                    "<#E0E0E0>距离夜晚降临还有 <white>${timeStatus.minutes} <#E0E0E0>分钟".toComponent(),
+                    "<#E0E0E0>距离夜晚降临还有 <white>${status.minutes} <#E0E0E0>分钟".toComponent(),
                     Times.times(Duration.ofMillis(500), Duration.ofMillis(1500),Duration.ofMillis(500)))
                 )
                 it.playSound(it, Sound.ENTITY_CHICKEN_AMBIENT,1f,1f)
