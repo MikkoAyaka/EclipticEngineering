@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.TowerArrowBlueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
 import org.wolflink.minecraft.plugin.eclipticengineering.metadata.MetadataModifier
@@ -22,6 +23,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequ
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructureTag
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureInitializedEvent
+import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureZoneRelationRepository
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.ZoneRepository
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
@@ -91,9 +93,16 @@ class TowerArrow private constructor(blueprint: TowerArrowBlueprint, builder: Bu
         // 修改箭矢实体，附加伤害标签
         MetadataModifier.modifyDamage(projectile,extraDamageRange.random())
     }
-
+    private suspend fun shooterNotice() {
+        while (available) {
+            shooters.forEach {
+                it.sendActionBar("$MESSAGE_PREFIX 弓箭高台正在为你提供增益。".toComponent())
+            }
+            delay(3000)
+        }
+    }
     private suspend fun shooterLeaveCheck() {
-        while (!destroyed) {
+        while (available) {
            shooters
                // 离开有效区域的射击者
                .filter { it.location.distance(builder.buildLocation.clone().add(0.0,3.0,0.0)) >= 4 }
@@ -105,5 +114,6 @@ class TowerArrow private constructor(blueprint: TowerArrowBlueprint, builder: Bu
 
     override fun initialized(e: StructureInitializedEvent) {
         EEngineeringScope.launch { shooterLeaveCheck() }
+        EEngineeringScope.launch { shooterNotice() }
     }
 }
