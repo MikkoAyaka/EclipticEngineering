@@ -16,6 +16,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.metadata.MetadataModifi
 import org.wolflink.minecraft.plugin.eclipticengineering.particle.withParticle
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
+import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.SpecialIron
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompanion
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
@@ -69,7 +70,8 @@ class BlazeTurret private constructor(blueprint: ElementalTurretBlueprint, build
                 VirtualRequirement("需要 30 木材", VirtualResourceType.WOOD, 30),
                 VirtualRequirement("需要 50 石料", VirtualResourceType.STONE, 50),
                 VirtualRequirement("需要 30 金属", VirtualResourceType.METAL, 30),
-                ItemRequirement("需要 10 熔岩桶", ItemStack(Material.LAVA_BUCKET, 10))
+                ItemRequirement("需要 5 陨铁矿石", SpecialIron.defaultItem.clone().apply { amount = 5 }),
+                ItemRequirement("需要 5 熔岩桶", ItemStack(Material.LAVA_BUCKET, 5))
             )
         )
     }

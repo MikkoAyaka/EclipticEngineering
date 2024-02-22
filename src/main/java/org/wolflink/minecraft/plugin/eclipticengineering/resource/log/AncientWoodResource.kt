@@ -12,10 +12,11 @@ import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.PRIMARY_TEXT
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.createSpecialItem
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.ResourceBlock
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.ResourceCycle
+import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.AncientWood
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 
 // TODO 需要重新制作建筑结构
-class AncientWood(structure: Structure, location: Location): ResourceBlock(
+class AncientWoodResource(structure: Structure, location: Location): ResourceBlock(
     structure,
     location,
     AncientWoodResourceCycle(),
@@ -28,15 +29,5 @@ class AncientWood(structure: Structure, location: Location): ResourceBlock(
 private class AncientWoodResourceCycle: ResourceCycle() {
     override val initialBlockData: BlockData = Material.OAK_LOG.createBlockData()
     override val finalBlockData: BlockData = Material.STRIPPED_OAK_LOG.createBlockData()
-    override val droppedItem: ItemStack
-        get() = Material.STRIPPED_OAK_LOG.createSpecialItem(
-            SpecialItemType.SPECIAL_RESOURCE,
-            Quality.RARE,
-            "永翠木",
-            false,
-            listOf(
-                "    ${PRIMARY_TEXT_COLOR}吸收了世界的精华，",
-                "    ${PRIMARY_TEXT_COLOR}历经千年仍绿意盎然。"
-            )
-        )
+    override val droppedItem: ItemStack = AncientWood.defaultItem
 }

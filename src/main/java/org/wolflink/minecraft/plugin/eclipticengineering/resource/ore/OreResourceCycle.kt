@@ -8,6 +8,10 @@ import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.SpecialItemT
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.PRIMARY_TEXT_COLOR
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.createSpecialItem
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.ResourceCycle
+import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.SpecialDiamond
+import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.SpecialGold
+import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.SpecialIron
+import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.SpecialItem
 
 class OreResourceCycle: ResourceCycle() {
     override val finalBlockData: BlockData
@@ -25,31 +29,13 @@ class OreResourceCycle: ResourceCycle() {
     override val droppedItem: ItemStack
         get() = when {
             number <= 0.03 -> {
-                Material.DIAMOND.createSpecialItem(
-                    SpecialItemType.SPECIAL_RESOURCE,
-                    Quality.EPIC,
-                    "辉晶矿石",
-                    true,
-                    listOf("    ${PRIMARY_TEXT_COLOR}每一面切割都精准地捕捉到了天际的璀璨，","    ${PRIMARY_TEXT_COLOR}仿佛夜空最明亮的星辰凝聚而成。")
-                )
+                SpecialDiamond.defaultItem
             }
             number <= 0.15 -> {
-                Material.RAW_GOLD.createSpecialItem(
-                    SpecialItemType.SPECIAL_RESOURCE,
-                    Quality.EXQUISITE,
-                    "闪金矿石",
-                    false,
-                    listOf("    ${PRIMARY_TEXT_COLOR}携带着星辰的记忆，","    ${PRIMARY_TEXT_COLOR}每一粒金砂都闪烁着过往光年的辉煌。")
-                )
+                SpecialGold.defaultItem
             }
             else -> {
-                Material.RAW_IRON.createSpecialItem(
-                    SpecialItemType.SPECIAL_RESOURCE,
-                    Quality.RARE,
-                    "陨铁矿石",
-                    false,
-                    listOf("    ${PRIMARY_TEXT_COLOR}质地坚硬无比，","    ${PRIMARY_TEXT_COLOR}散发着淡淡的星光。")
-                )
+                SpecialIron.defaultItem
             }
         }
     override val initialBlockData: BlockData

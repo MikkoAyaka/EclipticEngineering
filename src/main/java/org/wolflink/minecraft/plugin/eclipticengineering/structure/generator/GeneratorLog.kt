@@ -7,7 +7,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureTyp
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
-import org.wolflink.minecraft.plugin.eclipticengineering.resource.log.EvergreenWood
+import org.wolflink.minecraft.plugin.eclipticengineering.resource.log.EvergreenWoodResource
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompanion
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
@@ -28,9 +28,9 @@ class GeneratorLog private constructor(blueprint: GeneratorBlueprint, builder: B
                 3000,
                 { structure, buildLocation ->
                     setOf(
-                        EvergreenWood(structure, buildLocation.clone().add(0.0, 1.0, -2.0)),
-                        EvergreenWood(structure, buildLocation.clone().add(0.0, 2.0, -1.0)),
-                        EvergreenWood(structure, buildLocation.clone().add(0.0, 3.0, 0.0))
+                        EvergreenWoodResource(structure, buildLocation.clone().add(0.0, 1.0, -2.0)),
+                        EvergreenWoodResource(structure, buildLocation.clone().add(0.0, 2.0, -1.0)),
+                        EvergreenWoodResource(structure, buildLocation.clone().add(0.0, 3.0, 0.0))
                     )
                 },
                 ItemRequirement("需要 16 泥土", ItemStack(Material.DIRT, 16)),

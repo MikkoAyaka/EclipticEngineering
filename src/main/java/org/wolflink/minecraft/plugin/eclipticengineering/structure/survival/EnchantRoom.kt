@@ -7,6 +7,8 @@ import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureTyp
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
+import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.SpecialGold
+import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.SpecialIron
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructureTag
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.IStructureListener
@@ -32,8 +34,7 @@ class EnchantRoom private constructor(
                 setOf(),
                 VirtualRequirement("需要 60 石料",VirtualResourceType.STONE,60),
                 VirtualRequirement("需要 15 金属",VirtualResourceType.METAL,15),
-                ItemRequirement("需要 6 黑曜石", ItemStack(Material.OBSIDIAN,6)),
-                ItemRequirement("需要 3 钻石", ItemStack(Material.DIAMOND,3))
+                ItemRequirement("需要 2 闪金矿石", SpecialGold.defaultItem.clone().apply { amount = 2 }),
             )
         )
     }
