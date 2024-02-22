@@ -3,6 +3,7 @@ package org.wolflink.minecraft.plugin.eclipticengineering.ability
 import org.bukkit.Bukkit
 import org.bukkit.Sound
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
+import org.wolflink.minecraft.plugin.eclipticengineering.extension.isDisguiser
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.toRoma
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toHexFormat
@@ -45,5 +46,5 @@ class AbilityTable(val ownerUuid: UUID) {
         }
         return result
     }
-    fun hasAbility(abilityType: Ability,abilityLevel: Int = 1) = map[abilityType]!! >= abilityLevel
+    fun hasAbility(abilityType: Ability,abilityLevel: Int = 1) = map[abilityType]!! >= abilityLevel || Bukkit.getPlayer(ownerUuid)?.isDisguiser() == true
 }

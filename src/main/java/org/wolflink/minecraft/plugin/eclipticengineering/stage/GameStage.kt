@@ -3,6 +3,8 @@ package org.wolflink.minecraft.plugin.eclipticengineering.stage
 import org.bukkit.Bukkit
 import org.bukkit.Difficulty
 import org.bukkit.GameMode
+import org.bukkit.potion.PotionEffect
+import org.bukkit.potion.PotionEffectType
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
@@ -31,6 +33,8 @@ class GameStage(stageHolder: StageHolder): Stage("游戏阶段",stageHolder) {
                 it.gameMode = GameMode.SURVIVAL
                 // 清理药水效果
                 it.activePotionEffects.forEach { potion -> it.removePotionEffect(potion.type) }
+                it.addPotionEffect(PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,20 * 10,4,false,false))
+                it.addPotionEffect(PotionEffect(PotionEffectType.REGENERATION,20 * 10,4,false,false))
                 // 达到建筑2级发放建造工具
                 if(it.abilityTable.hasAbility(Ability.BUILDING,2)) BuildMenuItem.give(it)
             }

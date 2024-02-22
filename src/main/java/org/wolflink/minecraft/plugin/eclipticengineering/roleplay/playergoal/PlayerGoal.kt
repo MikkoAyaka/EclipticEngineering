@@ -54,14 +54,14 @@ abstract class PlayerGoal(val disguiser: Player) : Listener {
         if(Calendar.getInstance().timeInMillis - triggerTime.timeInMillis < 20 * 1000) return
         status = Status.FINISHED
         disguiser.playSound(disguiser,Sound.UI_TOAST_CHALLENGE_COMPLETE,0.5f,2f)
-        disguiser.sendMessage("$MESSAGE_PREFIX 今日目标已完成。")
+        disguiser.sendMessage("$MESSAGE_PREFIX 今日目标已完成。".toComponent())
         disable()
     }
     fun failed() {
         if(Calendar.getInstance().timeInMillis - triggerTime.timeInMillis < 20 * 1000) return
         status = Status.FAILED
         disguiser.playSound(disguiser,Sound.ENTITY_WOLF_HOWL,0.5f,1.5f)
-        disguiser.sendMessage("$MESSAGE_PREFIX 今日目标失败，等待明日刷新。")
+        disguiser.sendMessage("$MESSAGE_PREFIX 今日目标失败，等待明日刷新。".toComponent())
         disable()
     }
 }

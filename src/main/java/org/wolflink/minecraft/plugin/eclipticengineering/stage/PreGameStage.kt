@@ -130,6 +130,7 @@ private object PreGameListener : Listener {
         if (e.hasBlock() && e.clickedBlock?.state is Container) {
             val chestBlock = e.clickedBlock!!.state as Container
             if(chestBlock in cacheChest) return
+            chestBlock.inventory.clear()
             cacheChest.add(chestBlock)
             EEngineeringScope.launch {
                 chestBlock.inventory.contents = chestBlock.inventory
