@@ -44,7 +44,7 @@ object MeetingHandler {
         }
         available = true
         lastTriggerDays = DayNightHandler.days
-        Bukkit.broadcast("$MESSAGE_PREFIX ${player.name} 召开了今日的会议，玩家们将陆续到达会议大厅，请尽快入座。".toComponent())
+        Bukkit.broadcast("$MESSAGE_PREFIX ${player.name} 召开了今日的会议，玩家们将陆续到达会议大厅，请尽快入座。<gray>(/eev vote ID 进行投票，/eev abstain 弃权)".toComponent())
         EEngineeringScope.launch {
             Bukkit.getOnlinePlayers().filter { it != player }.forEach {
                 it.teleport(player)
@@ -75,7 +75,7 @@ object MeetingHandler {
         voteHistory[voter.uniqueId] = beenVoted.uniqueId
         voter.sendMessage("$MESSAGE_PREFIX 你在投票纸上写下了 ${beenVoted.name} 的名字。<gray>(先前的已被擦除)".toComponent())
         Bukkit.broadcast("$MESSAGE_PREFIX <green>${voter.name} 完成了投票。".toComponent())
-        if(voteHistory.size >= gamingPlayers.size) judgment()
+        if(voteHistory.size >= gamingPlayers.size) endMeeting()
     }
 
     /**
@@ -88,7 +88,7 @@ object MeetingHandler {
         }
         voteHistory[voter.uniqueId] = null
         Bukkit.broadcast("$MESSAGE_PREFIX <red>${voter.name} 弃权了。".toComponent())
-        if(voteHistory.size >= gamingPlayers.size) judgment()
+        if(voteHistory.size >= gamingPlayers.size) endMeeting()
     }
 
     /**
