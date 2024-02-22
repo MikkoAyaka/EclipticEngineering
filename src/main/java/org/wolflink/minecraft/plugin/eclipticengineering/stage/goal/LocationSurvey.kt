@@ -2,7 +2,10 @@ package org.wolflink.minecraft.plugin.eclipticengineering.stage.goal
 
 import kotlinx.coroutines.delay
 import org.bukkit.Location
+import org.bukkit.Material
 import org.bukkit.World
+import org.bukkit.enchantments.Enchantment
+import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.Condition
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.FunctionalCondition
@@ -78,5 +81,13 @@ object LocationSurvey : Goal("定点勘察",300) {
      * 根据完成状态发放奖励
      */
     override fun giveRewards() {
+        // 发放精准采集
+        val enchantBook = ItemStack(Material.ENCHANTED_BOOK)
+        enchantBook.addEnchantment(Enchantment.SILK_TOUCH,1)
+        gamingPlayers.random().inventory.addItem(enchantBook)
+        gamingPlayers.forEach {
+            it.inventory.addItem(ItemStack(Material.DIAMOND))
+            it.inventory.addItem(ItemStack(Material.EXPERIENCE_BOTTLE,24))
+        }
     }
 }

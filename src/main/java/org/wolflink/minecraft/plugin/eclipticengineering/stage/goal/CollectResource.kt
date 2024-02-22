@@ -1,5 +1,9 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.stage.goal
 
+import org.bukkit.Material
+import org.bukkit.enchantments.Enchantment
+import org.bukkit.inventory.ItemStack
+import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.Condition
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.FunctionalCondition
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.story.Story
@@ -49,5 +53,13 @@ object CollectResource : Goal("物资收集",60) {
     )
     override val failedConditions: List<Condition> = listOf()
     override fun giveRewards() {
+        // 发放时运
+        val enchantBook = ItemStack(Material.ENCHANTED_BOOK)
+        enchantBook.addEnchantment(Enchantment.LUCK,2)
+        gamingPlayers.random().inventory.addItem(enchantBook)
+        gamingPlayers.forEach {
+            it.inventory.addItem(ItemStack(Material.DIAMOND))
+            it.inventory.addItem(ItemStack(Material.EXPERIENCE_BOTTLE,24))
+        }
     }
 }

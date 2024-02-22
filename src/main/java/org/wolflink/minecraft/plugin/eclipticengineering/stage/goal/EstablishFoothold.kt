@@ -1,16 +1,13 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.stage.goal
 
-import kotlinx.coroutines.launch
-import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
-import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.Condition
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.FunctionalCondition
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.story.Story
-import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.EnergySource
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.LivingHouse
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureRepository
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
@@ -35,14 +32,14 @@ object EstablishFoothold : Goal("建立据点",0) {
         "就是你现在的使命",
     )
     override val finishConditions: List<Condition> = listOf(
-        FunctionalCondition("建立幽光能量发生场"){
-            StructureRepository.findBy { it is EnergySource && it.builder.status == Builder.Status.COMPLETED }.any()
+        FunctionalCondition("寻找合适的地点作为据点，建造居住屋"){
+            StructureRepository.findBy { it is LivingHouse && it.builder.status == Builder.Status.COMPLETED }.any()
         }
     )
     override val failedConditions: List<Condition> = listOf()
     override fun beforeFinish() {
-        val energySource = StructureRepository.findBy { it is EnergySource }.first()
-        val footholdLocation = energySource.builder.buildLocation
+        val structure = StructureRepository.findBy { it is LivingHouse }.first()
+        val footholdLocation = structure.builder.buildLocation
         // 更新据点坐标
         GoalHolder.footholdLocation = footholdLocation
         // 更新边界
@@ -56,9 +53,8 @@ object EstablishFoothold : Goal("建立据点",0) {
      */
     override fun giveRewards() {
         gamingPlayers.forEach {
-            // TODO 发放奖励
-            it.giveExp(114)
-            it.inventory.addItem(ItemStack(Material.DIRT, 51))
+            it.inventory.addItem(ItemStack(Material.DIAMOND))
+            it.inventory.addItem(ItemStack(Material.EXPERIENCE_BOTTLE,24))
         }
     }
 }

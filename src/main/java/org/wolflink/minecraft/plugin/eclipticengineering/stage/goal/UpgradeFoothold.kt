@@ -1,5 +1,8 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.stage.goal
 
+import org.bukkit.Material
+import org.bukkit.inventory.ItemStack
+import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.Condition
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.FunctionalCondition
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.story.Story
@@ -22,13 +25,13 @@ object UpgradeFoothold : Goal("据点扩张",0) {
         "稍作整顿，接下来将有困难的任务等待着你们",
     )
     override val finishConditions: List<Condition> = listOf(
-        FunctionalCondition("建造伐木场"){
+        FunctionalCondition("建造精培木场"){
             StructureRepository.findBy { it is GeneratorLog && it.builder.status == Builder.Status.COMPLETED }.any()
         },
-        FunctionalCondition("建造农场"){
+        FunctionalCondition("建造精培农场"){
             StructureRepository.findBy { it is GeneratorCrop && it.builder.status == Builder.Status.COMPLETED }.any()
         },
-        FunctionalCondition("建造采矿场"){
+        FunctionalCondition("建造精炼矿场"){
             StructureRepository.findBy { it is GeneratorOre && it.builder.status == Builder.Status.COMPLETED }.any()
         }
     )
@@ -37,6 +40,10 @@ object UpgradeFoothold : Goal("据点扩张",0) {
      * 根据完成状态发放奖励
      */
     override fun giveRewards() {
-        // TODO 苏哒哟
+        gamingPlayers.forEach {
+            it.inventory.addItem(ItemStack(Material.WHITE_SHULKER_BOX))
+            it.inventory.addItem(ItemStack(Material.DIAMOND))
+            it.inventory.addItem(ItemStack(Material.EXPERIENCE_BOTTLE,24))
+        }
     }
 }
