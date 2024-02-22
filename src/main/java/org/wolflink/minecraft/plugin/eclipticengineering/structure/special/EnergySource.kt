@@ -1,10 +1,8 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.structure.special
 
-import org.bukkit.Material
-import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
-import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructureTag
@@ -13,12 +11,9 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompan
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
-class EnergySource private constructor(blueprint: Blueprint, builder: Builder) : GameStructure(blueprint, builder, 1),
+class EnergySource private constructor(blueprint: Blueprint, builder: Builder) :
+    GameStructure(StructureType.ENERGY_SOURCE, blueprint, builder, 1),
     IStructureListener {
-    override val tags = setOf(
-        GameStructureTag.AMOUNT_LIMITED,
-        GameStructureTag.ENERGY_SUPPLY
-    )
     override val customListeners by lazy { listOf(this) }
 
     companion object : StructureCompanion<EnergySource>() {
@@ -33,6 +28,10 @@ class EnergySource private constructor(blueprint: Blueprint, builder: Builder) :
                 STRUCTURE_NAME,
                 120,
                 20000,
+                setOf(
+                    GameStructureTag.AMOUNT_LIMITED,
+                    GameStructureTag.ENERGY_SUPPLY
+                ),
                 VirtualRequirement("需要 150 石料", VirtualResourceType.STONE, 150),
                 VirtualRequirement("需要 60 木材", VirtualResourceType.WOOD, 60)
             )

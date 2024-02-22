@@ -10,6 +10,7 @@ import org.bukkit.entity.Player
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ElementalTurretBlueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.EnergyRequiredListener
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructureTag
@@ -20,11 +21,8 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.IStructureListe
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 import java.util.*
 
-abstract class ElementalTurret(blueprint: ElementalTurretBlueprint, builder: Builder) :
-    GameStructure(blueprint, builder),IStructureListener {
-    override val tags = setOf(
-        GameStructureTag.ENERGY_REQUIRED
-    )
+abstract class ElementalTurret(type:StructureType,blueprint: ElementalTurretBlueprint, builder: Builder) :
+    GameStructure(type,blueprint, builder),IStructureListener {
     override val customListeners by lazy { listOf(EnergyRequiredListener(this),this) }
     private val attackRange = blueprint.attackRange
     private val damageRange = blueprint.attackDamage

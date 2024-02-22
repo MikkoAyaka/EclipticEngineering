@@ -33,6 +33,7 @@ enum class StructureType(
     RESPAWN_BEACON("幽光重生信标",RespawnBeacon::class.java,RespawnBeacon.blueprints,RespawnBeacon::create),// 重生信标
     ENERGY_SOURCE("幽光能量发生场",EnergySource::class.java,EnergySource.blueprints,EnergySource::create),// 能源中心
     MINING_STATION("勘探站台",MiningStation::class.java,MiningStation.blueprints,MiningStation::create),
+    PIPELINE_INTERFACE("管道接口",PipelineInterface::class.java,PipelineInterface.blueprints,PipelineInterface::create),
 //    HOT_SPRING(HotSpring.blueprint,{ HotSpring(it)}),// 温泉
 //
 //    TOTEM_EXPERIENCE(TotemExperience.blueprint,{TotemExperience(it)}),// 经验图腾

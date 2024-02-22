@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.RespawnBeaconBlueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
@@ -24,10 +25,7 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Bluep
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
 class RespawnBeacon private constructor(blueprint: RespawnBeaconBlueprint, builder: Builder) :
-    GameStructure(blueprint, builder, 1), IStructureListener {
-    override val tags = setOf(
-        GameStructureTag.AMOUNT_LIMITED
-    )
+    GameStructure(StructureType.RESPAWN_BEACON,blueprint, builder, 1), IStructureListener {
     override val customListeners by lazy { listOf(this) }
     private val chargeSeconds = blueprint.chargeSeconds
     private val maxChargeAmount = blueprint.chargeAmount

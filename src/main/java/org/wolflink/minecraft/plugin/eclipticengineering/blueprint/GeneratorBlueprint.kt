@@ -1,10 +1,9 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.blueprint
 
 import org.bukkit.Location
-import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.Condition
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.ResourceBlock
-import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructureTag
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 
 /**
@@ -15,6 +14,13 @@ class GeneratorBlueprint(
     structureName: String,
     buildSeconds: Int,
     maxDurability: Int,
-    val resourceBlocksSupplier: (structure: Structure,buildLocation:Location) -> Set<ResourceBlock>,
+    val resourceBlocksSupplier: (structure: Structure, buildLocation: Location) -> Set<ResourceBlock>,
     vararg conditions: Condition
-): ConditionBlueprint(structureLevel,structureName, buildSeconds, maxDurability, *conditions)
+) : ConditionBlueprint(
+    structureLevel, structureName, buildSeconds, maxDurability,
+    setOf(
+        GameStructureTag.AMOUNT_LIMITED,
+        GameStructureTag.SPECIAL_RESOURCE_GENERATOR
+    ),
+    *conditions
+)

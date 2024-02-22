@@ -3,6 +3,7 @@ package org.wolflink.minecraft.plugin.eclipticengineering.structure.survival
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
@@ -15,8 +16,7 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
 class EnchantRoom private constructor(
     blueprint: Blueprint, builder: Builder
-) : GameStructure(blueprint, builder) {
-    override val tags: Set<GameStructureTag> = setOf()
+) : GameStructure(StructureType.ENCHANT_ROOM,blueprint, builder) {
     override val customListeners = listOf<IStructureListener>()
     companion object : StructureCompanion<EnchantRoom>() {
         override fun supplier(blueprint: Blueprint, builder: Builder): EnchantRoom {
@@ -29,6 +29,7 @@ class EnchantRoom private constructor(
                 "附魔站台",
                 60,
                 5000,
+                setOf(),
                 VirtualRequirement("需要 60 石料",VirtualResourceType.STONE,60),
                 VirtualRequirement("需要 15 金属",VirtualResourceType.METAL,15),
                 ItemRequirement("需要 6 黑曜石", ItemStack(Material.OBSIDIAN,6)),

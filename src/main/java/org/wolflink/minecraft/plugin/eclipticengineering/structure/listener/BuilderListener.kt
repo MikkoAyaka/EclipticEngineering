@@ -5,6 +5,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.GameStructureBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.Requirement
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
@@ -61,11 +62,13 @@ object BuilderListener: Listener, IBuilderListener {
     override fun preBuild(e: BuilderPreBuildEvent) {
         val structure = e.builder.structure
         if(structure is GameStructure) {
+            val blueprint = structure.blueprint
+            if(blueprint !is GameStructureBlueprint) throw IllegalStateException("${structure.type.displayName} 建筑蓝图不为 GameStructureBlueprint 类型。")
             if(!amountCheck(structure,e.player)) {
                 e.isCancelled = true
                 return
             }
-            if(GameStructureTag.ENERGY_REQUIRED in structure.tags) {
+            if(GameStructureTag.ENERGY_REQUIRED in blueprint.tags) {
                 if(!energyCheck(structure,e.player)) {
                     e.isCancelled = true
                     return
@@ -81,7 +84,9 @@ object BuilderListener: Listener, IBuilderListener {
     override fun completed(e: BuilderCompletedEvent) {
         val structure = e.structure
         if(structure is GameStructure) {
-            if(GameStructureTag.ENERGY_SUPPLY in structure.tags) {
+            val blueprint = structure.blueprint
+            if(blueprint !is GameStructureBlueprint) throw IllegalStateException("${structure.type.displayName} 建筑蓝图不为 GameStructureBlueprint 类型。")
+            if(GameStructureTag.ENERGY_SUPPLY in blueprint.tags) {
                 GameStructureCounter.energyStructures.add(structure)
             }
         }
@@ -104,8 +109,10 @@ object BuilderListener: Listener, IBuilderListener {
     override fun destroyed(e: BuilderDestroyedEvent) {
         val structure = e.builder.structure
         if(structure is GameStructure) {
+            val blueprint = structure.blueprint
+            if(blueprint !is GameStructureBlueprint) throw IllegalStateException("${structure.type.displayName} 建筑蓝图不为 GameStructureBlueprint 类型。")
             amountDecrement(structure)
-            if(GameStructureTag.ENERGY_SUPPLY in structure.tags) {
+            if(GameStructureTag.ENERGY_SUPPLY in blueprint.tags) {
                 GameStructureCounter.energyStructures.remove(structure)
             }
         }

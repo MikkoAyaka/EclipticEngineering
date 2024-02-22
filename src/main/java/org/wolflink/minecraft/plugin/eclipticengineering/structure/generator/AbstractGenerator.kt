@@ -4,6 +4,7 @@ import kotlinx.coroutines.launch
 import org.bukkit.entity.Player
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.GeneratorBlueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.ResourceBlock
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructureTag
@@ -14,12 +15,8 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.IStructureListe
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
 
-abstract class AbstractGenerator(blueprint: GeneratorBlueprint, builder: Builder) :
-    GameStructure(blueprint, builder, 1), IStructureListener {
-    override val tags = setOf(
-        GameStructureTag.AMOUNT_LIMITED,
-        GameStructureTag.SPECIAL_RESOURCE_GENERATOR
-    )
+abstract class AbstractGenerator(type: StructureType, blueprint: GeneratorBlueprint, builder: Builder) :
+    GameStructure(type, blueprint, builder, 1), IStructureListener {
     override val customListeners by lazy { listOf(this) }
 
     // 矿物资源方块

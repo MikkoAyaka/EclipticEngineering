@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.TowerArrowBlueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
 import org.wolflink.minecraft.plugin.eclipticengineering.metadata.MetadataModifier
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
@@ -31,9 +32,8 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 import java.util.Random
 
 class TowerArrow private constructor(blueprint: TowerArrowBlueprint, builder: Builder
-) : GameStructure(blueprint, builder),
+) : GameStructure(StructureType.TOWER_ARROW,blueprint, builder),
     IStructureListener {
-    override val tags: Set<GameStructureTag> = setOf()
     override val customListeners by lazy { listOf(this) }
     private val extraDamageRange = blueprint.extraDamageRange
     private val maxShooterAmount = blueprint.maxShooterAmount

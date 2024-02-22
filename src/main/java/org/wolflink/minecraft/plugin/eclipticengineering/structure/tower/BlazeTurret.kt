@@ -10,32 +10,37 @@ import org.bukkit.entity.SmallFireball
 import org.bukkit.inventory.ItemStack
 import org.bukkit.util.Vector
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ElementalTurretBlueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
 import org.wolflink.minecraft.plugin.eclipticengineering.metadata.MetadataModifier
 import org.wolflink.minecraft.plugin.eclipticengineering.particle.withParticle
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
-import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompanion
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
-class BlazeTurret private constructor(blueprint: ElementalTurretBlueprint,builder: Builder) : ElementalTurret(blueprint, builder) {
+class BlazeTurret private constructor(blueprint: ElementalTurretBlueprint, builder: Builder) :
+    ElementalTurret(StructureType.TURRET_BLAZE, blueprint, builder) {
     private val displayEntityRelativeVector = blueprint.displayEntityRelativeVector
-    override fun attack(enemy: Entity,damage: Int) {
-        displayEntity.location.world.playSound(displayEntity.location, Sound.ENTITY_BLAZE_SHOOT,2f,1f)
+    override fun attack(enemy: Entity, damage: Int) {
+        displayEntity.location.world.playSound(displayEntity.location, Sound.ENTITY_BLAZE_SHOOT, 2f, 1f)
         // 从展示实体指向敌人的向量
-        val vector = enemy.location.add(-displayEntity.location.x,-1-displayEntity.location.y,-displayEntity.location.z).toVector()
+        val vector =
+            enemy.location.add(-displayEntity.location.x, -1 - displayEntity.location.y, -displayEntity.location.z)
+                .toVector()
         displayEntity.world.spawnEntity(
-            displayEntity.location.clone().add(0.0,2.0,0.0),
+            displayEntity.location.clone().add(0.0, 2.0, 0.0),
             EntityType.SMALL_FIREBALL
         ).apply {
             this as SmallFireball
             direction = vector.normalize().multiply(1.2)
             yield = 0f
-            MetadataModifier.modifyDamage(this,damage)
+            MetadataModifier.modifyDamage(this, damage)
             withParticle(Particle.SMALL_FLAME)
         }
     }
+
     override fun spawnDisplayEntity(): Entity {
         val spawnLocation = builder.buildLocation.clone().add(displayEntityRelativeVector)
         return spawnLocation.world.spawnEntity(spawnLocation, EntityType.BLAZE).apply {
@@ -46,9 +51,9 @@ class BlazeTurret private constructor(blueprint: ElementalTurretBlueprint,builde
         }
     }
 
-    companion object : StructureCompanion<BlazeTurret>(){
+    companion object : StructureCompanion<BlazeTurret>() {
         override fun supplier(blueprint: Blueprint, builder: Builder): BlazeTurret {
-            return BlazeTurret(blueprint as ElementalTurretBlueprint,builder)
+            return BlazeTurret(blueprint as ElementalTurretBlueprint, builder)
         }
 
         override val blueprints = listOf(
@@ -57,14 +62,14 @@ class BlazeTurret private constructor(blueprint: ElementalTurretBlueprint,builde
                 "烈焰防御塔台",
                 60,
                 6000,
-                Vector(0,11,0),
+                Vector(0, 11, 0),
                 1,
                 4..6,
                 24,
-                VirtualRequirement("需要 30 木材", VirtualResourceType.WOOD,30),
-                VirtualRequirement("需要 50 石料", VirtualResourceType.STONE,50),
-                VirtualRequirement("需要 30 金属", VirtualResourceType.METAL,30),
-                ItemRequirement("需要 10 熔岩桶", ItemStack(Material.LAVA_BUCKET,10))
+                VirtualRequirement("需要 30 木材", VirtualResourceType.WOOD, 30),
+                VirtualRequirement("需要 50 石料", VirtualResourceType.STONE, 50),
+                VirtualRequirement("需要 30 金属", VirtualResourceType.METAL, 30),
+                ItemRequirement("需要 10 熔岩桶", ItemStack(Material.LAVA_BUCKET, 10))
             )
         )
     }
