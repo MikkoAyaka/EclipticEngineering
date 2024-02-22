@@ -25,7 +25,7 @@ class SpawnerAttribute(eeDifficulty: EEDifficulty) {
                 healthMultiple = 0.5
                 movementMultiple = 0.8
                 damageMultiple = 0.5
-                spawnPeriodSecs = 12
+                spawnPeriodSecs = 30
                 weightMap[EntityType.ZOMBIE] = 50
                 weightMap[EntityType.HUSK] = 50
                 weightMap[EntityType.ZOMBIE_VILLAGER] = 50
@@ -40,7 +40,7 @@ class SpawnerAttribute(eeDifficulty: EEDifficulty) {
                 healthMultiple = 0.8
                 movementMultiple = 1.0
                 damageMultiple = 0.8
-                spawnPeriodSecs = 11
+                spawnPeriodSecs = 20
                 weightMap[EntityType.ZOMBIE] = 50
                 weightMap[EntityType.HUSK] = 50
                 weightMap[EntityType.ZOMBIE_VILLAGER] = 50
@@ -55,7 +55,7 @@ class SpawnerAttribute(eeDifficulty: EEDifficulty) {
                 healthMultiple = 1.05
                 movementMultiple = 1.1
                 damageMultiple = 1.05
-                spawnPeriodSecs = 9
+                spawnPeriodSecs = 16
                 weightMap[EntityType.ZOMBIE] = 45
                 weightMap[EntityType.HUSK] = 45
                 weightMap[EntityType.ZOMBIE_VILLAGER] = 45
@@ -73,7 +73,7 @@ class SpawnerAttribute(eeDifficulty: EEDifficulty) {
                 healthMultiple = 1.25
                 movementMultiple = 1.25
                 damageMultiple = 1.25
-                spawnPeriodSecs = 8
+                spawnPeriodSecs = 12
                 weightMap[EntityType.ZOMBIE] = 40
                 weightMap[EntityType.HUSK] = 40
                 weightMap[EntityType.ZOMBIE_VILLAGER] = 40
