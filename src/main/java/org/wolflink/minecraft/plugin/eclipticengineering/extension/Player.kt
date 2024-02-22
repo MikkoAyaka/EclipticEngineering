@@ -10,6 +10,7 @@ import org.bukkit.entity.Player
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.AbilityTable
 import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
+import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.DisguiserBook
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.PioneerBook
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 import java.time.Duration
@@ -80,7 +81,7 @@ fun Player.scriptKill() {
 fun Player.asDisguiser() {
     disguiserSet.add(this.uniqueId)
     // 发放伪装者手册
-    inventory.addItem(PioneerBook.defaultItem)
+    DisguiserBook.give(this)
 }
 fun OfflinePlayer.isDisguiser() = this.uniqueId in disguiserSet
 fun Player.isGaming() = gameMode == GameMode.SURVIVAL && world.name != Config.lobbyWorldName

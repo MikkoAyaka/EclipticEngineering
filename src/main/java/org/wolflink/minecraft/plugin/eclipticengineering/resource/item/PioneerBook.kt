@@ -19,6 +19,7 @@ object PioneerBook {
             "    ${PRIMARY_TEXT_COLOR}开拓者们，这里有一个非常不幸的消息，",
             "    ${PRIMARY_TEXT_COLOR}幽匿伪装者正潜伏在你们之中，",
             "    ${PRIMARY_TEXT_COLOR}也许是一位，也许...是多个。",
+            "    ${PRIMARY_TEXT_COLOR}他会有一些异于常人的行为需要留意。",
             "    ${PRIMARY_TEXT_COLOR}不论如何，一定要在第5天到来之前抓住他。",
         )
     )
