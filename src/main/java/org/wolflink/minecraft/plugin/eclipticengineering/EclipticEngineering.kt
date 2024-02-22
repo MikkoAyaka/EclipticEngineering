@@ -14,6 +14,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.metadata.MetadataHandle
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.CreatureSpawnListener
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.smartai.SmartAIListener
 import org.wolflink.minecraft.plugin.eclipticengineering.papi.AbilityPapi
+import org.wolflink.minecraft.plugin.eclipticengineering.papi.DayNightPapi
 import org.wolflink.minecraft.plugin.eclipticengineering.papi.StagePapi
 import org.wolflink.minecraft.plugin.eclipticengineering.papi.VirtualResourcePapi
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.VirtualTeamInventory
@@ -72,6 +73,7 @@ class EclipticEngineering : JavaPlugin() {
         StagePapi.register()
         VirtualResourcePapi.register()
         AbilityPapi.register()
+        DayNightPapi.register()
         // 初始化阶段
         StageHolder.init()
     }

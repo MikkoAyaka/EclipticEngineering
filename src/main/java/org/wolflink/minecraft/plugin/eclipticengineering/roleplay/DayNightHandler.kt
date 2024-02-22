@@ -21,8 +21,9 @@ object DayNightHandler {
     // 游戏天数
     var days = 0
         private set
-    enum class Status(val minutes: Int) {
-        DAY(16),NIGHT(8)
+    enum class Status(val displayName: String,val minutes: Int) {
+        DAY("白天",16),
+        NIGHT("夜晚",8)
     }
     var status = Status.DAY
         private set(value) {
