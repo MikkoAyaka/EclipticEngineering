@@ -1,5 +1,6 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.structure.tower
 
+import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.Particle
 import org.bukkit.Sound
@@ -17,6 +18,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.particle.withParticle
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.SpecialIron
+import org.wolflink.minecraft.plugin.eclipticengineering.utils.RandomAPI
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompanion
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
@@ -24,14 +26,13 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 class BlazeTurret private constructor(blueprint: ElementalTurretBlueprint, builder: Builder) :
     ElementalTurret(StructureType.TURRET_BLAZE, blueprint, builder) {
     private val displayEntityRelativeVector = blueprint.displayEntityRelativeVector
-    override fun attack(enemy: Entity, damage: Int) {
+    override fun playShootSound() {
         displayEntity.location.world.playSound(displayEntity.location, Sound.ENTITY_BLAZE_SHOOT, 2f, 1f)
-        // 从展示实体指向敌人的向量
-        val vector =
-            enemy.location.add(-displayEntity.location.x, -1 - displayEntity.location.y, -displayEntity.location.z)
-                .toVector()
-        displayEntity.world.spawnEntity(
-            displayEntity.location.clone().add(0.0, 2.0, 0.0),
+    }
+
+    override fun shoot(from: Location, vector: Vector, damage: Int) {
+        from.world.spawnEntity(
+            from,
             EntityType.SMALL_FIREBALL
         ).apply {
             this as SmallFireball
@@ -64,7 +65,7 @@ class BlazeTurret private constructor(blueprint: ElementalTurretBlueprint, build
                 60,
                 6000,
                 Vector(0, 11, 0),
-                1,
+                2,
                 4..6,
                 24,
                 VirtualRequirement("需要 30 木材", VirtualResourceType.WOOD, 30),

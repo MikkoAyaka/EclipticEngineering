@@ -4,9 +4,11 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.bukkit.Bukkit
+import org.bukkit.Location
 import org.bukkit.entity.Animals
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
+import org.bukkit.util.Vector
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ElementalTurretBlueprint
@@ -14,6 +16,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureTyp
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.EnergyRequiredListener
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructureTag
+import org.wolflink.minecraft.plugin.eclipticengineering.utils.RandomAPI
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureAvailableEvent
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureDestroyedEvent
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureUnavailableEvent
@@ -32,7 +35,21 @@ abstract class ElementalTurret(type:StructureType,blueprint: ElementalTurretBlue
     /**
      * 炮台攻击逻辑
      */
-    abstract fun attack(enemy: Entity, damage: Int)
+    private fun attack(enemy: Entity, damage: Int) {
+        repeat(10) {
+            // 从展示实体指向敌人的向量
+            val vector =
+                enemy.location.clone().add(
+                    RandomAPI.nextDouble(-1.5, 1.5) - displayEntity.location.x,
+                    RandomAPI.nextDouble(-1.5, 1.5) - 1 - displayEntity.location.y,
+                    RandomAPI.nextDouble(-1.5, 1.5) - displayEntity.location.z
+                )
+                    .toVector()
+            shoot(displayEntity.location.clone().add(0.0, 2.0, 0.0), vector.normalize().multiply(1.2), damage)
+        }
+    }
+    protected abstract fun playShootSound()
+    protected abstract fun shoot(from: Location, vector: Vector, damage: Int)
 
     /**
      * 炮台生成展示实体
