@@ -7,9 +7,11 @@ import net.kyori.adventure.title.Title.Times
 import org.bukkit.Bukkit
 import org.bukkit.Sound
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
+import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
+import org.wolflink.minecraft.plugin.eclipticstructure.extension.call
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 import java.time.Duration
 
@@ -21,15 +23,15 @@ object DayNightHandler {
     // 游戏天数
     var days = 0
         private set
-    enum class Status(val displayName: String,val minutes: Int) {
-        DAY("白天",16),
-        NIGHT("夜晚",8)
+    enum class Status(val displayName: String,val minutes: Int,val gameTime: Int) {
+        DAY("白天",16,6000),
+        NIGHT("夜晚",8,18000)
     }
     var status = Status.DAY
         private set(value) {
             if(value == field) return
             field = value
-            DayNightEvent(field)
+            DayNightEvent(field).call()
         }
 
     private var available = false
@@ -44,10 +46,11 @@ object DayNightHandler {
         if(available)
         delay(1000L * 60 * status.minutes - 1)
         if(status == Status.DAY) {
-            Config.gameWorld.time = 12800
+            EclipticEngineering.runTask {
+                Config.gameWorld.time = 12800
+            }
             Bukkit.broadcast("$MESSAGE_PREFIX 太阳落山了，开拓者们，是时候回去休息了。".toComponent())
             delay(1000 * 60)
-            Config.gameWorld.time = 18000
             status = Status.NIGHT
             gamingPlayers.forEach{
                 it.showTitle(Title.title(
@@ -59,10 +62,11 @@ object DayNightHandler {
             }
         }
         if(status == Status.NIGHT) {
-            Config.gameWorld.time = 23500
+            EclipticEngineering.runTask {
+                Config.gameWorld.time = 23500
+            }
             Bukkit.broadcast("$MESSAGE_PREFIX 太阳升起，新的一天就要到来了。".toComponent())
             delay(1000 * 60)
-            Config.gameWorld.time = 6000
             status = Status.DAY
             gamingPlayers.forEach{
                 it.showTitle(Title.title(
