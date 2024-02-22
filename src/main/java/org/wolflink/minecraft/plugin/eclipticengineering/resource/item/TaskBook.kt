@@ -3,11 +3,7 @@ package org.wolflink.minecraft.plugin.eclipticengineering.resource.item
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.entity.Player
-import org.bukkit.event.EventHandler
-import org.bukkit.event.Listener
-import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
-import org.bukkit.inventory.meta.ItemMeta
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.Quality
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.SpecialItemType
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
@@ -29,7 +25,7 @@ object TaskBook: InteractiveItem(
     )
 ) {
     private var lastUpdateTime = 0L
-    override fun update(player: Player,bookItem: ItemStack) {
+    override fun update(player: Player, itemStack: ItemStack) {
         if(GoalHolder.nowGoal?.status == Goal.Status.PREPARING) {
             player.sendActionBar("$MESSAGE_PREFIX <yellow>新的目标将在准备时间结束后到来".toComponent())
             player.playSound(player, Sound.ENTITY_VILLAGER_NO,1f,1.5f)
@@ -53,7 +49,7 @@ object TaskBook: InteractiveItem(
                 else "<white>☐ ${PRIMARY_TEXT_COLOR}${it.description}"
             }
         ).itemMeta
-        bookItem.itemMeta = newMeta
+        itemStack.itemMeta = newMeta
         lastUpdateMeta = newMeta
         // 所有条件通过
         if(goal.finishConditions.all { it.isSatisfy() }) goal.finish()

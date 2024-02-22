@@ -4,7 +4,9 @@ import kotlinx.coroutines.launch
 import org.bukkit.Location
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
+import org.wolflink.minecraft.plugin.eclipticengineering.extension.asDisguiser
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
+import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.PioneerBook
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.TaskBook
 
 object GoalHolder {
@@ -20,6 +22,12 @@ object GoalHolder {
         nowGoal = EstablishFoothold
         // 发放任务书给随机一名正在游戏中的玩家
         TaskBook.give(gamingPlayers.random())
+        // 发放身份手册
+        gamingPlayers.forEach{
+            it.inventory.addItem(PioneerBook.defaultItem)
+        }
+        // 随机一名玩家作为内鬼
+        gamingPlayers.random().asDisguiser()
         nowGoal!!.into()
     }
     fun next() {

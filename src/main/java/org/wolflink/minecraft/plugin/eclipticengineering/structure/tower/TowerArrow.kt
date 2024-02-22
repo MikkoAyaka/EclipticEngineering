@@ -44,7 +44,7 @@ class TowerArrow private constructor(blueprint: TowerArrowBlueprint, builder: Bu
                 // 获取玩家所处的建筑结构
                 val player = e.entity as Player
                 val arrowTower = ZoneRepository.findByLocation(player.location)
-                    .map { StructureZoneRelationRepository.find1(it) }
+                    .mapNotNull { StructureZoneRelationRepository.find1(it) }
                     .filterIsInstance<TowerArrow>()
                     .firstOrNull() ?: return
                 arrowTower.playerShoot(player,e.shouldConsumeItem(),e.projectile)

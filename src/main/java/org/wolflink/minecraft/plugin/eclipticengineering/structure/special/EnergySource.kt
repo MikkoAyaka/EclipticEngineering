@@ -69,7 +69,7 @@ class EnergySource private constructor(blueprint: Blueprint, builder: Builder) :
             if (available) {
                 // 在影响范围内的建筑结构
                 val effectedStructures = ZoneRepository.findByOverlap(effectZone)
-                    .map(StructureZoneRelationRepository::find1)
+                    .mapNotNull(StructureZoneRelationRepository::find1)
                     .toSet()
                 // 不在影响范围内的建筑结构
                 val notEffectedStructures = StructureRepository.findAll() - effectedStructures

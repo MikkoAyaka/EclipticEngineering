@@ -26,6 +26,11 @@ object DayNightHandler {
         DAY(16),NIGHT(8)
     }
     private var timeStatus = Status.DAY
+        private set(value) {
+            if(value == field) return
+            field = value
+            DayNightEvent(field)
+        }
 
     private var available = false
     fun start() {

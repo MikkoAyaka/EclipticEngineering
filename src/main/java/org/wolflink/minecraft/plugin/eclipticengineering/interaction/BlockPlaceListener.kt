@@ -10,7 +10,9 @@ import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureZoneR
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.ZoneRepository
 
 object BlockPlaceListener: Listener {
-    private suspend fun inStructureZone(location: Location) = ZoneRepository.findByLocation(location).map { StructureZoneRelationRepository.find1(it) }.isNotEmpty()
+    private suspend fun inStructureZone(location: Location) = ZoneRepository.findByLocation(location)
+        .mapNotNull { StructureZoneRelationRepository.find1(it) }
+        .isNotEmpty()
     @EventHandler
     fun on(e: BlockPlaceEvent) {
         EEngineeringScope.launch {

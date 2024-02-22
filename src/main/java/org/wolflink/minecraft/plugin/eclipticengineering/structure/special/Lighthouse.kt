@@ -1,4 +1,4 @@
-package org.wolflink.minecraft.plugin.eclipticengineering.structure.decoration
+package org.wolflink.minecraft.plugin.eclipticengineering.structure.special
 
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
