@@ -45,9 +45,9 @@ object VirtualTeamInventory: Listener {
 
     private fun interactVirtualItemHandler(itemStack: ItemStack) {
         when(val material = itemStack.type) {
-            Material.IRON_INGOT -> add(VirtualResourceType.METAL,5 * itemStack.amount)
-            Material.GOLD_INGOT -> add(VirtualResourceType.METAL,10 * itemStack.amount)
-            Material.DIAMOND -> add(VirtualResourceType.METAL,30 * itemStack.amount)
+            Material.IRON_INGOT -> add(VirtualResourceType.METAL,1 * itemStack.amount)
+            Material.GOLD_INGOT -> add(VirtualResourceType.METAL,2 * itemStack.amount)
+            Material.DIAMOND -> add(VirtualResourceType.METAL,6 * itemStack.amount)
             Material.STONE -> add(VirtualResourceType.STONE,1 * itemStack.amount)
             Material.COBBLESTONE -> add(VirtualResourceType.STONE,1 * itemStack.amount)
             Material.DEEPSLATE -> add(VirtualResourceType.STONE,2 * itemStack.amount)

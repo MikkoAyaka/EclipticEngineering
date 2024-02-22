@@ -7,7 +7,9 @@ import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.MeetingHandler
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructureTag
@@ -33,10 +35,10 @@ class MeetingPlace private constructor(blueprint: Blueprint, builder: Builder) :
             ConditionBlueprint(
                 1,
                 "会议大厅",
-                5,
-                3000,
-                ItemRequirement("需要 1 圆石", ItemStack(Material.COBBLESTONE)),
-                ItemRequirement("需要 1 铁锭", ItemStack(Material.COBBLESTONE))
+                60,
+                6000,
+                VirtualRequirement("需要 30 石料", VirtualResourceType.STONE, 30),
+                VirtualRequirement("需要 120 木材", VirtualResourceType.WOOD, 120),
             )
         )
         override fun supplier(blueprint: Blueprint, builder: Builder): MeetingPlace {

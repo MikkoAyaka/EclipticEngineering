@@ -3,7 +3,9 @@ package org.wolflink.minecraft.plugin.eclipticengineering.structure.special
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.EnergyRequiredListener
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructureTag
@@ -25,11 +27,11 @@ class MiningStation private constructor(blueprint: Blueprint, builder: Builder) 
         override val blueprints = listOf(
             ConditionBlueprint(
                 1,
-                "开采站",
-                5,
-                3000,
-                ItemRequirement("需要 1 圆石", ItemStack(Material.COBBLESTONE)),
-                ItemRequirement("需要 1 铁锭", ItemStack(Material.COBBLESTONE))
+                "幽光开采站",
+                120,
+                10000,
+                VirtualRequirement("需要 120 石料", VirtualResourceType.STONE, 120),
+                VirtualRequirement("需要 60 金属", VirtualResourceType.METAL,60)
             )
         )
         override fun supplier(blueprint: Blueprint, builder: Builder): MiningStation {

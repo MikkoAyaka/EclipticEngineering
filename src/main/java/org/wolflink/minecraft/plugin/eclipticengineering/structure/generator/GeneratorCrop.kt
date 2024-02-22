@@ -3,7 +3,9 @@ package org.wolflink.minecraft.plugin.eclipticengineering.structure.generator
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.GeneratorBlueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.crop.CropResourceBlock
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompanion
@@ -21,8 +23,8 @@ class GeneratorCrop private constructor(blueprint: GeneratorBlueprint, builder: 
             GeneratorBlueprint(
                 1,
                 STRUCTURE_NAME,
-                5,
-                1000,
+                60,
+                3000,
                 { structure, buildLocation ->
                     setOf(
                         CropResourceBlock(structure, buildLocation.clone().add(-1.0, 1.0, 1.0)),
@@ -35,8 +37,9 @@ class GeneratorCrop private constructor(blueprint: GeneratorBlueprint, builder: 
                         CropResourceBlock(structure, buildLocation.clone().add(1.0, 1.0, -1.0)),
                     )
                 },
-                ItemRequirement("需要 1 圆石", ItemStack(Material.COBBLESTONE)),
-                ItemRequirement("需要 1 铁锭", ItemStack(Material.COBBLESTONE))
+                ItemRequirement("需要 96 泥土", ItemStack(Material.DIRT,96)),
+                VirtualRequirement("需要 60 木材", VirtualResourceType.WOOD,60),
+                VirtualRequirement("需要 15 金属", VirtualResourceType.METAL,15),
             )
         )
     }

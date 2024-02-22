@@ -3,7 +3,9 @@ package org.wolflink.minecraft.plugin.eclipticengineering.structure.generator
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.GeneratorBlueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.log.EvergreenWood
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.ore.OreResourceBlock
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
@@ -21,8 +23,8 @@ class GeneratorLog private constructor(blueprint: GeneratorBlueprint, builder: B
             GeneratorBlueprint(
                 1,
                 STRUCTURE_NAME,
-                5,
-                1000,
+                60,
+                3000,
                 { structure, buildLocation ->
                     setOf(
                         EvergreenWood(structure, buildLocation.clone().add(0.0, 1.0, -2.0)),
@@ -30,25 +32,10 @@ class GeneratorLog private constructor(blueprint: GeneratorBlueprint, builder: B
                         EvergreenWood(structure, buildLocation.clone().add(0.0, 3.0, 0.0))
                     )
                 },
-                ItemRequirement("需要 1 圆石", ItemStack(Material.COBBLESTONE)),
-                ItemRequirement("需要 1 铁锭", ItemStack(Material.COBBLESTONE))
+                ItemRequirement("需要 16 泥土", ItemStack(Material.DIRT,16)),
+                VirtualRequirement("需要 100 木材", VirtualResourceType.WOOD,100),
+                VirtualRequirement("需要 15 金属", VirtualResourceType.METAL,15),
             ),
-            GeneratorBlueprint(
-                2,
-                STRUCTURE_NAME,
-                10,
-                1750,
-                { structure, buildLocation ->
-                    setOf(
-                        OreResourceBlock(structure, buildLocation.clone().add(-1.0, 1.0, 0.0)),
-                        OreResourceBlock(structure, buildLocation.clone().add(1.0, 0.0, -1.0)),
-                        OreResourceBlock(structure, buildLocation.clone().add(-2.0, 2.0, 0.0)),
-                        OreResourceBlock(structure, buildLocation.clone().add(-1.0, 3.0, -1.0))
-                    )
-                },
-                ItemRequirement("需要 1 圆石", ItemStack(Material.COBBLESTONE)),
-                ItemRequirement("需要 1 铁锭", ItemStack(Material.COBBLESTONE))
-            )
         )
     }
 }

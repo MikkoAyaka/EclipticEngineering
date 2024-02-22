@@ -12,7 +12,9 @@ import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.RespawnBeaconBlueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructureTag
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureAvailableEvent
@@ -40,12 +42,12 @@ class RespawnBeacon private constructor(blueprint: RespawnBeaconBlueprint, build
             RespawnBeaconBlueprint(
                 1,
                 "幽光充能信标",
-                5,
-                1000,
+                120,
+                10000,
                 180,
                 4,
-                ItemRequirement("需要 1 圆石", ItemStack(Material.COBBLESTONE)),
-                ItemRequirement("需要 1 铁锭", ItemStack(Material.COBBLESTONE))
+                VirtualRequirement("需要 150 石料", VirtualResourceType.STONE, 150),
+                VirtualRequirement("需要 50 金属", VirtualResourceType.METAL,50)
             )
         )
     }

@@ -3,7 +3,9 @@ package org.wolflink.minecraft.plugin.eclipticengineering.structure.special
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructureTag
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.IStructureListener
@@ -28,10 +30,11 @@ class Lighthouse private constructor(
             ConditionBlueprint(
                 1,
                 "幽光灯塔",
-                5,
-                3000,
-                ItemRequirement("需要 1 圆石", ItemStack(Material.COBBLESTONE)),
-                ItemRequirement("需要 1 铁锭", ItemStack(Material.COBBLESTONE))
+                90,
+                8000,
+                VirtualRequirement("需要 150 石料", VirtualResourceType.STONE, 150),
+                VirtualRequirement("需要 60 木材", VirtualResourceType.WOOD, 60),
+                VirtualRequirement("需要 20 金属",VirtualResourceType.METAL,20)
             )
         )
     }
