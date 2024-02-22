@@ -21,7 +21,7 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.registry.Struct
 enum class StructureType(
     val displayName: String,
     val clazz: Class<out GameStructure>,
-    private val blueprints: List<Blueprint>,
+    val blueprints: List<Blueprint>,
     private val supplier: (structureLevel: Int, builder: Builder) -> Structure
 ) {
 
