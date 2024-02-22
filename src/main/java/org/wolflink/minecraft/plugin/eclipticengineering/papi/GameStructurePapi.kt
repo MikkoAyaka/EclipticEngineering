@@ -23,6 +23,7 @@ object GameStructurePapi: PlaceholderExpansion()  {
     private val regexTags = "[A-Za-z-]+_tags".toRegex()
     private val regexBlueprint = "[A-Za-z-]+_\\d+_blueprint_[A-Za-z]+".toRegex()
     override fun onRequest(player: OfflinePlayer?, params: String): String {
+        if(player == null || player.player == null) return "未找到玩家"
         val args = params.split('_')
         try {
             when {
@@ -31,7 +32,10 @@ object GameStructurePapi: PlaceholderExpansion()  {
                     val level = args[1].toInt()
                     val blueprint = structureType.blueprints[level-1] as ConditionBlueprint
                     if(blueprint.conditions.isEmpty()) return "    &#E8E8E8无"
-                    return blueprint.conditions.joinToString(separator = "\n") { "    &#E8E8E8"+it.description }
+                    return blueprint.conditions.joinToString(separator = "\n") {
+                        if(it.isSatisfy(player.player)) "    &#33FF33☑"+it.description
+                        else "    &#FF3333☒"+it.description
+                    }
                 }
                 params.matches(regexTags) -> {
                     val structureType = StructureType.valueOf(args[0].uppercase().replace('-','_'))
