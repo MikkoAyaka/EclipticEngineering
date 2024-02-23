@@ -133,13 +133,17 @@ private object PreGameListener : Listener {
             chestBlock.inventory.clear()
             cacheChest.add(chestBlock)
             EEngineeringScope.launch {
-                chestBlock.inventory.contents = chestBlock.inventory
-                    .apply {
-                        chestItemRandomTable
-                            .filter { RandomAPI.nextDouble() <= it.first / averChestAmount }
-                            .forEach { this.addItem(it.second) }
-                    }
-                    .contents.apply { this.shuffle() }
+                try {
+                    chestBlock.inventory.contents = chestBlock.inventory
+                        .apply {
+                            chestItemRandomTable
+                                .filter { RandomAPI.nextDouble() <= it.first / averChestAmount }
+                                .forEach { this.addItem(it.second) }
+                        }
+                        .contents.apply { this.shuffle() }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
         }
     }
