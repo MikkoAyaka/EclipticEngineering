@@ -23,61 +23,56 @@ object DayNightHandler {
     // 游戏天数
     var days = 0
         private set
-    enum class Status(val displayName: String,val minutes: Int,val gameTime: Int) {
-        DAY("白天",16,6000),
-        NIGHT("夜晚",8,18000)
+    enum class Status(val displayName: String,val description: String,val minutes: Int,val gameTime: Int) {
+        DAWN("黎明","$MESSAGE_PREFIX 太阳即将升起，新的一天就要到来了。",2,23500),
+        DAY("白天","",16,6000), // 新的一天从这里开始
+        HUSK("黄昏","$MESSAGE_PREFIX 太阳落山了，开拓者们，是时候回去休息了。",2,12800),
+        NIGHT("夜晚","",8,18000)
     }
-    var status = Status.DAY
+    var status = Status.NIGHT
         private set(value) {
             if(value == field) return
             field = value
-            DayNightEvent(field).call()
+            EclipticEngineering.runTask {
+                DayNightEvent(field).call()
+                Config.gameWorld.time = field.gameTime.toLong()
+                if(field.description.isNotEmpty()) {
+                    Bukkit.broadcast(field.description.toComponent())
+                }
+                if(field == Status.DAY) {
+                    days++
+                    gamingPlayers.forEach{
+                        it.showTitle(Title.title(
+                            "<#FFFFFF>白昼".toComponent(),
+                            "<#E0E0E0>距离夜晚降临还有 <white>${status.minutes} <#E0E0E0>分钟".toComponent(),
+                            Times.times(Duration.ofMillis(500), Duration.ofMillis(1500),Duration.ofMillis(500)))
+                        )
+                        it.playSound(it, Sound.ENTITY_CHICKEN_AMBIENT,1f,1f)
+                    }
+                }
+                if(field == Status.NIGHT) {
+                    gamingPlayers.forEach{
+                        it.showTitle(Title.title(
+                            "<#003366>深夜".toComponent(),
+                            "<#E0E0E0>距离白天到来还有 <white>${status.minutes} <#E0E0E0>分钟".toComponent(),
+                            Times.times(Duration.ofMillis(500), Duration.ofMillis(1500),Duration.ofMillis(500)))
+                        )
+                        it.playSound(it, Sound.ENTITY_WOLF_HOWL,1f,1f)
+                    }
+                }
+            }
         }
 
     private var available = false
     fun start() {
-        days = 1
         available = true
         status = Status.DAY
-        Config.gameWorld.time = 6000
-        EEngineeringScope.launch { toggleDayNight() }
+        EEngineeringScope.launch { dayNightPass() }
     }
-    private suspend fun toggleDayNight() {
-        if(available)
-        delay(1000L * 60 * status.minutes - 1)
-        if(status == Status.DAY) {
-            EclipticEngineering.runTask {
-                Config.gameWorld.time = 12800
-            }
-            Bukkit.broadcast("$MESSAGE_PREFIX 太阳落山了，开拓者们，是时候回去休息了。".toComponent())
-            delay(1000 * 60)
-            status = Status.NIGHT
-            gamingPlayers.forEach{
-                it.showTitle(Title.title(
-                    "<#003366>深夜".toComponent(),
-                    "<#E0E0E0>距离白天到来还有 <white>${status.minutes} <#E0E0E0>分钟".toComponent(),
-                    Times.times(Duration.ofMillis(500), Duration.ofMillis(1500),Duration.ofMillis(500)))
-                )
-                it.playSound(it, Sound.ENTITY_WOLF_HOWL,1f,1f)
-            }
+    private suspend fun dayNightPass() {
+        while (available) {
+            delay(1000L * 60 * status.minutes)
+            status = Status.entries[status.ordinal+1 % 4]
         }
-        if(status == Status.NIGHT) {
-            EclipticEngineering.runTask {
-                Config.gameWorld.time = 23500
-            }
-            Bukkit.broadcast("$MESSAGE_PREFIX 太阳升起，新的一天就要到来了。".toComponent())
-            delay(1000 * 60)
-            status = Status.DAY
-            gamingPlayers.forEach{
-                it.showTitle(Title.title(
-                    "<#FFFFFF>白昼".toComponent(),
-                    "<#E0E0E0>距离夜晚降临还有 <white>${status.minutes} <#E0E0E0>分钟".toComponent(),
-                    Times.times(Duration.ofMillis(500), Duration.ofMillis(1500),Duration.ofMillis(500)))
-                )
-                it.playSound(it, Sound.ENTITY_CHICKEN_AMBIENT,1f,1f)
-            }
-            days++
-        }
-        toggleDayNight()
     }
 }
