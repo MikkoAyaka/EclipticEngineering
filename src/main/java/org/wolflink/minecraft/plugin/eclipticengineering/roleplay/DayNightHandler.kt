@@ -72,7 +72,7 @@ object DayNightHandler {
     private suspend fun dayNightPass() {
         while (available) {
             delay(1000L * 60 * status.minutes)
-            status = Status.entries[status.ordinal+1 % 4]
+            status = Status.entries[(status.ordinal+1) % 4]
         }
     }
 }

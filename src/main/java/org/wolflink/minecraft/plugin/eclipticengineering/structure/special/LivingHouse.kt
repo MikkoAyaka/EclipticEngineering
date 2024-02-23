@@ -47,7 +47,7 @@ class LivingHouse private constructor(
             if (block.type == Material.IRON_DOOR && block.location in zone) {
                 // 交互的自己的门
                 if(doorOwners[e.player] == block) {
-                    (block.state as Door).apply { isOpen = !isOpen }
+                    (block.blockData as Door).apply { isOpen = !isOpen }
                 }
                 // 玩家还没有绑定铁门
                 else if(doorOwners[e.player] == null) {
