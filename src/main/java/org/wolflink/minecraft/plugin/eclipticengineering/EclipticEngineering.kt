@@ -59,6 +59,7 @@ class EclipticEngineering : JavaPlugin() {
         PlayerGoalHolder.register(this)
         DisguiserNotice.register(this)
         AuxiliaryBlockListener.register(this)
+        StepFarmlandListener.register(this)
         // 注册防御塔监听器
         TowerArrow.BukkitListener.register(this)
         // 注册背包监听器
