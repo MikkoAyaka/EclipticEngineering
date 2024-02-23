@@ -21,6 +21,10 @@ object PioneerBook {
             "    ${PRIMARY_TEXT_COLOR}也许是一位，也许...是多个。",
             "    ${PRIMARY_TEXT_COLOR}他会有一些异于常人的行为需要留意。",
             "    ${PRIMARY_TEXT_COLOR}不论如何，一定要在第5天到来之前抓住他。",
+            "",
+            "    ${PRIMARY_TEXT_COLOR}手持 木头、石头、金属 等资源，",
+            "    ${PRIMARY_TEXT_COLOR}蹲下并丢出即可提交到团队共享仓库。",
+            "",
         )
     )
 }

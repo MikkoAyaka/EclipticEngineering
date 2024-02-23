@@ -11,9 +11,11 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
+import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.RespawnBeaconBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.AbilityCondition
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
@@ -45,7 +47,8 @@ class RespawnBeacon private constructor(blueprint: RespawnBeaconBlueprint, build
                 180,
                 4,
                 VirtualRequirement("需要 150 石料", VirtualResourceType.STONE, 150),
-                VirtualRequirement("需要 50 金属", VirtualResourceType.METAL,50)
+                VirtualRequirement("需要 50 金属", VirtualResourceType.METAL,50),
+                AbilityCondition(Ability.BUILDING,3)
             )
         )
     }

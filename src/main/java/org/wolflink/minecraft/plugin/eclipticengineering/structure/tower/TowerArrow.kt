@@ -13,11 +13,13 @@ import org.bukkit.event.entity.EntityShootBowEvent
 import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
+import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.TowerArrowBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
 import org.wolflink.minecraft.plugin.eclipticengineering.metadata.MetadataModifier
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.AbilityCondition
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
@@ -71,6 +73,7 @@ class TowerArrow private constructor(blueprint: TowerArrowBlueprint, builder: Bu
                 0.5,
                 VirtualRequirement("需要 60 木材", VirtualResourceType.WOOD,60),
                 VirtualRequirement("需要 20 石料", VirtualResourceType.STONE,20),
+                AbilityCondition(Ability.BUILDING,2)
             )
         )
     }

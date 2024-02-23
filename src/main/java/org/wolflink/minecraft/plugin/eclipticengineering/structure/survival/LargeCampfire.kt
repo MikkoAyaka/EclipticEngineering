@@ -11,9 +11,11 @@ import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
+import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.AbilityCondition
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
@@ -42,7 +44,8 @@ class LargeCampfire private constructor(
                 5000,
                 setOf(),
                 VirtualRequirement("需要 50 木材", VirtualResourceType.WOOD, 50),
-                ItemRequirement("需要 1 打火石", ItemStack(Material.FLINT_AND_STEEL))
+                ItemRequirement("需要 1 打火石", ItemStack(Material.FLINT_AND_STEEL)),
+                AbilityCondition(Ability.BUILDING,2)
             )
         )
     }

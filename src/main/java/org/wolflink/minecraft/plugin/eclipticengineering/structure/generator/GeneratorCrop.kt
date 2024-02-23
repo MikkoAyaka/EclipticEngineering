@@ -2,9 +2,11 @@ package org.wolflink.minecraft.plugin.eclipticengineering.structure.generator
 
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
+import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.GeneratorBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.AbilityCondition
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.crop.CropResourceBlock
@@ -41,6 +43,7 @@ class GeneratorCrop private constructor(blueprint: GeneratorBlueprint, builder: 
                 ItemRequirement("需要 96 泥土", ItemStack(Material.DIRT, 96)),
                 VirtualRequirement("需要 60 木材", VirtualResourceType.WOOD, 60),
                 VirtualRequirement("需要 15 金属", VirtualResourceType.METAL, 15),
+                AbilityCondition(Ability.BUILDING,3)
             )
         )
     }

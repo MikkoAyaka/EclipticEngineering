@@ -2,9 +2,11 @@ package org.wolflink.minecraft.plugin.eclipticengineering.structure.survival
 
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
+import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.AbilityCondition
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.SpecialGold
@@ -35,6 +37,7 @@ class EnchantRoom private constructor(
                 VirtualRequirement("需要 60 石料",VirtualResourceType.STONE,60),
                 VirtualRequirement("需要 15 金属",VirtualResourceType.METAL,15),
                 ItemRequirement("需要 2 闪金矿石", SpecialGold.defaultItem.clone().apply { amount = 2 }),
+                AbilityCondition(Ability.BUILDING,2)
             )
         )
     }

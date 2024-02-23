@@ -5,9 +5,11 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractEvent
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
+import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.AbilityCondition
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.MeetingHandler
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
@@ -37,6 +39,7 @@ class MeetingPlace private constructor(blueprint: Blueprint, builder: Builder) :
                 ),
                 VirtualRequirement("需要 30 石料", VirtualResourceType.STONE, 30),
                 VirtualRequirement("需要 120 木材", VirtualResourceType.WOOD, 120),
+                AbilityCondition(Ability.BUILDING,3)
             )
         )
 

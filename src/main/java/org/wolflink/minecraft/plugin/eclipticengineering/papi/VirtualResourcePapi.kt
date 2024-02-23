@@ -3,9 +3,8 @@ package org.wolflink.minecraft.plugin.eclipticengineering.papi
 import me.clip.placeholderapi.expansion.PlaceholderExpansion
 import org.bukkit.OfflinePlayer
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
-import org.wolflink.minecraft.plugin.eclipticengineering.resource.VirtualTeamInventory
+import org.wolflink.minecraft.plugin.eclipticengineering.resource.virtual.VirtualTeamInventory
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toHex
-import org.wolflink.minecraft.plugin.eclipticstructure.extension.toHexFormat
 
 /**
  * 关于虚拟资源的变量

@@ -1,8 +1,10 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.structure.special
 
+import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.AbilityCondition
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructureTag
@@ -31,7 +33,8 @@ class LivingHouse private constructor(
                     GameStructureTag.AMOUNT_LIMITED
                 ),
                 VirtualRequirement("需要 90 石料", VirtualResourceType.STONE, 90),
-                VirtualRequirement("需要 90 木材", VirtualResourceType.WOOD, 90)
+                VirtualRequirement("需要 90 木材", VirtualResourceType.WOOD, 90),
+                AbilityCondition(Ability.BUILDING,3)
             )
         )
     }

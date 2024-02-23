@@ -1,5 +1,6 @@
-package org.wolflink.minecraft.plugin.eclipticengineering.resource
+package org.wolflink.minecraft.plugin.eclipticengineering.resource.virtual
 
+import com.google.common.util.concurrent.AtomicDouble
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.event.EventHandler
@@ -20,19 +21,19 @@ import java.util.concurrent.atomic.AtomicInteger
  * 当玩家 SHIFT+右键 可虚拟化的物资时，将自动存储到团队虚拟背包中
  */
 object VirtualTeamInventory: Listener {
-    private val resourceMap = enumValues<VirtualResourceType>().associateWith { AtomicInteger(0) }
-    @Synchronized private fun add(type: VirtualResourceType,amount: Int) {
+    private val resourceMap = enumValues<VirtualResourceType>().associateWith { AtomicDouble(0.0) }
+    @Synchronized private fun add(type: VirtualResourceType,amount: Double) {
         resourceMap[type]!!.addAndGet(amount)
         gamingPlayers.forEach {  player ->
             player.sendActionBar("<green>+ <white>$amount ${type.color.toHexFormat()}${type.displayName}".toComponent())
             player.playSound(player, Sound.BLOCK_NOTE_BLOCK_BELL,0.4f,1.5f)
         }
     }
-    fun get(type: VirtualResourceType): Int = resourceMap[type]!!.get()
-    fun has(type: VirtualResourceType,amount: Int): Boolean {
+    fun get(type: VirtualResourceType): Double = resourceMap[type]!!.get()
+    fun has(type: VirtualResourceType,amount: Double): Boolean {
         return resourceMap[type]!!.get() >= amount
     }
-    @Synchronized fun take(type: VirtualResourceType,amount: Int): Boolean {
+    @Synchronized fun take(type: VirtualResourceType,amount: Double): Boolean {
         return if(has(type,amount)) {
             resourceMap[type]!!.addAndGet(-amount)
             gamingPlayers.forEach {  player ->
@@ -45,15 +46,15 @@ object VirtualTeamInventory: Listener {
 
     private fun interactVirtualItemHandler(itemStack: ItemStack) {
         when(val material = itemStack.type) {
-            Material.IRON_INGOT -> add(VirtualResourceType.METAL,1 * itemStack.amount)
-            Material.GOLD_INGOT -> add(VirtualResourceType.METAL,2 * itemStack.amount)
-            Material.DIAMOND -> add(VirtualResourceType.METAL,6 * itemStack.amount)
-            Material.STONE -> add(VirtualResourceType.STONE,1 * itemStack.amount)
-            Material.COBBLESTONE -> add(VirtualResourceType.STONE,1 * itemStack.amount)
-            Material.DEEPSLATE -> add(VirtualResourceType.STONE,2 * itemStack.amount)
-            Material.COBBLED_DEEPSLATE -> add(VirtualResourceType.STONE,2 * itemStack.amount)
+            Material.IRON_INGOT -> add(VirtualResourceType.METAL,1.0 * itemStack.amount)
+            Material.GOLD_INGOT -> add(VirtualResourceType.METAL,2.0 * itemStack.amount)
+            Material.DIAMOND -> add(VirtualResourceType.METAL,6.0 * itemStack.amount)
+            Material.STONE -> add(VirtualResourceType.STONE,1.0 * itemStack.amount)
+            Material.COBBLESTONE -> add(VirtualResourceType.STONE,1.0 * itemStack.amount)
+            Material.DEEPSLATE -> add(VirtualResourceType.STONE,2.0 * itemStack.amount)
+            Material.COBBLED_DEEPSLATE -> add(VirtualResourceType.STONE,2.0 * itemStack.amount)
             else -> {
-                if(material.isWood()) add(VirtualResourceType.WOOD,1 * itemStack.amount)
+                if(material.isWood()) add(VirtualResourceType.WOOD,1.0 * itemStack.amount)
             }
         }
 

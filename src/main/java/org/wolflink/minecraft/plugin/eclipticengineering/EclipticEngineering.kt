@@ -14,7 +14,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.metadata.MetadataHandle
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.CreatureSpawnListener
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.smartai.SmartAIListener
 import org.wolflink.minecraft.plugin.eclipticengineering.papi.*
-import org.wolflink.minecraft.plugin.eclipticengineering.resource.VirtualTeamInventory
+import org.wolflink.minecraft.plugin.eclipticengineering.resource.virtual.VirtualTeamInventory
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.BuildMenuItem
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.DisguiserBook
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.MainMenuItem
@@ -58,6 +58,7 @@ class EclipticEngineering : JavaPlugin() {
         BuilderListener.register(this)
         PlayerGoalHolder.register(this)
         DisguiserNotice.register(this)
+        AuxiliaryBlockListener.register(this)
         // 注册防御塔监听器
         TowerArrow.BukkitListener.register(this)
         // 注册背包监听器

@@ -2,9 +2,11 @@ package org.wolflink.minecraft.plugin.eclipticengineering.structure.generator
 
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
+import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.GeneratorBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.AbilityCondition
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.ore.OreResourceBlock
@@ -36,7 +38,8 @@ class GeneratorOre private constructor(blueprint: GeneratorBlueprint, builder: B
                 },
                 ItemRequirement("需要 1 熔岩桶", ItemStack(Material.LAVA_BUCKET)),
                 VirtualRequirement("需要 120 石料", VirtualResourceType.WOOD, 120),
-                VirtualRequirement("需要 30 金属", VirtualResourceType.METAL, 30)
+                VirtualRequirement("需要 30 金属", VirtualResourceType.METAL, 30),
+                AbilityCondition(Ability.BUILDING,3)
             )
         )
     }
