@@ -25,7 +25,7 @@ object VirtualTeamInventory: Listener {
         resourceMap[type]!!.addAndGet(amount)
         gamingPlayers.forEach {  player ->
             player.sendActionBar("<green>+ <white>$amount ${type.color.toHexFormat()}${type.displayName}".toComponent())
-            player.playSound(player, Sound.BLOCK_CHEST_OPEN,1f,1.5f)
+            player.playSound(player, Sound.BLOCK_NOTE_BLOCK_BELL,0.4f,1.5f)
         }
     }
     fun get(type: VirtualResourceType): Int = resourceMap[type]!!.get()
@@ -37,7 +37,7 @@ object VirtualTeamInventory: Listener {
             resourceMap[type]!!.addAndGet(-amount)
             gamingPlayers.forEach {  player ->
                 player.sendActionBar("<red>- <white>$amount ${type.color.toHexFormat()}${type.displayName}".toComponent())
-                player.playSound(player, Sound.BLOCK_CHEST_CLOSE,1f,1.5f)
+                player.playSound(player, Sound.BLOCK_NOTE_BLOCK_COW_BELL,0.4f,1.2f)
             }
             true
         } else false
