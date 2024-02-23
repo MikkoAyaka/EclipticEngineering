@@ -14,9 +14,9 @@ object PioneerBook {
         "开拓者 帮助手册",
         false,
         listOf(
-            "    ${PRIMARY_TEXT_COLOR}任务目标：建立并不断发展据点。",
+            "    ${PRIMARY_TEXT_COLOR}任务目标：建立并发展据点，直至第5天的到来。",
             "",
-            "    ${PRIMARY_TEXT_COLOR}开拓者们，这里有一个非常不幸的消息，",
+            "    ${PRIMARY_TEXT_COLOR}开拓者们，本次任务艰巨，并且，",
             "    ${PRIMARY_TEXT_COLOR}幽匿伪装者正潜伏在你们之中，",
             "    ${PRIMARY_TEXT_COLOR}也许是一位，也许...是多个。",
             "    ${PRIMARY_TEXT_COLOR}他会有一些异于常人的行为需要留意。",

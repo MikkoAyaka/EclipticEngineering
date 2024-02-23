@@ -49,12 +49,12 @@ object VirtualTeamInventory: Listener {
             Material.IRON_INGOT -> add(VirtualResourceType.METAL,1.0 * itemStack.amount)
             Material.GOLD_INGOT -> add(VirtualResourceType.METAL,2.0 * itemStack.amount)
             Material.DIAMOND -> add(VirtualResourceType.METAL,6.0 * itemStack.amount)
-            Material.STONE -> add(VirtualResourceType.STONE,1.0 * itemStack.amount)
-            Material.COBBLESTONE -> add(VirtualResourceType.STONE,1.0 * itemStack.amount)
-            Material.DEEPSLATE -> add(VirtualResourceType.STONE,2.0 * itemStack.amount)
-            Material.COBBLED_DEEPSLATE -> add(VirtualResourceType.STONE,2.0 * itemStack.amount)
+            Material.STONE -> add(VirtualResourceType.STONE,2.0 * itemStack.amount)
+            Material.COBBLESTONE -> add(VirtualResourceType.STONE,2.0 * itemStack.amount)
+            Material.DEEPSLATE -> add(VirtualResourceType.STONE,4.0 * itemStack.amount)
+            Material.COBBLED_DEEPSLATE -> add(VirtualResourceType.STONE,4.0 * itemStack.amount)
             else -> {
-                if(material.isWood()) add(VirtualResourceType.WOOD,1.0 * itemStack.amount)
+                if(material.isWood()) add(VirtualResourceType.WOOD,2.0 * itemStack.amount)
             }
         }
 
