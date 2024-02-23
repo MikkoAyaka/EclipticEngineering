@@ -22,8 +22,20 @@ class SpawnerAttribute(eeDifficulty: EEDifficulty) {
         }
     private val weightMap: MutableMap<EntityType, Int> = EnumMap(EntityType::class.java)
     var healthMultiple = 0.0
+        get() {
+            return if(DayNightHandler.status == DayNightHandler.Status.NIGHT) field * 1.8
+            else field
+        }
     var movementMultiple = 0.0
+        get() {
+            return if(DayNightHandler.status == DayNightHandler.Status.NIGHT) field * 1.2
+            else field
+        }
     var damageMultiple = 0.0
+        get() {
+            return if(DayNightHandler.status == DayNightHandler.Status.NIGHT) field * 1.2
+            else field
+        }
 
     init {
         when (eeDifficulty) {

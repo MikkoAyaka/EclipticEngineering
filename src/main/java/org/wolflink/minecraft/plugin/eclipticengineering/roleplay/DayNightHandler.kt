@@ -26,7 +26,7 @@ object DayNightHandler {
     enum class Status(val displayName: String,val description: String,val minutes: Int,val gameTime: Int) {
         DAWN("黎明","$MESSAGE_PREFIX 太阳即将升起，新的一天就要到来了。",1,23500),
         DAY("白天","",12,6000), // 新的一天从这里开始
-        HUSK("黄昏","$MESSAGE_PREFIX 太阳落山了，开拓者们，是时候回去休息了。",1,12800),
+        HUSK("黄昏","$MESSAGE_PREFIX 太阳落山了，到处弥漫着阴森的气息，强力怪物们就要到来了。",1,12800),
         NIGHT("夜晚","",4,18000)
     }
     var status = Status.NIGHT
