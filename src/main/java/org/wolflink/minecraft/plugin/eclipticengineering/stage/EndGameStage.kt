@@ -11,6 +11,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.isDisguiser
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.StrategyDecider
+import org.wolflink.minecraft.plugin.eclipticengineering.sculkinfection.OrnamentSculkInfection
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.LivingHouse
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureRepository
@@ -44,6 +45,7 @@ class EndGameStage(stageHolder: StageHolder): Stage("最终游戏阶段",stageHo
             ))
             // 内鬼存活
             if(gamingPlayers.any{it.isDisguiser()}) {
+                OrnamentSculkInfection.enable()
                 getAttribute(Attribute.GENERIC_MOVEMENT_SPEED)?.addModifier(AttributeModifier(
                     UUID.randomUUID(),
                     "warden-speed",
@@ -55,6 +57,7 @@ class EndGameStage(stageHolder: StageHolder): Stage("最终游戏阶段",stageHo
 
     }
     override fun onLeave() {
+        OrnamentSculkInfection.disable()
         StrategyDecider.disable()
     }
 }
