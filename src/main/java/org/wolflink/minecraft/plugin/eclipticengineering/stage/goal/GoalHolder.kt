@@ -21,10 +21,14 @@ object GoalHolder {
     var footholdLocation: Location? = null
     // 剩余准备时间
     val prepareTimeLeft get() = nowGoal?.prepareTimeLeft ?: -1
+
+    /**
+     * TODO 阶段性目标正在维护
+     */
     fun init() {
-        nowGoal = EstablishFoothold
+//        nowGoal = EstablishFoothold
         // 发放任务书给随机一名正在游戏中的玩家
-        TaskBook.give(gamingPlayers.random())
+//        TaskBook.give(gamingPlayers.random())
         // 发放身份手册
         gamingPlayers.forEach{
             it.inventory.addItem(PioneerBook.defaultItem)
@@ -35,7 +39,7 @@ object GoalHolder {
         gamingPlayers.forEach{
             if(it.abilityTable.hasAbility(Ability.BUILDING,2)) BuildMenuItem.give(it)
         }
-        nowGoal!!.into()
+//        nowGoal!!.into()
     }
     fun next() {
         val gameWorldBorder = Config.gameWorld.worldBorder
