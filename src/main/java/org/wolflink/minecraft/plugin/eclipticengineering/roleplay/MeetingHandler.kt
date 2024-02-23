@@ -47,7 +47,7 @@ object MeetingHandler {
         Bukkit.broadcast("$MESSAGE_PREFIX ${player.name} 召开了今日的会议，玩家们将陆续到达会议大厅，请尽快入座。<gray>(/eev vote ID 进行投票，/eev abstain 弃权)".toComponent())
         EEngineeringScope.launch {
             Bukkit.getOnlinePlayers().filter { it != player }.forEach {
-                it.teleport(player)
+                EclipticEngineering.runTask { it.teleport(player) }
                 delay(1000)
             }
         }
