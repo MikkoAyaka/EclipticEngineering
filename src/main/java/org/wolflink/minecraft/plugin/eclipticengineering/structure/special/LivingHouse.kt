@@ -28,6 +28,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStruc
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureCompletedEvent
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureDestroyedEvent
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.register
+import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.unregister
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.IStructureListener
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompanion
@@ -71,12 +72,12 @@ class LivingHouse private constructor(
                 // 玩家还没有绑定铁门
                 else if(doorOwners[e.player] == null) {
                     doorOwners[e.player] = block
-                    e.player.sendMessage("$MESSAGE_PREFIX 你使用钥匙打开了这扇门，这个房间是你的了。")
+                    e.player.sendMessage("$MESSAGE_PREFIX 你使用钥匙打开了这扇门，这个房间是你的了。".toComponent())
                     e.player.playSound(e.player, Sound.ENTITY_VILLAGER_YES,1f,1.5f)
                 }
                 // 交互别人的门
                 else {
-                    e.player.sendMessage("$MESSAGE_PREFIX 你的钥匙无法打开门锁，这并不是你的房间。")
+                    e.player.sendMessage("$MESSAGE_PREFIX 你的钥匙无法打开门锁，这并不是你的房间。".toComponent())
                     e.player.playSound(e.player, Sound.ENTITY_VILLAGER_NO,1f,1.2f)
                 }
             }
