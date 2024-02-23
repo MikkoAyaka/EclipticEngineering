@@ -3,12 +3,14 @@ package org.wolflink.minecraft.plugin.eclipticengineering.structure.survival
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
+import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
@@ -47,8 +49,10 @@ class LargeCampfire private constructor(
 
     private suspend fun healTask() {
         while (available) {
-            builder.buildLocation.getNearbyEntitiesByType(Player::class.java, 10.0).forEach {
-                it.addPotionEffect(PotionEffect(PotionEffectType.REGENERATION, 20 * 5, 0))
+            EclipticEngineering.runTask {
+                builder.buildLocation.getNearbyEntitiesByType(Player::class.java, 10.0).forEach {
+                    it.addPotionEffect(PotionEffect(PotionEffectType.REGENERATION, 20 * 5, 0))
+                }
             }
             delay(5 * 1000)
         }
