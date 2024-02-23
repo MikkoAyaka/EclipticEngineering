@@ -19,6 +19,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.BuildMenu
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.DisguiserBook
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.MainMenuItem
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.TaskBook
+import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DisguiserNotice
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.playergoal.PlayerGoalHolder
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.StageHolder
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.listener.BuilderListener
@@ -57,6 +58,7 @@ class EclipticEngineering : JavaPlugin() {
         BlockPlaceListener.register(this)
         BuilderListener.register(this)
         PlayerGoalHolder.register(this)
+        DisguiserNotice.register(this)
         // 注册防御塔监听器
         TowerArrow.BukkitListener.register(this)
         // 注册背包监听器

@@ -18,6 +18,7 @@ import java.util.UUID
 
 private val scriptKilledPlayers = mutableSetOf<UUID>()
 private val disguiserSet = mutableSetOf<UUID>()
+fun getDisguisers() = disguiserSet.mapNotNull { Bukkit.getPlayer(it) }
 private val abilityTableMap = mutableMapOf<UUID,AbilityTable>()
 val UUID.abilityTable
     get() = abilityTableMap.getOrPut(this) { AbilityTable(this) }
