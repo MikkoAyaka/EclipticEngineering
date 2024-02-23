@@ -4,6 +4,7 @@ import org.bukkit.Bukkit
 import org.bukkit.entity.EntityType
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.EEDifficulty
 import org.wolflink.minecraft.plugin.eclipticengineering.eeLogger
+import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DayNightHandler
 import java.util.*
 import java.util.concurrent.ThreadLocalRandom
 
@@ -14,6 +15,11 @@ import java.util.concurrent.ThreadLocalRandom
 class SpawnerAttribute(eeDifficulty: EEDifficulty) {
     var spawnPeriodSecs = 0
         private set
+        get() {
+            // 夜晚刷怪效率增加
+            return if(DayNightHandler.status == DayNightHandler.Status.NIGHT) (field / 1.8).toInt()
+            else field
+        }
     private val weightMap: MutableMap<EntityType, Int> = EnumMap(EntityType::class.java)
     var healthMultiple = 0.0
     var movementMultiple = 0.0
