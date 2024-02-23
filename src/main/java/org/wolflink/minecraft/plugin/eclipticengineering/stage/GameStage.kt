@@ -47,6 +47,5 @@ class GameStage(stageHolder: StageHolder): Stage("游戏阶段",stageHolder) {
         },20 * 8)
     }
     override fun onLeave() {
-        StrategyDecider.disable()
     }
 }

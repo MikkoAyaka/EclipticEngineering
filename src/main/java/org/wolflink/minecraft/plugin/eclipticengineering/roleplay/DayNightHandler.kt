@@ -11,6 +11,8 @@ import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
+import org.wolflink.minecraft.plugin.eclipticengineering.stage.GameStage
+import org.wolflink.minecraft.plugin.eclipticengineering.stage.StageHolder
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.call
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 import java.time.Duration
@@ -22,7 +24,13 @@ import java.time.Duration
 object DayNightHandler {
     // 游戏天数
     var days = 0
-        private set
+        private set(value) {
+            if(field == value) return
+            field = value
+            if(field == 6 && StageHolder.thisStage is GameStage) {
+                StageHolder.next()
+            }
+        }
     enum class Status(val displayName: String,val description: String,val minutes: Int,val gameTime: Int) {
         DAWN("黎明","$MESSAGE_PREFIX 太阳即将升起，新的一天就要到来了。",1,23500),
         DAY("白天","",12,6000), // 新的一天从这里开始

@@ -18,7 +18,7 @@ object PioneerBook {
             "   ${SPLITER_COLOR}│ <#CCFFCC>目标",
             "",
             "    ${PRIMARY_TEXT_COLOR}建立并完善据点，利用防御塔巩固基地",
-            "    ${PRIMARY_TEXT_COLOR}比末影龙还要强大的 <#FF3333>BOSS</#FF3333> 将在 <yellow>第5天</yellow> 登场",
+            "    ${PRIMARY_TEXT_COLOR}比末影龙还要强大的 <#FF3333>BOSS</#FF3333> 将在 <yellow>第6天</yellow> 登场",
             "    ${PRIMARY_TEXT_COLOR}如果不能及时找出幽匿伪装者",
             "    ${PRIMARY_TEXT_COLOR}<#FF3333>BOSS</#FF3333> 将获得 <#7F00FF>史诗级强化</#7F00FF>",
             "",
@@ -28,7 +28,7 @@ object PioneerBook {
             "    ${PRIMARY_TEXT_COLOR}幽匿伪装者正潜伏在你们之中，",
             "    ${PRIMARY_TEXT_COLOR}也许是一位，也许...是多个。",
 
-            "    ${PRIMARY_TEXT_COLOR}不论如何，一定要在第5天到来之前抓住他！",
+            "    ${PRIMARY_TEXT_COLOR}不论如何，一定要在第6天到来之前抓住他！",
             "",
             "   ${SPLITER_COLOR}│ <#66B2FF>提示",
             "",
