@@ -33,7 +33,6 @@ class PlaceShrieker(disguiser: Player): PlayerGoal(disguiser) {
             val structure = structures.firstOrNull() ?: return
             if(structure in structureSet) return
             structureSet.add(structure)
-            e.isCancelled = false
             if(structureSet.size >= 5) {
                 finished()
             } else noticeInProgress()

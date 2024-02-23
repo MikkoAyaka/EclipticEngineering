@@ -55,7 +55,6 @@ class EclipticEngineering : JavaPlugin() {
         FertilizeListener.register(this)
         PlayerDeathListener.register(this)
         FirstJoinListener.register(this)
-        BlockPlaceListener.register(this)
         BuilderListener.register(this)
         PlayerGoalHolder.register(this)
         DisguiserNotice.register(this)
