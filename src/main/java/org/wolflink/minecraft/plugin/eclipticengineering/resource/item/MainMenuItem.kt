@@ -18,7 +18,7 @@ object MainMenuItem: InteractiveItem(
         "幽光回响终端",
         true,
         listOf("    ${PRIMARY_TEXT_COLOR}改造后的幽匿尖啸体，","    ${PRIMARY_TEXT_COLOR}能够发送并接收来自另一端的幽光信号。")
-    )
+    ),true
 ){
     private fun openMainMenu(player: Player) {
         player.playSound(player, Sound.BLOCK_SCULK_SHRIEKER_SHRIEK,0.4f,1f)
