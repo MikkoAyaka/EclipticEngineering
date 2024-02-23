@@ -14,9 +14,8 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Bluep
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
 class EnergySource private constructor(blueprint: Blueprint, builder: Builder) :
-    GameStructure(StructureType.ENERGY_SOURCE, blueprint, builder, 1),
-    IStructureListener {
-    override val customListeners by lazy { listOf(this) }
+    GameStructure(StructureType.ENERGY_SOURCE, blueprint, builder, 1) {
+    override val customListeners = listOf<IStructureListener>()
 
     companion object : StructureCompanion<EnergySource>() {
         private const val STRUCTURE_NAME = "幽光能量发生场"

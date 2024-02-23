@@ -1,13 +1,27 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.structure.special
 
+import org.bukkit.Material
+import org.bukkit.Sound
+import org.bukkit.block.Block
+import org.bukkit.block.data.type.Door
+import org.bukkit.entity.Player
+import org.bukkit.event.EventHandler
+import org.bukkit.event.Listener
+import org.bukkit.event.player.PlayerInteractEvent
+import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.AbilityCondition
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructureTag
+import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureCompletedEvent
+import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureDestroyedEvent
+import org.wolflink.minecraft.plugin.eclipticstructure.extension.register
+import org.wolflink.minecraft.plugin.eclipticstructure.extension.unregister
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.IStructureListener
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompanion
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
@@ -15,8 +29,41 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
 class LivingHouse private constructor(
     blueprint: Blueprint, builder: Builder
-) : GameStructure(StructureType.LIVING_HOUSE, blueprint, builder,1) {
-    override val customListeners = listOf<IStructureListener>()
+) : GameStructure(StructureType.LIVING_HOUSE, blueprint, builder,1),IStructureListener,Listener {
+    override val customListeners = listOf<IStructureListener>(this)
+    private val doorOwners = mutableMapOf<Player,Block>()
+    override fun completed(e: StructureCompletedEvent) {
+        this.register(EclipticEngineering.instance)
+    }
+
+    override fun destroyed(e: StructureDestroyedEvent) {
+        this.unregister()
+    }
+    @EventHandler
+    fun on(e: PlayerInteractEvent) {
+        if (e.hasBlock()) {
+            val block: Block = e.clickedBlock!!
+            // 与建筑区域的铁门交互
+            if (block.type == Material.IRON_DOOR && block.location in zone) {
+                // 交互的自己的门
+                if(doorOwners[e.player] == block) {
+                    (block.state as Door).apply { isOpen = !isOpen }
+                }
+                // 玩家还没有绑定铁门
+                else if(doorOwners[e.player] == null) {
+                    doorOwners[e.player] = block
+                    e.player.sendMessage("$MESSAGE_PREFIX 你使用钥匙打开了这扇门，这个房间是你的了。")
+                    e.player.playSound(e.player, Sound.ENTITY_VILLAGER_YES,1f,1.5f)
+                }
+                // 交互别人的门
+                else {
+                    e.player.sendMessage("$MESSAGE_PREFIX 你的钥匙无法打开门锁，这并不是你的房间。")
+                    e.player.playSound(e.player, Sound.ENTITY_VILLAGER_NO,1f,1.2f)
+                }
+            }
+        }
+    }
+
 
     companion object : StructureCompanion<LivingHouse>() {
         override fun supplier(blueprint: Blueprint, builder: Builder): LivingHouse {
