@@ -63,19 +63,19 @@ class PreGameStage(stageHolder: StageHolder) : Stage("搜集阶段", stageHolder
     }
 }
 // 玩家平均开箱数量，用于计算概率
-private val averChestAmount = 30
+private val averChestAmount = 25
 // 随机概率表 数量(在每次游戏中期望出现的次数) 物品(堆叠)
 private val chestItemRandomTable: Set<Pair<Double,ItemStack>> = setOf(
-    15.0 to ItemStack(Material.COBWEB),
-    15.0 to ItemStack(Material.ROTTEN_FLESH),
-    15.0 to ItemStack(Material.SPIDER_EYE),
+    12.0 to ItemStack(Material.COBWEB),
+    12.0 to ItemStack(Material.ROTTEN_FLESH),
+    12.0 to ItemStack(Material.SPIDER_EYE),
     3.0 to ItemStack(Material.DRIED_KELP,2),
     3.0 to ItemStack(Material.SWEET_BERRIES,2),
     3.0 to ItemStack(Material.APPLE,2),
     0.05 to ItemStack(Material.DIAMOND_SWORD, 1),
     0.1 to ItemStack(Material.IRON_SWORD, 1),
-    0.25 to ItemStack(Material.STONE_SWORD, 1),
-    0.4 to ItemStack(Material.WOODEN_SWORD,1),
+    0.35 to ItemStack(Material.STONE_SWORD, 1),
+    0.3 to ItemStack(Material.WOODEN_SWORD,1),
     0.7 to ItemStack(Material.LEATHER_HELMET, 1),
     0.7 to ItemStack(Material.LEATHER_CHESTPLATE, 1),
     0.7 to ItemStack(Material.LEATHER_LEGGINGS, 1),
@@ -107,18 +107,18 @@ private val chestItemRandomTable: Set<Pair<Double,ItemStack>> = setOf(
     2.0 to ItemStack(Material.TORCH, 16),
     0.3 to ItemStack(Material.WATER_BUCKET, 1),
     0.2 to ItemStack(Material.LAVA_BUCKET, 1),
-    0.4 to ItemStack(Material.WOODEN_PICKAXE, 1),
-    0.3 to ItemStack(Material.STONE_PICKAXE, 1),
+    0.3 to ItemStack(Material.WOODEN_PICKAXE, 1),
+    0.4 to ItemStack(Material.STONE_PICKAXE, 1),
     0.1 to ItemStack(Material.IRON_PICKAXE, 1),
     0.4 to ItemStack(Material.GOLDEN_PICKAXE, 1),
     0.05 to ItemStack(Material.DIAMOND_PICKAXE, 1),
-    0.4 to ItemStack(Material.WOODEN_AXE, 1),
-    0.3 to ItemStack(Material.STONE_AXE, 1),
+    0.3 to ItemStack(Material.WOODEN_AXE, 1),
+    0.4 to ItemStack(Material.STONE_AXE, 1),
     0.1 to ItemStack(Material.IRON_AXE, 1),
     0.4 to ItemStack(Material.GOLDEN_AXE, 1),
     0.05 to ItemStack(Material.DIAMOND_AXE, 1),
-    0.4 to ItemStack(Material.WOODEN_SHOVEL, 1),
-    0.3 to ItemStack(Material.STONE_SHOVEL, 1),
+    0.3 to ItemStack(Material.WOODEN_SHOVEL, 1),
+    0.4 to ItemStack(Material.STONE_SHOVEL, 1),
     0.1 to ItemStack(Material.IRON_SHOVEL, 1),
     0.4 to ItemStack(Material.GOLDEN_SHOVEL, 1),
     0.05 to ItemStack(Material.DIAMOND_SHOVEL, 1)
