@@ -1,5 +1,8 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.structure.special
 
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.block.Block
@@ -8,12 +11,16 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractEvent
+import org.bukkit.potion.PotionEffect
+import org.bukkit.potion.PotionEffectType
+import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
+import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.AbilityCondition
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
@@ -32,8 +39,20 @@ class LivingHouse private constructor(
 ) : GameStructure(StructureType.LIVING_HOUSE, blueprint, builder,1),IStructureListener,Listener {
     override val customListeners = listOf<IStructureListener>(this)
     private val doorOwners = mutableMapOf<Player,Block>()
+    // 夜晚效果
+    private suspend fun effectNightBuff() {
+        while (available) {
+            EclipticEngineering.runTask {
+                gamingPlayers.filter { it in zone }.forEach{
+                    it.addPotionEffect(PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,20 * 10,1))
+                }
+            }
+            delay(1000 * 10)
+        }
+    }
     override fun completed(e: StructureCompletedEvent) {
         this.register(EclipticEngineering.instance)
+        EEngineeringScope.launch { effectNightBuff() }
     }
 
     override fun destroyed(e: StructureDestroyedEvent) {
