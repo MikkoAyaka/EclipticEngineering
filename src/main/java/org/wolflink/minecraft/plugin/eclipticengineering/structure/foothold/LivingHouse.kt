@@ -67,7 +67,11 @@ class LivingHouse private constructor(
                 val doorBlock = doorOwners[e.player]
                 // 交互的自己的门
                 if(block == doorBlock || block.getRelative(0,1,0) == doorBlock || block.getRelative(0,-1,0) == doorBlock) {
-                    block.blockData = (block.blockData as Door).apply { isOpen = !isOpen }
+                    block.blockData = (block.blockData as Door).apply {
+                        isOpen = !isOpen
+                        if(isOpen) block.world.playSound(block.location,Sound.BLOCK_IRON_DOOR_OPEN,1f,1f)
+                        else block.world.playSound(block.location,Sound.BLOCK_BAMBOO_WOOD_DOOR_CLOSE,1f,1f)
+                    }
                 }
                 // 玩家还没有绑定铁门
                 else if(doorBlock == null) {
@@ -77,7 +81,7 @@ class LivingHouse private constructor(
                 }
                 // 交互别人的门
                 else {
-                    val owner = doorOwners.filter { it.value == doorBlock }.map { it.key }.firstOrNull()
+                    val owner = doorOwners.filter { it.value == block }.map { it.key }.firstOrNull()
                     if(owner == null) e.player.sendMessage("$MESSAGE_PREFIX 你没有匹配的钥匙打开这扇门。".toComponent())
                     else e.player.sendMessage("$MESSAGE_PREFIX 你无法打开这扇门，这是 ${owner.name} 的房间。".toComponent())
                     e.player.playSound(e.player, Sound.ENTITY_VILLAGER_NO,1f,1.2f)
