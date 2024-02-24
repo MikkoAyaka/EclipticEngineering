@@ -8,10 +8,12 @@ open class GameStructureBlueprint(
     structureName: String,
     buildSeconds: Int,
     maxDurability: Int,
+    pasteAir: Boolean = false,
     val tags: Set<GameStructureTag>
 ) : Blueprint(
     structureLevel,
     structureName,
     buildSeconds,
     maxDurability,
+    pasteAir
 )

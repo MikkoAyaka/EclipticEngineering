@@ -87,6 +87,7 @@ class MiningPlace private constructor(blueprint: GameStructureBlueprint, builder
                 STRUCTURE_NAME,
                 60,
                 4500,
+                true,
                 setOf(
                     GameStructureTag.AMOUNT_LIMITED,
                     GameStructureTag.COMMON_RESOURCE_GENERATOR

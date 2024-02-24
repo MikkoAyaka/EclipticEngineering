@@ -22,7 +22,7 @@ object BuildCommand:CommandExecutor {
             val structureTypeName = args.getOrNull(1)?.uppercase() ?: return false
             val structureLevel = args.getOrNull(2)?.toIntOrNull() ?: return false
             val structureMeta = StructureRegistry.get(structureTypeName)
-            val builder = Builder(structureLevel,structureMeta,sender.location,false)
+            val builder = Builder(structureLevel,structureMeta,sender.location)
             builder.build(sender)
             return true
         }
