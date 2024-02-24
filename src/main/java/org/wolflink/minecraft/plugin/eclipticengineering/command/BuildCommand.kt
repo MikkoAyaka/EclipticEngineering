@@ -23,7 +23,7 @@ object BuildCommand:CommandExecutor {
             val structureLevel = args.getOrNull(2)?.toIntOrNull() ?: return false
             val structureMeta = StructureRegistry.get(structureTypeName)
             val builder = Builder(structureLevel,structureMeta,sender.location)
-            builder.build(sender)
+            builder.build(sender,sender.isOp)
             return true
         }
         return false

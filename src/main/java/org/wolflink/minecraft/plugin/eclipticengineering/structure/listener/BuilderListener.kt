@@ -60,6 +60,7 @@ object BuilderListener: Listener, IBuilderListener {
     }
     @EventHandler
     override fun preBuild(e: BuilderPreBuildEvent) {
+        if(e.forceBuild) return
         val structure = e.builder.structure
         if(structure is GameStructure) {
             val blueprint = structure.blueprint
