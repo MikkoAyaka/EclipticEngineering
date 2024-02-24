@@ -42,7 +42,9 @@ class FarmingPlace private constructor(blueprint: GameStructureBlueprint, builde
             delay(1000 * 15)
             // 为范围内 30% 的作物生长一次
             cropLocations.map { it.block }.filter { it.blockData is Ageable && RandomAPI.nextDouble() < 0.3 }.forEach {
-                it.blockData = (it.blockData as Ageable).apply { if(age < maximumAge) age++ }
+                EclipticEngineering.runTask {
+                    it.blockData = (it.blockData as Ageable).apply { if(age < maximumAge) age++ }
+                }
             }
         }
     }
