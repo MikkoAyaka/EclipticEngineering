@@ -12,7 +12,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.isDisguiser
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.StrategyDecider
 import org.wolflink.minecraft.plugin.eclipticengineering.sculkinfection.OrnamentSculkInfection
-import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.LivingHouse
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.foothold.LivingHouse
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureRepository
 import org.wolflink.minecraft.wolfird.framework.gamestage.stage.Stage

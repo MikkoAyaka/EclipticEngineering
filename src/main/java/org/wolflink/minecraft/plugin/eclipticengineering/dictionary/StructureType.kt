@@ -2,17 +2,15 @@ package org.wolflink.minecraft.plugin.eclipticengineering.dictionary
 
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
-import org.wolflink.minecraft.plugin.eclipticengineering.structure.decoration.SpinTieMeme
-import org.wolflink.minecraft.plugin.eclipticengineering.structure.generator.GeneratorCrop
-import org.wolflink.minecraft.plugin.eclipticengineering.structure.generator.GeneratorLog
-import org.wolflink.minecraft.plugin.eclipticengineering.structure.generator.GeneratorOre
-import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.*
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.other.SpinTieMeme
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.foothold.*
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.survival.EnchantRoom
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.survival.ForgeRoom
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.survival.LargeCampfire
-import org.wolflink.minecraft.plugin.eclipticengineering.structure.tower.BlazeTurret
-import org.wolflink.minecraft.plugin.eclipticengineering.structure.tower.SnowGolemTurret
-import org.wolflink.minecraft.plugin.eclipticengineering.structure.tower.TowerArrow
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.defense.BlazeTurret
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.defense.SnowGolemTurret
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.defense.TowerArrow
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.resource.*
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
@@ -24,7 +22,9 @@ enum class StructureType(
     val blueprints: List<Blueprint>,
     private val supplier: (structureLevel: Int, builder: Builder) -> Structure
 ) {
-
+    FARMING_PLACE("农场",FarmingPlace::class.java,FarmingPlace.blueprints,FarmingPlace::create),
+    MINING_PLACE("采矿场",MiningPlace::class.java,MiningPlace.blueprints,MiningPlace::create),
+    LOGGING_PLACE("伐木场",LoggingPlace::class.java,LoggingPlace.blueprints,LoggingPlace::create),
     GENERATOR_ORE("精炼矿场",GeneratorOre::class.java,GeneratorOre.blueprints, GeneratorOre::create),
     GENERATOR_LOG("精培木场",GeneratorLog::class.java,GeneratorLog.blueprints, GeneratorLog::create),
     GENERATOR_CROP("精培农场",GeneratorCrop::class.java,GeneratorCrop.blueprints, GeneratorCrop::create),

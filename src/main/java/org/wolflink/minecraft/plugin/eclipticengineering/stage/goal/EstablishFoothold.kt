@@ -7,7 +7,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.Condition
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.FunctionalCondition
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.story.Story
-import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.LivingHouse
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.foothold.LivingHouse
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureRepository
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 

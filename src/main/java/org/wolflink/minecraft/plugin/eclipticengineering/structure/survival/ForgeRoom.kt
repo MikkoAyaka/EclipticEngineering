@@ -34,8 +34,8 @@ class ForgeRoom private constructor(
                 60,
                 5000,
                 setOf(),
-                VirtualRequirement("需要 80 石料", VirtualResourceType.STONE,80),
-                VirtualRequirement("需要 30 金属", VirtualResourceType.METAL,30),
+                VirtualRequirement(VirtualResourceType.STONE,80),
+                VirtualRequirement(VirtualResourceType.METAL,30),
                 ItemRequirement("需要 5 陨铁矿石", SpecialIron.defaultItem.clone().apply { amount = 5 }),
                 AbilityCondition(Ability.BUILDING,2)
             )

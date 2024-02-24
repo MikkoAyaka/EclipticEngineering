@@ -5,7 +5,7 @@ import org.bukkit.event.EventHandler
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DayNightEvent
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DayNightHandler
-import org.wolflink.minecraft.plugin.eclipticengineering.structure.decoration.SpinTieMeme
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.other.SpinTieMeme
 import org.wolflink.minecraft.plugin.eclipticstructure.event.builder.BuilderCompletedEvent
 
 class PlaceMeme(disguiser: Player): PlayerGoal(disguiser) {

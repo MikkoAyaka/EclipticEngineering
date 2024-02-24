@@ -1,8 +1,7 @@
-package org.wolflink.minecraft.plugin.eclipticengineering.structure.special
+package org.wolflink.minecraft.plugin.eclipticengineering.structure.foothold
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.block.Block
@@ -99,8 +98,8 @@ class LivingHouse private constructor(
                 setOf(
                     GameStructureTag.AMOUNT_LIMITED
                 ),
-                VirtualRequirement("需要 90 石料", VirtualResourceType.STONE, 90),
-                VirtualRequirement("需要 90 木材", VirtualResourceType.WOOD, 90),
+                VirtualRequirement(VirtualResourceType.STONE, 90),
+                VirtualRequirement(VirtualResourceType.WOOD, 90),
                 AbilityCondition(Ability.BUILDING,3)
             )
         )

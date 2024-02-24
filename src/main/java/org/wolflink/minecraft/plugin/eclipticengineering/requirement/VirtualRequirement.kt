@@ -4,8 +4,8 @@ import org.bukkit.entity.Player
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.virtual.VirtualTeamInventory
 
-class VirtualRequirement(description: String,private val virtualResourceType: VirtualResourceType,private val amount: Double): Requirement(description) {
-    constructor(description: String,virtualResourceType: VirtualResourceType,amount: Int): this(description,virtualResourceType,amount.toDouble())
+class VirtualRequirement(private val virtualResourceType: VirtualResourceType,private val amount: Double): Requirement("需要 $amount ${virtualResourceType.displayName}") {
+    constructor(virtualResourceType: VirtualResourceType,amount: Int): this(virtualResourceType,amount.toDouble())
     override fun delivery(player: Player?): Boolean {
         return VirtualTeamInventory.take(virtualResourceType,amount)
     }

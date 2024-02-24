@@ -1,4 +1,4 @@
-package org.wolflink.minecraft.plugin.eclipticengineering.structure.tower
+package org.wolflink.minecraft.plugin.eclipticengineering.structure.defense
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -20,17 +20,14 @@ import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureTyp
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
 import org.wolflink.minecraft.plugin.eclipticengineering.metadata.MetadataModifier
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.AbilityCondition
-import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
-import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructureTag
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureInitializedEvent
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureZoneRelationRepository
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.ZoneRepository
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.IStructureListener
-import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompanion
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 import java.util.Random
@@ -71,8 +68,8 @@ class TowerArrow private constructor(blueprint: TowerArrowBlueprint, builder: Bu
                 2..5,
                 1,
                 0.5,
-                VirtualRequirement("需要 60 木材", VirtualResourceType.WOOD,60),
-                VirtualRequirement("需要 20 石料", VirtualResourceType.STONE,20),
+                VirtualRequirement(VirtualResourceType.WOOD,60),
+                VirtualRequirement(VirtualResourceType.STONE,20),
                 AbilityCondition(Ability.BUILDING,2)
             )
         )

@@ -1,4 +1,4 @@
-package org.wolflink.minecraft.plugin.eclipticengineering.structure.generator
+package org.wolflink.minecraft.plugin.eclipticengineering.structure.resource
 
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
@@ -36,8 +36,8 @@ class GeneratorLog private constructor(blueprint: GeneratorBlueprint, builder: B
                     )
                 },
                 ItemRequirement("需要 16 泥土", ItemStack(Material.DIRT, 16)),
-                VirtualRequirement("需要 100 木材", VirtualResourceType.WOOD, 100),
-                VirtualRequirement("需要 15 金属", VirtualResourceType.METAL, 15),
+                VirtualRequirement(VirtualResourceType.WOOD, 100),
+                VirtualRequirement(VirtualResourceType.METAL, 15),
                 AbilityCondition(Ability.BUILDING,3)
             ),
         )

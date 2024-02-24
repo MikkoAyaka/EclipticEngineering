@@ -1,4 +1,4 @@
-package org.wolflink.minecraft.plugin.eclipticengineering.structure.decoration
+package org.wolflink.minecraft.plugin.eclipticengineering.structure.other
 
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
@@ -31,7 +31,7 @@ class SpinTieMeme private constructor(
                 5000,
                 setOf(),
                 ItemRequirement("需要 16 腐肉", ItemStack(Material.ROTTEN_FLESH, 16)),
-                VirtualRequirement("需要 196 石料", VirtualResourceType.STONE, 196)
+                VirtualRequirement(VirtualResourceType.STONE, 196)
             )
         )
     }

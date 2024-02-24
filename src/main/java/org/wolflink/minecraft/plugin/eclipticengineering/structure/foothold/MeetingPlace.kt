@@ -1,4 +1,4 @@
-package org.wolflink.minecraft.plugin.eclipticengineering.structure.special
+package org.wolflink.minecraft.plugin.eclipticengineering.structure.foothold
 
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
@@ -37,8 +37,8 @@ class MeetingPlace private constructor(blueprint: Blueprint, builder: Builder) :
                 setOf(
                     GameStructureTag.AMOUNT_LIMITED
                 ),
-                VirtualRequirement("需要 30 石料", VirtualResourceType.STONE, 30),
-                VirtualRequirement("需要 120 木材", VirtualResourceType.WOOD, 120),
+                VirtualRequirement(VirtualResourceType.STONE, 30),
+                VirtualRequirement(VirtualResourceType.WOOD, 120),
                 AbilityCondition(Ability.BUILDING,3)
             )
         )

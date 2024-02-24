@@ -7,8 +7,8 @@ import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.Condition
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.FunctionalCondition
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.story.Story
-import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.MiningStation
-import org.wolflink.minecraft.plugin.eclipticengineering.structure.special.PipelineInterface
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.foothold.MiningStation
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.foothold.PipelineInterface
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureRepository
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 

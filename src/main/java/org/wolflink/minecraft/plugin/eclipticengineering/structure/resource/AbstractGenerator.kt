@@ -1,4 +1,4 @@
-package org.wolflink.minecraft.plugin.eclipticengineering.structure.generator
+package org.wolflink.minecraft.plugin.eclipticengineering.structure.resource
 
 import kotlinx.coroutines.launch
 import org.bukkit.entity.Player
@@ -7,7 +7,6 @@ import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.GeneratorBlue
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.ResourceBlock
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
-import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructureTag
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureCompletedEvent
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureDurabilityDamageEvent
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.deepEquals

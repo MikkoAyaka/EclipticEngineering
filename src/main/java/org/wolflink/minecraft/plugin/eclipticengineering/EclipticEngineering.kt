@@ -23,7 +23,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DisguiserNotic
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.playergoal.PlayerGoalHolder
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.StageHolder
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.listener.BuilderListener
-import org.wolflink.minecraft.plugin.eclipticengineering.structure.tower.TowerArrow
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.defense.TowerArrow
 import org.wolflink.minecraft.plugin.eclipticengineering.utils.WorldAPI
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.register
 

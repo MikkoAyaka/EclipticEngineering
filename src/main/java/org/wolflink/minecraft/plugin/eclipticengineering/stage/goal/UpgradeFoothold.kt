@@ -6,9 +6,9 @@ import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.Condition
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.FunctionalCondition
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.story.Story
-import org.wolflink.minecraft.plugin.eclipticengineering.structure.generator.GeneratorCrop
-import org.wolflink.minecraft.plugin.eclipticengineering.structure.generator.GeneratorLog
-import org.wolflink.minecraft.plugin.eclipticengineering.structure.generator.GeneratorOre
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.resource.GeneratorCrop
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.resource.GeneratorLog
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.resource.GeneratorOre
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureRepository
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 

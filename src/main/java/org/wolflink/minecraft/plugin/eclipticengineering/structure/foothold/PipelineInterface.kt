@@ -1,19 +1,16 @@
-package org.wolflink.minecraft.plugin.eclipticengineering.structure.special
+package org.wolflink.minecraft.plugin.eclipticengineering.structure.foothold
 
 import org.bukkit.Material
-import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.hasConnection
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.AbilityCondition
-import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.EnergyRequiredListener
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructureTag
-import org.wolflink.minecraft.plugin.eclipticstructure.structure.IStructureListener
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompanion
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
@@ -45,8 +42,8 @@ class PipelineInterface private constructor(blueprint: Blueprint, builder: Build
                 setOf(
                     GameStructureTag.ENERGY_REQUIRED
                 ),
-                VirtualRequirement("需要 15 石料", VirtualResourceType.STONE, 15),
-                VirtualRequirement("需要 30 金属", VirtualResourceType.METAL,30),
+                VirtualRequirement(VirtualResourceType.STONE, 15),
+                VirtualRequirement(VirtualResourceType.METAL,30),
                 AbilityCondition(Ability.BUILDING,3)
             )
         )

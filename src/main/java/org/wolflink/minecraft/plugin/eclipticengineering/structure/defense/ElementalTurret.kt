@@ -1,4 +1,4 @@
-package org.wolflink.minecraft.plugin.eclipticengineering.structure.tower
+package org.wolflink.minecraft.plugin.eclipticengineering.structure.defense
 
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -15,7 +15,6 @@ import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ElementalTurr
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.EnergyRequiredListener
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
-import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructureTag
 import org.wolflink.minecraft.plugin.eclipticengineering.utils.RandomAPI
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureAvailableEvent
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureDestroyedEvent

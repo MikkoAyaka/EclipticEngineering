@@ -1,4 +1,4 @@
-package org.wolflink.minecraft.plugin.eclipticengineering.structure.special
+package org.wolflink.minecraft.plugin.eclipticengineering.structure.foothold
 
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
@@ -30,8 +30,8 @@ class MiningStation private constructor(blueprint: Blueprint, builder: Builder) 
                 setOf(
                     GameStructureTag.ENERGY_REQUIRED
                 ),
-                VirtualRequirement("需要 120 石料", VirtualResourceType.STONE, 120),
-                VirtualRequirement("需要 60 金属", VirtualResourceType.METAL, 60),
+                VirtualRequirement(VirtualResourceType.STONE, 120),
+                VirtualRequirement(VirtualResourceType.METAL, 60),
                 AbilityCondition(Ability.BUILDING,3)
             )
         )

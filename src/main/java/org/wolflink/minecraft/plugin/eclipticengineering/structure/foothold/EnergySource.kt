@@ -1,4 +1,4 @@
-package org.wolflink.minecraft.plugin.eclipticengineering.structure.special
+package org.wolflink.minecraft.plugin.eclipticengineering.structure.foothold
 
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
@@ -13,28 +13,28 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompan
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
-class Lighthouse private constructor(
-    blueprint: Blueprint, builder: Builder
-) : GameStructure(StructureType.LIGHT_HOUSE, blueprint, builder) {
+class EnergySource private constructor(blueprint: Blueprint, builder: Builder) :
+    GameStructure(StructureType.ENERGY_SOURCE, blueprint, builder, 1) {
     override val customListeners = listOf<IStructureListener>()
 
-    companion object : StructureCompanion<Lighthouse>() {
-        override fun supplier(blueprint: Blueprint, builder: Builder): Lighthouse {
-            return Lighthouse(blueprint, builder)
+    companion object : StructureCompanion<EnergySource>() {
+        private const val STRUCTURE_NAME = "幽光能量发生场"
+        override fun supplier(blueprint: Blueprint, builder: Builder): EnergySource {
+            return EnergySource(blueprint, builder)
         }
 
         override val blueprints = listOf(
             ConditionBlueprint(
                 1,
-                "幽光灯塔",
-                90,
-                8000,
+                STRUCTURE_NAME,
+                120,
+                20000,
                 setOf(
+                    GameStructureTag.AMOUNT_LIMITED,
                     GameStructureTag.ENERGY_SUPPLY
                 ),
-                VirtualRequirement("需要 150 石料", VirtualResourceType.STONE, 150),
-                VirtualRequirement("需要 60 木材", VirtualResourceType.WOOD, 60),
-                VirtualRequirement("需要 20 金属", VirtualResourceType.METAL, 20),
+                VirtualRequirement(VirtualResourceType.STONE, 150),
+                VirtualRequirement(VirtualResourceType.WOOD, 60),
                 AbilityCondition(Ability.BUILDING,3)
             )
         )
