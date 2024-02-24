@@ -35,7 +35,7 @@ abstract class ElementalTurret(type:StructureType,blueprint: ElementalTurretBlue
      * 炮台攻击逻辑
      */
     private fun attack(enemy: Entity, damage: Int) {
-        repeat(10) {
+        repeat(5) {
             // 从展示实体指向敌人的向量
             val vector =
                 enemy.location.clone().add(

@@ -62,18 +62,18 @@ class BlazeTurret private constructor(blueprint: ElementalTurretBlueprint, build
         override val blueprints = listOf(
             ElementalTurretBlueprint(
                 1,
-                "烈焰防御塔台",
-                60,
-                6000,
-                Vector(0, 11, 0),
+                "烈焰炮台",
+                15,
+                1500,
+                Vector(0, 6, 0),
                 2,
                 4..6,
-                24,
-                VirtualRequirement( VirtualResourceType.WOOD, 30),
-                VirtualRequirement( VirtualResourceType.STONE, 50),
-                VirtualRequirement(VirtualResourceType.METAL, 30),
-                ItemRequirement("需要 5 陨铁矿石", SpecialIron.defaultItem.clone().apply { amount = 5 }),
-                ItemRequirement("需要 5 熔岩桶", ItemStack(Material.LAVA_BUCKET, 5)),
+                16,
+                VirtualRequirement( VirtualResourceType.WOOD, 10),
+                VirtualRequirement( VirtualResourceType.STONE, 30),
+                VirtualRequirement(VirtualResourceType.METAL, 8),
+                ItemRequirement("需要 1 陨铁矿石", SpecialIron.defaultItem.clone().apply { amount = 1 }),
+                ItemRequirement("需要 1 熔岩桶", ItemStack(Material.LAVA_BUCKET, 1)),
                 AbilityCondition(Ability.BUILDING,2)
             )
         )

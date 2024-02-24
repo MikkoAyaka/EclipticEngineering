@@ -64,18 +64,18 @@ class SnowGolemTurret private constructor(blueprint: ElementalTurretBlueprint, b
         override val blueprints = listOf(
             ElementalTurretBlueprint(
                 1,
-                "寒冰防御塔台",
-                60,
-                6000,
-                Vector(0, 11, 0),
+                "雪球炮台",
+                15,
+                1500,
+                Vector(0, 6, 0),
                 2,
                 4..6,
-                24,
-                VirtualRequirement(VirtualResourceType.WOOD, 30),
-                VirtualRequirement(VirtualResourceType.STONE, 50),
-                VirtualRequirement(VirtualResourceType.METAL, 30),
-                ItemRequirement("需要 5 陨铁矿石", SpecialIron.defaultItem.clone().apply { amount = 5 }),
-                ItemRequirement("需要 30 雪块", ItemStack(Material.SNOW_BLOCK, 30)),
+                16,
+                VirtualRequirement( VirtualResourceType.WOOD, 10),
+                VirtualRequirement( VirtualResourceType.STONE, 30),
+                VirtualRequirement(VirtualResourceType.METAL, 8),
+                ItemRequirement("需要 1 陨铁矿石", SpecialIron.defaultItem.clone().apply { amount = 1 }),
+                ItemRequirement("需要 8 雪块", ItemStack(Material.SNOW_BLOCK, 8)),
                 AbilityCondition(Ability.BUILDING,2)
             )
         )

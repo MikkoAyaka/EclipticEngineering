@@ -45,8 +45,8 @@ enum class StructureType(
 //    TOWER_LIGHTNING(TowerLightning.blueprint,{TowerLightning(it)}),// 引雷塔
 //    TOWER_POTION(TowerPotion.blueprint,{TowerPotion(it)}),// 药水塔
 
-    TURRET_BLAZE("烈焰防御塔台",BlazeTurret::class.java,BlazeTurret.blueprints,BlazeTurret::create),// 烈焰防御塔台
-    TURRET_SNOW_GOLEM("雪人防御塔台",SnowGolemTurret::class.java,SnowGolemTurret.blueprints,SnowGolemTurret::create),// 雪人防御塔台
+    TURRET_BLAZE("烈焰炮台",BlazeTurret::class.java,BlazeTurret.blueprints,BlazeTurret::create),// 烈焰防御塔台
+    TURRET_SNOW_GOLEM("雪人炮台",SnowGolemTurret::class.java,SnowGolemTurret.blueprints,SnowGolemTurret::create),// 雪人防御塔台
 
     ENCHANT_ROOM("附魔站台",EnchantRoom::class.java,EnchantRoom.blueprints,EnchantRoom::create),
     FORGE_ROOM("锻造站台",ForgeRoom::class.java,ForgeRoom.blueprints,ForgeRoom::create),
