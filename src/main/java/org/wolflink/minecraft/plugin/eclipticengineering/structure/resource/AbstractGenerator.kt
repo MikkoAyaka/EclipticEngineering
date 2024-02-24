@@ -2,6 +2,7 @@ package org.wolflink.minecraft.plugin.eclipticengineering.structure.resource
 
 import kotlinx.coroutines.launch
 import org.bukkit.entity.Player
+import org.bukkit.event.block.BlockBreakEvent
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.GeneratorBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
@@ -29,17 +30,15 @@ abstract class AbstractGenerator(type: StructureType, blueprint: GeneratorBluepr
         }
     }
 
-    override fun onDurabilityDamage(e: StructureDurabilityDamageEvent) {
-        if (e.damageSourceType == DamageSource.PLAYER_BREAK) {
-            val player = e.damageSource as? Player ?: return
-            val resource = getResourceBlock(player) ?: return
-            // 取消事件，防止玩家不小心损坏结构
-            e.isCancelled = true
-            // 采集资源
-            resource.breaking(player)
-        }
+    override fun onBlockBreak(e: BlockBreakEvent) {
+        val player = e.player
+        // TODO 可以优化
+        val resource = getResourceBlock(player) ?: return
+        // 取消事件，防止玩家不小心损坏结构
+        e.isCancelled = true
+        // 采集资源
+        resource.breaking(player)
     }
-
     override fun completed(e: StructureCompletedEvent) {
         resourceBlocks.forEach {
             EEngineeringScope.launch { it.reset() }
