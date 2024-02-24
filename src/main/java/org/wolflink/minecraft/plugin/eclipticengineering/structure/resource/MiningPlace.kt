@@ -36,10 +36,12 @@ class MiningPlace private constructor(blueprint: GameStructureBlueprint, builder
     private val stoneLocations = mutableSetOf<Location>()
     private suspend fun timerTask() {
         while (available) {
-            delay(1000 * RandomAPI.nextLong(10,20))
+            delay(1000 * RandomAPI.nextLong(6,12))
             val location = stoneLocations.filter { it.block.type == Material.STONE }.randomOrNull() ?: return
-            location.block.type = oreDistribution.random()
-            location.world.playSound(location, Sound.BLOCK_STONE_PLACE,1.5f,1.2f)
+            EclipticEngineering.runTask {
+                location.block.type = oreDistribution.random()
+                location.world.playSound(location, Sound.BLOCK_STONE_PLACE,1.5f,1.2f)
+            }
         }
     }
     override fun completed(e: StructureCompletedEvent) {
