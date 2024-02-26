@@ -12,19 +12,15 @@ import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DayNightEvent
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DayNightHandler
 
 class HitEveryOne(disguiser: Player): PlayerGoal(disguiser) {
-    private val hitPlayers = mutableSetOf<Player>()
-    override val description = "对所有玩家造成一次伤害"
+    override val description = "对某个玩家造成一次伤害"
     @EventHandler
     fun on(e: DayNightEvent) { if(e.nowTime == DayNightHandler.Status.DAY) failed() }
     @EventHandler
     fun on(e: EntityDamageByEntityEvent) {
         val entity = e.entity
-        if(e.damager == disguiser && entity is Player && entity !in hitPlayers) {
-            hitPlayers.add(entity)
-            noticeInProgress()
+        if(e.damager == disguiser && entity is Player) {
+            finished()
         }
-        // 包括所有其它游戏玩家
-        if(hitPlayers.containsAll(gamingPlayers.filter { it != disguiser })) finished()
     }
     override fun init() {
     }

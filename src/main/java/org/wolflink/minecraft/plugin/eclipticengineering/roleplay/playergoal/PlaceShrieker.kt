@@ -15,13 +15,13 @@ import org.wolflink.minecraft.plugin.eclipticstructure.repository.ZoneRepository
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 
 class PlaceShrieker(disguiser: Player): PlayerGoal(disguiser) {
-    override val description = "在日落之前放置5个幽匿尖啸体在不同的建筑结构中"
+    override val description = "在日落之前放置3个幽匿尖啸体在不同的建筑结构中"
     private val structureSet = mutableSetOf<Structure>()
     override fun available(): Boolean {
-        return StructureRepository.findAll().size >= 8
+        return StructureRepository.findAll().size >= 5
     }
     override fun init() {
-        disguiser.inventory.addItem(ItemStack(Material.SCULK_SHRIEKER,5))
+        disguiser.inventory.addItem(ItemStack(Material.SCULK_SHRIEKER,3))
     }
     @EventHandler(priority = EventPriority.LOWEST)
     fun on(e: BlockPlaceEvent) {
@@ -33,7 +33,7 @@ class PlaceShrieker(disguiser: Player): PlayerGoal(disguiser) {
             val structure = structures.firstOrNull() ?: return
             if(structure in structureSet) return
             structureSet.add(structure)
-            if(structureSet.size >= 5) {
+            if(structureSet.size >= 3) {
                 finished()
             } else noticeInProgress()
         }
