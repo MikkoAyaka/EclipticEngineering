@@ -102,12 +102,13 @@ object StrategyDecider {
     }
 
     /**
+     * 预期总时长 90 分钟
      * 每1分钟 +0.8% 血量
-     * 每1分钟 +1.2% 攻击
+     * 每1分钟 +0.6% 攻击
      */
     private fun updateAttribute() {
         spawnerAttribute.healthMultiple += 0.008
-        spawnerAttribute.damageMultiple += 0.012
+        spawnerAttribute.damageMultiple += 0.006
     }
 
     private fun getEfficiencyReduction(playerAmount: Int): Double {

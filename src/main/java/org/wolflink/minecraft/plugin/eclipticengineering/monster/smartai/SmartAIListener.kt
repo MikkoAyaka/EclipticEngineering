@@ -32,7 +32,7 @@ object SmartAIListener : Listener {
     }
 
     private fun enhanceZombie(zombie: Zombie) {
-        zombie.goalSelector.addGoal(1, ZombieBlockGoal(zombie))
+//        zombie.goalSelector.addGoal(1, ZombieBlockGoal(zombie))
     }
 
     private fun addXrayAbility(mob: Mob) {
