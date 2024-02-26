@@ -43,7 +43,7 @@ class LargeCampfire private constructor(
                 60,
                 5000,
                 setOf(),
-                VirtualRequirement(VirtualResourceType.WOOD, 50),
+                VirtualRequirement(VirtualResourceType.WOOD, 40),
                 ItemRequirement("需要 1 打火石", ItemStack(Material.FLINT_AND_STEEL)),
                 AbilityCondition(Ability.BUILDING,2)
             )

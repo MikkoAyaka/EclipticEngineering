@@ -68,7 +68,7 @@ class TowerArrow private constructor(blueprint: TowerArrowBlueprint, builder: Bu
                 2..5,
                 1,
                 0.5,
-                VirtualRequirement(VirtualResourceType.WOOD,60),
+                VirtualRequirement(VirtualResourceType.WOOD,40),
                 VirtualRequirement(VirtualResourceType.STONE,20),
                 AbilityCondition(Ability.BUILDING,2)
             )

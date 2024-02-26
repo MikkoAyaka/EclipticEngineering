@@ -38,7 +38,7 @@ class MeetingPlace private constructor(blueprint: Blueprint, builder: Builder) :
                     GameStructureTag.AMOUNT_LIMITED
                 ),
                 VirtualRequirement(VirtualResourceType.STONE, 30),
-                VirtualRequirement(VirtualResourceType.WOOD, 120),
+                VirtualRequirement(VirtualResourceType.WOOD, 90),
                 AbilityCondition(Ability.BUILDING,3)
             )
         )

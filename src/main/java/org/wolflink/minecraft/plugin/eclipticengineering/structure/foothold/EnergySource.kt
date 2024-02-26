@@ -33,8 +33,8 @@ class EnergySource private constructor(blueprint: Blueprint, builder: Builder) :
                     GameStructureTag.AMOUNT_LIMITED,
                     GameStructureTag.ENERGY_SUPPLY
                 ),
-                VirtualRequirement(VirtualResourceType.STONE, 150),
-                VirtualRequirement(VirtualResourceType.WOOD, 60),
+                VirtualRequirement(VirtualResourceType.STONE, 100),
+                VirtualRequirement(VirtualResourceType.WOOD, 50),
                 AbilityCondition(Ability.BUILDING,3)
             )
         )

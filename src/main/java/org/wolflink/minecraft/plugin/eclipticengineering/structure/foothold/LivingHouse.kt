@@ -105,8 +105,8 @@ class LivingHouse private constructor(
                 setOf(
                     GameStructureTag.AMOUNT_LIMITED
                 ),
-                VirtualRequirement(VirtualResourceType.STONE, 90),
-                VirtualRequirement(VirtualResourceType.WOOD, 90),
+                VirtualRequirement(VirtualResourceType.STONE, 75),
+                VirtualRequirement(VirtualResourceType.WOOD, 75),
                 AbilityCondition(Ability.BUILDING,3)
             )
         )

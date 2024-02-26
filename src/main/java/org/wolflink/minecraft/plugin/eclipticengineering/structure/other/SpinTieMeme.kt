@@ -30,8 +30,8 @@ class SpinTieMeme private constructor(
                 60,
                 5000,
                 setOf(),
-                ItemRequirement("需要 16 腐肉", ItemStack(Material.ROTTEN_FLESH, 16)),
-                VirtualRequirement(VirtualResourceType.STONE, 196)
+                ItemRequirement("需要 12 腐肉", ItemStack(Material.ROTTEN_FLESH, 12)),
+                VirtualRequirement(VirtualResourceType.STONE, 128)
             )
         )
     }
