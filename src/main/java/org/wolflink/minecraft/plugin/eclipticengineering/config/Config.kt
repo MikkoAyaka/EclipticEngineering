@@ -6,6 +6,7 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.Zone
 
 object Config {
     val buildMenuCmd = "dm open 建造菜单 %player_name%"
+    val structureMenuCmd = "dm open 结构详情 %player_name%"
     val mainMenuCmd = "dm open 据点看板 %player_name%"
     val lobbyWorldName = "spawn"
     val gameWorldName = "world"

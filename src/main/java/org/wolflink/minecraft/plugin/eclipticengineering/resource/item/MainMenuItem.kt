@@ -4,6 +4,7 @@ import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.entity.Player
+import org.bukkit.event.player.PlayerInteractEvent
 import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.PRIMARY_TEXT_COLOR
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.Quality
@@ -25,7 +26,7 @@ object MainMenuItem: InteractiveItem(
         player.playSound(player, Sound.BLOCK_AMETHYST_BLOCK_RESONATE,1f,1f)
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), Config.mainMenuCmd.parsePapi(player))
     }
-    override fun onInteract(player: Player) {
-        openMainMenu(player)
+    override fun onRightClick(e: PlayerInteractEvent) {
+        openMainMenu(e.player)
     }
 }

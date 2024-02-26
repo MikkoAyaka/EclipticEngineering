@@ -75,6 +75,7 @@ class EclipticEngineering : JavaPlugin() {
         AbilityPapi.register()
         DayNightPapi.register()
         GameStructurePapi.register()
+        PlayerStructurePapi.register()
         // 初始化阶段
         StageHolder.init()
     }

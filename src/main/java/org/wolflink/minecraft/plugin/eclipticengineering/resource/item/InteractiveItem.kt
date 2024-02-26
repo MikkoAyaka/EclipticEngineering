@@ -13,12 +13,13 @@ import org.bukkit.inventory.meta.ItemMeta
  */
 abstract class InteractiveItem(defaultItem: ItemStack, private val cancelInteract: Boolean = false): SpecialItem(defaultItem), Listener {
     protected var lastUpdateMeta: ItemMeta = defaultItem.itemMeta
-    protected open fun onInteract(player: Player) {}
+    protected open fun onRightClick(e: PlayerInteractEvent) {}
+    protected open fun onLeftClick(e: PlayerInteractEvent) {}
     protected open fun update(player: Player, itemStack: ItemStack) {}
     @EventHandler
-    fun onInteract(e: PlayerInteractEvent) {
+    fun on(e: PlayerInteractEvent) {
         if(e.action.isRightClick && e.item?.itemMeta == lastUpdateMeta) {
-            onInteract(e.player)
+            onRightClick(e)
             update(e.player, e.item!!)
             if(cancelInteract) e.isCancelled = true
         }
