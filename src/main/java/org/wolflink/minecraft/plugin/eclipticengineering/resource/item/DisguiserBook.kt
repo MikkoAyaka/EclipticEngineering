@@ -54,9 +54,9 @@ object DisguiserBook : InteractiveItem(
             false,
             listOf(
                 when (playerGoal.status) {
-                    PlayerGoal.Status.FINISHED -> "<green>☑ $SECONDARY_TEXT_COLOR<st><italic>${playerGoal.description}</italic></st>"
-                    PlayerGoal.Status.FAILED -> "<red>☒ $SECONDARY_TEXT_COLOR<st><italic>${playerGoal.description}</italic></st>"
-                    PlayerGoal.Status.IN_PROGRESS -> "<white>☐ ${PRIMARY_TEXT_COLOR}${playerGoal.description}"
+                    PlayerGoal.Status.FINISHED -> "<green>☑ $SECONDARY_TEXT_COLOR<st><italic>${playerGoal.formatDescription()}</italic></st>"
+                    PlayerGoal.Status.FAILED -> "<red>☒ $SECONDARY_TEXT_COLOR<st><italic>${playerGoal.formatDescription()}</italic></st>"
+                    PlayerGoal.Status.IN_PROGRESS -> "<white>☐ ${PRIMARY_TEXT_COLOR}${playerGoal.formatDescription()}"
                 }
             )
         ).itemMeta

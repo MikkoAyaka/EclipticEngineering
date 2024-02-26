@@ -24,6 +24,10 @@ object PlayerGoalHolder : Listener {
     )
     // 完成次数
     private val finishCounter = mutableMapOf<UUID,AtomicInteger>()
+    fun addFinishCount(player: Player) {
+        if(finishCounter[player.uniqueId] == null) finishCounter[player.uniqueId] = AtomicInteger(0)
+        finishCounter[player.uniqueId]?.incrementAndGet()
+    }
     private val disguiserGoals = mutableMapOf<UUID,PlayerGoal>()
     // 今日已刷新过目标的玩家，每日重置
     private val refreshCache = mutableSetOf<UUID>()

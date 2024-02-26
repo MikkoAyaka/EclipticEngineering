@@ -8,7 +8,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DayNightEvent
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DayNightHandler
 
-class LowerHead(disguiser: Player): PlayerGoal(disguiser) {
+class LowerHead(disguiser: Player): PlayerGoal(disguiser,Difficulty.NORMAL) {
     override val description = "一整天都必须低头(俯角在30~90度)"
     @EventHandler
     fun on(e: DayNightEvent) { if(e.nowTime == DayNightHandler.Status.DAY) finished() }

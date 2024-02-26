@@ -15,7 +15,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.utils.RandomAPI
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 import java.util.Random
 
-class CantJump(disguiser: Player): PlayerGoal(disguiser) {
+class CantJump(disguiser: Player): PlayerGoal(disguiser,Difficulty.NORMAL) {
     private val jumpCount = RandomAPI.nextInt(2,6)
     private var count = 0
     override val description = "一天内最多只能跳跃 $jumpCount 次"

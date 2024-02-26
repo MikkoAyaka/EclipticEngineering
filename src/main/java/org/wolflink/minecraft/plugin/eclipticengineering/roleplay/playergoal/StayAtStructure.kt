@@ -7,7 +7,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureRepository
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 
-class StayAtStructure(disguiser: Player): PlayerGoal(disguiser) {
+class StayAtStructure(disguiser: Player): PlayerGoal(disguiser,Difficulty.NORMAL) {
     private lateinit var structure: Structure
     private var counter = 240
     override val description by lazy { "待在 ${structure.blueprint.structureName} 类型的建筑中持续4分钟。" }

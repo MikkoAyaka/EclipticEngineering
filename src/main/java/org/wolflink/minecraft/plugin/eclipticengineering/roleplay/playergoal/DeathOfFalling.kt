@@ -7,7 +7,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DayNightEvent
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DayNightHandler
 
-class DeathOfFalling(disguiser: Player): PlayerGoal(disguiser) {
+class DeathOfFalling(disguiser: Player): PlayerGoal(disguiser,Difficulty.HARD) {
     override val description = "在其它玩家的视线中摔死"
     @EventHandler
     fun on(e: PlayerDeathEvent) {

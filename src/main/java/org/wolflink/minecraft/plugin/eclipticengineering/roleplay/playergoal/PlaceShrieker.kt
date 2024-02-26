@@ -14,7 +14,7 @@ import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureZoneR
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.ZoneRepository
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 
-class PlaceShrieker(disguiser: Player): PlayerGoal(disguiser) {
+class PlaceShrieker(disguiser: Player): PlayerGoal(disguiser,Difficulty.NORMAL) {
     override val description = "在日落之前放置3个幽匿尖啸体在不同的建筑结构中"
     private val structureSet = mutableSetOf<Structure>()
     override fun available(): Boolean {

@@ -7,7 +7,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DayNightEvent
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DayNightHandler
 import org.wolflink.minecraft.plugin.eclipticstructure.event.builder.BuilderCompletedEvent
 
-class PreventBuildStructure(disguiser: Player): PlayerGoal(disguiser) {
+class PreventBuildStructure(disguiser: Player): PlayerGoal(disguiser,Difficulty.HARD) {
     private lateinit var structureType: StructureType
     override val description by lazy { "阻止任何人在今天之内建造 ${structureType.displayName} 类型的建筑结构。" }
     override fun init() {

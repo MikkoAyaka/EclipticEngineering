@@ -8,15 +8,17 @@ import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DayNightHandle
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.other.SpinTieMeme
 import org.wolflink.minecraft.plugin.eclipticstructure.event.builder.BuilderCompletedEvent
 
-class PlaceMeme(disguiser: Player): PlayerGoal(disguiser) {
+class PlaceMeme(disguiser: Player): PlayerGoal(disguiser,Difficulty.EASY) {
     private val structureType = StructureType.SPIN_TIE_MEME
-    override val description = "在日落之前在能源中心附近建造一个 ${structureType.displayName}"
+    override val description = "在日落之前建造一个 ${structureType.displayName}"
     override fun init() {
 
     }
     @EventHandler
     fun on(e: BuilderCompletedEvent) {
-        if(e.structure is SpinTieMeme) finished()
+        if(e.structure is SpinTieMeme) {
+            finished()
+        }
     }
     @EventHandler
     fun on(e: DayNightEvent) { if(e.nowTime == DayNightHandler.Status.NIGHT) failed() }

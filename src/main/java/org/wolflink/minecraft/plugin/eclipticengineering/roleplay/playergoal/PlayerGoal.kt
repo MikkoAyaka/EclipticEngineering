@@ -1,5 +1,6 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.roleplay.playergoal
 
+import org.bukkit.Color
 import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.event.Listener
@@ -7,13 +8,20 @@ import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.register
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
+import org.wolflink.minecraft.plugin.eclipticstructure.extension.toHexFormat
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.unregister
 import java.util.Calendar
 
 /**
  * 玩家目标，编写完成后需要前往 PlayerGoalHolder 注册
  */
-abstract class PlayerGoal(val disguiser: Player) : Listener {
+abstract class PlayerGoal(val disguiser: Player,val difficulty: Difficulty) : Listener {
+    enum class Difficulty(val displayName: String,val color: Color) {
+        EASY("简单",Color.fromRGB(0,255,127)),
+        NORMAL("普通", Color.fromRGB(0,191,255)),
+        HARD("困难",Color.fromRGB(160,32,240)),
+        HADES("炼狱",Color.fromRGB(255,48,48))
+    }
     enum class Status {
         IN_PROGRESS,
         FINISHED,
@@ -21,6 +29,7 @@ abstract class PlayerGoal(val disguiser: Player) : Listener {
     }
     abstract val description: String
 
+    fun formatDescription() = "${difficulty.color.toHexFormat()}${difficulty.displayName} $description"
     /**
      * 该目标是否可以正常使用
      */
@@ -62,6 +71,7 @@ abstract class PlayerGoal(val disguiser: Player) : Listener {
         status = Status.FINISHED
         disguiser.playSound(disguiser,Sound.UI_TOAST_CHALLENGE_COMPLETE,0.5f,2f)
         disguiser.sendMessage("$MESSAGE_PREFIX 今日目标已完成。".toComponent())
+        PlayerGoalHolder.addFinishCount(disguiser)
         disable()
     }
     fun failed() {
