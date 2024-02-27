@@ -56,7 +56,9 @@ enum class StructureType(
     SPIN_TIE_MEME("非常好建筑，使我的领带旋转",SpinTieMeme::class.java,SpinTieMeme.blueprints,SpinTieMeme::create),
     MEETING_PLACE("会议大厅",MeetingPlace::class.java,MeetingPlace.blueprints,MeetingPlace::create)
     ;
-
+    companion object {
+        fun parse(structure: Structure) = entries.firstOrNull { structure::class.java == it.clazz }
+    }
     fun register() {
         StructureRegistry.register(EclipticEngineering.instance, name, blueprints, supplier)
     }

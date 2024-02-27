@@ -2,6 +2,7 @@ package org.wolflink.minecraft.plugin.eclipticengineering.papi
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion
 import org.bukkit.OfflinePlayer
+import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.parsePapi
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureRepository
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
@@ -28,7 +29,8 @@ object PlayerStructurePapi: PlaceholderExpansion() {
         // 建筑结构
         val structure = StructureRepository.find(structureId) ?: return "未找到ID为 $structureId 的建筑结构"
         if(player == null) return "不存在的玩家"
+        val type = StructureType.parse(structure) ?: return "未找到建筑类为 ${structure::class.java.name} 的注册类型数据"
         // 重定向到 GameStructure 变量的请求当中
-        return "%eegs_${structureId}_${structure.blueprint.structureLevel}_${params}%".parsePapi(player)
+        return "%eegs_${type.name}_${structure.blueprint.structureLevel}_${params}%".parsePapi(player)
     }
 }

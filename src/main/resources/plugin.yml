@@ -16,3 +16,5 @@ commands:
     aliases: ees
   ee-vote:
     aliases: eev
+  ee-gamestructure:
+    aliases: eegs

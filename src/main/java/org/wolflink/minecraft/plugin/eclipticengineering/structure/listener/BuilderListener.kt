@@ -61,7 +61,7 @@ object BuilderListener: Listener, IBuilderListener {
     @EventHandler
     override fun preBuild(e: BuilderPreBuildEvent) {
         if(e.player.isOp) {
-            e.player.sendMessage("$MESSAGE_PREFIX <yellow>由于您是管理员，自动绕过了部分建筑条件检测。")
+            e.player.sendMessage("$MESSAGE_PREFIX <yellow>由于您是管理员，自动绕过了部分建筑条件检测。".toComponent())
             return
         }
         val structure = e.builder.structure

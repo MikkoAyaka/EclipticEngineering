@@ -18,6 +18,10 @@ abstract class InteractiveItem(defaultItem: ItemStack, private val cancelInterac
     protected open fun update(player: Player, itemStack: ItemStack) {}
     @EventHandler
     fun on(e: PlayerInteractEvent) {
+        if(e.action.isLeftClick && e.item?.itemMeta == lastUpdateMeta) {
+            onLeftClick(e)
+            e.isCancelled = true
+        }
         if(e.action.isRightClick && e.item?.itemMeta == lastUpdateMeta) {
             onRightClick(e)
             update(e.player, e.item!!)
