@@ -10,14 +10,33 @@ open class ConditionBlueprint(
     maxDurability: Int,
     pasteAir: Boolean,
     tags: Set<GameStructureTag>,
-    vararg val conditions: Condition
-) : GameStructureBlueprint(structureLevel, structureName, buildSeconds, maxDurability,pasteAir, tags) {
+    repairConditions: Set<Condition>,
+    val buildConditions: Set<Condition>
+) : GameStructureBlueprint(
+    structureLevel,
+    structureName,
+    buildSeconds,
+    maxDurability,
+    pasteAir,
+    tags,
+    repairConditions
+) {
     constructor(
         structureLevel: Int,
         structureName: String,
         buildSeconds: Int,
         maxDurability: Int,
         tags: Set<GameStructureTag>,
-        vararg conditions: Condition
-    ): this(structureLevel, structureName, buildSeconds, maxDurability, false, tags, *conditions)
+        repairConditions: Set<Condition>,
+        buildConditions: Set<Condition>
+    ): this(
+        structureLevel,
+        structureName,
+        buildSeconds,
+        maxDurability,
+        false,
+        tags,
+        repairConditions,
+        buildConditions
+    )
 }

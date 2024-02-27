@@ -4,6 +4,7 @@ import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.GameStructureBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.AbilityCondition
@@ -19,12 +20,12 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Bluep
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
 class EnchantRoom private constructor(
-    blueprint: Blueprint, builder: Builder
+    blueprint: GameStructureBlueprint, builder: Builder
 ) : GameStructure(StructureType.ENCHANT_ROOM,blueprint, builder) {
     override val customListeners = listOf<IStructureListener>()
     companion object : StructureCompanion<EnchantRoom>() {
         override fun supplier(blueprint: Blueprint, builder: Builder): EnchantRoom {
-            return EnchantRoom(blueprint, builder)
+            return EnchantRoom(blueprint as GameStructureBlueprint, builder)
         }
 
         override val blueprints = listOf(
@@ -34,10 +35,11 @@ class EnchantRoom private constructor(
                 60,
                 5000,
                 setOf(),
-                VirtualRequirement(VirtualResourceType.STONE,40),
-                VirtualRequirement(VirtualResourceType.METAL,15),
-                ItemRequirement("需要 2 闪金矿石", SpecialGold.defaultItem.clone().apply { amount = 2 }),
-                AbilityCondition(Ability.BUILDING,2)
+                setOf(),
+                setOf(VirtualRequirement(VirtualResourceType.STONE,40),
+                    VirtualRequirement(VirtualResourceType.METAL,15),
+                    ItemRequirement("需要 2 闪金矿石", SpecialGold.defaultItem.clone().apply { amount = 2 }),
+                    AbilityCondition(Ability.BUILDING,2))
             )
         )
     }

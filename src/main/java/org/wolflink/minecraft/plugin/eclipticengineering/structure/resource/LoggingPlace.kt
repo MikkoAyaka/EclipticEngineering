@@ -68,9 +68,10 @@ class LoggingPlace private constructor(blueprint: GameStructureBlueprint, builde
                     GameStructureTag.AMOUNT_LIMITED,
                     GameStructureTag.COMMON_RESOURCE_GENERATOR
                 ),
-                ItemRequirement("需要 96 泥土", ItemStack(Material.DIRT, 96)),
-                VirtualRequirement(VirtualResourceType.WOOD, 60),
-                AbilityCondition(Ability.BUILDING,2)
+                setOf(),
+                setOf(ItemRequirement("需要 96 泥土", ItemStack(Material.DIRT, 96)),
+                    VirtualRequirement(VirtualResourceType.WOOD, 60),
+                    AbilityCondition(Ability.BUILDING,2))
             )
         )
     }

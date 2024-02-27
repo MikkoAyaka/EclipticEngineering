@@ -16,6 +16,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.GameStructureBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
@@ -35,7 +36,7 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Bluep
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
 class LivingHouse private constructor(
-    blueprint: Blueprint, builder: Builder
+    blueprint: GameStructureBlueprint, builder: Builder
 ) : GameStructure(StructureType.LIVING_HOUSE, blueprint, builder,1),IStructureListener,Listener {
     override val customListeners = listOf<IStructureListener>(this)
     private val doorOwners = mutableMapOf<Player,Block>()
@@ -93,7 +94,7 @@ class LivingHouse private constructor(
 
     companion object : StructureCompanion<LivingHouse>() {
         override fun supplier(blueprint: Blueprint, builder: Builder): LivingHouse {
-            return LivingHouse(blueprint, builder)
+            return LivingHouse(blueprint as GameStructureBlueprint, builder)
         }
 
         override val blueprints = listOf(
@@ -105,9 +106,10 @@ class LivingHouse private constructor(
                 setOf(
                     GameStructureTag.AMOUNT_LIMITED
                 ),
-                VirtualRequirement(VirtualResourceType.STONE, 75),
-                VirtualRequirement(VirtualResourceType.WOOD, 75),
-                AbilityCondition(Ability.BUILDING,3)
+                setOf(),
+                setOf(VirtualRequirement(VirtualResourceType.STONE, 75),
+                    VirtualRequirement(VirtualResourceType.WOOD, 75),
+                    AbilityCondition(Ability.BUILDING,3))
             )
         )
     }

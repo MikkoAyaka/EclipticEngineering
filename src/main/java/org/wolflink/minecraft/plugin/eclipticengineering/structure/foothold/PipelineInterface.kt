@@ -3,6 +3,7 @@ package org.wolflink.minecraft.plugin.eclipticengineering.structure.foothold
 import org.bukkit.Material
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.GameStructureBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.hasConnection
@@ -15,7 +16,7 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompan
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
-class PipelineInterface private constructor(blueprint: Blueprint, builder: Builder) :
+class PipelineInterface private constructor(blueprint: GameStructureBlueprint, builder: Builder) :
     GameStructure(StructureType.PIPELINE_INTERFACE,blueprint, builder) {
     override val customListeners = listOf(EnergyRequiredListener(this))
 
@@ -30,7 +31,7 @@ class PipelineInterface private constructor(blueprint: Blueprint, builder: Build
 
     companion object : StructureCompanion<PipelineInterface>() {
         override fun supplier(blueprint: Blueprint, builder: Builder): PipelineInterface {
-            return PipelineInterface(blueprint, builder)
+            return PipelineInterface(blueprint as GameStructureBlueprint, builder)
         }
 
         override val blueprints = listOf(
@@ -42,9 +43,10 @@ class PipelineInterface private constructor(blueprint: Blueprint, builder: Build
                 setOf(
                     GameStructureTag.ENERGY_REQUIRED
                 ),
-                VirtualRequirement(VirtualResourceType.STONE, 15),
-                VirtualRequirement(VirtualResourceType.METAL,30),
-                AbilityCondition(Ability.BUILDING,3)
+                setOf(),
+                setOf(VirtualRequirement(VirtualResourceType.STONE, 15),
+                    VirtualRequirement(VirtualResourceType.METAL,30),
+                    AbilityCondition(Ability.BUILDING,3))
             )
         )
     }

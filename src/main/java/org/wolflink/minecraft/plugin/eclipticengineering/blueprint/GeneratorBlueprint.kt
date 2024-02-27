@@ -15,12 +15,17 @@ class GeneratorBlueprint(
     buildSeconds: Int,
     maxDurability: Int,
     val resourceBlocksSupplier: (structure: Structure, buildLocation: Location) -> Set<ResourceBlock>,
-    vararg conditions: Condition
+    repairConditions: Set<Condition>,
+    buildConditions: Set<Condition>
 ) : ConditionBlueprint(
-    structureLevel, structureName, buildSeconds, maxDurability,
+    structureLevel,
+    structureName,
+    buildSeconds,
+    maxDurability,
     setOf(
         GameStructureTag.AMOUNT_LIMITED,
         GameStructureTag.SPECIAL_RESOURCE_GENERATOR
     ),
-    *conditions
+    repairConditions,
+    buildConditions
 )

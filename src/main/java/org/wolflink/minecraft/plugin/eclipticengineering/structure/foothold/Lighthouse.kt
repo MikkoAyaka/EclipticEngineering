@@ -2,6 +2,7 @@ package org.wolflink.minecraft.plugin.eclipticengineering.structure.foothold
 
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.GameStructureBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.AbilityCondition
@@ -14,13 +15,13 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Bluep
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
 class Lighthouse private constructor(
-    blueprint: Blueprint, builder: Builder
+    blueprint: GameStructureBlueprint, builder: Builder
 ) : GameStructure(StructureType.LIGHT_HOUSE, blueprint, builder) {
     override val customListeners = listOf<IStructureListener>()
 
     companion object : StructureCompanion<Lighthouse>() {
         override fun supplier(blueprint: Blueprint, builder: Builder): Lighthouse {
-            return Lighthouse(blueprint, builder)
+            return Lighthouse(blueprint as GameStructureBlueprint, builder)
         }
 
         override val blueprints = listOf(
@@ -32,10 +33,11 @@ class Lighthouse private constructor(
                 setOf(
                     GameStructureTag.ENERGY_SUPPLY
                 ),
-                VirtualRequirement(VirtualResourceType.STONE, 150),
-                VirtualRequirement(VirtualResourceType.WOOD, 60),
-                VirtualRequirement(VirtualResourceType.METAL, 20),
-                AbilityCondition(Ability.BUILDING,3)
+                setOf(),
+                setOf(VirtualRequirement(VirtualResourceType.STONE, 150),
+                    VirtualRequirement(VirtualResourceType.WOOD, 60),
+                    VirtualRequirement(VirtualResourceType.METAL, 20),
+                    AbilityCondition(Ability.BUILDING,3))
             )
         )
     }

@@ -10,11 +10,13 @@ class RespawnBeaconBlueprint(
     maxDurability: Int,
     val chargeSeconds: Int,
     val chargeAmount: Int,
-    vararg conditions: Condition
+    repairConditions: Set<Condition>,
+    buildConditions: Set<Condition>
 ) : ConditionBlueprint(
     structureLevel, structureName, buildSeconds, maxDurability,
     setOf(
         GameStructureTag.AMOUNT_LIMITED
     ),
-    *conditions
+    repairConditions,
+    buildConditions
 )

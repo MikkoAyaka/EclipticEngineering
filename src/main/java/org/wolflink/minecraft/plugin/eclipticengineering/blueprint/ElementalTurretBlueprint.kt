@@ -13,9 +13,16 @@ class ElementalTurretBlueprint(
     val attackCooldownSeconds: Int,
     val attackDamage: IntRange,
     val attackRange: Int,
-    vararg conditions: Condition
+    repairConditions: Set<Condition>,
+    buildConditions: Set<Condition>
 ) : ConditionBlueprint(
-    structureLevel, structureName, buildSeconds, maxDurability, setOf(
+    structureLevel,
+    structureName,
+    buildSeconds,
+    maxDurability,
+    setOf(
         GameStructureTag.ENERGY_REQUIRED
-    ), *conditions
+    ),
+    repairConditions,
+    buildConditions
 )

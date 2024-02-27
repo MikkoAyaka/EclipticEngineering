@@ -42,14 +42,14 @@ object BuilderListener: Listener, IBuilderListener {
         if(blueprint is ConditionBlueprint) {
             val conditionText = mutableListOf<String>()
             var pass = true
-            for (condition in blueprint.conditions) {
+            for (condition in blueprint.buildConditions) {
                 if(!condition.isSatisfy(player)) {
                     pass = false
                     conditionText.add(condition.description)
                 }
             }
             return if(pass) {
-                blueprint.conditions.forEach { if(it is Requirement)it.delivery(player) }
+                blueprint.buildConditions.forEach { if(it is Requirement)it.delivery(player) }
                 true
             } else {
                 player.sendMessage("$MESSAGE_PREFIX 无法建造${blueprint.structureName} <hover:show_text:'<newline>${conditionText.joinToString(separator = "<newline>")}<newline>'><yellow>[详情]".toComponent())

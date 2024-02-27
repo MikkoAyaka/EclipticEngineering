@@ -7,6 +7,7 @@ import org.bukkit.event.player.PlayerInteractEvent
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.GameStructureBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.AbilityCondition
@@ -23,7 +24,7 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompan
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
-class MeetingPlace private constructor(blueprint: Blueprint, builder: Builder) :
+class MeetingPlace private constructor(blueprint: GameStructureBlueprint, builder: Builder) :
     GameStructure(StructureType.MEETING_PLACE, blueprint, builder, 1), IStructureListener, Listener {
     override val customListeners = listOf<IStructureListener>(this)
 
@@ -37,14 +38,15 @@ class MeetingPlace private constructor(blueprint: Blueprint, builder: Builder) :
                 setOf(
                     GameStructureTag.AMOUNT_LIMITED
                 ),
-                VirtualRequirement(VirtualResourceType.STONE, 30),
-                VirtualRequirement(VirtualResourceType.WOOD, 90),
-                AbilityCondition(Ability.BUILDING,3)
+                setOf(),
+                setOf(VirtualRequirement(VirtualResourceType.STONE, 30),
+                    VirtualRequirement(VirtualResourceType.WOOD, 90),
+                    AbilityCondition(Ability.BUILDING,3))
             )
         )
 
         override fun supplier(blueprint: Blueprint, builder: Builder): MeetingPlace {
-            return MeetingPlace(blueprint, builder)
+            return MeetingPlace(blueprint as GameStructureBlueprint, builder)
         }
     }
 

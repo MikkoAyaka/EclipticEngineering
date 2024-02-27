@@ -13,6 +13,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.GameStructureBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.AbilityCondition
@@ -27,13 +28,13 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Bluep
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
 class LargeCampfire private constructor(
-    blueprint: Blueprint, builder: Builder
+    blueprint: GameStructureBlueprint, builder: Builder
 ) : GameStructure(StructureType.LARGE_CAMPFIRE, blueprint, builder), IStructureListener {
     override val customListeners = listOf(this)
 
     companion object : StructureCompanion<LargeCampfire>() {
         override fun supplier(blueprint: Blueprint, builder: Builder): LargeCampfire {
-            return LargeCampfire(blueprint, builder)
+            return LargeCampfire(blueprint as GameStructureBlueprint, builder)
         }
 
         override val blueprints = listOf(
@@ -43,9 +44,10 @@ class LargeCampfire private constructor(
                 60,
                 5000,
                 setOf(),
-                VirtualRequirement(VirtualResourceType.WOOD, 40),
-                ItemRequirement("需要 1 打火石", ItemStack(Material.FLINT_AND_STEEL)),
-                AbilityCondition(Ability.BUILDING,2)
+                setOf(),
+                setOf(VirtualRequirement(VirtualResourceType.WOOD, 40),
+                    ItemRequirement("需要 1 打火石", ItemStack(Material.FLINT_AND_STEEL)),
+                    AbilityCondition(Ability.BUILDING,2))
             )
         )
     }

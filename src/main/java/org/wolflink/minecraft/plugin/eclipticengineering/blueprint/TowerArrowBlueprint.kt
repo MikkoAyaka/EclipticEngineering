@@ -10,7 +10,14 @@ class TowerArrowBlueprint(
     val extraDamageRange: IntRange,
     val maxShooterAmount: Int,
     val returnArrowPercent: Double,
-    vararg conditions: Condition
+    repairConditions: Set<Condition>,
+    buildConditions: Set<Condition>
 ) : ConditionBlueprint(
-    structureLevel, structureName, buildSeconds, maxDurability, setOf(), *conditions
+    structureLevel,
+    structureName,
+    buildSeconds,
+    maxDurability,
+    setOf(),
+    repairConditions,
+    buildConditions
 )

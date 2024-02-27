@@ -69,12 +69,13 @@ class BlazeTurret private constructor(blueprint: ElementalTurretBlueprint, build
                 2,
                 4..6,
                 16,
-                VirtualRequirement( VirtualResourceType.WOOD, 10),
-                VirtualRequirement( VirtualResourceType.STONE, 30),
-                VirtualRequirement(VirtualResourceType.METAL, 8),
-                ItemRequirement("需要 1 陨铁矿石", SpecialIron.defaultItem.clone().apply { amount = 1 }),
-                ItemRequirement("需要 1 熔岩桶", ItemStack(Material.LAVA_BUCKET, 1)),
-                AbilityCondition(Ability.BUILDING,2)
+                setOf(),
+                setOf(VirtualRequirement( VirtualResourceType.WOOD, 10),
+                    VirtualRequirement( VirtualResourceType.STONE, 30),
+                    VirtualRequirement(VirtualResourceType.METAL, 8),
+                    ItemRequirement("需要 1 陨铁矿石", SpecialIron.defaultItem.clone().apply { amount = 1 }),
+                    ItemRequirement("需要 1 熔岩桶", ItemStack(Material.LAVA_BUCKET, 1)),
+                    AbilityCondition(Ability.BUILDING,2))
             )
         )
     }

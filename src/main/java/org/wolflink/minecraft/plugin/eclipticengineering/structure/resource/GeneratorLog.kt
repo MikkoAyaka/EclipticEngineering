@@ -35,10 +35,11 @@ class GeneratorLog private constructor(blueprint: GeneratorBlueprint, builder: B
                         EvergreenWoodResource(structure, buildLocation.clone().add(0.0, 3.0, 0.0))
                     )
                 },
-                ItemRequirement("需要 16 泥土", ItemStack(Material.DIRT, 16)),
-                VirtualRequirement(VirtualResourceType.WOOD, 100),
-                VirtualRequirement(VirtualResourceType.METAL, 15),
-                AbilityCondition(Ability.BUILDING,3)
+                setOf(),
+                setOf(ItemRequirement("需要 16 泥土", ItemStack(Material.DIRT, 16)),
+                    VirtualRequirement(VirtualResourceType.WOOD, 100),
+                    VirtualRequirement(VirtualResourceType.METAL, 15),
+                    AbilityCondition(Ability.BUILDING,3))
             ),
         )
     }

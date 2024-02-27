@@ -40,10 +40,11 @@ class GeneratorCrop private constructor(blueprint: GeneratorBlueprint, builder: 
                         CropResourceBlock(structure, buildLocation.clone().add(1.0, 1.0, -1.0)),
                     )
                 },
-                ItemRequirement("需要 96 泥土", ItemStack(Material.DIRT, 96)),
-                VirtualRequirement(VirtualResourceType.WOOD, 60),
-                VirtualRequirement(VirtualResourceType.METAL, 15),
-                AbilityCondition(Ability.BUILDING,3)
+                setOf(),
+                setOf(ItemRequirement("需要 96 泥土", ItemStack(Material.DIRT, 96)),
+                    VirtualRequirement(VirtualResourceType.WOOD, 60),
+                    VirtualRequirement(VirtualResourceType.METAL, 15),
+                    AbilityCondition(Ability.BUILDING,3))
             )
         )
     }

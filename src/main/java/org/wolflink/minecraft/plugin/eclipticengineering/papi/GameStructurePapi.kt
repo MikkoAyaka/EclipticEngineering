@@ -10,6 +10,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.utils.ReflectionAPI
 /**
  * %eegs_xxxxx_x_conditions% 类型名称为 xxxxx 等级为 x 的建筑的建造条件(如果有下划线，用连字符代替-)
  * %eegs_xxxxx_tags% 建筑类型为 xxxxx 的标签
+ * %eegs_xxxxx_x_tags% 建筑类型为 xxxxx 的标签
  * %eegs_xxxxx_x_blueprint_xxx% 获取 xxxxx 建筑 x 等级的蓝图中的 xxx 属性
  */
 object GameStructurePapi: PlaceholderExpansion()  {
@@ -20,7 +21,8 @@ object GameStructurePapi: PlaceholderExpansion()  {
     override fun getVersion() = "1.0.0"
 
     private val regexConditions = "[A-Za-z-]+_\\d+_conditions".toRegex()
-    private val regexTags = "[A-Za-z-]+_tags".toRegex()
+    private val regexTags1 = "[A-Za-z-]+_tags".toRegex()
+    private val regexTags2 = "[A-Za-z-]+_\\d+_tags".toRegex()
     private val regexBlueprint = "[A-Za-z-]+_\\d+_blueprint_[A-Za-z]+".toRegex()
     override fun onRequest(player: OfflinePlayer?, params: String): String {
         if(player == null || player.player == null) return "未找到玩家"
@@ -31,13 +33,13 @@ object GameStructurePapi: PlaceholderExpansion()  {
                     val structureType = StructureType.valueOf(args[0].uppercase().replace('-','_'))
                     val level = args[1].toInt()
                     val blueprint = structureType.blueprints[level-1] as ConditionBlueprint
-                    if(blueprint.conditions.isEmpty()) return "    &#E8E8E8无"
-                    return blueprint.conditions.joinToString(separator = "\n") {
+                    if(blueprint.buildConditions.isEmpty()) return "    &#E8E8E8无"
+                    return blueprint.buildConditions.joinToString(separator = "\n") {
                         if(it.isSatisfy(player.player)) "    &#33FF33☑"+it.description
                         else "    &#FF3333☒"+it.description
                     }
                 }
-                params.matches(regexTags) -> {
+                params.matches(regexTags1) || params.matches(regexTags2) -> {
                     val structureType = StructureType.valueOf(args[0].uppercase().replace('-','_'))
                     val tags = structureType.blueprints
                         .filterIsInstance<GameStructureBlueprint>()

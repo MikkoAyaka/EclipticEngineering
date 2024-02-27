@@ -1,5 +1,6 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.blueprint
 
+import org.wolflink.minecraft.plugin.eclipticengineering.requirement.Condition
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructureTag
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
 
@@ -9,7 +10,8 @@ open class GameStructureBlueprint(
     buildSeconds: Int,
     maxDurability: Int,
     pasteAir: Boolean = false,
-    val tags: Set<GameStructureTag>
+    val tags: Set<GameStructureTag>,
+    val repairConditions: Set<Condition>
 ) : Blueprint(
     structureLevel,
     structureName,

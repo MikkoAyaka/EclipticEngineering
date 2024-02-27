@@ -36,10 +36,11 @@ class GeneratorOre private constructor(blueprint: GeneratorBlueprint, builder: B
                         OreResourceBlock(structure, buildLocation.clone().add(-1.0, 3.0, -1.0))
                     )
                 },
-                ItemRequirement("需要 1 熔岩桶", ItemStack(Material.LAVA_BUCKET)),
-                VirtualRequirement(VirtualResourceType.WOOD, 120),
-                VirtualRequirement(VirtualResourceType.METAL, 30),
-                AbilityCondition(Ability.BUILDING,3)
+                setOf(),
+                setOf(ItemRequirement("需要 1 熔岩桶", ItemStack(Material.LAVA_BUCKET)),
+                    VirtualRequirement(VirtualResourceType.WOOD, 120),
+                    VirtualRequirement(VirtualResourceType.METAL, 30),
+                    AbilityCondition(Ability.BUILDING,3))
             )
         )
     }
