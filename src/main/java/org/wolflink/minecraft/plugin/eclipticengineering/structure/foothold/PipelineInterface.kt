@@ -43,7 +43,7 @@ class PipelineInterface private constructor(blueprint: GameStructureBlueprint, b
                 setOf(
                     GameStructureTag.ENERGY_REQUIRED
                 ),
-                setOf(),
+                setOf(VirtualRequirement(VirtualResourceType.STONE, 5)),
                 setOf(VirtualRequirement(VirtualResourceType.STONE, 15),
                     VirtualRequirement(VirtualResourceType.METAL,30),
                     AbilityCondition(Ability.BUILDING,3))

@@ -71,7 +71,9 @@ class SnowGolemTurret private constructor(blueprint: ElementalTurretBlueprint, b
                 2,
                 4..6,
                 16,
-                setOf(),
+                setOf(
+                    ItemRequirement("需要 1 陨铁矿石", SpecialIron.defaultItem.clone().apply { amount = 1 }),
+                ),
                 setOf(VirtualRequirement( VirtualResourceType.WOOD, 10),
                     VirtualRequirement( VirtualResourceType.STONE, 30),
                     VirtualRequirement(VirtualResourceType.METAL, 8),

@@ -68,7 +68,10 @@ class TowerArrow private constructor(blueprint: TowerArrowBlueprint, builder: Bu
                 2..5,
                 1,
                 0.5,
-                setOf(),
+                setOf(
+                    VirtualRequirement(VirtualResourceType.WOOD,8),
+                    VirtualRequirement(VirtualResourceType.STONE,4),
+                ),
                 setOf(VirtualRequirement(VirtualResourceType.WOOD,40),
                     VirtualRequirement(VirtualResourceType.STONE,20),
                     AbilityCondition(Ability.BUILDING,2))

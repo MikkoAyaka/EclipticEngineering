@@ -35,7 +35,7 @@ class EnchantRoom private constructor(
                 60,
                 5000,
                 setOf(),
-                setOf(),
+                setOf(VirtualRequirement(VirtualResourceType.STONE,10)),
                 setOf(VirtualRequirement(VirtualResourceType.STONE,40),
                     VirtualRequirement(VirtualResourceType.METAL,15),
                     ItemRequirement("需要 2 闪金矿石", SpecialGold.defaultItem.clone().apply { amount = 2 }),

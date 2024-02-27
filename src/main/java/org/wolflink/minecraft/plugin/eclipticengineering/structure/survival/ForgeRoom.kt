@@ -35,7 +35,7 @@ class ForgeRoom private constructor(
                 60,
                 5000,
                 setOf(),
-                setOf(),
+                setOf(VirtualRequirement(VirtualResourceType.STONE,15)),
                 setOf(VirtualRequirement(VirtualResourceType.STONE,60),
                     VirtualRequirement(VirtualResourceType.METAL,30),
                     ItemRequirement("需要 5 陨铁矿石", SpecialIron.defaultItem.clone().apply { amount = 5 }),

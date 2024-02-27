@@ -31,9 +31,12 @@ class MiningStation private constructor(blueprint: GameStructureBlueprint, build
                 setOf(
                     GameStructureTag.ENERGY_REQUIRED
                 ),
-                setOf(),
+                setOf(
+                    VirtualRequirement(VirtualResourceType.STONE, 30),
+                    VirtualRequirement(VirtualResourceType.METAL, 10)
+                ),
                 setOf(VirtualRequirement(VirtualResourceType.STONE, 90),
-                    VirtualRequirement(VirtualResourceType.METAL, 60),
+                    VirtualRequirement(VirtualResourceType.METAL, 50),
                     AbilityCondition(Ability.BUILDING,3))
             )
         )

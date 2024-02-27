@@ -94,7 +94,8 @@ class MiningPlace private constructor(blueprint: GameStructureBlueprint, builder
                     GameStructureTag.AMOUNT_LIMITED,
                     GameStructureTag.COMMON_RESOURCE_GENERATOR
                 ),
-                setOf(),
+                setOf(VirtualRequirement(VirtualResourceType.WOOD, 8),
+                    VirtualRequirement(VirtualResourceType.STONE, 8)),
                 setOf(VirtualRequirement(VirtualResourceType.WOOD, 30),
                     VirtualRequirement(VirtualResourceType.STONE, 30),
                     VirtualRequirement(VirtualResourceType.METAL, 30),

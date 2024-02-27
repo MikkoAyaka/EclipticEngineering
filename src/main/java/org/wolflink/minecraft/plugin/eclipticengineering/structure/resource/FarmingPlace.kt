@@ -94,7 +94,7 @@ class FarmingPlace private constructor(blueprint: GameStructureBlueprint, builde
                     GameStructureTag.AMOUNT_LIMITED,
                     GameStructureTag.COMMON_RESOURCE_GENERATOR
                 ),
-                setOf(),
+                setOf(VirtualRequirement(VirtualResourceType.WOOD, 15)),
                 setOf(ItemRequirement("需要 96 泥土", ItemStack(Material.DIRT, 96)),
                     VirtualRequirement(VirtualResourceType.WOOD, 60),
                     AbilityCondition(Ability.BUILDING,2))

@@ -33,7 +33,10 @@ class Lighthouse private constructor(
                 setOf(
                     GameStructureTag.ENERGY_SUPPLY
                 ),
-                setOf(),
+                setOf(
+                    VirtualRequirement(VirtualResourceType.STONE, 20),
+                    VirtualRequirement(VirtualResourceType.WOOD, 10)
+                ),
                 setOf(VirtualRequirement(VirtualResourceType.STONE, 150),
                     VirtualRequirement(VirtualResourceType.WOOD, 60),
                     VirtualRequirement(VirtualResourceType.METAL, 20),
