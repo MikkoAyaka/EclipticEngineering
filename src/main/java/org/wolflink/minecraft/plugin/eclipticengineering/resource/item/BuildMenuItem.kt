@@ -6,13 +6,13 @@ import org.bukkit.entity.Player
 import org.bukkit.event.player.PlayerInteractEvent
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
-import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.PRIMARY_TEXT_COLOR
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.Quality
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.SpecialItemType
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.abilityTable
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.createSpecialItem
 import org.wolflink.minecraft.plugin.eclipticengineering.papi.PlayerStructurePapi
 import org.wolflink.minecraft.plugin.eclipticstructure.META_STRUCTURE_ID
+import org.wolflink.minecraft.plugin.eclipticstructure.config.PRIMARY_TEXT_COLOR
 import org.wolflink.minecraft.plugin.eclipticstructure.esLogger
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.parsePapi
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureRepository

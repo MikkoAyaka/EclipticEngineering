@@ -5,14 +5,14 @@ import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
-import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.PRIMARY_TEXT_COLOR
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.Quality
-import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.SECONDARY_TEXT_COLOR
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.SpecialItemType
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.createSpecialItem
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.isDisguiser
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.playergoal.PlayerGoal
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.playergoal.PlayerGoalHolder
+import org.wolflink.minecraft.plugin.eclipticstructure.config.PRIMARY_TEXT_COLOR
+import org.wolflink.minecraft.plugin.eclipticstructure.config.SECONDARY_TEXT_COLOR
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 import java.util.*
 

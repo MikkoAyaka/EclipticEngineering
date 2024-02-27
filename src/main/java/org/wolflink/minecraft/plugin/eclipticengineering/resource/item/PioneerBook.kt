@@ -2,11 +2,11 @@ package org.wolflink.minecraft.plugin.eclipticengineering.resource.item
 
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
-import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.PRIMARY_TEXT_COLOR
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.Quality
-import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.SPLITER_COLOR
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.SpecialItemType
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.createSpecialItem
+import org.wolflink.minecraft.plugin.eclipticstructure.config.PRIMARY_TEXT_COLOR
+import org.wolflink.minecraft.plugin.eclipticstructure.config.SPLITER_COLOR
 
 object PioneerBook {
     val defaultItem: ItemStack = Material.BOOK.createSpecialItem(

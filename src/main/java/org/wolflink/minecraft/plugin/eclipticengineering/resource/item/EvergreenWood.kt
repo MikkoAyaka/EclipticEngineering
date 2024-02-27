@@ -1,10 +1,10 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.resource.item
 
 import org.bukkit.Material
-import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.PRIMARY_TEXT_COLOR
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.Quality
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.SpecialItemType
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.createSpecialItem
+import org.wolflink.minecraft.plugin.eclipticstructure.config.PRIMARY_TEXT_COLOR
 
 object EvergreenWood: SpecialItem(
     Material.STRIPPED_OAK_LOG.createSpecialItem(
