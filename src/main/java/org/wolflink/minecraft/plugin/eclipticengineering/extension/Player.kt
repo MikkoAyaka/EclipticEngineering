@@ -11,14 +11,12 @@ import org.wolflink.minecraft.plugin.eclipticengineering.ability.AbilityTable
 import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.DisguiserBook
-import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.PioneerBook
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 import java.time.Duration
 import java.util.UUID
 
 private val scriptKilledPlayers = mutableSetOf<UUID>()
 private val disguiserSet = mutableSetOf<UUID>()
-fun getDisguisers() = disguiserSet.mapNotNull { Bukkit.getPlayer(it) }
 private val abilityTableMap = mutableMapOf<UUID,AbilityTable>()
 val UUID.abilityTable
     get() = abilityTableMap.getOrPut(this) { AbilityTable(this) }
@@ -86,5 +84,7 @@ fun Player.asDisguiser() {
 }
 fun OfflinePlayer.isDisguiser() = this.uniqueId in disguiserSet
 fun Player.isGaming() = gameMode == GameMode.SURVIVAL && world.name != Config.lobbyWorldName
+val disguiserPlayers: Collection<Player> get() = disguiserSet.mapNotNull { Bukkit.getPlayer(it) }
 val gamingPlayers: Collection<Player> get() = onlinePlayers.filter { it.isGaming() }
+val pioneerPlayers: Collection<Player> get() = gamingPlayers.filter { !it.isDisguiser() }
 val onlinePlayers: Collection<Player> get() = Bukkit.getOnlinePlayers()

@@ -14,14 +14,21 @@ object PlayerGoalHolder : Listener {
     private val randomPlayerGoals = setOf(
         CantJump::class.java,
         DeathOfFalling::class.java,
-        EveryOneHitMe::class.java,
-        HitEveryOne::class.java,
+        SomeoneHitMe::class.java,
+        HitSomeone::class.java,
         LowerHead::class.java,
         PlaceShrieker::class.java,
         PreventBuildStructure::class.java,
         StayAtStructure::class.java,
         PlaceMeme::class.java,
-        EatRottenFlesh::class.java
+        EatRottenFlesh::class.java,
+        EatPufferfish::class.java,
+        LetSomeoneEatPufferfish::class.java,
+        CantSprint::class.java,
+        MustSprint::class.java,
+        FollowSomeone::class.java,
+        KeepAlone::class.java,
+        PickaxeKiller::class.java
     )
     // 完成次数
     private val finishCounter = mutableMapOf<UUID,AtomicInteger>()

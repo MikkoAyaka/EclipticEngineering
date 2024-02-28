@@ -31,11 +31,15 @@ abstract class PlayerGoal(val disguiser: Player,val difficulty: Difficulty) : Li
 
     fun formatDescription() = "${difficulty.color.toHexFormat()}${difficulty.displayName} $description"
     /**
-     * 该目标是否可以正常使用
+     * 该目标是否可以正常使用(可以在此处进行条件检测)
      */
     open fun available(): Boolean {
         return true
     }
+
+    /**
+     * 该目标当前是否已激活(启用相关检测)
+     */
     protected var enabled = false
         private set
     var status = Status.IN_PROGRESS
@@ -67,6 +71,7 @@ abstract class PlayerGoal(val disguiser: Player,val difficulty: Difficulty) : Li
         disguiser.sendActionBar("$MESSAGE_PREFIX 目标正在顺利进行".toComponent())
     }
     fun finished() {
+        if(!enabled) return
         if(Calendar.getInstance().timeInMillis - triggerTime.timeInMillis < 20 * 1000) return
         status = Status.FINISHED
         disguiser.playSound(disguiser,Sound.UI_TOAST_CHALLENGE_COMPLETE,0.5f,2f)
@@ -75,6 +80,7 @@ abstract class PlayerGoal(val disguiser: Player,val difficulty: Difficulty) : Li
         disable()
     }
     fun failed() {
+        if(!enabled) return
         if(Calendar.getInstance().timeInMillis - triggerTime.timeInMillis < 20 * 1000) return
         status = Status.FAILED
         disguiser.playSound(disguiser,Sound.ENTITY_WOLF_HOWL,0.5f,1.5f)
