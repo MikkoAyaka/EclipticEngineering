@@ -54,14 +54,9 @@ object AbilityPapi: PlaceholderExpansion() {
             }
         }
         when(params) {
-            "points_total" -> {
-                return player.abilityTable.totalPoints.toString()
-            }
-            "points_used" -> {
-                return player.abilityTable.usedPoints().toString()
-            }
-            "points_usable" -> {
-                return player.abilityTable.usablePoints().toString()
+            "occupation" -> {
+                val occupationType = player.abilityTable.occupationType ?: return "&7暂无"
+                return "&#${occupationType.color.toHex()}${occupationType.displayName}"
             }
         }
         return "未知变量"

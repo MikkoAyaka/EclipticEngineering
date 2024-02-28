@@ -21,6 +21,7 @@ object PlayerGoalHolder : Listener {
         PreventBuildStructure::class.java,
         StayAtStructure::class.java,
         PlaceMeme::class.java,
+        EatRottenFlesh::class.java
     )
     // 完成次数
     private val finishCounter = mutableMapOf<UUID,AtomicInteger>()
