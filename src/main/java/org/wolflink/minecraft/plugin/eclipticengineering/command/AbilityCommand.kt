@@ -8,11 +8,11 @@ import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
+import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.OccupationType
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.abilityTable
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
-import org.wolflink.minecraft.plugin.eclipticstructure.extension.toHex
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toHexFormat
-import java.lang.Exception
+import kotlin.Exception
 
 object AbilityCommand: CommandExecutor {
     fun register() {
@@ -21,6 +21,17 @@ object AbilityCommand: CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if(sender !is Player) return false
         return when (args.getOrNull(0)) {
+            "occupation" -> {
+                if(!sender.isOp) return false
+                val occupationName = args.getOrNull(1) ?: return false
+                val occupationType = try {
+                    OccupationType.valueOf(occupationName)
+                } catch (_: Exception){ return false }
+                sender.abilityTable.setOccupation(occupationType)
+                sender.playSound(sender,Sound.ENTITY_VILLAGER_YES,1f,1.25f)
+                sender.sendMessage("$MESSAGE_PREFIX <white>你的职业类型已被更改为 <green>${occupationType.color.toHexFormat()}${occupationType.displayName}".toComponent())
+                return true
+            }
             "set" -> {
                 if(!sender.isOp) return false
                 val abilityName = args.getOrNull(1) ?: return false
@@ -32,25 +43,26 @@ object AbilityCommand: CommandExecutor {
                 sender.playSound(sender,Sound.ENTITY_PLAYER_LEVELUP,1f,1.75f)
                 true
             }
-            "add" -> {
-                val abilityName = args.getOrNull(1) ?: return false
-                val ability = try { Ability.valueOf(abilityName.uppercase()) } catch (_: Exception){ return false }
-                if(!sender.abilityTable.hasPoint()) {
-                    sender.sendActionBar("$MESSAGE_PREFIX 你没有足够的能力点数了。".toComponent())
-                    sender.playSound(sender,Sound.ENTITY_VILLAGER_NO,1f,0.7f)
-                    return false
-                }
-                val abilityLevel = sender.abilityTable.getLevel(ability)
-                if(abilityLevel >= ability.maxLevel) {
-                    sender.sendActionBar("$MESSAGE_PREFIX <white>你的 ${ability.color.toHexFormat()}$ability <white>等级已达到上限，最大为 <green>${sender.abilityTable.getLevel(ability)}".toComponent())
-                    sender.playSound(sender,Sound.ENTITY_VILLAGER_NO,1f,0.7f)
-                    return false
-                }
-                sender.abilityTable.addAbility(ability)
-                sender.sendActionBar("$MESSAGE_PREFIX <white>你的 ${ability.color.toHexFormat()}$ability <white>等级已达到 <green>${sender.abilityTable.getLevel(ability)}".toComponent())
-                sender.playSound(sender,Sound.ENTITY_PLAYER_LEVELUP,1f,1.75f)
-                true
-            }
+//            "add" -> {
+//                if(!sender.isOp) return false
+//                val abilityName = args.getOrNull(1) ?: return false
+//                val ability = try { Ability.valueOf(abilityName.uppercase()) } catch (_: Exception){ return false }
+//                if(!sender.abilityTable.hasPoint()) {
+//                    sender.sendActionBar("$MESSAGE_PREFIX 你没有足够的能力点数了。".toComponent())
+//                    sender.playSound(sender,Sound.ENTITY_VILLAGER_NO,1f,0.7f)
+//                    return false
+//                }
+//                val abilityLevel = sender.abilityTable.getLevel(ability)
+//                if(abilityLevel >= ability.maxLevel) {
+//                    sender.sendActionBar("$MESSAGE_PREFIX <white>你的 ${ability.color.toHexFormat()}$ability <white>等级已达到上限，最大为 <green>${sender.abilityTable.getLevel(ability)}".toComponent())
+//                    sender.playSound(sender,Sound.ENTITY_VILLAGER_NO,1f,0.7f)
+//                    return false
+//                }
+//                sender.abilityTable.addAbility(ability)
+//                sender.sendActionBar("$MESSAGE_PREFIX <white>你的 ${ability.color.toHexFormat()}$ability <white>等级已达到 <green>${sender.abilityTable.getLevel(ability)}".toComponent())
+//                sender.playSound(sender,Sound.ENTITY_PLAYER_LEVELUP,1f,1.75f)
+//                true
+//            }
             else -> false
         }
     }

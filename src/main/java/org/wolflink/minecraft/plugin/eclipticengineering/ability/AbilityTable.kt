@@ -3,6 +3,7 @@ package org.wolflink.minecraft.plugin.eclipticengineering.ability
 import org.bukkit.Bukkit
 import org.bukkit.Sound
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
+import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.OccupationType
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.isDisguiser
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.toRoma
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
@@ -14,17 +15,29 @@ import java.util.UUID
  * 存放关于玩家的能力数据
  */
 class AbilityTable(val ownerUuid: UUID) {
-    val totalPoints = 9
+    var occupationType: OccupationType? = null
+        private set
     private val map = EnumMap<Ability,Int>(Ability::class.java)
     init {
         Ability.entries.forEach { map[it] = 0 }
     }
-    fun usedPoints() = map.values.reduce(Int::plus)
-    fun usablePoints() = totalPoints - usedPoints()
+
     /**
-     * 判断玩家是否有剩余能力点数
+     * 设置玩家的职业类型
      */
-    fun hasPoint() = map.values.reduce(Int::plus) < totalPoints
+    fun setOccupation(occupationType: OccupationType) {
+        this.occupationType = occupationType
+        reset()
+        occupationType.abilityData.forEach { (type, level) ->
+            setAbility(type,level)
+        }
+    }
+    /**
+     * 重置所有天赋
+     */
+    fun reset() {
+        Ability.entries.forEach { map[it] = 0 }
+    }
     fun setAbility(abilityType: Ability,abilityLevel: Int) {
         map[abilityType] = abilityLevel
     }
