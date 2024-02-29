@@ -8,8 +8,8 @@ import org.wolflink.minecraft.plugin.eclipticengineering.extension.createSpecial
 import org.wolflink.minecraft.plugin.eclipticstructure.config.PRIMARY_TEXT_COLOR
 import org.wolflink.minecraft.plugin.eclipticstructure.config.SPLITER_COLOR
 
-object PioneerBook {
-    val defaultItem: ItemStack = Material.BOOK.createSpecialItem(
+object PioneerBook: SpecialItem(
+    Material.BOOK.createSpecialItem(
         SpecialItemType.SPECIAL_ITEM,
         Quality.UNIQUE,
         "开拓者 帮助手册",
@@ -38,4 +38,4 @@ object PioneerBook {
             "",
         )
     )
-}
+)

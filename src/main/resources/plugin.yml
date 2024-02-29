@@ -19,5 +19,7 @@ commands:
     aliases: eev
   ee-gamestructure:
     aliases: eegs
+  ee-resource:
+    aliases: eer
   ee-forge:
     aliases: eef

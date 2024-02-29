@@ -43,6 +43,7 @@ class EclipticEngineering : JavaPlugin() {
         VoteCommand.register()
         GameStructureCommand.register()
         ForgeCommand.register()
+        ResourceCommand.register()
         // 注册可用的建筑结构
         StructureType.entries.forEach(StructureType::register)
         // 注册事件监听器
