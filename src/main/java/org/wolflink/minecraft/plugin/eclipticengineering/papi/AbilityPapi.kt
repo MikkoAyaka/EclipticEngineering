@@ -11,8 +11,6 @@ import org.wolflink.minecraft.plugin.eclipticstructure.extension.toHex
  * %eea_level_xxxxx%
  * %eea_maxlevel_xxxxx%
  * %eea_displayname_xxxxx%
- * %eea_points_used%
- * %eea_points_usable%
  */
 object AbilityPapi: PlaceholderExpansion() {
     override fun getIdentifier() = "eea"

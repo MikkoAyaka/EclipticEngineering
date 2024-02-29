@@ -17,7 +17,7 @@ enum class OccupationType(val displayName: String,val color: Color,val abilityDa
         Ability.COMBAT to 3,
         Ability.LOGGING to 1
     )),
-    MINER("一般路过打灰仔",Color.fromRGB(139,101,8),mapOf(
+    MINER("一般路过打灰仔",Color.fromRGB(131,255,135),mapOf(
         Ability.FARMING to 2,
         Ability.MINING to 2,
         Ability.LOGGING to 2,

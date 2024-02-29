@@ -30,6 +30,8 @@ object AbilityCommand: CommandExecutor {
                 sender.abilityTable.setOccupation(occupationType)
                 sender.playSound(sender,Sound.ENTITY_VILLAGER_YES,1f,1.25f)
                 sender.sendMessage("$MESSAGE_PREFIX <white>你的职业类型已被更改为 <green>${occupationType.color.toHexFormat()}${occupationType.displayName}".toComponent())
+                sender.playerListName("${occupationType.color.toHexFormat()}${occupationType.displayName} <white>${sender.name}".toComponent())
+                sender.displayName("${occupationType.color.toHexFormat()}${occupationType.displayName} <white>${sender.name}".toComponent())
                 return true
             }
             "set" -> {
