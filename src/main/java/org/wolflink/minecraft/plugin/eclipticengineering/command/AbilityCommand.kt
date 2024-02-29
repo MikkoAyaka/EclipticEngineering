@@ -19,19 +19,19 @@ object AbilityCommand: CommandExecutor {
         Bukkit.getPluginCommand("ee-ability")?.setExecutor(this)
     }
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        if(sender !is Player) return false
+        if(!sender.isOp) return false
         return when (args.getOrNull(0)) {
             "occupation" -> {
-                if(!sender.isOp) return false
                 val occupationName = args.getOrNull(1) ?: return false
                 val occupationType = try {
                     OccupationType.valueOf(occupationName)
                 } catch (_: Exception){ return false }
-                sender.abilityTable.setOccupation(occupationType)
-                sender.playSound(sender,Sound.ENTITY_VILLAGER_YES,1f,1.25f)
-                sender.sendMessage("$MESSAGE_PREFIX <white>你的职业类型已被更改为 <green>${occupationType.color.toHexFormat()}${occupationType.displayName}".toComponent())
-                sender.playerListName("${occupationType.color.toHexFormat()}${occupationType.displayName} <white>${sender.name}".toComponent())
-                sender.displayName("${occupationType.color.toHexFormat()}${occupationType.displayName} <white>${sender.name}".toComponent())
+                val player = Bukkit.getPlayer(args.getOrElse(2){""}) ?: return false
+                player.abilityTable.setOccupation(occupationType)
+                player.playSound(player,Sound.ENTITY_VILLAGER_YES,1f,1.25f)
+                player.sendMessage("$MESSAGE_PREFIX <white>你的职业类型已被更改为 <green>${occupationType.color.toHexFormat()}${occupationType.displayName}".toComponent())
+                player.playerListName("${occupationType.color.toHexFormat()}${occupationType.displayName} <white>${player.name}".toComponent())
+                player.displayName("${occupationType.color.toHexFormat()}${occupationType.displayName} <white>${player.name}".toComponent())
                 return true
             }
             "set" -> {
@@ -42,7 +42,6 @@ object AbilityCommand: CommandExecutor {
                 val ability = try { Ability.valueOf(abilityName.uppercase()) } catch (_: Exception){ return false }
                 val player = Bukkit.getOfflinePlayer(playerName).apply { abilityTable.setAbility(ability,abilityLevel) }
                 sender.sendMessage("$MESSAGE_PREFIX <white>${player.name} 的 ${ability.color.toHexFormat()}$ability <white>等级已被设置为 <green>$abilityLevel".toComponent())
-                sender.playSound(sender,Sound.ENTITY_PLAYER_LEVELUP,1f,1.75f)
                 true
             }
 //            "add" -> {
