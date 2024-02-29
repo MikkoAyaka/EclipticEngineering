@@ -14,6 +14,7 @@ class WaitStage(stageHolder: StageHolder): Stage("等待阶段",stageHolder) {
         initGameRule()
         taskId = Bukkit.getScheduler().runTaskTimer(EclipticEngineering.instance, Runnable {
             Bukkit.getOnlinePlayers().forEach {
+                it.addPotionEffect(PotionEffect(PotionEffectType.REGENERATION,20 * 3,4))
                 it.addPotionEffect(PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,20 * 3,4))
                 it.addPotionEffect(PotionEffect(PotionEffectType.SATURATION,1,0))
             }

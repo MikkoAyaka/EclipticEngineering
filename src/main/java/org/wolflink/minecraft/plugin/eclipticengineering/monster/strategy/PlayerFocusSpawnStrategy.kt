@@ -88,7 +88,7 @@ class PlayerFocusSpawnStrategy(spawnerAttribute: SpawnerAttribute) : SpawnStrate
                 } else if (entity is Monster) {
                     AttributeAPI.multiplyAttribute(
                         entity, "pf_health",
-                        Attribute.GENERIC_MAX_HEALTH, spawnerAttribute.movementMultiple
+                        Attribute.GENERIC_MAX_HEALTH, spawnerAttribute.healthMultiple
                     )
                     entity.health = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!.value
                     AttributeAPI.multiplyAttribute(
