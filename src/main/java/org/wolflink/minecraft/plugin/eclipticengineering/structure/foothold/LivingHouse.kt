@@ -74,8 +74,8 @@ class LivingHouse private constructor(
                         else block.world.playSound(block.location,Sound.BLOCK_BAMBOO_WOOD_DOOR_CLOSE,1f,1f)
                     }
                 }
-                // 玩家还没有绑定铁门
-                else if(doorBlock == null) {
+                // 玩家还没有绑定铁门，并且交互的铁门也没有被绑定
+                else if(doorBlock == null && block !in doorOwners.values && block.getRelative(0,1,0) !in doorOwners.values && block.getRelative(0,-1,0) !in doorOwners.values) {
                     doorOwners[e.player] = block
                     e.player.sendMessage("$MESSAGE_PREFIX 你使用钥匙打开了这扇门，这个房间是你的了。".toComponent())
                     e.player.playSound(e.player, Sound.ENTITY_VILLAGER_YES,1f,1.5f)

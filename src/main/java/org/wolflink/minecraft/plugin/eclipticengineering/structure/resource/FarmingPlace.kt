@@ -72,6 +72,7 @@ class FarmingPlace private constructor(blueprint: GameStructureBlueprint, builde
     }
     override fun onBlockBreak(e: BlockBreakEvent) {
         if(e.block.location in cropLocations && e.block.blockData is Ageable) {
+            if((e.block.blockData as Ageable).run { age != maximumAge }) return
             generateResource(e.block.location,e.block.type)
             e.isCancelled = false
             e.isDropItems = true
