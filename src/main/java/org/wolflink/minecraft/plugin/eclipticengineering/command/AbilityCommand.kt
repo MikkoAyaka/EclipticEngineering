@@ -10,6 +10,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.OccupationType
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.abilityTable
+import org.wolflink.minecraft.plugin.eclipticengineering.extension.updateOccupationDisplayName
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toHexFormat
 import kotlin.Exception
@@ -30,8 +31,7 @@ object AbilityCommand: CommandExecutor {
                 player.abilityTable.setOccupation(occupationType)
                 player.playSound(player,Sound.ENTITY_VILLAGER_YES,1f,1.25f)
                 player.sendMessage("$MESSAGE_PREFIX <white>你的职业类型已被更改为 <green>${occupationType.color.toHexFormat()}${occupationType.displayName}".toComponent())
-                player.playerListName("${occupationType.color.toHexFormat()}${occupationType.displayName} <white>${player.name}".toComponent())
-                player.displayName("${occupationType.color.toHexFormat()}${occupationType.displayName} <white>${player.name}".toComponent())
+                player.updateOccupationDisplayName()
                 return true
             }
             "set" -> {

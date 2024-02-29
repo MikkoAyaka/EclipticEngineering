@@ -9,11 +9,11 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.reset
+import org.wolflink.minecraft.plugin.eclipticengineering.extension.updateOccupationDisplayName
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.MainMenuItem
-import org.wolflink.minecraft.wolfird.framework.bukkit.attribute.ModifierData
 import java.util.UUID
 
-object FirstJoinListener: Listener {
+object PlayerJoinListener: Listener {
     // 缓存列表，玩家进入服务器后会被记录到该列表，直至服务器重启
     private val cacheSet = mutableSetOf<UUID>()
     private fun firstJoin(player: Player) {
@@ -30,6 +30,7 @@ object FirstJoinListener: Listener {
     @EventHandler
     fun on(e: PlayerJoinEvent) {
         val uuid = e.player.uniqueId
+        e.player.updateOccupationDisplayName()
         if(!cacheSet.contains(uuid)) {
             cacheSet.add(uuid)
             firstJoin(e.player)

@@ -12,6 +12,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.DisguiserBook
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
+import org.wolflink.minecraft.plugin.eclipticstructure.extension.toHexFormat
 import java.time.Duration
 import java.util.UUID
 
@@ -88,3 +89,12 @@ val disguiserPlayers: Collection<Player> get() = disguiserSet.mapNotNull { Bukki
 val gamingPlayers: Collection<Player> get() = onlinePlayers.filter { it.isGaming() }
 val pioneerPlayers: Collection<Player> get() = gamingPlayers.filter { !it.isDisguiser() }
 val onlinePlayers: Collection<Player> get() = Bukkit.getOnlinePlayers()
+
+/**
+ * 更新玩家职业展示名称(TAB、聊天框)
+ */
+fun Player.updateOccupationDisplayName() {
+    val occupationType = abilityTable.occupationType ?: return
+    playerListName("${occupationType.color.toHexFormat()}${occupationType.displayName} <white>${name}".toComponent())
+    displayName("${occupationType.color.toHexFormat()}${occupationType.displayName} <white>${name}".toComponent())
+}

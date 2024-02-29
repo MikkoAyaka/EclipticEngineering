@@ -58,7 +58,7 @@ class EclipticEngineering : JavaPlugin() {
         SmartAIListener.register(this)
         FertilizeListener.register(this)
         PlayerDeathListener.register(this)
-        FirstJoinListener.register(this)
+        PlayerJoinListener.register(this)
         BuilderListener.register(this)
         PlayerGoalHolder.register(this)
         DisguiserNotice.register(this)
