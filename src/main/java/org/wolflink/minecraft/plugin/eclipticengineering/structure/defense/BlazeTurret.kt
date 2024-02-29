@@ -1,5 +1,6 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.structure.defense
 
+import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.Particle
@@ -10,6 +11,7 @@ import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.SmallFireball
 import org.bukkit.inventory.ItemStack
 import org.bukkit.util.Vector
+import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ElementalTurretBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
@@ -39,8 +41,10 @@ class BlazeTurret private constructor(blueprint: ElementalTurretBlueprint, build
             this as SmallFireball
             direction = vector.normalize().multiply(1.2)
             yield = 0f
+            setIsIncendiary(false)
             MetadataModifier.modifyDamage(this, damage)
             withParticle(Particle.SMALL_FLAME)
+            EclipticEngineering.runTaskLater(40L) { remove() }
         }
     }
 

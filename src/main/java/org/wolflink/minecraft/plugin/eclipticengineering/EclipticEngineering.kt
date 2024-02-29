@@ -31,6 +31,9 @@ class EclipticEngineering : JavaPlugin() {
         fun runTask(block: ()->Unit) {
             Bukkit.getScheduler().runTask(instance,block)
         }
+        fun runTaskLater(delay: Long,block: ()->Unit) {
+            Bukkit.getScheduler().runTaskLater(instance,block,delay)
+        }
     }
     override fun onLoad() {
         instance = this

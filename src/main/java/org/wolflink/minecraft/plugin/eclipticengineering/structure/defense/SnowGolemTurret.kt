@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import org.bukkit.util.Vector
+import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ElementalTurretBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
@@ -43,6 +44,7 @@ class SnowGolemTurret private constructor(blueprint: ElementalTurretBlueprint, b
             withParticle(Particle.SNOWFLAKE)
             MetadataModifier.modifyEffect(this, PotionEffect(PotionEffectType.SLOW, 40, 1, false, false))
             MetadataModifier.modifyDamage(this, damage)
+            EclipticEngineering.runTaskLater(40L) { remove() }
         }
     }
 
