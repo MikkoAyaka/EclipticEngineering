@@ -12,6 +12,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.SpecialGo
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.SpecialIron
 import org.wolflink.minecraft.plugin.eclipticengineering.utils.toRandomDistribution
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.parsePapi
+import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 
 object ForgeHandler {
     val weaponConditions = setOf<Requirement>(
@@ -41,21 +42,23 @@ object ForgeHandler {
     fun forgeWeapon(player: Player) {
         // 不满足条件
         if(weaponConditions.any { !it.isSatisfy(player) }) {
-            player.sendMessage("$MESSAGE_PREFIX 你缺少必要的锻造材料进行锻造。")
+            player.sendMessage("$MESSAGE_PREFIX 你缺少必要的锻造材料进行锻造。".toComponent())
             player.playSound(player, Sound.ENTITY_VILLAGER_NO,1f,1f)
+            return
         }
         weaponConditions.forEach { it.delivery(player) }
-        player.sendMessage("$MESSAGE_PREFIX 锻造成功。")
+        player.sendMessage("$MESSAGE_PREFIX 锻造成功。".toComponent())
         player.playSound(player, Sound.ENTITY_VILLAGER_YES,1f,1f)
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), randomWeaponCommand.random().parsePapi(player))
     }
     fun forgeRepair(player: Player) {
         if(repairConditions.any{ !it.isSatisfy(player) }) {
-            player.sendMessage("$MESSAGE_PREFIX 你缺少必要的锻造材料进行锻造。")
+            player.sendMessage("$MESSAGE_PREFIX 你缺少必要的锻造材料进行锻造。".toComponent())
             player.playSound(player, Sound.ENTITY_VILLAGER_NO,1f,1f)
+            return
         }
         repairConditions.forEach { it.delivery(player) }
-        player.sendMessage("$MESSAGE_PREFIX 锻造成功。")
+        player.sendMessage("$MESSAGE_PREFIX 锻造成功。".toComponent())
         player.playSound(player, Sound.ENTITY_VILLAGER_YES,1f,1f)
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), randomRepairCommand.random().parsePapi(player))
     }

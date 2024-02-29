@@ -17,13 +17,13 @@ enum class OccupationType(val displayName: String,val color: Color,val abilityDa
         Ability.COMBAT to 3,
         Ability.LOGGING to 1
     )),
-    MINER("一般路过打灰仔",Color.fromRGB(240,255,240),mapOf(
+    MINER("一般路过打灰仔",Color.fromRGB(139,101,8),mapOf(
         Ability.FARMING to 2,
         Ability.MINING to 2,
         Ability.LOGGING to 2,
         Ability.COMBAT to 1,
     )),
-    BLACKSMITH("千锤百炼大胡子", Color.fromRGB(238,238,209), mapOf(
+    BLACKSMITH("千锤百炼大胡子", Color.fromRGB(255,193,37), mapOf(
         Ability.ENGINEERING to 2,
         Ability.SMELTING to 2,
         Ability.COMBAT to 3,
