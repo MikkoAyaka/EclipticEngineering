@@ -30,7 +30,7 @@ object StrategyDecider {
     /**
      * 判断抱团的半径(格)
      */
-    private const val HUDDLE_RADIUS = 8
+    private const val HUDDLE_RADIUS = 15
     private lateinit var spawnerAttribute: SpawnerAttribute
     private val subScheduler: SubScheduler = SubScheduler()
 
@@ -112,7 +112,7 @@ object StrategyDecider {
     }
 
     private fun getEfficiencyReduction(playerAmount: Int): Double {
-        return 1 - (1.25 * ln(playerAmount.toDouble()) + 1.0) / playerAmount
+        return 1 - (0.9 * ln(playerAmount.toDouble()) + 1.0) / playerAmount
     }
 
     private fun getHuddlePlayersAmount(location: Location): Int {

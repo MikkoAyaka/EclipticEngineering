@@ -17,7 +17,7 @@ class SpawnerAttribute(eeDifficulty: EEDifficulty) {
         private set
         get() {
             // 夜晚刷怪效率增加
-            return if(DayNightHandler.status == DayNightHandler.Status.NIGHT) (field / 1.8).toInt()
+            return if(DayNightHandler.status == DayNightHandler.Status.NIGHT) (field / 1.6).toInt()
             else field
         }
     private val weightMap: MutableMap<EntityType, Int> = EnumMap(EntityType::class.java)
@@ -39,21 +39,6 @@ class SpawnerAttribute(eeDifficulty: EEDifficulty) {
 
     init {
         when (eeDifficulty) {
-            EEDifficulty.EASY -> { // 轻松
-                healthMultiple = 0.5
-                movementMultiple = 0.8
-                damageMultiple = 0.5
-                spawnPeriodSecs = 30
-                weightMap[EntityType.ZOMBIE] = 50
-                weightMap[EntityType.HUSK] = 50
-                weightMap[EntityType.ZOMBIE_VILLAGER] = 50
-                weightMap[EntityType.SKELETON] = 20
-                weightMap[EntityType.STRAY] = 20
-                weightMap[EntityType.SILVERFISH] = 20
-                weightMap[EntityType.SPIDER] = 40
-                weightMap[EntityType.CREEPER] = 20
-            }
-
             EEDifficulty.NORMAL -> { // 常规
                 healthMultiple = 0.8
                 movementMultiple = 1.0
@@ -68,42 +53,8 @@ class SpawnerAttribute(eeDifficulty: EEDifficulty) {
                 weightMap[EntityType.SPIDER] = 40
                 weightMap[EntityType.CREEPER] = 20
             }
-
-            EEDifficulty.HARD -> { // 困难
-                healthMultiple = 1.05
-                movementMultiple = 1.1
-                damageMultiple = 1.0
-                spawnPeriodSecs = 16
-                weightMap[EntityType.ZOMBIE] = 45
-                weightMap[EntityType.HUSK] = 45
-                weightMap[EntityType.ZOMBIE_VILLAGER] = 45
-                weightMap[EntityType.SKELETON] = 20
-                weightMap[EntityType.STRAY] = 20
-                weightMap[EntityType.SILVERFISH] = 20
-                weightMap[EntityType.SPIDER] = 40
-                weightMap[EntityType.CREEPER] = 20
-                weightMap[EntityType.VEX] = 4
-                weightMap[EntityType.VINDICATOR] = 5
-                weightMap[EntityType.WITCH] = 5
-                weightMap[EntityType.RABBIT] = 1
-            }
-            EEDifficulty.HADES -> { // 专家
-                healthMultiple = 1.25
-                movementMultiple = 1.25
-                damageMultiple = 1.2
-                spawnPeriodSecs = 12
-                weightMap[EntityType.ZOMBIE] = 40
-                weightMap[EntityType.HUSK] = 40
-                weightMap[EntityType.ZOMBIE_VILLAGER] = 40
-                weightMap[EntityType.SKELETON] = 20
-                weightMap[EntityType.STRAY] = 20
-                weightMap[EntityType.SILVERFISH] = 20
-                weightMap[EntityType.SPIDER] = 40
-                weightMap[EntityType.CREEPER] = 20
-                weightMap[EntityType.VINDICATOR] = 5
-                weightMap[EntityType.VEX] = 4
-                weightMap[EntityType.WITCH] = 5
-                weightMap[EntityType.RABBIT] = 1
+            else -> {
+                throw IllegalArgumentException("暂不支持的难度 ${eeDifficulty.displayName}")
             }
         }
     }
