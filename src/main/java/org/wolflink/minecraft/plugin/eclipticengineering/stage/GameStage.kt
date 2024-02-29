@@ -3,6 +3,7 @@ package org.wolflink.minecraft.plugin.eclipticengineering.stage
 import org.bukkit.Bukkit
 import org.bukkit.Difficulty
 import org.bukkit.GameMode
+import org.bukkit.permissions.PermissionAttachment
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
@@ -35,6 +36,12 @@ class GameStage(stageHolder: StageHolder): Stage("游戏阶段",stageHolder) {
                 it.activePotionEffects.forEach { potion -> it.removePotionEffect(potion.type) }
                 it.addPotionEffect(PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,20 * 10,4,false,false))
                 it.addPotionEffect(PotionEffect(PotionEffectType.REGENERATION,20 * 10,4,false,false))
+                // 设置权限，对接 RPG-PRO 插件
+                if(it.abilityTable.hasAbility(Ability.COMBAT,3)) {
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(),"lp user ${it.name} permission set quantumrpg.class.战斗III true")
+                } else {
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(),"lp user ${it.name} permission unset quantumrpg.class.战斗III")
+                }
             }
 
         // 启用刷怪

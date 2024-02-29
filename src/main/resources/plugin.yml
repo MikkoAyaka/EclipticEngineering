@@ -7,6 +7,7 @@ depend:
   - EclipticStructure
   - WolfirdFramework
   - Citizens
+  - ProRPGItems
 commands:
   ee-build:
     aliases: eeb
@@ -18,3 +19,5 @@ commands:
     aliases: eev
   ee-gamestructure:
     aliases: eegs
+  ee-forge:
+    aliases: eef

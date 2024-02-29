@@ -22,6 +22,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequ
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructureTag
 import org.wolflink.minecraft.plugin.eclipticengineering.utils.RandomAPI
+import org.wolflink.minecraft.plugin.eclipticengineering.utils.toRandomDistribution
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureAvailableEvent
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureCompletedEvent
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.IStructureListener
@@ -75,9 +76,7 @@ class MiningPlace private constructor(blueprint: GameStructureBlueprint, builder
             Material.REDSTONE_ORE to 4,
             Material.LAPIS_ORE to 4,
             Material.DIAMOND_ORE to 2
-        ).flatMap { (material, count) ->
-            List(count) { material }
-        }.shuffled()
+        ).toRandomDistribution()
         private const val STRUCTURE_NAME = "采矿场"
         override fun supplier(blueprint: Blueprint, builder: Builder): MiningPlace {
             return MiningPlace(blueprint as GameStructureBlueprint, builder)

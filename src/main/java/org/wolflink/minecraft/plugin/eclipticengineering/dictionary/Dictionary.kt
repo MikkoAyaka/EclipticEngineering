@@ -45,6 +45,14 @@ val HOE_MATERIAL = setOf(
     Material.WOODEN_HOE,
     Material.STONE_HOE,
 )
+val SWORD_MATERIAL = setOf(
+    Material.DIAMOND_SWORD,
+    Material.IRON_SWORD,
+    Material.GOLDEN_SWORD,
+    Material.NETHERITE_SWORD,
+    Material.WOODEN_SWORD,
+    Material.STONE_SWORD
+)
 val FURNACE_MATERIAL = setOf(
     Material.FURNACE,
     Material.BLAST_FURNACE
@@ -60,6 +68,37 @@ val AUXILIARY_MATERIAL = setOf(
 val REMOTE_WEAPON_MATERIAL = setOf(
     Material.BOW,
     Material.CROSSBOW
+)
+val ARMOR_MATERIAL = setOf(
+    Material.LEATHER_BOOTS,
+    Material.LEATHER_CHESTPLATE,
+    Material.LEATHER_LEGGINGS,
+    Material.LEATHER_HELMET,
+
+    Material.CHAINMAIL_BOOTS,
+    Material.CHAINMAIL_CHESTPLATE,
+    Material.CHAINMAIL_LEGGINGS,
+    Material.CHAINMAIL_HELMET,
+
+    Material.IRON_BOOTS,
+    Material.IRON_CHESTPLATE,
+    Material.IRON_LEGGINGS,
+    Material.IRON_HELMET,
+
+    Material.GOLDEN_BOOTS,
+    Material.GOLDEN_CHESTPLATE,
+    Material.GOLDEN_LEGGINGS,
+    Material.GOLDEN_HELMET,
+
+    Material.DIAMOND_BOOTS,
+    Material.DIAMOND_CHESTPLATE,
+    Material.DIAMOND_LEGGINGS,
+    Material.DIAMOND_HELMET,
+
+    Material.NETHERITE_BOOTS,
+    Material.NETHERITE_CHESTPLATE,
+    Material.NETHERITE_LEGGINGS,
+    Material.NETHERITE_HELMET
 )
 val HARVESTABLE_CROP_MATERIAL = setOf(
     Material.WHEAT,
@@ -124,6 +163,8 @@ fun Material.isVirtualResource() = this in VIRTUAL_RESOURCE_MATERIAL
 fun Material.isRemoteWeapon() = this in REMOTE_WEAPON_MATERIAL
 fun Material.isAuxiliaryBlock() = this in AUXILIARY_MATERIAL
 fun Material.isFurnace() = this in FURNACE_MATERIAL
+fun Material.isSword() = this in SWORD_MATERIAL
+fun Material.isArmor() = this in ARMOR_MATERIAL
 fun Material.isHoe() = this in HOE_MATERIAL
 fun Material.isAxe() = this in AXE_MATERIAL
 fun Material.isPickaxe() = this in PICKAXE_MATERIAL
