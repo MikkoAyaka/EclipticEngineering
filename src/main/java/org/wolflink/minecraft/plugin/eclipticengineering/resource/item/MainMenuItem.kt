@@ -13,6 +13,7 @@ import org.wolflink.minecraft.plugin.eclipticstructure.config.PRIMARY_TEXT_COLOR
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.parsePapi
 
 object MainMenuItem: InteractiveItem(
+    "幽光回响终端",
     Material.SCULK_SHRIEKER.createSpecialItem(
         SpecialItemType.SPECIAL_ITEM,
         Quality.EXQUISITE,

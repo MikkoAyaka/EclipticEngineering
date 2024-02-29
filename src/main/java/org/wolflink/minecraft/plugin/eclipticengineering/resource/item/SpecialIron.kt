@@ -7,6 +7,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.extension.createSpecial
 import org.wolflink.minecraft.plugin.eclipticstructure.config.PRIMARY_TEXT_COLOR
 
 object SpecialIron: SpecialItem(
+    "陨铁矿石",
     Material.RAW_IRON.createSpecialItem(
         SpecialItemType.SPECIAL_RESOURCE,
         Quality.RARE,

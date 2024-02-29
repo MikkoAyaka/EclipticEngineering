@@ -16,6 +16,7 @@ import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 import java.util.Calendar
 
 object TaskBook: InteractiveItem(
+    "任务书",
     Material.BOOK.createSpecialItem(
         SpecialItemType.SPECIAL_ITEM,
         Quality.UNIQUE,

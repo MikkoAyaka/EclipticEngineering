@@ -9,6 +9,7 @@ import org.wolflink.minecraft.plugin.eclipticstructure.config.PRIMARY_TEXT_COLOR
 import org.wolflink.minecraft.plugin.eclipticstructure.config.SPLITER_COLOR
 
 object PioneerBook: SpecialItem(
+    "开拓者 帮助手册",
     Material.BOOK.createSpecialItem(
         SpecialItemType.SPECIAL_ITEM,
         Quality.UNIQUE,

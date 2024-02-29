@@ -11,7 +11,7 @@ import org.bukkit.inventory.meta.ItemMeta
  * 可交互物品
  * 需要注册监听器
  */
-abstract class InteractiveItem(defaultItem: ItemStack, private val cancelInteract: Boolean = false): SpecialItem(defaultItem), Listener {
+abstract class InteractiveItem(itemName: String,defaultItem: ItemStack, private val cancelInteract: Boolean = false): SpecialItem(itemName,defaultItem), Listener {
     protected var lastUpdateMeta: ItemMeta = defaultItem.itemMeta
     protected open fun onRightClick(e: PlayerInteractEvent) {}
     protected open fun onLeftClick(e: PlayerInteractEvent) {}

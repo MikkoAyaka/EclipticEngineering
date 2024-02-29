@@ -7,6 +7,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.extension.createSpecial
 import org.wolflink.minecraft.plugin.eclipticstructure.config.PRIMARY_TEXT_COLOR
 
 object SpecialGold: SpecialItem(
+    "闪金矿石",
     Material.RAW_GOLD.createSpecialItem(
         SpecialItemType.SPECIAL_RESOURCE,
         Quality.EXQUISITE,

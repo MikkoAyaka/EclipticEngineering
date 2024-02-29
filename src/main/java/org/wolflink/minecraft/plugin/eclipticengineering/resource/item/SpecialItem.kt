@@ -7,6 +7,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 
 open class SpecialItem(
+    val itemName: String,
     val defaultItem: ItemStack
 ) {
     fun give(player: Player) {

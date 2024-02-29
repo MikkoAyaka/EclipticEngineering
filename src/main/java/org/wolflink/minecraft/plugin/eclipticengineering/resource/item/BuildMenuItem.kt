@@ -19,6 +19,7 @@ import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureRepos
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.Structure
 
 object BuildMenuItem: InteractiveItem(
+    "幽光万华镜",
     Material.SPYGLASS.createSpecialItem(
         SpecialItemType.SPECIAL_ITEM,
         Quality.EXQUISITE,

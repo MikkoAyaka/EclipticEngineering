@@ -17,6 +17,7 @@ import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 import java.util.*
 
 object DisguiserBook : InteractiveItem(
+    "幽匿伪装者 帮助手册",
     Material.BOOK.createSpecialItem(
         SpecialItemType.SPECIAL_ITEM,
         Quality.UNIQUE,

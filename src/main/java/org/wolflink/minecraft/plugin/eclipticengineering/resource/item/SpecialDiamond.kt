@@ -7,6 +7,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.extension.createSpecial
 import org.wolflink.minecraft.plugin.eclipticstructure.config.PRIMARY_TEXT_COLOR
 
 object SpecialDiamond: SpecialItem(
+    "辉晶矿石",
     Material.DIAMOND.createSpecialItem(
     SpecialItemType.SPECIAL_RESOURCE,
     Quality.EPIC,

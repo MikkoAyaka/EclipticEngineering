@@ -7,6 +7,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.extension.createSpecial
 import org.wolflink.minecraft.plugin.eclipticstructure.config.PRIMARY_TEXT_COLOR
 
 object EvergreenWood: SpecialItem(
+    "永翠木",
     Material.STRIPPED_OAK_LOG.createSpecialItem(
         SpecialItemType.SPECIAL_RESOURCE,
         Quality.RARE,
