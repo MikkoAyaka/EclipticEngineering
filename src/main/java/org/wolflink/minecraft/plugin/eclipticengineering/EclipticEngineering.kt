@@ -29,6 +29,9 @@ import org.wolflink.minecraft.plugin.eclipticstructure.extension.register
 class EclipticEngineering : JavaPlugin() {
     companion object {
         lateinit var instance: EclipticEngineering
+        fun runTaskTimer(delay:Long,period:Long,block: ()->Unit) {
+            Bukkit.getScheduler().runTaskTimer(instance,block,delay,period)
+        }
         fun runTask(block: ()->Unit) {
             Bukkit.getScheduler().runTask(instance,block)
         }
