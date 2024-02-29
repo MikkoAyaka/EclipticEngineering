@@ -3,7 +3,6 @@ package org.wolflink.minecraft.plugin.eclipticengineering.utils
 import org.bukkit.attribute.Attributable
 import org.bukkit.attribute.Attribute
 import org.bukkit.attribute.AttributeModifier
-import org.wolflink.common.ioc.Singleton
 
 object AttributeAPI {
     /**

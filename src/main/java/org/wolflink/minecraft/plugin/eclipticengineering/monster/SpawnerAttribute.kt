@@ -43,7 +43,7 @@ class SpawnerAttribute(eeDifficulty: EEDifficulty) {
                 healthMultiple = 0.8
                 movementMultiple = 1.0
                 damageMultiple = 0.6
-                spawnPeriodSecs = 28
+                spawnPeriodSecs = 15
                 weightMap[EntityType.ZOMBIE] = 50
                 weightMap[EntityType.HUSK] = 50
                 weightMap[EntityType.ZOMBIE_VILLAGER] = 50

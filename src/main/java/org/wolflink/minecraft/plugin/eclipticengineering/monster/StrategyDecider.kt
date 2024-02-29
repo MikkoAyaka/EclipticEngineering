@@ -10,12 +10,12 @@ import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.strategy.OceanSpawnStrategy
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.strategy.PlayerFocusSpawnStrategy
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.strategy.SpawnStrategy
+import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DayNightHandler
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 import org.wolflink.minecraft.wolfird.framework.bukkit.scheduler.SubScheduler
 import java.time.Duration
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
-import kotlin.math.ln
 
 /**
  * 全局唯一决策者
@@ -30,7 +30,7 @@ object StrategyDecider {
     /**
      * 判断抱团的半径(格)
      */
-    private const val HUDDLE_RADIUS = 15
+    private const val HUDDLE_RADIUS = 12
     private lateinit var spawnerAttribute: SpawnerAttribute
     private val subScheduler: SubScheduler = SubScheduler()
 
@@ -102,17 +102,19 @@ object StrategyDecider {
     }
 
     /**
-     * 预期总时长 90 分钟
-     * 每1分钟 +0.8% 血量
-     * 每1分钟 +0.6% 攻击
+     * 预期总时长 90 分钟，夜晚不计入
+     * 每1分钟 +1.0% 血量
+     * 每1分钟 +0.8% 攻击
      */
     private fun updateAttribute() {
-        spawnerAttribute.healthMultiple += 0.008
-        spawnerAttribute.damageMultiple += 0.006
+        // 夜晚不操作属性，否则会因为覆写 getter 溢出
+        if(DayNightHandler.status == DayNightHandler.Status.NIGHT) return
+        spawnerAttribute.healthMultiple += 0.01
+        spawnerAttribute.damageMultiple += 0.008
     }
 
-    private fun getEfficiencyReduction(playerAmount: Int): Double {
-        return 1 - (0.9 * ln(playerAmount.toDouble()) + 1.0) / playerAmount
+    private fun getSpawnEfficiency(playerAmount: Int): Double {
+        return 1.0 / playerAmount
     }
 
     private fun getHuddlePlayersAmount(location: Location): Int {
@@ -125,7 +127,7 @@ object StrategyDecider {
     }
 
     /**
-     * 多位玩家抱团时降低刷怪效率
+     * 多位玩家抱团时降低刷怪效率(刷怪效率总和为 1.0 + 0.1 * 人数)
      */
     private fun spawnTask() {
         for ((key, value) in playerStrategyMap) {
@@ -133,7 +135,7 @@ object StrategyDecider {
             if (!player.isOnline || player !in gamingPlayers) continue
             val location = player.location
             val nearbyPlayerAmount = getHuddlePlayersAmount(location)
-            if (Math.random() >= getEfficiencyReduction(nearbyPlayerAmount)) value.spawn(player)
+            if (Math.random() < getSpawnEfficiency(nearbyPlayerAmount)) value.spawn(player)
         }
     }
 
