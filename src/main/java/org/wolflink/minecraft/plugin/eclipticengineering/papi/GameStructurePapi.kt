@@ -5,6 +5,7 @@ import org.bukkit.OfflinePlayer
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.GameStructureBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
+import org.wolflink.minecraft.plugin.eclipticengineering.extension.toDeluxeMenuLores
 import org.wolflink.minecraft.plugin.eclipticengineering.utils.ReflectionAPI
 
 /**
@@ -35,20 +36,14 @@ object GameStructurePapi: PlaceholderExpansion()  {
                     val level = args[1].toInt()
                     val blueprint = structureType.blueprints[level-1] as ConditionBlueprint
                     if(blueprint.buildConditions.isEmpty()) return "    &#E8E8E8无"
-                    return blueprint.buildConditions.joinToString(separator = "\n") {
-                        if(it.isSatisfy(player.player)) "    &#33FF33☑"+it.description
-                        else "    &#FF3333☒"+it.description
-                    }
+                    return blueprint.buildConditions.toDeluxeMenuLores(player)
                 }
                 params.matches(regexRepairConditions) -> {
                     val structureType = StructureType.valueOf(args[0].uppercase().replace('-','_'))
                     val level = args[1].toInt()
                     val blueprint = structureType.blueprints[level-1] as ConditionBlueprint
                     if(blueprint.repairConditions.isEmpty()) return "    &#E8E8E8无"
-                    return blueprint.repairConditions.joinToString(separator = "\n") {
-                        if(it.isSatisfy(player.player)) "    &#33FF33☑"+it.description
-                        else "    &#FF3333☒"+it.description
-                    }
+                    return blueprint.repairConditions.toDeluxeMenuLores(player)
                 }
                 params.matches(regexTags1) || params.matches(regexTags2) -> {
                     val structureType = StructureType.valueOf(args[0].uppercase().replace('-','_'))
