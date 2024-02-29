@@ -28,7 +28,7 @@ enum class StructureType(
     GENERATOR_ORE("精炼矿场",GeneratorOre::class.java,GeneratorOre.blueprints, GeneratorOre::create),
     GENERATOR_LOG("精培木场",GeneratorLog::class.java,GeneratorLog.blueprints, GeneratorLog::create),
     GENERATOR_CROP("精培农场",GeneratorCrop::class.java,GeneratorCrop.blueprints, GeneratorCrop::create),
-
+    REFINING_FURNACE("精炼熔炉",RefiningFurnace::class.java,RefiningFurnace.blueprints, RefiningFurnace::create),
     LIGHT_HOUSE("幽光灯塔", Lighthouse::class.java, Lighthouse.blueprints, Lighthouse::create),// 灯塔
     RESPAWN_BEACON("幽光重生信标",RespawnBeacon::class.java,RespawnBeacon.blueprints,RespawnBeacon::create),// 重生信标
     ENERGY_SOURCE("幽光能量发生场",EnergySource::class.java,EnergySource.blueprints,EnergySource::create),// 能源中心

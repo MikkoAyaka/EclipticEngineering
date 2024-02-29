@@ -3,6 +3,7 @@ package org.wolflink.minecraft.plugin.eclipticengineering.forge
 import org.bukkit.Bukkit
 import org.bukkit.Sound
 import org.bukkit.entity.Player
+import org.wolflink.minecraft.plugin.eclipticengineering.config.Config.forgeMenuCmd
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.ItemRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.Requirement
@@ -39,6 +40,9 @@ object ForgeHandler {
         "rpgrepair give %player_name% sample_tool 4" to 25,
         "rpgrepair give %player_name% sample_tool 5" to 10,
     ).toRandomDistribution()
+    fun openForgeMenu(player: Player) {
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(),forgeMenuCmd.parsePapi(player))
+    }
     fun forgeWeapon(player: Player) {
         // 不满足条件
         if(weaponConditions.any { !it.isSatisfy(player) }) {
