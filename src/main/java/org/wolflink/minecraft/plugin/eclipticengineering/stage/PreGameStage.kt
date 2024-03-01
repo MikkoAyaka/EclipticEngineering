@@ -51,7 +51,8 @@ class PreGameStage(stageHolder: StageHolder) : Stage("搜集阶段", stageHolder
             it.addPotionEffect(PotionEffect(PotionEffectType.SPEED,20 * 60,1,false,false))
         }
         EEngineeringScope.launch {
-            Counter.count(60)
+            if(Config.debugMode) Counter.count(5)
+            else Counter.count(60)
             EclipticEngineering.runTask { stageHolder.next() }
         }
     }

@@ -8,6 +8,7 @@ import org.bukkit.GameMode
 import org.bukkit.Sound
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
+import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.onlinePlayers
 import org.wolflink.minecraft.plugin.eclipticengineering.interaction.Counter
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.*
@@ -20,7 +21,8 @@ class ReadyStage(stageHolder: StageHolder) : Stage("准备阶段", stageHolder) 
             it.gameMode = GameMode.ADVENTURE
         }
         EEngineeringScope.launch {
-            Counter.count(15,"<green>准备搜刮物资吧！".toComponent())
+            if(Config.debugMode) Counter.count(5,"<green>准备搜刮物资吧！".toComponent())
+            else Counter.count(15,"<green>准备搜刮物资吧！".toComponent())
             EclipticEngineering.runTask { stageHolder.next() }
         }
     }
