@@ -11,6 +11,8 @@ class DeathOfFalling(disguiser: Player): PlayerGoal(disguiser,Difficulty.HARD) {
     override val description = "在其它玩家的视线中摔死"
     @EventHandler
     fun on(e: PlayerDeathEvent) {
+        // 死亡的不是内鬼玩家
+        if(e.player != disguiser) return
         gamingPlayers.filter { it != e.player }.forEach {
             if(it.hasLineOfSight(e.player)) finished()
         }
