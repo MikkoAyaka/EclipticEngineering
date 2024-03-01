@@ -29,16 +29,6 @@ object GoalHolder {
 //        nowGoal = EstablishFoothold
         // 发放任务书给随机一名正在游戏中的玩家
 //        TaskBook.give(gamingPlayers.random())
-        // 发放身份手册
-        gamingPlayers.forEach{
-            it.inventory.addItem(PioneerBook.defaultItem)
-        }
-        // 随机一名玩家作为内鬼
-        gamingPlayers.random().asDisguiser()
-        // 达到建筑2级发放建造工具
-        gamingPlayers.forEach{
-            if(it.abilityTable.hasAbility(Ability.BUILDING,2)) BuildMenuItem.give(it)
-        }
 //        nowGoal!!.into()
     }
     fun next() {
