@@ -17,6 +17,9 @@ class LetSomeoneEatPufferfish(disguiser: Player): PlayerGoal(disguiser,Difficult
     override fun init() {
         randomPlayer = gamingPlayers.filter { !it.isDisguiser() }.random()
     }
+    override fun available(): Boolean {
+        return gamingPlayers.any { !it.isDisguiser() }
+    }
     @EventHandler
     fun on(e: DayNightEvent) { if(e.nowTime == DayNightHandler.Status.DAY) failed() }
     @EventHandler

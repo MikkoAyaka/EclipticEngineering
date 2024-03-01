@@ -31,5 +31,8 @@ class FollowSomeone(disguiser: Player): PlayerGoal(disguiser,Difficulty.NORMAL) 
         another = gamingPlayers.filter { !it.isDisguiser() }.random()
         EEngineeringScope.launch { timerTask() }
     }
+    override fun available(): Boolean {
+        return gamingPlayers.any { !it.isDisguiser() }
+    }
 
 }
