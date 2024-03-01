@@ -11,6 +11,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.papi.PlayerStructurePap
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureRepository
+import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
 
 /**
  * /eegs repair 修理建筑
@@ -27,6 +28,10 @@ object GameStructureCommand: CommandExecutor {
         val structure = StructureRepository.find(structureId) ?: return false
         if(structure !is GameStructure) {
             eeLogger.warning("${sender.name} 尝试与非 GameStructure 类型交互以进行修理/摧毁等行为，这是不应该发生的。")
+            return false
+        }
+        if(structure.builder.status != Builder.Status.COMPLETED) {
+            sender.sendMessage("$MESSAGE_PREFIX <yellow>请等待建造完成后操作。".toComponent())
             return false
         }
         when(args.getOrElse(0){""}.lowercase()) {

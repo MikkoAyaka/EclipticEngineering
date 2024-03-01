@@ -31,6 +31,6 @@ object PlayerStructurePapi: PlaceholderExpansion() {
         if(player == null) return "不存在的玩家"
         val type = StructureType.parse(structure) ?: return "未找到建筑类为 ${structure::class.java.name} 的注册类型数据"
         // 重定向到 GameStructure 变量的请求当中
-        return "%eegs_${type.name}_${structure.blueprint.structureLevel}_${params}%".parsePapi(player)
+        return "%eegs_${type.name.replace('_','-')}_${structure.blueprint.structureLevel}_${params}%".parsePapi(player)
     }
 }
