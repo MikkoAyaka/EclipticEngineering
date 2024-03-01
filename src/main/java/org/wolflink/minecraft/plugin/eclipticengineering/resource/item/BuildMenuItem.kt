@@ -5,6 +5,7 @@ import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.player.PlayerInteractEvent
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
+import org.wolflink.minecraft.plugin.eclipticengineering.command.BuildCommand
 import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.Quality
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.SpecialItemType
@@ -25,7 +26,14 @@ object BuildMenuItem: InteractiveItem(
         Quality.EXQUISITE,
         "幽光万华镜",
         true,
-        listOf("    ${PRIMARY_TEXT_COLOR}窥视深渊的万华镜，","    ${PRIMARY_TEXT_COLOR}能够看到些什么呢？")
+        listOf(
+            "    ${PRIMARY_TEXT_COLOR}窥视深渊的万华镜，",
+            "    ${PRIMARY_TEXT_COLOR}能够看到些什么呢？",
+            "",
+            "    <green>左键空地 <white>确定建造地点",
+            "    <green>左键建筑 <white>查看建筑详情",
+            "    <green>右键 <white>打开建造菜单",
+        )
     )
 ) {
     /**
@@ -50,13 +58,17 @@ object BuildMenuItem: InteractiveItem(
     }
 
     override fun onLeftClick(e: PlayerInteractEvent) {
-        if(e.clickedBlock?.hasMetadata(META_STRUCTURE_ID) != true) return
-        val structure = StructureRepository.find(e.clickedBlock!!.getMetadata(META_STRUCTURE_ID).first().asInt())
-        if(structure == null) {
-            esLogger.warning("玩家与带有建筑结构标签的方块交互，但是未找到建筑结构。")
-            return
+        if(e.clickedBlock?.hasMetadata(META_STRUCTURE_ID) != true) {
+            if(e.clickedBlock?.location != null && BuildCommand.hasBuildRequest(e.player)) BuildCommand.continueBuildRequest(e.player,e.clickedBlock!!.location)
         }
-        openStructureMenu(e.player,structure)
+        else {
+            val structure = StructureRepository.find(e.clickedBlock!!.getMetadata(META_STRUCTURE_ID).first().asInt())
+            if(structure == null) {
+                esLogger.warning("玩家与带有建筑结构标签的方块交互，但是未找到建筑结构。")
+                return
+            }
+            openStructureMenu(e.player,structure)
+        }
     }
     override fun onRightClick(e: PlayerInteractEvent) {
         openBuildMenu(e.player)

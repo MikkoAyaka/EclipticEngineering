@@ -1,10 +1,14 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.command
 
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.bukkit.Bukkit
+import org.bukkit.Location
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.ConditionBlueprint
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.Requirement
@@ -17,6 +21,22 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.registry.Struct
  * /eeb energy_source 1   false   true   true    true
  */
 object BuildCommand:CommandExecutor {
+    private val buildRequestMap = mutableMapOf<Player,(Location)->Unit>()
+    // 挂起建造请求
+    private fun hangupBuildRequest(player: Player,buildTask:(Location)->Unit) {
+        buildRequestMap[player] = buildTask
+        player.sendMessage("$MESSAGE_PREFIX <green>建造任务已挂起，请在 15 秒内使用建造工具左键以指定建造点。".toComponent())
+    }
+    fun hasBuildRequest(player: Player) = buildRequestMap[player] != null
+    fun continueBuildRequest(player: Player,location: Location) {
+        val buildTask = buildRequestMap[player]!!
+        buildTask.invoke(location)
+        buildRequestMap.remove(player)
+    }
+    private fun cancelBuildRequest(player: Player) {
+        buildRequestMap.remove(player)
+        player.sendMessage("$MESSAGE_PREFIX <yellow>没有在指定时间内选择建造点，建造任务已取消。".toComponent())
+    }
     fun register() {
         Bukkit.getPluginCommand("ee-build")?.setExecutor(this)
     }
@@ -30,8 +50,16 @@ object BuildCommand:CommandExecutor {
             val playerCheck = args.getOrElse(4){"true"}.toBooleanStrict()
             val zoneCheck = args.getOrElse(5){"true"}.toBooleanStrict()
             val structureMeta = StructureRegistry.get(structureTypeName)
-            val builder = Builder(structureLevel,structureMeta,sender.location)
-            builder.build(sender,broadcast,floorCheck,playerCheck,zoneCheck)
+            // 挂起建造请求，等待玩家选择建造地点
+            hangupBuildRequest(sender) {
+                val builder = Builder(structureLevel,structureMeta,it)
+                builder.build(sender,broadcast,floorCheck,playerCheck,zoneCheck)
+            }
+            // 超时检测
+            EEngineeringScope.launch {
+                delay(1000 * 15)
+                if(buildRequestMap.containsKey(sender)) cancelBuildRequest(sender)
+            }
             return true
         } catch (e: Exception) {
             sender.sendMessage("$MESSAGE_PREFIX <red>执行指令时发生错误，请检查指令格式。".toComponent())
