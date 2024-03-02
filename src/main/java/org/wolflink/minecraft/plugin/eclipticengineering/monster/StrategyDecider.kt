@@ -7,6 +7,7 @@ import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.wolflink.minecraft.plugin.eclipticengineering.config.GameSettings
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
+import org.wolflink.minecraft.plugin.eclipticengineering.monster.strategy.NotSpawnStrategy
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.strategy.OceanSpawnStrategy
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.strategy.PlayerFocusSpawnStrategy
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.strategy.SpawnStrategy
@@ -47,6 +48,7 @@ object StrategyDecider {
     private fun init() {
         spawnerAttribute = SpawnerAttribute(GameSettings.difficulty)
         strategyList = listOf(
+            NotSpawnStrategy(spawnerAttribute),
             OceanSpawnStrategy(spawnerAttribute),
             PlayerFocusSpawnStrategy(spawnerAttribute)
         )
