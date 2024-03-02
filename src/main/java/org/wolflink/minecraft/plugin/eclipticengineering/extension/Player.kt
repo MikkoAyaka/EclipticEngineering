@@ -56,6 +56,7 @@ fun Player.inGameDeath() {
         )
     ))
 }
+fun Player.wasScriptKilled() = this.uniqueId in scriptKilledPlayers
 /**
  * 剧情杀
  */

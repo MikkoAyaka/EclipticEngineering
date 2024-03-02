@@ -12,8 +12,10 @@ import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.blueprint.RespawnBeaconBlueprint
+import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.VirtualResourceType
+import org.wolflink.minecraft.plugin.eclipticengineering.extension.wasScriptKilled
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.AbilityCondition
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
@@ -38,10 +40,10 @@ class RespawnBeacon private constructor(blueprint: RespawnBeaconBlueprint, build
         override val blueprints = listOf(
             RespawnBeaconBlueprint(
                 1,
-                "幽光充能信标",
+                "幽光重生信标",
                 120,
                 10000,
-                180,
+                60,
                 4,
                 setOf(VirtualRequirement(VirtualResourceType.STONE, 30)),
                 setOf(VirtualRequirement(VirtualResourceType.STONE, 150),
@@ -77,6 +79,11 @@ class RespawnBeacon private constructor(blueprint: RespawnBeaconBlueprint, build
     }
 
     private fun respawn(player: Player) {
+        if(player.wasScriptKilled()) {
+            player.playSound(player,Sound.ENTITY_VILLAGER_NO,1f,1f)
+            player.sendMessage("$MESSAGE_PREFIX <yellow>你因为 会议投票/伪装者 而死去，无法复活。")
+            return
+        }
         if (nowChargeAmount > 0) {
             player.level = 0
             player.exp = 0.0f
