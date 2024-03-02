@@ -33,14 +33,14 @@ class GameStage(stageHolder: StageHolder): Stage("游戏阶段",stageHolder) {
         Bukkit.getOnlinePlayers()
             .filter { it.gameMode == GameMode.ADVENTURE }
             .forEach {
-                // 发放身份手册
-                it.inventory.addItem(PioneerBook.defaultItem)
-                // 达到建筑2级发放建造工具
-                if(it.abilityTable.hasAbility(Ability.BUILDING,2)) BuildMenuItem.give(it)
                 // 传送到游戏世界
                 it.teleport(Config.gameLocation)
                 // 游戏模式改为生存
                 it.gameMode = GameMode.SURVIVAL
+                // 发放身份手册
+                it.inventory.addItem(PioneerBook.defaultItem)
+                // 达到建筑2级发放建造工具
+                if(it.abilityTable.hasAbility(Ability.BUILDING,2)) BuildMenuItem.give(it)
                 // 清理药水效果
                 it.activePotionEffects.forEach { potion -> it.removePotionEffect(potion.type) }
                 it.addPotionEffect(PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,20 * 10,4,false,false))
