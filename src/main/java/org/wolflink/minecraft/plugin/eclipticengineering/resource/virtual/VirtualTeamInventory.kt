@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicInteger
  */
 object VirtualTeamInventory: Listener {
     private val resourceMap = enumValues<VirtualResourceType>().associateWith { AtomicDouble(0.0) }
-    @Synchronized private fun add(type: VirtualResourceType,amount: Double) {
+    @Synchronized fun add(type: VirtualResourceType,amount: Double) {
         resourceMap[type]!!.addAndGet(amount)
         gamingPlayers.forEach {  player ->
             player.sendActionBar("<green>+ <white>$amount ${type.color.toHexFormat()}${type.displayName}".toComponent())
