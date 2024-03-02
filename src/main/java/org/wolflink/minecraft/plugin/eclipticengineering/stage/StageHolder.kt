@@ -9,7 +9,8 @@ object StageHolder: LinearStageHolder(false) {
             ReadyStage(this),
             PreGameStage(this),
             GameStage(this),
-            EndGameStage(this)
+            EndGameStage(this),
+            FinalStage(this)
         ))
         next()
     }

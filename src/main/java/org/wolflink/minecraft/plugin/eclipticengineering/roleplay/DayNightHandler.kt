@@ -78,6 +78,9 @@ object DayNightHandler {
         if(Config.debugMode) days = 5
         EEngineeringScope.launch { dayNightPass() }
     }
+    fun stop() {
+        available = false
+    }
     private suspend fun dayNightPass() {
         while (available) {
             delay(1000L * 60 * status.minutes)

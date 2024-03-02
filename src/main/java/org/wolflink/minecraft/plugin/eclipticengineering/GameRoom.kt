@@ -8,6 +8,9 @@ import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.OccupationTy
  */
 object GameRoom {
     private val occupationPlayers = mutableMapOf<OccupationType,MutableSet<Player>>()
-
+    enum class Result {
+        NONE,PIONEER_WIN,DISGUISER_WIN
+    }
+    var result = Result.NONE
 
 }
