@@ -41,33 +41,33 @@ object DayNightHandler {
         private set(value) {
             if(value == field) return
             field = value
+            if(field == Status.DAY) {
+                days++
+                gamingPlayers.forEach{
+                    it.showTitle(Title.title(
+                        "<#FFFFFF>白昼".toComponent(),
+                        "<#E0E0E0>距离夜晚降临还有 <white>${status.minutes} <#E0E0E0>分钟".toComponent(),
+                        Times.times(Duration.ofMillis(500), Duration.ofMillis(1500),Duration.ofMillis(500)))
+                    )
+                    it.playSound(it, Sound.ENTITY_CHICKEN_AMBIENT,1f,1f)
+                }
+            }
+            if(field == Status.NIGHT) {
+                gamingPlayers.forEach{
+                    it.showTitle(Title.title(
+                        "<#003366>深夜".toComponent(),
+                        "<#E0E0E0>距离白天到来还有 <white>${status.minutes} <#E0E0E0>分钟".toComponent(),
+                        Times.times(Duration.ofMillis(500), Duration.ofMillis(1500),Duration.ofMillis(500)))
+                    )
+                    it.playSound(it, Sound.ENTITY_WOLF_HOWL,1f,1f)
+                }
+            }
+            if(field.description.isNotEmpty()) {
+                Bukkit.broadcast(field.description.toComponent())
+            }
             EclipticEngineering.runTask {
                 DayNightEvent(field).call()
                 Config.gameWorld.time = field.gameTime.toLong()
-                if(field.description.isNotEmpty()) {
-                    Bukkit.broadcast(field.description.toComponent())
-                }
-                if(field == Status.DAY) {
-                    days++
-                    gamingPlayers.forEach{
-                        it.showTitle(Title.title(
-                            "<#FFFFFF>白昼".toComponent(),
-                            "<#E0E0E0>距离夜晚降临还有 <white>${status.minutes} <#E0E0E0>分钟".toComponent(),
-                            Times.times(Duration.ofMillis(500), Duration.ofMillis(1500),Duration.ofMillis(500)))
-                        )
-                        it.playSound(it, Sound.ENTITY_CHICKEN_AMBIENT,1f,1f)
-                    }
-                }
-                if(field == Status.NIGHT) {
-                    gamingPlayers.forEach{
-                        it.showTitle(Title.title(
-                            "<#003366>深夜".toComponent(),
-                            "<#E0E0E0>距离白天到来还有 <white>${status.minutes} <#E0E0E0>分钟".toComponent(),
-                            Times.times(Duration.ofMillis(500), Duration.ofMillis(1500),Duration.ofMillis(500)))
-                        )
-                        it.playSound(it, Sound.ENTITY_WOLF_HOWL,1f,1f)
-                    }
-                }
             }
         }
 
