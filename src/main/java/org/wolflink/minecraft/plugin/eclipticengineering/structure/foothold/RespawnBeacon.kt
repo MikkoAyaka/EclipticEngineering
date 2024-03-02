@@ -45,9 +45,9 @@ class RespawnBeacon private constructor(blueprint: RespawnBeaconBlueprint, build
                 10000,
                 60,
                 4,
-                setOf(VirtualRequirement(VirtualResourceType.STONE, 30)),
-                setOf(VirtualRequirement(VirtualResourceType.STONE, 150),
-                    VirtualRequirement(VirtualResourceType.METAL,50),
+                setOf(VirtualRequirement(VirtualResourceType.STONE, 15)),
+                setOf(VirtualRequirement(VirtualResourceType.STONE, 100),
+                    VirtualRequirement(VirtualResourceType.METAL,30),
                     AbilityCondition(Ability.BUILDING,3))
             )
         )
