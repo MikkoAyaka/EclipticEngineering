@@ -85,9 +85,6 @@ class RespawnBeacon private constructor(blueprint: RespawnBeaconBlueprint, build
             return
         }
         if (nowChargeAmount > 0) {
-            player.level = 0
-            player.exp = 0.0f
-            player.inventory.clear()
             player.clearActivePotionEffects()
             player.gameMode = GameMode.SURVIVAL
             player.location.world.playSound(player.location, Sound.ITEM_TOTEM_USE, 2f, 1.2f)
