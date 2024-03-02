@@ -24,6 +24,7 @@ object OccupationHandler {
             // 建筑师
             gamingPlayers.filter { it.abilityTable.occupationType == OccupationType.BUILDER }.forEach {
                 it.addPotionEffect(PotionEffect(PotionEffectType.GLOWING,20 * 5,0,false,false))
+                it.addPotionEffect(PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,20 * 5,0,false,false))
             }
             // 打工仔
             gamingPlayers.filter { it.abilityTable.occupationType == OccupationType.MINER }.forEach {
