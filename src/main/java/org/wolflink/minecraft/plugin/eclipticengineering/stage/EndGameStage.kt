@@ -16,11 +16,14 @@ import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.GameRoom
 import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
+import org.wolflink.minecraft.plugin.eclipticengineering.extension.disguiserPlayers
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.isDisguiser
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.StrategyDecider
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DayNightHandler
+import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.playergoal.PlayerGoalHolder
 import org.wolflink.minecraft.plugin.eclipticengineering.sculkinfection.OrnamentSculkInfection
+import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.foothold.LivingHouse
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.register
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
@@ -59,8 +62,10 @@ class EndGameStage(stageHolder: StageHolder): Stage("最终游戏阶段",stageHo
                 -0.6,
                 AttributeModifier.Operation.MULTIPLY_SCALAR_1
             ))
-            // 内鬼存活
-            if(gamingPlayers.any{it.isDisguiser()}) {
+            // 内鬼存活而且已经完成目标
+            if(disguiserPlayers.any {PlayerGoalHolder.hasFinished(it)}) {
+                Bukkit.broadcast("$MESSAGE_PREFIX <red>幽匿伪装者在没被发现的情况下完成了所有任务！开拓者们即将迎来一场噩耗...做好觉悟吧！".toComponent())
+                Bukkit.broadcast("$MESSAGE_PREFIX <red>幽匿伪装者将被允许击杀其它玩家。".toComponent())
                 OrnamentSculkInfection.enable()
                 getAttribute(Attribute.GENERIC_MOVEMENT_SPEED)?.addModifier(AttributeModifier(
                     UUID.randomUUID(),
@@ -68,9 +73,17 @@ class EndGameStage(stageHolder: StageHolder): Stage("最终游戏阶段",stageHo
                     0.1,
                     AttributeModifier.Operation.MULTIPLY_SCALAR_1
                 ))
+            } else if(disguiserPlayers.isNotEmpty()) {
+                Bukkit.broadcast("$MESSAGE_PREFIX <red>幽匿伪装者没能在规定时间内完成指标，在临死前决定带走几个人陪葬！".toComponent())
+                disguiserPlayers.forEach {
+                    it.addPotionEffect(PotionEffect(PotionEffectType.HEALTH_BOOST,20 * 60 * 5,4,false,false))
+                    it.addPotionEffect(PotionEffect(PotionEffectType.REGENERATION,20 * 60 * 5,1,false,false))
+                    it.addPotionEffect(PotionEffect(PotionEffectType.SPEED,20 * 60 * 5,0,false,false))
+                    it.addPotionEffect(PotionEffect(PotionEffectType.INCREASE_DAMAGE,20 * 60 * 5,0,false,false))
+                }
             }
         }
-
+        livingHouse.destroy()
     }
     override fun onLeave() {
         this.unregister()

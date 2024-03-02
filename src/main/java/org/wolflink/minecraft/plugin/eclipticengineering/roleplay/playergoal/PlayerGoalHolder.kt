@@ -7,6 +7,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.isDisguiser
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DayNightEvent
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DayNightHandler
+import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 import java.util.UUID
 import java.util.concurrent.atomic.AtomicInteger
 
@@ -30,11 +31,15 @@ object PlayerGoalHolder : Listener {
         KeepAlone::class.java,
         PickaxeKiller::class.java
     )
+    // 获胜所需完成目标数
+    private const val DISGUISER_WIN_GOAL_COUNT = 3
     // 完成次数
     private val finishCounter = mutableMapOf<UUID,AtomicInteger>()
+    fun hasFinished(player: Player) = (finishCounter[player.uniqueId]?.get() ?: 0) >= DISGUISER_WIN_GOAL_COUNT
     fun addFinishCount(player: Player) {
         if(finishCounter[player.uniqueId] == null) finishCounter[player.uniqueId] = AtomicInteger(0)
-        finishCounter[player.uniqueId]?.incrementAndGet()
+        val count = finishCounter[player.uniqueId]!!.incrementAndGet()
+        if(count >= DISGUISER_WIN_GOAL_COUNT) player.sendMessage("$MESSAGE_PREFIX <green>你已完成指标，可以自由行动了，尽情捣乱吧！但不要被发现了。".toComponent())
     }
     private val disguiserGoals = mutableMapOf<UUID,PlayerGoal>()
     // 今日已刷新过目标的玩家，每日重置
@@ -51,11 +56,15 @@ object PlayerGoalHolder : Listener {
 
     fun refreshPlayerGoal(player: Player) {
         if(!player.isDisguiser()) {
-            player.sendMessage("$MESSAGE_PREFIX 你不是幽匿伪装者，无法刷新目标。")
+            player.sendMessage("$MESSAGE_PREFIX 你不是幽匿伪装者，无法刷新目标。".toComponent())
+            return
+        }
+        if(hasFinished(player)) {
+            player.sendMessage("$MESSAGE_PREFIX 你已达成指标，无需刷新目标。".toComponent())
             return
         }
         if(refreshCache.contains(player.uniqueId)) {
-            player.sendMessage("$MESSAGE_PREFIX 今天你已经刷新过目标了。")
+            player.sendMessage("$MESSAGE_PREFIX 今天你已经刷新过目标了。".toComponent())
             return
         }
         refreshCache.add(player.uniqueId)
@@ -66,7 +75,7 @@ object PlayerGoalHolder : Listener {
             }
             if(tempGoal.available()) tempGoal else null
         } ?: run {
-            player.sendMessage("$MESSAGE_PREFIX 多次尝试后仍未获取到可用的目标，请汇报给开发者。")
+            player.sendMessage("$MESSAGE_PREFIX 多次尝试后仍未获取到可用的目标，请汇报给开发者。".toComponent())
             return
         }
         disguiserGoals[player.uniqueId] = playerGoal

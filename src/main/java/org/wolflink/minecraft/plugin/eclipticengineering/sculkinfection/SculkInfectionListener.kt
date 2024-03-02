@@ -62,8 +62,8 @@ internal class SculkInfectionListener(private val manager: OrnamentSculkInfectio
     fun sculkSpread(event: EntityDeathEvent) {
         if(event.entity.world != Config.gameWorld) return
         Bukkit.getScheduler().runTaskAsynchronously(EclipticEngineering.instance, Runnable {
-            // 15%几率生成地基
-            if (RandomAPI.nextDouble() <= 0.2) {
+            // 40%几率生成地基
+            if (RandomAPI.nextDouble() <= 0.4) {
                 val sculkSpawnBox = SculkSpawnBox(event.entity.location.clone())
                 if (sculkSpawnBox.isAvailable) {
                     Bukkit.getScheduler().runTask(EclipticEngineering.instance, sculkSpawnBox::spawn)

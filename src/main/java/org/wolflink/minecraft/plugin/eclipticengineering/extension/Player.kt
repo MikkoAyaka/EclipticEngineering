@@ -86,7 +86,7 @@ fun Player.asDisguiser() {
 }
 fun OfflinePlayer.isDisguiser() = this.uniqueId in disguiserSet
 fun Player.isGaming() = gameMode == GameMode.SURVIVAL && world.name != Config.lobbyWorldName
-val disguiserPlayers: Collection<Player> get() = disguiserSet.mapNotNull { Bukkit.getPlayer(it) }
+val disguiserPlayers: Collection<Player> get() = disguiserSet.mapNotNull { Bukkit.getPlayer(it) }.filter { it in gamingPlayers }
 val gamingPlayers: Collection<Player> get() = onlinePlayers.filter { it.isGaming() }
 val pioneerPlayers: Collection<Player> get() = gamingPlayers.filter { !it.isDisguiser() }
 val onlinePlayers: Collection<Player> get() = Bukkit.getOnlinePlayers()

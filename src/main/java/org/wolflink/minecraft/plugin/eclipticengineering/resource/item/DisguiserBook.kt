@@ -24,11 +24,13 @@ object DisguiserBook : InteractiveItem(
         "幽匿伪装者 帮助手册",
         false,
         listOf(
-            "    ${PRIMARY_TEXT_COLOR}获胜条件：完成至少3个每日目标，并存活至第5天结束。",
+            "    ${PRIMARY_TEXT_COLOR}获胜条件：完成至少 3 个每日目标，并存活至第 5 天结束。",
             "",
-            "    ${PRIMARY_TEXT_COLOR}幽匿伪装者拥有所有特殊能力，",
+            "    ${PRIMARY_TEXT_COLOR}幽匿伪装者拥有所有能力(不包括职业被动)，",
             "    ${PRIMARY_TEXT_COLOR}每天到来都会从帮助手册获得一个随机目标，",
             "    ${PRIMARY_TEXT_COLOR}努力去完成它吧，但不要暴露了你的身份。",
+            "    ${PRIMARY_TEXT_COLOR}如果没能在 5 天内完成 3 个目标，没关系，",
+            "    ${PRIMARY_TEXT_COLOR}你还可以在最后带走几个人陪葬！",
             "",
             "    <yellow>手持该手册，右键以获取目标",
         )
