@@ -1,6 +1,7 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.stage
 
 import org.bukkit.Bukkit
+import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.attribute.Attribute
 import org.bukkit.attribute.AttributeModifier
@@ -10,6 +11,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.CreatureSpawnEvent
 import org.bukkit.event.entity.EntityDeathEvent
+import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
@@ -19,6 +21,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.disguiserPlayers
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.isDisguiser
+import org.wolflink.minecraft.plugin.eclipticengineering.extension.pioneerPlayers
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.StrategyDecider
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DayNightHandler
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.playergoal.PlayerGoalHolder
@@ -76,6 +79,14 @@ class EndGameStage(stageHolder: StageHolder): Stage("最终游戏阶段",stageHo
             } else if(disguiserPlayers.isNotEmpty()) {
                 Bukkit.broadcast("$MESSAGE_PREFIX <red>幽匿伪装者没能在规定时间内完成指标，在临死前决定带走几个人陪葬！".toComponent())
                 disguiserPlayers.forEach {
+                    if(pioneerPlayers.size >= 3) it.inventory.addItem(ItemStack(Material.TOTEM_OF_UNDYING))
+                    if(pioneerPlayers.size >= 5) {
+                        it.inventory.addItem(ItemStack(Material.ENCHANTED_GOLDEN_APPLE))
+                    }
+                    if(pioneerPlayers.size >= 7) {
+                        it.inventory.addItem(ItemStack(Material.TNT,16))
+                        it.inventory.addItem(ItemStack(Material.REDSTONE_BLOCK,16))
+                    }
                     it.addPotionEffect(PotionEffect(PotionEffectType.HEALTH_BOOST,20 * 60 * 5,4,false,false))
                     it.addPotionEffect(PotionEffect(PotionEffectType.REGENERATION,20 * 60 * 5,1,false,false))
                     it.addPotionEffect(PotionEffect(PotionEffectType.SPEED,20 * 60 * 5,0,false,false))
