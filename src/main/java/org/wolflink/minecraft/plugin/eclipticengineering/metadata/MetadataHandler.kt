@@ -1,6 +1,7 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.metadata
 
 import org.bukkit.entity.Damageable
+import org.bukkit.entity.EntityType
 import org.bukkit.entity.LivingEntity
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -16,6 +17,7 @@ object MetadataHandler: Listener {
     @EventHandler
     fun extraDamage(e: ProjectileHitEvent) {
         val hitEntity = e.hitEntity
+        if(hitEntity?.type == EntityType.PLAYER) return
         // 计算总附加伤害
         val extraDamages = e.entity.getMetadata(META_PROJECTILE_EXTRA_DAMAGE).map { it.asDouble() }.reduceOrNull(Double::plus) ?: return
         if(hitEntity is Damageable) hitEntity.damage(extraDamages)
@@ -23,6 +25,7 @@ object MetadataHandler: Listener {
     @EventHandler
     fun potionEffect(e: ProjectileHitEvent) {
         val hitEntity = e.hitEntity
+        if(hitEntity?.type == EntityType.PLAYER) return
         val potionEffects = e.entity.getMetadata(META_PROJECTILE_POTION_EFFECT).map { it.value() as PotionEffect }
         if(potionEffects.isEmpty()) return
         if(hitEntity is LivingEntity) hitEntity.addPotionEffects(potionEffects)
