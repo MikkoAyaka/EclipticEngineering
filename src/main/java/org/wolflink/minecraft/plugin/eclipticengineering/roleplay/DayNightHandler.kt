@@ -22,10 +22,6 @@ import java.time.Duration
  * 白天 16 分钟 夜晚 8 分钟
  */
 object DayNightHandler {
-    @SuppressWarnings
-    fun debug() {
-        days++
-    }
     // 游戏天数
     var days = 0
         private set(value) {
@@ -79,6 +75,7 @@ object DayNightHandler {
     fun start() {
         available = true
         status = Status.DAY
+        if(Config.debugMode) days = 5
         EEngineeringScope.launch { dayNightPass() }
     }
     private suspend fun dayNightPass() {

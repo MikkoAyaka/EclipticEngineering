@@ -1,6 +1,5 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.ability
 
-import org.bukkit.Bukkit
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
@@ -11,8 +10,11 @@ import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
 /**
  * 持续为玩家应用职业效果
  */
-object OccupationApplier {
-    fun init() {
+object OccupationHandler {
+    /**
+     * 启用职业被动效果
+     */
+    fun initEffects() {
         EclipticEngineering.runTaskTimer(20 * 3,20 * 3) {
             // 战士
             gamingPlayers.filter { it.abilityTable.occupationType == OccupationType.WARRIOR }.forEach {

@@ -3,7 +3,7 @@ package org.wolflink.minecraft.plugin.eclipticengineering
 import kotlinx.coroutines.cancel
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
-import org.wolflink.minecraft.plugin.eclipticengineering.ability.OccupationApplier
+import org.wolflink.minecraft.plugin.eclipticengineering.ability.OccupationHandler
 import org.wolflink.minecraft.plugin.eclipticengineering.command.*
 import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureType
@@ -88,7 +88,7 @@ class EclipticEngineering : JavaPlugin() {
         PlayerStructurePapi.register()
         ForgePapi.register()
         // 初始化职业效果
-        OccupationApplier.init()
+        OccupationHandler.initEffects()
         // 初始化阶段
         StageHolder.init()
     }

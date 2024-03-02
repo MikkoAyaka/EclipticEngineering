@@ -6,13 +6,14 @@ import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.OccupationType
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.isDisguiser
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.toRoma
+import org.wolflink.minecraft.plugin.eclipticengineering.extension.updateOccupationDisplayName
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toHexFormat
 import java.util.EnumMap
 import java.util.UUID
 
 /**
- * 存放关于玩家的能力数据
+ * 存放关于玩家的能力数据和职业数据
  */
 class AbilityTable(val ownerUuid: UUID) {
     var occupationType: OccupationType? = null
@@ -23,7 +24,7 @@ class AbilityTable(val ownerUuid: UUID) {
     }
 
     /**
-     * 设置玩家的职业类型
+     * 变更玩家的职业类型
      */
     fun setOccupation(occupationType: OccupationType) {
         this.occupationType = occupationType
@@ -31,11 +32,15 @@ class AbilityTable(val ownerUuid: UUID) {
         occupationType.abilityData.forEach { (type, level) ->
             setAbility(type,level)
         }
+        val player = Bukkit.getPlayer(ownerUuid) ?: return
+        player.playSound(player,Sound.ENTITY_VILLAGER_YES,1f,1.25f)
+        player.sendMessage("$MESSAGE_PREFIX <white>你的职业类型已被更改为 <green>${occupationType.color.toHexFormat()}${occupationType.displayName}".toComponent())
+        player.updateOccupationDisplayName()
     }
     /**
      * 重置所有天赋
      */
-    fun reset() {
+    private fun reset() {
         Ability.entries.forEach { map[it] = 0 }
     }
     fun setAbility(abilityType: Ability,abilityLevel: Int) {

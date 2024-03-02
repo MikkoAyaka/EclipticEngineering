@@ -11,6 +11,8 @@ import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.OccupationType
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.abilityTable
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.updateOccupationDisplayName
+import org.wolflink.minecraft.plugin.eclipticengineering.stage.StageHolder
+import org.wolflink.minecraft.plugin.eclipticengineering.stage.WaitStage
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toHexFormat
 import kotlin.Exception
@@ -23,15 +25,16 @@ object AbilityCommand: CommandExecutor {
         if(!sender.isOp) return false
         return when (args.getOrNull(0)) {
             "occupation" -> {
+                val player = Bukkit.getPlayer(args.getOrElse(2){""}) ?: return false
+                if(StageHolder.thisStage !is WaitStage) {
+                    player.sendMessage("$MESSAGE_PREFIX 游戏已开始，无法选择职业。".toComponent())
+                    return false
+                }
                 val occupationName = args.getOrNull(1) ?: return false
                 val occupationType = try {
                     OccupationType.valueOf(occupationName)
                 } catch (_: Exception){ return false }
-                val player = Bukkit.getPlayer(args.getOrElse(2){""}) ?: return false
                 player.abilityTable.setOccupation(occupationType)
-                player.playSound(player,Sound.ENTITY_VILLAGER_YES,1f,1.25f)
-                player.sendMessage("$MESSAGE_PREFIX <white>你的职业类型已被更改为 <green>${occupationType.color.toHexFormat()}${occupationType.displayName}".toComponent())
-                player.updateOccupationDisplayName()
                 return true
             }
             "set" -> {

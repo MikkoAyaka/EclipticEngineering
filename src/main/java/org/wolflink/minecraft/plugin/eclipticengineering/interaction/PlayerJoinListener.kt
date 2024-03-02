@@ -8,9 +8,13 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
+import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.reset
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.updateOccupationDisplayName
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.MainMenuItem
+import org.wolflink.minecraft.plugin.eclipticengineering.stage.StageHolder
+import org.wolflink.minecraft.plugin.eclipticengineering.stage.WaitStage
+import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 import java.util.UUID
 
 object PlayerJoinListener: Listener {
@@ -24,8 +28,13 @@ object PlayerJoinListener: Listener {
         }
         player.reset()
         player.teleport(Config.lobbyLocation)
-        player.gameMode = GameMode.ADVENTURE
-        MainMenuItem.give(player)
+        if(StageHolder.thisStage is WaitStage) {
+            player.gameMode = GameMode.ADVENTURE
+            MainMenuItem.give(player)
+        } else {
+            player.gameMode = GameMode.SPECTATOR
+            player.sendMessage("$MESSAGE_PREFIX 游戏已经开始，请文明旁观，不要泄漏信息。".toComponent())
+        }
     }
     @EventHandler
     fun on(e: PlayerJoinEvent) {
