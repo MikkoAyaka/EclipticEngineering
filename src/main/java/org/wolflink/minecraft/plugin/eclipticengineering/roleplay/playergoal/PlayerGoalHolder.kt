@@ -32,7 +32,7 @@ object PlayerGoalHolder : Listener {
         PickaxeKiller::class.java
     )
     // 获胜所需完成目标数
-    private const val DISGUISER_WIN_GOAL_COUNT = 3
+    const val DISGUISER_WIN_GOAL_COUNT = 2
     // 完成次数
     private val finishCounter = mutableMapOf<UUID,AtomicInteger>()
     fun hasFinished(player: Player) = (finishCounter[player.uniqueId]?.get() ?: 0) >= DISGUISER_WIN_GOAL_COUNT

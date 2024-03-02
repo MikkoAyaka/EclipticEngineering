@@ -9,6 +9,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.Quality
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.SpecialItemType
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.createSpecialItem
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.isDisguiser
+import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DayNightHandler
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.playergoal.PlayerGoal
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.playergoal.PlayerGoalHolder
 import org.wolflink.minecraft.plugin.eclipticstructure.config.PRIMARY_TEXT_COLOR
@@ -24,12 +25,12 @@ object DisguiserBook : InteractiveItem(
         "幽匿伪装者 帮助手册",
         false,
         listOf(
-            "    ${PRIMARY_TEXT_COLOR}获胜条件：完成至少 3 个每日目标，并存活至第 5 天结束。",
+            "    ${PRIMARY_TEXT_COLOR}获胜条件：完成至少 ${PlayerGoalHolder.DISGUISER_WIN_GOAL_COUNT} 个每日目标，并存活至第 ${DayNightHandler.BOSS_DAY} 天。",
             "",
             "    ${PRIMARY_TEXT_COLOR}幽匿伪装者拥有所有能力(不包括职业被动)，",
             "    ${PRIMARY_TEXT_COLOR}每天到来都会从帮助手册获得一个随机目标，",
             "    ${PRIMARY_TEXT_COLOR}努力去完成它吧，但不要暴露了你的身份。",
-            "    ${PRIMARY_TEXT_COLOR}如果没能在 5 天内完成 3 个目标，没关系，",
+            "    ${PRIMARY_TEXT_COLOR}如果没能按时完成目标，没关系，",
             "    ${PRIMARY_TEXT_COLOR}你还可以在最后带走几个人陪葬！",
             "",
             "    <yellow>手持该手册，右键以获取目标",

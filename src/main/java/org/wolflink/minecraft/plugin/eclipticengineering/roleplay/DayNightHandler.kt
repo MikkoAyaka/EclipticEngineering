@@ -22,20 +22,21 @@ import java.time.Duration
  * 白天 16 分钟 夜晚 8 分钟
  */
 object DayNightHandler {
+    const val BOSS_DAY = 5
     // 游戏天数
     var days = 0
         private set(value) {
             if(field == value) return
             field = value
-            if(field == 6 && StageHolder.thisStage is GameStage) {
+            if(field == BOSS_DAY && StageHolder.thisStage is GameStage) {
                 StageHolder.next()
             }
         }
     enum class Status(val displayName: String,val description: String,val minutes: Int,val gameTime: Int) {
         DAWN("黎明","$MESSAGE_PREFIX 太阳即将升起，新的一天就要到来了。",1,23500),
-        DAY("白天","",12,6000), // 新的一天从这里开始
+        DAY("白天","$MESSAGE_PREFIX 距离最终决战还有 ${BOSS_DAY - days} 天时间。",9,6000), // 新的一天从这里开始
         HUSK("黄昏","$MESSAGE_PREFIX 太阳落山了，到处弥漫着阴森的气息，强力怪物们就要到来了。",1,12800),
-        NIGHT("夜晚","",4,18000)
+        NIGHT("夜晚","$MESSAGE_PREFIX 尽快回到居住屋吧，当然，你也可以不回去。",3,18000)
     }
     var status = Status.NIGHT
         private set(value) {
@@ -75,7 +76,7 @@ object DayNightHandler {
     fun start() {
         available = true
         status = Status.DAY
-        if(Config.debugMode) days = 5
+        if(Config.debugMode) days = 4
         EEngineeringScope.launch { dayNightPass() }
     }
     fun stop() {
@@ -84,7 +85,7 @@ object DayNightHandler {
     private suspend fun dayNightPass() {
         while (available) {
             delay(1000L * 60 * status.minutes)
-            status = Status.entries[(status.ordinal+1) % 4]
+            status = Status.entries[(status.ordinal+1) % Status.entries.size]
         }
     }
 }
