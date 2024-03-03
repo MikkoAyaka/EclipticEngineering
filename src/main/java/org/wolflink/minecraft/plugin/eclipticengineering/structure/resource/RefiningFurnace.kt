@@ -38,7 +38,7 @@ class RefiningFurnace private constructor(blueprint: GameStructureBlueprint, bui
             ConditionBlueprint(
                 1,
                 STRUCTURE_NAME,
-                60,
+                30,
                 6000,
                 true,
                 // tag

@@ -32,7 +32,7 @@ class ForgeRoom private constructor(
             ConditionBlueprint(
                 1,
                 "锻造站台",
-                60,
+                30,
                 5000,
                 setOf(),
                 setOf(VirtualRequirement(VirtualResourceType.STONE,15)),

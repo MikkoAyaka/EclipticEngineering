@@ -26,7 +26,7 @@ class GeneratorOre private constructor(blueprint: GeneratorBlueprint, builder: B
             GeneratorBlueprint(
                 1,
                 STRUCTURE_NAME,
-                60,
+                30,
                 3000,
                 { structure, buildLocation ->
                     setOf(

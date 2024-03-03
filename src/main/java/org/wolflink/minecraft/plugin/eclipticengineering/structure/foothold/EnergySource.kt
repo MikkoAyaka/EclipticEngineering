@@ -28,7 +28,7 @@ class EnergySource private constructor(blueprint: GameStructureBlueprint, builde
             ConditionBlueprint(
                 1,
                 STRUCTURE_NAME,
-                120,
+                60,
                 20000,
                 setOf(
                     GameStructureTag.AMOUNT_LIMITED,

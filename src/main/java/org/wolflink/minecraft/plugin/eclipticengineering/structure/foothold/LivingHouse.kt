@@ -101,7 +101,7 @@ class LivingHouse private constructor(
             ConditionBlueprint(
                 1,
                 "居住屋",
-                120,
+                60,
                 20000,
                 setOf(
                     GameStructureTag.AMOUNT_LIMITED

@@ -93,7 +93,7 @@ class MiningPlace private constructor(blueprint: GameStructureBlueprint, builder
             ConditionBlueprint(
                 1,
                 STRUCTURE_NAME,
-                60,
+                30,
                 4500,
                 true,
                 setOf(

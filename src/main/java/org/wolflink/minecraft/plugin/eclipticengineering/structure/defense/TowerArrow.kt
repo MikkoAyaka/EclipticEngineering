@@ -63,7 +63,7 @@ class TowerArrow private constructor(blueprint: TowerArrowBlueprint, builder: Bu
             TowerArrowBlueprint(
                 1,
                 "弓箭高台",
-                60,
+                30,
                 5000,
                 2..5,
                 1,

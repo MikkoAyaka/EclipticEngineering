@@ -41,7 +41,7 @@ class RespawnBeacon private constructor(blueprint: RespawnBeaconBlueprint, build
             RespawnBeaconBlueprint(
                 1,
                 "幽光重生信标",
-                120,
+                90,
                 10000,
                 60,
                 4,

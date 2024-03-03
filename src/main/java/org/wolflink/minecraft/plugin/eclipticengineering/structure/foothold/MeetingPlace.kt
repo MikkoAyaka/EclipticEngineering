@@ -33,7 +33,7 @@ class MeetingPlace private constructor(blueprint: GameStructureBlueprint, builde
             ConditionBlueprint(
                 1,
                 "会议大厅",
-                60,
+                45,
                 6000,
                 setOf(
                     GameStructureTag.AMOUNT_LIMITED

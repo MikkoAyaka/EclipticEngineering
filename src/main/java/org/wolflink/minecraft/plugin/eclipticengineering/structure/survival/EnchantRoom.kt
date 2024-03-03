@@ -32,7 +32,7 @@ class EnchantRoom private constructor(
             ConditionBlueprint(
                 1,
                 "附魔站台",
-                60,
+                30,
                 5000,
                 setOf(),
                 setOf(VirtualRequirement(VirtualResourceType.STONE,10)),

@@ -41,7 +41,7 @@ class LargeCampfire private constructor(
             ConditionBlueprint(
                 1,
                 "大型营火",
-                60,
+                30,
                 5000,
                 setOf(),
                 setOf(VirtualRequirement(VirtualResourceType.WOOD, 10)),

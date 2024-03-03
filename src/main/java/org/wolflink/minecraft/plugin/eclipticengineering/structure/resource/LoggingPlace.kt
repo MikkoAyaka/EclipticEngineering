@@ -62,7 +62,7 @@ class LoggingPlace private constructor(blueprint: GameStructureBlueprint, builde
             ConditionBlueprint(
                 1,
                 STRUCTURE_NAME,
-                60,
+                30,
                 3000,
                 setOf(
                     GameStructureTag.AMOUNT_LIMITED,
