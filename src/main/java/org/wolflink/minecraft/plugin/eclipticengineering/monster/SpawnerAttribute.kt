@@ -17,7 +17,7 @@ class SpawnerAttribute(eeDifficulty: EEDifficulty) {
         private set
         get() {
             // 夜晚刷怪效率增加
-            return if(DayNightHandler.status == DayNightHandler.Status.NIGHT) (field / 1.6).toInt()
+            return if(DayNightHandler.status == DayNightHandler.Status.NIGHT) (field / 2.0).toInt()
             else field
         }
     private val weightMap: MutableMap<EntityType, Int> = EnumMap(EntityType::class.java)
