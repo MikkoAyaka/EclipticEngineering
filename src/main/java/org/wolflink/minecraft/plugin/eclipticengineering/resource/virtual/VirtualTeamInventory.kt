@@ -46,16 +46,16 @@ object VirtualTeamInventory: Listener {
 
     private fun interactVirtualItemHandler(itemStack: ItemStack) {
         when(val material = itemStack.type) {
-            Material.COPPER_INGOT -> add(VirtualResourceType.METAL,0.5 * itemStack.amount)
-            Material.IRON_INGOT -> add(VirtualResourceType.METAL,1.5 * itemStack.amount)
-            Material.GOLD_INGOT -> add(VirtualResourceType.METAL,3.0 * itemStack.amount)
+            Material.COPPER_INGOT -> add(VirtualResourceType.METAL,1.0 * itemStack.amount)
+            Material.IRON_INGOT -> add(VirtualResourceType.METAL,2.0 * itemStack.amount)
+            Material.GOLD_INGOT -> add(VirtualResourceType.METAL,4.0 * itemStack.amount)
             Material.DIAMOND -> add(VirtualResourceType.METAL,9.0 * itemStack.amount)
-            Material.STONE -> add(VirtualResourceType.STONE,2.0 * itemStack.amount)
-            Material.COBBLESTONE -> add(VirtualResourceType.STONE,2.0 * itemStack.amount)
-            Material.DEEPSLATE -> add(VirtualResourceType.STONE,4.0 * itemStack.amount)
-            Material.COBBLED_DEEPSLATE -> add(VirtualResourceType.STONE,4.0 * itemStack.amount)
+            Material.STONE -> add(VirtualResourceType.STONE,3.0 * itemStack.amount)
+            Material.COBBLESTONE -> add(VirtualResourceType.STONE,3.0 * itemStack.amount)
+            Material.DEEPSLATE -> add(VirtualResourceType.STONE,6.0 * itemStack.amount)
+            Material.COBBLED_DEEPSLATE -> add(VirtualResourceType.STONE,6.0 * itemStack.amount)
             else -> {
-                if(material.isWood()) add(VirtualResourceType.WOOD,2.0 * itemStack.amount)
+                if(material.isWood()) add(VirtualResourceType.WOOD,3.0 * itemStack.amount)
             }
         }
 
