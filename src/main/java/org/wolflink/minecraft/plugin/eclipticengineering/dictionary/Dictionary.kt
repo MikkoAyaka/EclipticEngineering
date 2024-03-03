@@ -131,6 +131,7 @@ val WOOD_MATERIAL = setOf(
 )
 private val VIRTUAL_RESOURCE_MATERIAL = setOf(
     // 金属
+    Material.COPPER_INGOT,
     Material.IRON_INGOT,
     Material.GOLD_INGOT,
     Material.DIAMOND,
