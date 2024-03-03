@@ -72,6 +72,10 @@ object MeetingHandler {
             voter.sendMessage("$MESSAGE_PREFIX 未开始会议，无法进行投票。".toComponent())
             return
         }
+        if(voter !in gamingPlayers) {
+            voter.sendMessage("$MESSAGE_PREFIX 你不可以参与投票。".toComponent())
+            return
+        }
         voteHistory[voter.uniqueId] = beenVoted.uniqueId
         voter.sendMessage("$MESSAGE_PREFIX 你在投票纸上写下了 ${beenVoted.name} 的名字。<gray>(先前的已被擦除)".toComponent())
         Bukkit.broadcast("$MESSAGE_PREFIX <green>${voter.name} 完成了投票。".toComponent())
@@ -84,6 +88,10 @@ object MeetingHandler {
     fun abstain(voter: Player) {
         if(!available) {
             voter.sendMessage("$MESSAGE_PREFIX 未开始会议，无法弃权。".toComponent())
+            return
+        }
+        if(voter !in gamingPlayers) {
+            voter.sendMessage("$MESSAGE_PREFIX 你不可以参与投票。".toComponent())
             return
         }
         voteHistory[voter.uniqueId] = null
