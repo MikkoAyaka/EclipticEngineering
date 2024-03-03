@@ -16,6 +16,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.monster.StrategyDecider
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.BuildMenuItem
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.PioneerBook
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DayNightHandler
+import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.disguise.ToBeDisguiser
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.goal.GoalHolder
 import org.wolflink.minecraft.wolfird.framework.gamestage.stage.Stage
 
@@ -29,7 +30,7 @@ class GameStage(stageHolder: StageHolder): Stage("游戏阶段",stageHolder) {
     override fun onEnter() {
         initGameWorld()
         // 随机一名玩家作为内鬼
-        Bukkit.getOnlinePlayers().filter { it.gameMode == GameMode.ADVENTURE }.randomOrNull()?.asDisguiser()
+        ToBeDisguiser.applyDisguiser()
         Bukkit.getOnlinePlayers()
             .filter { it.gameMode == GameMode.ADVENTURE }
             .forEach {

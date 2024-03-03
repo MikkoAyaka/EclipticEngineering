@@ -7,6 +7,9 @@ import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.MeetingHandler
+import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.disguise.ToBeDisguiser
+import org.wolflink.minecraft.plugin.eclipticengineering.stage.StageHolder
+import org.wolflink.minecraft.plugin.eclipticengineering.stage.WaitStage
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 
 object VoteCommand: CommandExecutor {
@@ -15,6 +18,16 @@ object VoteCommand: CommandExecutor {
     }
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if(sender !is Player) return false
+        if(args.getOrNull(0) == "disguiser") {
+            if(StageHolder.thisStage !is WaitStage) {
+                sender.sendMessage("$MESSAGE_PREFIX 当前不在等待阶段，无法成为内鬼。".toComponent())
+                return false
+            } else {
+                ToBeDisguiser.toBeDisguiser(sender)
+                sender.sendMessage("$MESSAGE_PREFIX 深渊听到了你的诉说，你成为幽匿伪装者的概率提高了。".toComponent())
+                return true
+            }
+        }
         if(args.getOrNull(0) == "vote") {
             val beenVotedName = args.getOrNull(1) ?: run {
                 sender.sendMessage("$MESSAGE_PREFIX 请输入你要投票的玩家ID。".toComponent())
