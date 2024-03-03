@@ -20,6 +20,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.onlinePlayers
 import org.wolflink.minecraft.plugin.eclipticengineering.interaction.Counter
+import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.disguise.DisguiseHandler
 import org.wolflink.minecraft.plugin.eclipticengineering.utils.RandomAPI
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.register
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
@@ -45,6 +46,7 @@ class PreGameStage(stageHolder: StageHolder) : Stage("搜集阶段", stageHolder
         removeWalls()
         PreGameListener.register(EclipticEngineering.instance)
         onlinePlayers.forEach {
+            DisguiseHandler.disguise(it)
             it.teleport(Config.lobbyLocation)
             it.sendActionBar("$MESSAGE_PREFIX 在倒计时结束前，尽量多搜集些物资吧，接下来就要正式出发了。".toComponent())
             it.playSound(it, Sound.ENTITY_VILLAGER_AMBIENT, 1f, 1f)
