@@ -4,9 +4,11 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.bukkit.Bukkit
 import org.bukkit.Sound
+import org.bukkit.entity.Monster
 import org.bukkit.entity.Player
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
+import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.scriptKill
@@ -42,6 +44,7 @@ object MeetingHandler {
             player.sendMessage("$MESSAGE_PREFIX <yellow>今日已召开过会议，明天再来吧。".toComponent())
             return
         }
+        Config.gameWorld.entities.filterIsInstance<Monster>().filter { it.hasAI() }.forEach { it.remove() }
         DayNightHandler.stopTimer()
         available = true
         lastTriggerDays = DayNightHandler.days

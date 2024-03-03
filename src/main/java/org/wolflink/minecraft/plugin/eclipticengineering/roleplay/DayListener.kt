@@ -10,9 +10,10 @@ object DayListener: Listener {
     @EventHandler
     fun on(e: DayNightEvent) {
         if(e.nowTime == DayNightHandler.Status.DAY) {
-            Config.gameWorld.entities.forEach {
-                if(it is Monster) it.remove()
-            }
+            Config.gameWorld.entities
+                .filterIsInstance<Monster>()
+                .filter { it.hasAI() }
+                .forEach { it.remove() }
         }
     }
 }
