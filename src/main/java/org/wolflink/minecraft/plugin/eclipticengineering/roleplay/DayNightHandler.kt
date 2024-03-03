@@ -28,15 +28,17 @@ object DayNightHandler {
         private set(value) {
             if(field == value) return
             field = value
+            Bukkit.broadcast("$MESSAGE_PREFIX 距离最终决战还有 ${BOSS_DAY - field} 天时间。".toComponent())
             if(field == BOSS_DAY && StageHolder.thisStage is GameStage) {
                 StageHolder.next()
             }
         }
     enum class Status(val displayName: String,val description: String,val minutes: Int,val gameTime: Int) {
         DAWN("黎明","$MESSAGE_PREFIX 太阳即将升起，新的一天就要到来了。",1,23500),
-        DAY("白天","$MESSAGE_PREFIX 距离最终决战还有 ${BOSS_DAY - days} 天时间。",9,6000), // 新的一天从这里开始
+        DAY("白天","",9,6000), // 新的一天从这里开始
         HUSK("黄昏","$MESSAGE_PREFIX 太阳落山了，到处弥漫着阴森的气息，强力怪物们就要到来了。",1,12800),
-        NIGHT("夜晚","$MESSAGE_PREFIX 尽快回到居住屋吧，当然，你也可以不回去。",3,18000)
+        NIGHT("夜晚","$MESSAGE_PREFIX 尽快回到居住屋吧，当然，你也可以不回去。",3,18000);
+        fun next() = entries[(this.ordinal+1) % entries.size]
     }
     var status = Status.NIGHT
         private set(value) {
@@ -77,15 +79,34 @@ object DayNightHandler {
         available = true
         status = Status.DAY
         if(Config.debugMode) days = 4
-        EEngineeringScope.launch { dayNightPass() }
+        EEngineeringScope.launch { startTimer() }
     }
     fun stop() {
         available = false
+        stopTimer()
     }
-    private suspend fun dayNightPass() {
-        while (available) {
-            delay(1000L * 60 * status.minutes)
-            status = Status.entries[(status.ordinal+1) % Status.entries.size]
+    //当前状态已持续时间(秒)
+    private var statusSeconds = 0
+    private var timePass = false
+    /**
+     * 开始记时
+     */
+    suspend fun startTimer() {
+        timePass = true
+        while (timePass) {
+            delay(1000)
+            statusSeconds++
+            if(statusSeconds >= status.minutes * 60) {
+                statusSeconds = 0
+                status = status.next()
+            }
         }
+    }
+
+    /**
+     * 停止计时
+     */
+    fun stopTimer() {
+        timePass = false
     }
 }

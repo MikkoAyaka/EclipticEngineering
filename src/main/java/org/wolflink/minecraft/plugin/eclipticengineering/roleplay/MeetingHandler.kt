@@ -42,6 +42,7 @@ object MeetingHandler {
             player.sendMessage("$MESSAGE_PREFIX <yellow>今日已召开过会议，明天再来吧。".toComponent())
             return
         }
+        DayNightHandler.stopTimer()
         available = true
         lastTriggerDays = DayNightHandler.days
         Bukkit.broadcast("$MESSAGE_PREFIX ${player.name} 召开了今日的会议，玩家们将陆续到达会议大厅，请尽快入座。<gray>(/eev vote ID 进行投票，/eev abstain 弃权)".toComponent())
@@ -59,6 +60,7 @@ object MeetingHandler {
         },20L * 60 * MEETING_TIME_MINUTES)
     }
     fun endMeeting() {
+        EEngineeringScope.launch { DayNightHandler.startTimer() }
         available = false
         val mostVotePlayer = judgment() ?: return
         mostVotePlayer.scriptKill()
