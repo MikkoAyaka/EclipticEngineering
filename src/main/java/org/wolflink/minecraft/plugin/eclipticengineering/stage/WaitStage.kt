@@ -37,6 +37,7 @@ class WaitStage(stageHolder: StageHolder): Stage("等待阶段",stageHolder) {
             it.setGameRule(GameRule.SHOW_DEATH_MESSAGES,false) // 无死亡通知(插件接管
             it.setGameRule(GameRule.PLAYERS_SLEEPING_PERCENTAGE,200) // 睡觉无法跳过夜晚
             it.setGameRule(GameRule.DO_DAYLIGHT_CYCLE,false)// 禁止昼夜更替
+            it.setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS,false)// 关闭成就提示
             it.difficulty = Difficulty.PEACEFUL
         }
     }
