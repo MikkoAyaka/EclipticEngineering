@@ -10,6 +10,11 @@ object Config {
     val structureMenuCmd = "dm open 结构详情 %player_name%"
     val mainMenuCmd = "dm open 据点看板 %player_name%"
     val forgeMenuCmd = "dm open 锻造菜单 %player_name%"
+    val bossItemCmd = "ecomobs give %player_name% sp_warden"
+    private val spawnBossCmd = "ecomobs spawn sp_warden "
+    fun getSpawnBossCmd(location: Location):String {
+        return spawnBossCmd+"${location.blockX} ${location.blockY} ${location.blockZ}"
+    }
     val lobbyWorldName = "spawn"
     val gameWorldName = "world"
     val lobbyWallStrings = listOf(
