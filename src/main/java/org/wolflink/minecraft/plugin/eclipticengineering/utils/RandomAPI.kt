@@ -2,6 +2,7 @@ package org.wolflink.minecraft.plugin.eclipticengineering.utils
 
 import java.util.Random
 
+@Deprecated("影响性能")
 val RandomAPI = Random()
 
 /**

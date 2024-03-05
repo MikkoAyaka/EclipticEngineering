@@ -14,13 +14,12 @@ import org.wolflink.minecraft.plugin.eclipticengineering.utils.BlockAPI
 import java.util.*
 
 class OceanSpawnStrategy(spawnerAttribute: SpawnerAttribute) : SpawnStrategy(spawnerAttribute) {
-    private val random = Random()
     override fun isApplicable(player: Player): Boolean {
         return BlockAPI.checkIsOcean(player.location)
     }
 
-    override fun spawn(player: Player, triedCount: Int) {
-        if (triedCount <= 0) return
+    override fun spawn(player: Player,mobAmount: Int, triedTimes: Int) {
+        if (triedTimes <= 0) return
         val world = player.world
         val x = player.location.blockX
         val y = player.location.blockY
@@ -29,7 +28,7 @@ class OceanSpawnStrategy(spawnerAttribute: SpawnerAttribute) : SpawnStrategy(spa
         val newZ = z + random.nextInt(SAFE_RADIUS, SAFE_RADIUS + 10)
         var newY = y + random.nextInt(-4, 4)
         if (player.world.getBlockAt(newX, newY, newZ).type.isSolid()) {
-            spawn(player, triedCount - 1)
+            spawn(player, triedTimes - 1)
             return
         }
         if (newY > player.world.getHighestBlockYAt(newX, newZ)) newY = player.world.getHighestBlockYAt(newX, newZ)
@@ -43,27 +42,36 @@ class OceanSpawnStrategy(spawnerAttribute: SpawnerAttribute) : SpawnStrategy(spa
                 ) { entity: Entity -> entity.type == EntityType.PLAYER }
                     .isEmpty()
             ) {
-                spawn(player, triedCount - 1)
+                spawn(player, triedTimes - 1)
                 return@Runnable
             }
             val entityType = if (random.nextDouble() < 0.85) EntityType.DROWNED else EntityType.GUARDIAN
-            val monster = world.spawnEntity(summonLocation, entityType) as Monster
-            AttributeAPI.multiplyAttribute(
-                monster, "o_health",
-                Attribute.GENERIC_MAX_HEALTH, spawnerAttribute.healthMultiple
-            )
-            monster.health = monster.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!.value
-            AttributeAPI.multiplyAttribute(
-                monster, "o_speed",
-                Attribute.GENERIC_MOVEMENT_SPEED, spawnerAttribute.movementMultiple
-            )
-            AttributeAPI.multiplyAttribute(
-                monster, "o_attack",
-                Attribute.GENERIC_ATTACK_DAMAGE, spawnerAttribute.damageMultiple
-            )
-            appendMetadata(player, monster)
-            callEvent(player, monster)
+            repeat(mobAmount) {
+                singleSpawn(player,summonLocation,entityType)
+            }
         })
+    }
+
+    /**
+     * 生成单个怪物
+     */
+    override fun singleSpawn(player: Player, location: Location, mobType: EntityType) {
+        val monster = location.world.spawnEntity(location, mobType) as Monster
+        AttributeAPI.multiplyAttribute(
+            monster, "o_health",
+            Attribute.GENERIC_MAX_HEALTH, spawnerAttribute.healthMultiple
+        )
+        monster.health = monster.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!.value
+        AttributeAPI.multiplyAttribute(
+            monster, "o_speed",
+            Attribute.GENERIC_MOVEMENT_SPEED, spawnerAttribute.movementMultiple
+        )
+        AttributeAPI.multiplyAttribute(
+            monster, "o_attack",
+            Attribute.GENERIC_ATTACK_DAMAGE, spawnerAttribute.damageMultiple
+        )
+        appendMetadata(player, monster)
+        callEvent(player, monster)
     }
 
     companion object {

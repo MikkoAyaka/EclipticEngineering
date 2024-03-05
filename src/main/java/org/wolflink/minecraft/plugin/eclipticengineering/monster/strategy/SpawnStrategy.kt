@@ -1,13 +1,16 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.monster.strategy
 
 import org.bukkit.Bukkit
+import org.bukkit.Location
 import org.bukkit.entity.Entity
+import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
 import org.bukkit.metadata.FixedMetadataValue
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.META_MONSTER_BELONG_PLAYER
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.SpawnerAttribute
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.SpecialSpawnEntityEvent
+import java.util.Random
 
 /**
  * 怪物生成策略
@@ -15,6 +18,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.monster.SpecialSpawnEnt
  */
 abstract class SpawnStrategy(val spawnerAttribute: SpawnerAttribute) {
 
+    protected val random = Random()
     /**
      * 判断玩家是否适合应用该刷怪策略
      */
@@ -25,11 +29,16 @@ abstract class SpawnStrategy(val spawnerAttribute: SpawnerAttribute) {
      * 异步计算，同步生成
      * 异常重试 5 次
      */
-    fun spawn(player: Player) {
-        spawn(player, 5)
+    fun spawn(player: Player,mobAmount: Int) {
+        spawn(player, mobAmount,5)
     }
 
-    abstract fun spawn(player: Player, triedCount: Int)
+    /**
+     * 生成单个怪物
+     */
+    protected abstract fun singleSpawn(player: Player, location: Location, mobType: EntityType)
+
+    abstract fun spawn(player: Player, mobAmount: Int, triedTimes: Int)
 
     /**
      * 为生成的怪物附加额外信息

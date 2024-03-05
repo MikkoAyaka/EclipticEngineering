@@ -137,7 +137,7 @@ object StrategyDecider {
             if (!player.isOnline || player !in gamingPlayers) continue
             val location = player.location
             val nearbyPlayerAmount = getHuddlePlayersAmount(location)
-            if (Math.random() < getSpawnEfficiency(nearbyPlayerAmount)) value.spawn(player)
+            if (Math.random() < getSpawnEfficiency(nearbyPlayerAmount)) value.spawn(player, spawnerAttribute.spawnAmount)
         }
     }
 

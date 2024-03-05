@@ -13,12 +13,37 @@ import java.util.concurrent.ThreadLocalRandom
 
 class PlayerFocusSpawnStrategy(spawnerAttribute: SpawnerAttribute) : SpawnStrategy(spawnerAttribute) {
     override fun isApplicable(player: Player): Boolean {
-        // TODO 暂时不需要额外检测
         return true
     }
-
-    public override fun spawn(player: Player, triedCount: Int) {
-        if (triedCount <= 0) return
+    override fun singleSpawn(player: Player,location: Location,mobType: EntityType) {
+        val world = location.world
+        val entity = world.spawnEntity(location, mobType)
+        if (mobType == EntityType.RABBIT) {
+            val rabbit = entity as Rabbit
+            rabbit.rabbitType = Rabbit.Type.THE_KILLER_BUNNY
+        } else if (mobType == EntityType.CREEPER) {
+            val creeper = entity as Creeper
+            if (random.nextDouble() < 0.06) creeper.isPowered = true
+        } else if (entity is Monster) {
+            AttributeAPI.multiplyAttribute(
+                entity, "pf_health",
+                Attribute.GENERIC_MAX_HEALTH, spawnerAttribute.healthMultiple
+            )
+            entity.health = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!.value
+            AttributeAPI.multiplyAttribute(
+                entity, "pf_speed",
+                Attribute.GENERIC_MOVEMENT_SPEED, spawnerAttribute.movementMultiple
+            )
+            AttributeAPI.multiplyAttribute(
+                entity, "pf_attack",
+                Attribute.GENERIC_ATTACK_DAMAGE, spawnerAttribute.damageMultiple
+            )
+        }
+        appendMetadata(player, entity)
+        callEvent(player, entity)
+    }
+    override fun spawn(player: Player,mobAmount: Int, triedTimes: Int) {
+        if (triedTimes <= 0) return
         val locList: MutableList<Location> = ArrayList()
         val firstLoc = player.location
         val available = booleanArrayOf(true)
@@ -28,7 +53,7 @@ class PlayerFocusSpawnStrategy(spawnerAttribute: SpawnerAttribute) : SpawnStrate
             if (!available[0]) return@Runnable
             val playerLoc = player.location
             // 与初始坐标不在同一世界
-            if (firstLoc.getWorld() !== playerLoc.getWorld()) {
+            if (firstLoc.world !== playerLoc.world) {
                 available[0] = false
                 return@Runnable
             }
@@ -65,43 +90,23 @@ class PlayerFocusSpawnStrategy(spawnerAttribute: SpawnerAttribute) : SpawnStrate
             val goalLocation: Location = LocationAPI.getLocationByAngle(averLocation, randYaw.toDouble(), randDistance)
             val summonLocation: Location? = LocationAPI.getNearestSurface(goalLocation, 16)
             if (summonLocation == null) {
-                spawn(player, triedCount - 1)
+                spawn(player, triedTimes - 1)
                 return@mainR
             }
             Bukkit.getScheduler().runTask(EclipticEngineering.instance,Runnable subR@{
-                val world = firstLoc.getWorld()!!
+                val world = firstLoc.world!!
                 if (!world.getNearbyEntities(
                         summonLocation, 8.0, 4.0, 8.0
                     ) { entity: Entity -> entity.type == EntityType.PLAYER }.isEmpty()
                 ) {
-                    spawn(player, triedCount - 1)
+                    spawn(player, triedTimes - 1)
                     return@subR
                 }
                 val entityType: EntityType = spawnerAttribute.randomType()
-                val entity = world.spawnEntity(summonLocation, entityType)
-                if (entityType == EntityType.RABBIT) {
-                    val rabbit = entity as Rabbit
-                    rabbit.rabbitType = Rabbit.Type.THE_KILLER_BUNNY
-                } else if (entityType == EntityType.CREEPER) {
-                    val creeper = entity as Creeper
-                    if (random.nextDouble() < 0.06) creeper.isPowered = true
-                } else if (entity is Monster) {
-                    AttributeAPI.multiplyAttribute(
-                        entity, "pf_health",
-                        Attribute.GENERIC_MAX_HEALTH, spawnerAttribute.healthMultiple
-                    )
-                    entity.health = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!.value
-                    AttributeAPI.multiplyAttribute(
-                        entity, "pf_speed",
-                        Attribute.GENERIC_MOVEMENT_SPEED, spawnerAttribute.movementMultiple
-                    )
-                    AttributeAPI.multiplyAttribute(
-                        entity, "pf_attack",
-                        Attribute.GENERIC_ATTACK_DAMAGE, spawnerAttribute.damageMultiple
-                    )
+                // 批量生成
+                repeat(mobAmount) {
+                    singleSpawn(player,summonLocation,entityType)
                 }
-                appendMetadata(player, entity)
-                callEvent(player, entity)
             })
         }, 20 * 3L)
     }

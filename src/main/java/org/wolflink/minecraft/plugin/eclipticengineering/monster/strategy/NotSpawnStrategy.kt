@@ -1,5 +1,7 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.monster.strategy
 
+import org.bukkit.Location
+import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.SpawnerAttribute
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.foothold.LivingHouse
@@ -14,6 +16,12 @@ class NotSpawnStrategy(spawnerAttribute: SpawnerAttribute) : SpawnStrategy(spawn
         return livingHouse?.zone?.contains(player.location) == true || meetingPlace?.zone?.contains(player.location) == true
     }
 
-    override fun spawn(player: Player, triedCount: Int) {
+    override fun spawn(player: Player, mobAmount: Int, triedTimes: Int) {
+    }
+
+    /**
+     * 生成单个怪物
+     */
+    override fun singleSpawn(player: Player, location: Location, mobType: EntityType) {
     }
 }

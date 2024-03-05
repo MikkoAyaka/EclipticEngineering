@@ -13,6 +13,8 @@ import java.util.concurrent.ThreadLocalRandom
  */
 
 class SpawnerAttribute(eeDifficulty: EEDifficulty) {
+    // 每次生成的数量
+    var spawnAmount = 0
     var spawnPeriodSecs = 0
         private set
         get() {
@@ -40,10 +42,11 @@ class SpawnerAttribute(eeDifficulty: EEDifficulty) {
     init {
         when (eeDifficulty) {
             EEDifficulty.NORMAL -> { // 常规
-                healthMultiple = 0.8
+                spawnAmount = 8
+                healthMultiple = 3.0
                 movementMultiple = 1.0
-                damageMultiple = 0.6
-                spawnPeriodSecs = 15
+                damageMultiple = 1.0
+                spawnPeriodSecs = 90
                 weightMap[EntityType.ZOMBIE] = 50
                 weightMap[EntityType.HUSK] = 50
                 weightMap[EntityType.ZOMBIE_VILLAGER] = 50

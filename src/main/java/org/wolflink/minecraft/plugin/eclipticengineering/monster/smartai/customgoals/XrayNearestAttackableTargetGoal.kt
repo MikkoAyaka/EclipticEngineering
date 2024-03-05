@@ -45,7 +45,7 @@ open class XrayNearestAttackableTargetGoal<T : LivingEntity>(
     init {
         randomInterval = reducedTickDelay(reciprocalChance)
         this.setFlags(EnumSet.of(Flag.TARGET))
-        targetConditions = TargetingConditions.forCombat().range(this.getFollowDistance()).selector(targetPredicate)
+        targetConditions = TargetingConditions.forCombat().range(this.followDistance).selector(targetPredicate)
         targetConditions.ignoreLineOfSight()
         if (mob.level().paperConfig().entities.entitiesTargetWithFollowRange) targetConditions.useFollowRange() // Paper
     }
