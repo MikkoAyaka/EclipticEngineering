@@ -65,9 +65,9 @@ class TowerArrow private constructor(blueprint: TowerArrowBlueprint, builder: Bu
                 "弓箭高台",
                 30,
                 5000,
-                2..5,
+                10..25,
                 1,
-                0.5,
+                0.75,
                 setOf(
                     VirtualRequirement(VirtualResourceType.WOOD,6),
                     VirtualRequirement(VirtualResourceType.STONE,4),

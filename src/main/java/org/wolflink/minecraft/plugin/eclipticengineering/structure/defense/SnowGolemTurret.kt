@@ -42,7 +42,7 @@ class SnowGolemTurret private constructor(blueprint: ElementalTurretBlueprint, b
             setGravity(false)
             velocity = vector.normalize().multiply(1.2)
             withParticle(Particle.SNOWFLAKE)
-            MetadataModifier.modifyEffect(this, PotionEffect(PotionEffectType.SLOW, 40, 1, false, false))
+            MetadataModifier.modifyEffect(this, PotionEffect(PotionEffectType.SLOW, 60, 1, false, false))
             MetadataModifier.modifyDamage(this, damage)
             EclipticEngineering.runTaskLater(40L) { remove() }
         }
@@ -71,7 +71,7 @@ class SnowGolemTurret private constructor(blueprint: ElementalTurretBlueprint, b
                 4500,
                 Vector(0, 7, 0),
                 2,
-                7..12,
+                20..30,
                 18,
                 setOf(
                     ItemRequirement("需要 1 陨铁矿石", SpecialIron.defaultItem.clone().apply { amount = 1 }),

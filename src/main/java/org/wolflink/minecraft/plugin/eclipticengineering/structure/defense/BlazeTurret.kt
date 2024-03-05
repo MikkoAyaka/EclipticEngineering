@@ -71,7 +71,7 @@ class BlazeTurret private constructor(blueprint: ElementalTurretBlueprint, build
                 4500,
                 Vector(0, 7, 0),
                 2,
-                7..12,
+                28..40,
                 18,
                 setOf(
                     ItemRequirement("需要 1 陨铁矿石", SpecialIron.defaultItem.clone().apply { amount = 1 }),
