@@ -20,9 +20,7 @@ class ElementalTurretBlueprint(
     structureName,
     buildSeconds,
     maxDurability,
-    setOf(
-        GameStructureTag.ENERGY_REQUIRED
-    ),
+    setOf(),
     repairConditions,
     buildConditions
 )
