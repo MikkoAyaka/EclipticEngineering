@@ -27,10 +27,10 @@ abstract class SpawnStrategy(val spawnerAttribute: SpawnerAttribute) {
     /**
      * 具体的刷怪算法
      * 异步计算，同步生成
-     * 异常重试 5 次
+     * 异常重试 10 次
      */
     fun spawn(player: Player,mobAmount: Int) {
-        spawn(player, mobAmount,5)
+        spawn(player, mobAmount,10)
     }
 
     /**

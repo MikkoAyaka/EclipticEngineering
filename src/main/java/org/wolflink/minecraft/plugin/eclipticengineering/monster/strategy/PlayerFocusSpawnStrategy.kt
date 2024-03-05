@@ -104,9 +104,9 @@ class PlayerFocusSpawnStrategy(spawnerAttribute: SpawnerAttribute) : SpawnStrate
                     spawn(player, triedTimes - 1)
                     return@subR
                 }
-                val entityType: EntityType = spawnerAttribute.randomType()
                 // 批量生成
                 repeat(mobAmount) {
+                    val entityType: EntityType = spawnerAttribute.randomType()
                     singleSpawn(player,summonLocation,entityType)
                 }
             })
@@ -114,7 +114,7 @@ class PlayerFocusSpawnStrategy(spawnerAttribute: SpawnerAttribute) : SpawnStrate
     }
 
     companion object {
-        private const val SAFE_RADIUS = 20
-        private const val MAX_RADIUS = 35
+        private const val SAFE_RADIUS = 25
+        private const val MAX_RADIUS = 40
     }
 }

@@ -30,7 +30,7 @@ object DayNightHandler {
             field = value
             Bukkit.broadcast("$MESSAGE_PREFIX 距离最终决战还有 ${BOSS_DAY - field} 天时间。".toComponent())
             if(field == BOSS_DAY && StageHolder.thisStage is GameStage) {
-                StageHolder.next()
+                EclipticEngineering.runTask { StageHolder.next() }
             }
         }
     enum class Status(val displayName: String,val description: String,val minutes: Int,val gameTime: Int) {

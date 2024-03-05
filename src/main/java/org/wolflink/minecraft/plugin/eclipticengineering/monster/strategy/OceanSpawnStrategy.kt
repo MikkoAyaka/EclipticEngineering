@@ -46,8 +46,8 @@ class OceanSpawnStrategy(spawnerAttribute: SpawnerAttribute) : SpawnStrategy(spa
                 spawn(player, triedTimes - 1)
                 return@Runnable
             }
-            val entityType = if (random.nextDouble() < 0.85) EntityType.DROWNED else EntityType.GUARDIAN
             repeat(mobAmount) {
+                val entityType = if (random.nextDouble() < 0.85) EntityType.DROWNED else EntityType.GUARDIAN
                 singleSpawn(player,summonLocation,entityType)
             }
         })
@@ -77,6 +77,6 @@ class OceanSpawnStrategy(spawnerAttribute: SpawnerAttribute) : SpawnStrategy(spa
     }
 
     companion object {
-        private const val SAFE_RADIUS = 8
+        private const val SAFE_RADIUS = 15
     }
 }
