@@ -104,15 +104,15 @@ object StrategyDecider {
     }
 
     /**
-     * 预期总时长 90 分钟，夜晚不计入
-     * 每1分钟 +1.0% 血量
-     * 每1分钟 +0.8% 攻击
+     * 预期总时长 60 分钟，夜晚不计入
+     * 每1分钟 +2.0% 血量
+     * 每1分钟 +1.2% 攻击
      */
     private fun updateAttribute() {
         // 夜晚不操作属性，否则会因为覆写 getter 溢出
         if(DayNightHandler.status == DayNightHandler.Status.NIGHT) return
-        spawnerAttribute.healthMultiple += 0.01
-        spawnerAttribute.damageMultiple += 0.008
+        spawnerAttribute.healthMultiple += 0.02
+        spawnerAttribute.damageMultiple += 0.012
     }
 
     private fun getSpawnEfficiency(playerAmount: Int): Double {
