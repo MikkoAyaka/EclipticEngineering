@@ -5,6 +5,7 @@ import org.bukkit.Location
 import org.bukkit.attribute.Attribute
 import org.bukkit.entity.*
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
+import org.wolflink.minecraft.plugin.eclipticengineering.GameRoom
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.SpawnerAttribute
 import org.wolflink.minecraft.plugin.eclipticengineering.utils.AttributeAPI
 import org.wolflink.minecraft.plugin.eclipticengineering.utils.LocationAPI
@@ -16,6 +17,7 @@ class PlayerFocusSpawnStrategy(spawnerAttribute: SpawnerAttribute) : SpawnStrate
         return true
     }
     override fun singleSpawn(player: Player,location: Location,mobType: EntityType) {
+        if(GameRoom.getFoothold()?.zone?.contains(location) == true) return
         val world = location.world
         val entity = world.spawnEntity(location, mobType)
         if (mobType == EntityType.RABBIT) {

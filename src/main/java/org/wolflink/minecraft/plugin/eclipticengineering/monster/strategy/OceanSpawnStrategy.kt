@@ -8,6 +8,7 @@ import org.bukkit.entity.EntityType
 import org.bukkit.entity.Monster
 import org.bukkit.entity.Player
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
+import org.wolflink.minecraft.plugin.eclipticengineering.GameRoom
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.SpawnerAttribute
 import org.wolflink.minecraft.plugin.eclipticengineering.utils.AttributeAPI
 import org.wolflink.minecraft.plugin.eclipticengineering.utils.BlockAPI
@@ -56,6 +57,7 @@ class OceanSpawnStrategy(spawnerAttribute: SpawnerAttribute) : SpawnStrategy(spa
      * 生成单个怪物
      */
     override fun singleSpawn(player: Player, location: Location, mobType: EntityType) {
+        if(GameRoom.getFoothold()?.zone?.contains(location) == true) return
         val monster = location.world.spawnEntity(location, mobType) as Monster
         AttributeAPI.multiplyAttribute(
             monster, "o_health",
