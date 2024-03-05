@@ -2,7 +2,6 @@ package org.wolflink.minecraft.plugin.eclipticengineering.roleplay.disguise
 
 import org.bukkit.entity.Player
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.asDisguiser
-import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.onlinePlayers
 
 object ToBeDisguiser {

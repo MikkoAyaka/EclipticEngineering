@@ -8,7 +8,6 @@ depend:
   - WolfirdFramework
   - Citizens
   - ProRPGItems
-  - LibsDisguises
 commands:
   ee-build:
     aliases: eeb

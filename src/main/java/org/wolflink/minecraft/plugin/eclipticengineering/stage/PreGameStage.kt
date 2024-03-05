@@ -1,14 +1,12 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.stage
 
 import kotlinx.coroutines.launch
-import net.citizensnpcs.api.event.NPCClickEvent
 import net.citizensnpcs.api.event.NPCLeftClickEvent
 import net.citizensnpcs.api.event.NPCRightClickEvent
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.block.Container
 import org.bukkit.event.EventHandler
-import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
@@ -20,7 +18,6 @@ import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.onlinePlayers
 import org.wolflink.minecraft.plugin.eclipticengineering.interaction.Counter
-import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.disguise.DisguiseHandler
 import org.wolflink.minecraft.plugin.eclipticengineering.utils.RandomAPI
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.register
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
@@ -46,7 +43,6 @@ class PreGameStage(stageHolder: StageHolder) : Stage("搜集阶段", stageHolder
         removeWalls()
         PreGameListener.register(EclipticEngineering.instance)
         onlinePlayers.forEach {
-            DisguiseHandler.disguise(it)
             it.teleport(Config.lobbyLocation)
             it.sendActionBar("$MESSAGE_PREFIX 在倒计时结束前，尽量多搜集些物资吧，接下来就要正式出发了。".toComponent())
             it.playSound(it, Sound.ENTITY_VILLAGER_AMBIENT, 1f, 1f)
@@ -66,7 +62,7 @@ class PreGameStage(stageHolder: StageHolder) : Stage("搜集阶段", stageHolder
     }
 }
 // 玩家平均开箱数量，用于计算概率
-private val averChestAmount = 20
+private const val averChestAmount = 20
 // 随机概率表 数量(在每次游戏中期望出现的次数) 物品(堆叠)
 private val chestItemRandomTable: Set<Pair<Double,ItemStack>> = setOf(
     10.0 to ItemStack(Material.COBWEB),
