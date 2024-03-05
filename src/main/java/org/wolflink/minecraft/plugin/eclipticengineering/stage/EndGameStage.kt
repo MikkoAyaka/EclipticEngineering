@@ -44,7 +44,7 @@ class EndGameStage(stageHolder: StageHolder): Stage("最终游戏阶段",stageHo
             it.playSound(it, Sound.ENTITY_WARDEN_ROAR,1f,0.8f)
             it.playSound(it, Sound.ENTITY_WITHER_SPAWN,1f,0.5f)
         }
-        val livingHouse = StructureRepository.findBy { it is LivingHouse }.first()
+        val livingHouse = StructureRepository.findBy { it is LivingHouse }.firstOrNull()
         // 内鬼存活而且已经完成目标
         if(disguiserPlayers.any {PlayerGoalHolder.hasFinished(it)}) {
             val disguiser = disguiserPlayers.random()
@@ -72,11 +72,11 @@ class EndGameStage(stageHolder: StageHolder): Stage("最终游戏阶段",stageHo
         } else {
             Bukkit.dispatchCommand(
                 Bukkit.getConsoleSender(),
-                Config.getSpawnBossCmd(livingHouse.builder.buildLocation.clone().add(0.0,50.0,0.0))
+                Config.getSpawnBossCmd(livingHouse?.builder?.buildLocation?.clone()?.add(0.0,50.0,0.0) ?: gamingPlayers.random().location)
             )
             Bukkit.broadcast("$MESSAGE_PREFIX <red>沉睡千年的灵魂即刻苏醒，开拓者们，协力战胜它！".toComponent())
         }
-        livingHouse.destroy()
+        livingHouse?.destroy()
     }
     override fun onLeave() {
         this.unregister()
