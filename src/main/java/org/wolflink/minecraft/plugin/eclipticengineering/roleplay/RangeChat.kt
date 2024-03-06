@@ -2,6 +2,7 @@ package org.wolflink.minecraft.plugin.eclipticengineering.roleplay
 
 import io.papermc.paper.event.player.AsyncChatEvent
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
+import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
@@ -13,6 +14,7 @@ object RangeChat: Listener {
     private const val CHAT_RANGE = 50
     @EventHandler(priority = EventPriority.HIGHEST)
     fun on(e: AsyncChatEvent) {
+        Bukkit.getConsoleSender().sendMessage("<white>${e.player.name} <gray>说 <white>".toComponent().append(e.message()))
         e.isCancelled = true
         val chatter = e.player
         onlinePlayers
