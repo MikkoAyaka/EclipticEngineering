@@ -34,11 +34,11 @@ class GameStage(stageHolder: StageHolder): Stage("游戏阶段",stageHolder) {
 
     /**
      * 时间奖励
-     * 每2分钟为玩家等级提升1级
+     * 每90秒为玩家等级提升1级
      */
     private suspend fun timeRewards() {
         while (stageHolder.thisStage == this) {
-            delay(1000 * 60 * 2)
+            delay(1000 * 90)
             EclipticEngineering.runTask {
                 gamingPlayers.forEach {
                     it.level += 1
