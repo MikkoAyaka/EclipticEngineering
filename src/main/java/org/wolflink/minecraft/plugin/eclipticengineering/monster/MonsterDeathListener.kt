@@ -6,11 +6,10 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityDeathEvent
 import org.bukkit.inventory.ItemStack
-import org.wolflink.minecraft.plugin.eclipticengineering.utils.RandomAPI
 import org.wolflink.minecraft.plugin.eclipticengineering.utils.toRandomDistribution
 import java.util.Random
 
-object MonsterDropItemListener: Listener {
+object MonsterDeathListener: Listener {
     private val random = Random()
     private const val DROP_CHANCE = 0.4
     private val dropTable = mapOf(
@@ -28,6 +27,8 @@ object MonsterDropItemListener: Listener {
         if(e.entity is Monster && random.nextDouble() <= DROP_CHANCE) {
             // 掉落资源
             e.entity.world.dropItemNaturally(e.entity.location, dropTable.random())
+            // 经验翻倍
+            e.droppedExp *= 2
         }
     }
 }

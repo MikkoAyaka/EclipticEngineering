@@ -10,7 +10,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.StructureTyp
 import org.wolflink.minecraft.plugin.eclipticengineering.interaction.*
 import org.wolflink.minecraft.plugin.eclipticengineering.metadata.MetadataHandler
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.CreatureSpawnListener
-import org.wolflink.minecraft.plugin.eclipticengineering.monster.MonsterDropItemListener
+import org.wolflink.minecraft.plugin.eclipticengineering.monster.MonsterDeathListener
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.smartai.SmartAIListener
 import org.wolflink.minecraft.plugin.eclipticengineering.papi.*
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.virtual.VirtualTeamInventory
@@ -72,7 +72,7 @@ class EclipticEngineering : JavaPlugin() {
         AuxiliaryBlockListener.register(this)
         StepFarmlandListener.register(this)
         DayListener.register(this)
-        MonsterDropItemListener.register(this)
+        MonsterDeathListener.register(this)
         RangeChat.register(this)
         // 注册防御塔监听器
         TowerArrow.BukkitListener.register(this)

@@ -1,11 +1,15 @@
 package org.wolflink.minecraft.plugin.eclipticengineering.stage
 
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.bukkit.Bukkit
 import org.bukkit.Difficulty
 import org.bukkit.GameMode
+import org.bukkit.Sound
 import org.bukkit.permissions.PermissionAttachment
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
+import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.ability.Ability
 import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
@@ -27,8 +31,25 @@ class GameStage(stageHolder: StageHolder): Stage("游戏阶段",stageHolder) {
         gameWorld.worldBorder.size = 800.0
         gameWorld.worldBorder.setCenter(0.0,0.0)
     }
+
+    /**
+     * 时间奖励
+     * 每2分钟为玩家等级提升1级
+     */
+    private suspend fun timeRewards() {
+        while (stageHolder.thisStage == this) {
+            delay(1000 * 60 * 2)
+            EclipticEngineering.runTask {
+                gamingPlayers.forEach {
+                    it.level += 1
+                    it.playSound(it,Sound.ENTITY_PLAYER_LEVELUP,0.5f,1f)
+                }
+            }
+        }
+    }
     override fun onEnter() {
         initGameWorld()
+        EEngineeringScope.launch { timeRewards() }
         // 随机一名玩家作为内鬼
         ToBeDisguiser.applyDisguiser()
         Bukkit.getOnlinePlayers()
