@@ -18,6 +18,7 @@ object RangeChat: Listener {
         e.isCancelled = true
         val chatter = e.player
         onlinePlayers
+            .filter { it.world == chatter.world }
             .filter { it.location.distance(chatter.location) <= CHAT_RANGE }
             .forEach {
                 if(it.hasLineOfSight(chatter) || it == chatter || it.location.distance(chatter.location) < CHAT_RANGE * 0.5) {
