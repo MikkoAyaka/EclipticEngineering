@@ -4,12 +4,9 @@ import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.attribute.Attribute
-import org.bukkit.attribute.AttributeModifier
 import org.bukkit.entity.EntityType
-import org.bukkit.entity.Warden
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
-import org.bukkit.event.entity.CreatureSpawnEvent
 import org.bukkit.event.entity.EntityDeathEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffect
@@ -18,12 +15,14 @@ import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
 import org.wolflink.minecraft.plugin.eclipticengineering.GameRoom
 import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
-import org.wolflink.minecraft.plugin.eclipticengineering.extension.*
+import org.wolflink.minecraft.plugin.eclipticengineering.extension.disguiserPlayers
+import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
+import org.wolflink.minecraft.plugin.eclipticengineering.extension.isDisguiser
+import org.wolflink.minecraft.plugin.eclipticengineering.extension.pioneerPlayers
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.StrategyDecider
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DayNightHandler
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.playergoal.PlayerGoalHolder
 import org.wolflink.minecraft.plugin.eclipticengineering.sculkinfection.OrnamentSculkInfection
-import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.foothold.LivingHouse
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.parsePapi
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.register
@@ -31,14 +30,13 @@ import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 import org.wolflink.minecraft.plugin.eclipticstructure.extension.unregister
 import org.wolflink.minecraft.plugin.eclipticstructure.repository.StructureRepository
 import org.wolflink.minecraft.wolfird.framework.gamestage.stage.Stage
-import java.util.UUID
 
 class EndGameStage(stageHolder: StageHolder): Stage("最终游戏阶段",stageHolder),Listener {
     override fun onEnter() {
         this.register(EclipticEngineering.instance)
         DayNightHandler.stop()
         Config.gameWorld.time = 14000
-        Bukkit.broadcast("$MESSAGE_PREFIX <#6326F2>?????</#6326F2> <red>已从幽匿深渊中苏醒...开拓者们，放..抵抗..空港<obf>.....</obf>".toComponent())
+        Bukkit.broadcast("$MESSAGE_PREFIX <#6326F2>?????</#6326F2> <red>即将从幽匿深渊中苏醒...开拓者们，放..抵抗..空港<obf>.....</obf>".toComponent())
         gamingPlayers.forEach {
             it.addPotionEffect(PotionEffect(PotionEffectType.DARKNESS,10 * 20,0))
             it.playSound(it, Sound.ENTITY_WARDEN_ROAR,1f,0.8f)
@@ -47,14 +45,9 @@ class EndGameStage(stageHolder: StageHolder): Stage("最终游戏阶段",stageHo
         val livingHouse = StructureRepository.findBy { it is LivingHouse }.firstOrNull()
         // 内鬼存活而且已经完成目标
         if(disguiserPlayers.any {PlayerGoalHolder.hasFinished(it)}) {
-            val disguiser = disguiserPlayers.random()
-            disguiser.playSound(disguiser,Sound.ENTITY_VILLAGER_YES,1f,1f)
-            disguiser.sendMessage("$MESSAGE_PREFIX 你拿到了<#ff3030>远古幽匿尖啸体</#ff3030>，是时候唤醒沉睡的灵魂了。".toComponent())
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(),Config.bossItemCmd.parsePapi(disguiser))
-            Bukkit.broadcast("$MESSAGE_PREFIX <red>幽匿伪装者在没被发现的情况下完成了所有任务！开拓者们即将迎来一场噩耗...做好觉悟吧！".toComponent())
+            giveBossItem()
             OrnamentSculkInfection.enable()
         } else if(disguiserPlayers.isNotEmpty()) {
-            Bukkit.broadcast("$MESSAGE_PREFIX <red>幽匿伪装者没能在规定时间内完成指标，在临死前决定带走几个人陪葬！".toComponent())
             disguiserPlayers.forEach {
                 if(pioneerPlayers.size >= 3) it.inventory.addItem(ItemStack(Material.TOTEM_OF_UNDYING))
                 if(pioneerPlayers.size >= 5) {
@@ -69,6 +62,7 @@ class EndGameStage(stageHolder: StageHolder): Stage("最终游戏阶段",stageHo
                 it.addPotionEffect(PotionEffect(PotionEffectType.SPEED,20 * 60 * 5,0,false,false))
                 it.addPotionEffect(PotionEffect(PotionEffectType.INCREASE_DAMAGE,20 * 60 * 5,0,false,false))
             }
+            giveBossItem()
         } else {
             Bukkit.dispatchCommand(
                 Bukkit.getConsoleSender(),
@@ -77,6 +71,12 @@ class EndGameStage(stageHolder: StageHolder): Stage("最终游戏阶段",stageHo
             Bukkit.broadcast("$MESSAGE_PREFIX <red>沉睡千年的灵魂即刻苏醒，开拓者们，协力战胜它！".toComponent())
         }
         livingHouse?.destroy()
+    }
+    private fun giveBossItem() {
+        val disguiser = disguiserPlayers.random()
+        disguiser.playSound(disguiser,Sound.ENTITY_VILLAGER_YES,1f,1f)
+        disguiser.sendMessage("$MESSAGE_PREFIX 你拿到了<#ff3030>远古幽匿尖啸体</#ff3030>，是时候唤醒沉睡的灵魂了。".toComponent())
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(),Config.bossItemCmd.parsePapi(disguiser))
     }
     override fun onLeave() {
         this.unregister()
