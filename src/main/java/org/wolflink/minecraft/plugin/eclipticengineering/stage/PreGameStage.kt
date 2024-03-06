@@ -65,6 +65,8 @@ class PreGameStage(stageHolder: StageHolder) : Stage("搜集阶段", stageHolder
 private const val averChestAmount = 20
 // 随机概率表 数量(在每次游戏中期望出现的次数) 物品(堆叠)
 private val chestItemRandomTable: Set<Pair<Double,ItemStack>> = setOf(
+    10.0 to ItemStack(Material.EXPERIENCE_BOTTLE,2),
+    5.0 to ItemStack(Material.LAPIS_LAZULI,2),
     10.0 to ItemStack(Material.COBWEB),
     10.0 to ItemStack(Material.ROTTEN_FLESH),
     10.0 to ItemStack(Material.SPIDER_EYE),
