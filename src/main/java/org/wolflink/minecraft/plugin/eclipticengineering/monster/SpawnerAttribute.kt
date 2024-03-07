@@ -47,12 +47,12 @@ class SpawnerAttribute(eeDifficulty: EEDifficulty) {
                 movementMultiple = 1.05
                 damageMultiple = 1.0
                 spawnPeriodSecs = 60
-                weightMap[EntityType.ZOMBIE] = 50
-                weightMap[EntityType.HUSK] = 50
+                weightMap[EntityType.ZOMBIE] = 60
+                weightMap[EntityType.HUSK] = 40
                 weightMap[EntityType.ZOMBIE_VILLAGER] = 50
-                weightMap[EntityType.SKELETON] = 20
-                weightMap[EntityType.STRAY] = 20
-                weightMap[EntityType.SILVERFISH] = 20
+                weightMap[EntityType.SKELETON] = 30
+                weightMap[EntityType.STRAY] = 10
+                weightMap[EntityType.SILVERFISH] = 10
                 weightMap[EntityType.SPIDER] = 40
                 weightMap[EntityType.CREEPER] = 20
             }

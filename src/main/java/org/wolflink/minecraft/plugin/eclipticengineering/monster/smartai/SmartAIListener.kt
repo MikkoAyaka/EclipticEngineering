@@ -11,9 +11,12 @@ import net.minecraft.world.entity.player.Player
 import org.bukkit.craftbukkit.v1_20_R3.entity.CraftEntity
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.wolflink.minecraft.plugin.eclipticengineering.GameRoom
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.SpecialSpawnEntityEvent
+import org.wolflink.minecraft.plugin.eclipticengineering.monster.smartai.customgoals.MoveToLocationGoal
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.smartai.customgoals.SelfExplosionGoal
 import org.wolflink.minecraft.plugin.eclipticengineering.monster.smartai.customgoals.XrayNearestAttackableTargetGoal
+
 
 /**
  * 更聪明的怪物AI
@@ -27,6 +30,9 @@ object SmartAIListener : Listener {
             addXrayAbility(craftEntity)
             fartherFollowDistance(craftEntity)
         }
+        if(craftEntity is PathfinderMob) {
+            footholdRush(craftEntity)
+        }
         if (craftEntity is Zombie) {
             enhanceZombie(craftEntity)
         } else if (craftEntity is Creeper) {
@@ -36,6 +42,9 @@ object SmartAIListener : Listener {
 
     private fun enhanceZombie(zombie: Zombie) {
 //        zombie.goalSelector.addGoal(1, ZombieBlockGoal(zombie))
+    }
+    private fun footholdRush(mob: PathfinderMob) {
+        mob.goalSelector.addGoal(1, MoveToLocationGoal(mob, GameRoom.getFootholdLocation() ?: return))
     }
 
     /**
