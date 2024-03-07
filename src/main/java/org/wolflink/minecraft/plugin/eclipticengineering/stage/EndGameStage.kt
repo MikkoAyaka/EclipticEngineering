@@ -34,7 +34,6 @@ import org.wolflink.minecraft.wolfird.framework.gamestage.stage.Stage
 class EndGameStage(stageHolder: StageHolder): Stage("最终游戏阶段",stageHolder),Listener {
     override fun onEnter() {
         this.register(EclipticEngineering.instance)
-        DayNightHandler.stop()
         Config.gameWorld.time = 14000
         Bukkit.broadcast("$MESSAGE_PREFIX <#6326F2>?????</#6326F2> <red>即将从幽匿深渊中苏醒...开拓者们，放..抵抗..空港<obf>.....</obf>".toComponent())
         gamingPlayers.forEach {

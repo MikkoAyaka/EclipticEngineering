@@ -19,7 +19,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.Disguiser
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.MainMenuItem
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.TaskBook
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DayListener
-import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DisguiserNotice
+import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.disguise.DisguiserNotice
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.RangeChat
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.playergoal.PlayerGoalHolder
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.StageHolder

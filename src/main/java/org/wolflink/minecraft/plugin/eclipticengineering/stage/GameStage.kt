@@ -20,6 +20,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.monster.StrategyDecider
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.BuildMenuItem
 import org.wolflink.minecraft.plugin.eclipticengineering.resource.item.PioneerBook
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DayNightHandler
+import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.disguise.ActivityRecorder
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.disguise.ToBeDisguiser
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.goal.GoalHolder
 import org.wolflink.minecraft.wolfird.framework.gamestage.stage.Stage
@@ -80,10 +81,13 @@ class GameStage(stageHolder: StageHolder): Stage("游戏阶段",stageHolder) {
         Bukkit.getScheduler().runTaskLater(EclipticEngineering.instance, Runnable {
             DayNightHandler.start()
         },20 * 5)
+        ActivityRecorder.enable()
         Bukkit.getScheduler().runTaskLater(EclipticEngineering.instance, Runnable {
             GoalHolder.init()
         },20 * 8)
     }
     override fun onLeave() {
+        DayNightHandler.stop()
+        ActivityRecorder.disable()
     }
 }
