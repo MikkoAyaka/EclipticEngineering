@@ -20,6 +20,7 @@ import org.wolflink.minecraft.plugin.eclipticengineering.requirement.AbilityCond
 import org.wolflink.minecraft.plugin.eclipticengineering.requirement.VirtualRequirement
 import org.wolflink.minecraft.plugin.eclipticengineering.structure.api.GameStructure
 import org.wolflink.minecraft.plugin.eclipticstructure.event.structure.StructureAvailableEvent
+import org.wolflink.minecraft.plugin.eclipticstructure.extension.toComponent
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.IStructureListener
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompanion
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
@@ -66,10 +67,10 @@ class RespawnBeacon private constructor(blueprint: RespawnBeaconBlueprint, build
             // 重生信标是否有重生次数
             if (nowChargeAmount == 0) continue
             val respawnPlayers = Bukkit.getOnlinePlayers()
-                .filter {
-                    it.gameMode == GameMode.SPECTATOR // 观察者模式
-                            && it.location.distance(builder.buildLocation) < 8 // 靠近重生信标
-                            && it.location.block.getRelative(0, -1, 0).type == Material.END_PORTAL_FRAME // 脚下是末地门框架
+                .filter { player ->
+                    player.gameMode == GameMode.SPECTATOR // 观察者模式
+                            && player.location.distance(builder.buildLocation) <= 6 // 靠近重生信标
+                            && !player.location.block.isSolid && !player.location.block.getRelative(0,1,0).isSolid // 有空间复活
                 }
             Bukkit.getScheduler().runTask(EclipticEngineering.instance, Runnable {
                 respawnPlayers.forEach { respawn(it) }
@@ -81,7 +82,7 @@ class RespawnBeacon private constructor(blueprint: RespawnBeaconBlueprint, build
     private fun respawn(player: Player) {
         if(player.wasScriptKilled()) {
             player.playSound(player,Sound.ENTITY_VILLAGER_NO,1f,1f)
-            player.sendMessage("$MESSAGE_PREFIX <yellow>你因为 会议投票/伪装者 而死去，无法复活。")
+            player.sendMessage("$MESSAGE_PREFIX <yellow>你因为 会议投票/伪装者 而死去，无法复活。".toComponent())
             return
         }
         if (nowChargeAmount > 0) {
