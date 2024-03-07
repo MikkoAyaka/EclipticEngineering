@@ -8,6 +8,8 @@ import java.util.*
 
 
 class MoveToLocationGoal(private val mob: PathfinderMob,private val targetLocation: Location): Goal() {
+    // 从怪物指向目的地坐标的向量(自然化后翻10倍)
+    private val vector = targetLocation.subtract(mob.bukkitEntity.location).toVector().normalize().multiply(10)
     // 是否已经接近过目标地点
     private var reached = false
     init {
@@ -17,13 +19,17 @@ class MoveToLocationGoal(private val mob: PathfinderMob,private val targetLocati
         return !mob.isPathFinding && !reached
     }
     override fun canContinueToUse(): Boolean {
-        return !isNearDestination()
+        return !isNearDestination() && mob.level().getNearestPlayer(mob, 10.0) == null
     }
     override fun start() {
-        mob.navigation.moveTo(targetLocation.x,targetLocation.y,targetLocation.z, 1.2)
+    }
+    override fun tick() {
+        mob.navigation.moveTo(vector.x,vector.y,vector.z, 1.2)
     }
     private fun isNearDestination(): Boolean {
-        return mob.bukkitMob.location.distance(targetLocation) < 10
+        val result = mob.bukkitMob.location.distance(targetLocation) < 10
+        if(result && !reached) reached = true
+        return result
     }
 
 }
