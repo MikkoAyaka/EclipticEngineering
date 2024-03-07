@@ -31,7 +31,7 @@ object StrategyDecider {
     /**
      * 判断抱团的半径(格)
      */
-    private const val HUDDLE_RADIUS = 12
+    private const val HUDDLE_RADIUS = 10
     private lateinit var spawnerAttribute: SpawnerAttribute
     private val subScheduler: SubScheduler = SubScheduler()
 
@@ -59,7 +59,7 @@ object StrategyDecider {
         gamingPlayers.forEach {
             it.showTitle(
                 Title.title(
-                    "".toComponent(), "<yellow>怪物们将在90秒后来袭，请做好准备...".toComponent(),
+                    "".toComponent(), "<yellow>怪物们即将来袭，请做好准备...".toComponent(),
                     Title.Times.times(Duration.ofMillis(400), Duration.ofMillis(1000), Duration.ofMillis(400))
                 )
             )
@@ -79,7 +79,7 @@ object StrategyDecider {
             gamingPlayers.forEach {
                 it.showTitle(
                     Title.title(
-                        "<red>它们来了！".toComponent(), "".toComponent(),
+                        "<red>怪物们出动了，准备战斗吧！".toComponent(), "".toComponent(),
                         Title.Times.times(Duration.ofMillis(400), Duration.ofMillis(1000), Duration.ofMillis(400))
                     )
                 )
@@ -104,15 +104,15 @@ object StrategyDecider {
     }
 
     /**
-     * 预期总时长 60 分钟，夜晚不计入
-     * 每1分钟 +2.0% 血量
-     * 每1分钟 +1.2% 攻击
+     * 预期总时长 30 分钟，夜晚不计入
+     * 每1分钟 +6% 血量
+     * 每1分钟 +4% 攻击
      */
     private fun updateAttribute() {
         // 夜晚不操作属性，否则会因为覆写 getter 溢出
         if(DayNightHandler.status == DayNightHandler.Status.NIGHT) return
-        spawnerAttribute.healthMultiple += 0.02
-        spawnerAttribute.damageMultiple += 0.012
+        spawnerAttribute.healthMultiple += 0.06
+        spawnerAttribute.damageMultiple += 0.04
     }
 
     private fun getSpawnEfficiency(playerAmount: Int): Double {
@@ -122,7 +122,7 @@ object StrategyDecider {
     private fun getHuddlePlayersAmount(location: Location): Int {
         var amount = 0
         for (player in gamingPlayers) {
-            if (player.world !== location.getWorld()) continue
+            if (player.world !== location.world) continue
             if (player.location.distance(location) <= HUDDLE_RADIUS) amount++
         }
         return amount

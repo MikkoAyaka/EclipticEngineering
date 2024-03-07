@@ -42,11 +42,11 @@ class SpawnerAttribute(eeDifficulty: EEDifficulty) {
     init {
         when (eeDifficulty) {
             EEDifficulty.NORMAL -> { // 常规
-                spawnAmount = 12
+                spawnAmount = 2
                 healthMultiple = 3.0
                 movementMultiple = 1.05
                 damageMultiple = 1.0
-                spawnPeriodSecs = 60
+                spawnPeriodSecs = 22
                 weightMap[EntityType.ZOMBIE] = 60
                 weightMap[EntityType.HUSK] = 40
                 weightMap[EntityType.ZOMBIE_VILLAGER] = 50

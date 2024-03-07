@@ -8,7 +8,9 @@ import org.bukkit.Bukkit
 import org.bukkit.Sound
 import org.wolflink.minecraft.plugin.eclipticengineering.EEngineeringScope
 import org.wolflink.minecraft.plugin.eclipticengineering.EclipticEngineering
+import org.wolflink.minecraft.plugin.eclipticengineering.GameRoom
 import org.wolflink.minecraft.plugin.eclipticengineering.config.Config
+import org.wolflink.minecraft.plugin.eclipticengineering.config.GameSettings
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.gamingPlayers
 import org.wolflink.minecraft.plugin.eclipticengineering.stage.GameStage
@@ -22,14 +24,13 @@ import java.time.Duration
  * 白天 16 分钟 夜晚 8 分钟
  */
 object DayNightHandler {
-    const val BOSS_DAY = 5
     // 游戏天数
     var days = 0
         private set(value) {
             if(field == value) return
             field = value
-            Bukkit.broadcast("$MESSAGE_PREFIX 距离最终决战还有 ${BOSS_DAY - field} 天时间。".toComponent())
-            if(field == BOSS_DAY && StageHolder.thisStage is GameStage) {
+            Bukkit.broadcast("$MESSAGE_PREFIX 距离最终决战还有 ${GameSettings.totalDays + 1 - field} 天时间。".toComponent())
+            if(field == GameSettings.totalDays+1 && StageHolder.thisStage is GameStage) {
                 EclipticEngineering.runTask { StageHolder.next() }
             }
         }
@@ -78,7 +79,7 @@ object DayNightHandler {
     fun start() {
         available = true
         status = Status.DAY
-        if(Config.debugMode) days = 4
+        if(Config.debugMode) days = GameSettings.totalDays
         EEngineeringScope.launch { startTimer() }
     }
     fun stop() {

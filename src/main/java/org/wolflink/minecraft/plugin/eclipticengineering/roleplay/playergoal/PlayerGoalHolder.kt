@@ -3,6 +3,7 @@ package org.wolflink.minecraft.plugin.eclipticengineering.roleplay.playergoal
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.wolflink.minecraft.plugin.eclipticengineering.config.GameSettings
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.isDisguiser
 import org.wolflink.minecraft.plugin.eclipticengineering.roleplay.DayNightEvent
@@ -31,15 +32,14 @@ object PlayerGoalHolder : Listener {
         KeepAlone::class.java,
         PickaxeKiller::class.java
     )
-    // 获胜所需完成目标数
-    const val DISGUISER_WIN_GOAL_COUNT = 2
+
     // 完成次数
     private val finishCounter = mutableMapOf<UUID,AtomicInteger>()
-    fun hasFinished(player: Player) = (finishCounter[player.uniqueId]?.get() ?: 0) >= DISGUISER_WIN_GOAL_COUNT
+    fun hasFinished(player: Player) = (finishCounter[player.uniqueId]?.get() ?: 0) >= GameSettings.disguiserWinGoalAmount
     fun addFinishCount(player: Player) {
         if(finishCounter[player.uniqueId] == null) finishCounter[player.uniqueId] = AtomicInteger(0)
         val count = finishCounter[player.uniqueId]!!.incrementAndGet()
-        if(count >= DISGUISER_WIN_GOAL_COUNT) player.sendMessage("$MESSAGE_PREFIX <green>你已完成指标，可以自由行动了，尽情捣乱吧！但不要被发现了。".toComponent())
+        if(count >= GameSettings.disguiserWinGoalAmount) player.sendMessage("$MESSAGE_PREFIX <green>你已完成指标，可以自由行动了，尽情捣乱吧！但不要被发现了。".toComponent())
     }
     private val disguiserGoals = mutableMapOf<UUID,PlayerGoal>()
     // 今日已刷新过目标的玩家，每日重置

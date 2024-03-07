@@ -2,6 +2,7 @@ package org.wolflink.minecraft.plugin.eclipticengineering.resource.item
 
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
+import org.wolflink.minecraft.plugin.eclipticengineering.config.GameSettings
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.Quality
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.SpecialItemType
 import org.wolflink.minecraft.plugin.eclipticengineering.extension.createSpecialItem
@@ -20,7 +21,7 @@ object PioneerBook: SpecialItem(
             "   ${SPLITER_COLOR}│ <#CCFFCC>目标",
             "",
             "    ${PRIMARY_TEXT_COLOR}建立并完善据点，利用防御塔巩固基地",
-            "    ${PRIMARY_TEXT_COLOR}比末影龙还要强大的 <#FF3333>BOSS</#FF3333> 将在 <yellow>第 ${DayNightHandler.BOSS_DAY} 天</yellow> 登场",
+            "    ${PRIMARY_TEXT_COLOR}比末影龙还要强大的 <#FF3333>BOSS</#FF3333> 将在 <yellow>第 ${GameSettings.totalDays+1} 天</yellow> 降临",
             "    ${PRIMARY_TEXT_COLOR}如果不能及时找出幽匿伪装者",
             "    ${PRIMARY_TEXT_COLOR}<#FF3333>BOSS</#FF3333> 将获得 <#7F00FF>史诗级强化</#7F00FF>",
             "",
@@ -30,7 +31,7 @@ object PioneerBook: SpecialItem(
             "    ${PRIMARY_TEXT_COLOR}幽匿伪装者正潜伏在你们之中，",
             "    ${PRIMARY_TEXT_COLOR}也许是一位，也许...是多个。",
 
-            "    ${PRIMARY_TEXT_COLOR}不论如何，一定要在第 ${DayNightHandler.BOSS_DAY} 天到来之前抓住他！",
+            "    ${PRIMARY_TEXT_COLOR}不论如何，一定要在第 ${GameSettings.totalDays+1} 天到来之前抓住他！",
             "",
             "   ${SPLITER_COLOR}│ <#66B2FF>提示",
             "",

@@ -4,6 +4,7 @@ import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
+import org.wolflink.minecraft.plugin.eclipticengineering.config.GameSettings
 import org.wolflink.minecraft.plugin.eclipticengineering.config.MESSAGE_PREFIX
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.Quality
 import org.wolflink.minecraft.plugin.eclipticengineering.dictionary.SpecialItemType
@@ -25,7 +26,7 @@ object DisguiserBook : InteractiveItem(
         "幽匿伪装者 帮助手册",
         false,
         listOf(
-            "    ${PRIMARY_TEXT_COLOR}获胜条件：完成至少 ${PlayerGoalHolder.DISGUISER_WIN_GOAL_COUNT} 个每日目标，并存活至第 ${DayNightHandler.BOSS_DAY} 天。",
+            "    ${PRIMARY_TEXT_COLOR}获胜条件：完成至少 ${GameSettings.disguiserWinGoalAmount} 个每日目标，并存活至第 ${GameSettings.totalDays+1} 天。",
             "",
             "    ${PRIMARY_TEXT_COLOR}幽匿伪装者拥有所有能力(不包括职业被动)，",
             "    ${PRIMARY_TEXT_COLOR}每天到来都会从帮助手册获得一个随机目标，",
