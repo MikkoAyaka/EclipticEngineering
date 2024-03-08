@@ -28,13 +28,15 @@ import org.wolflink.minecraft.plugin.eclipticstructure.structure.IStructureListe
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.StructureCompanion
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.blueprint.Blueprint
 import org.wolflink.minecraft.plugin.eclipticstructure.structure.builder.Builder
+import java.util.Random
 
 class MiningPlace private constructor(blueprint: GameStructureBlueprint, builder: Builder) :
     GameStructure(StructureType.MINING_PLACE, blueprint, builder, 1), IStructureListener {
     override val customListeners: List<IStructureListener> = listOf(this)
+    private val random = Random()
     private val blockResourceJob = SingletonJob {
         while (available) {
-            delay(1000 * RandomAPI.nextLong(6, 12))
+            delay(1000 * random.nextLong(3, 5))
             val location =
                 stoneLocations.filter { it.block.type == Material.STONE }.randomOrNull() ?: return@SingletonJob
             EclipticEngineering.runTask {
@@ -78,11 +80,10 @@ class MiningPlace private constructor(blueprint: GameStructureBlueprint, builder
         private val oreDistribution = mapOf(
             Material.COAL_ORE to 8,
             Material.COPPER_ORE to 5,
-            Material.IRON_ORE to 12,
+            Material.IRON_ORE to 10,
             Material.GOLD_ORE to 7,
-            Material.REDSTONE_ORE to 4,
             Material.LAPIS_ORE to 4,
-            Material.DIAMOND_ORE to 2
+            Material.DIAMOND_ORE to 3
         ).toRandomDistribution()
         private const val STRUCTURE_NAME = "采矿场"
         override fun supplier(blueprint: Blueprint, builder: Builder): MiningPlace {
@@ -101,13 +102,13 @@ class MiningPlace private constructor(blueprint: GameStructureBlueprint, builder
                     GameStructureTag.COMMON_RESOURCE_GENERATOR
                 ),
                 setOf(
-                    VirtualRequirement(VirtualResourceType.WOOD, 8),
-                    VirtualRequirement(VirtualResourceType.STONE, 8)
+                    VirtualRequirement(VirtualResourceType.WOOD, 15),
+                    VirtualRequirement(VirtualResourceType.STONE, 15)
                 ),
                 setOf(
-                    VirtualRequirement(VirtualResourceType.WOOD, 30),
-                    VirtualRequirement(VirtualResourceType.STONE, 30),
-                    VirtualRequirement(VirtualResourceType.METAL, 30),
+                    VirtualRequirement(VirtualResourceType.WOOD, 60),
+                    VirtualRequirement(VirtualResourceType.STONE, 60),
+                    VirtualRequirement(VirtualResourceType.METAL, 60),
                     AbilityCondition(Ability.BUILDING, 2)
                 )
             )
