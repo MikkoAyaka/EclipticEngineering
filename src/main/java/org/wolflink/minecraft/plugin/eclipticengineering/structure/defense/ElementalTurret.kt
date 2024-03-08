@@ -45,7 +45,7 @@ abstract class ElementalTurret(type:StructureType,blueprint: ElementalTurretBlue
                     RandomAPI.nextDouble(-1.5, 1.5) - displayEntity.location.z
                 )
                     .toVector()
-            shoot(displayEntity.location.clone().add(0.0, 2.0, 0.0), vector.normalize().multiply(1.2), damage)
+            shoot(displayEntity.location.clone().add(0.0, 2.0, 0.0), vector.normalize().multiply(1.6), damage)
         }
     }
     protected abstract fun playShootSound()
