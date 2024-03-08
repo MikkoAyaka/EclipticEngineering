@@ -87,6 +87,7 @@ abstract class ResourceBlock(
         if(!breakCheck(player)) return
         collectProgress += 1.0 / breakAmount
         player.playSound(player, harvestSound,1f,0.5f)
+        player.giveExp(8)
         if(collectProgress >= 1.0) collect()
     }
     // 冷却时间结束后方块变更为最终状态
