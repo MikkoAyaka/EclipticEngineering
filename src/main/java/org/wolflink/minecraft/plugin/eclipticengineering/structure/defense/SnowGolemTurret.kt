@@ -72,7 +72,7 @@ class SnowGolemTurret private constructor(blueprint: ElementalTurretBlueprint, b
                 Vector(0, 7, 0),
                 2,
                 20..30,
-                18,
+                24,
                 setOf(
                     ItemRequirement("需要 1 陨铁矿石", SpecialIron.defaultItem.clone().apply { amount = 1 }),
                 ),
