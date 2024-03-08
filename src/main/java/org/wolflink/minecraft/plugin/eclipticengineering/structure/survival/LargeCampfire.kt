@@ -44,8 +44,8 @@ class LargeCampfire private constructor(
                 30,
                 5000,
                 setOf(),
-                setOf(VirtualRequirement(VirtualResourceType.WOOD, 10)),
-                setOf(VirtualRequirement(VirtualResourceType.WOOD, 40),
+                setOf(VirtualRequirement(VirtualResourceType.WOOD, 15)),
+                setOf(VirtualRequirement(VirtualResourceType.WOOD, 60),
                     ItemRequirement("需要 1 打火石", ItemStack(Material.FLINT_AND_STEEL)),
                     AbilityCondition(Ability.BUILDING,2))
             )
@@ -55,7 +55,7 @@ class LargeCampfire private constructor(
     private suspend fun healTask() {
         while (available) {
             EclipticEngineering.runTask {
-                builder.buildLocation.getNearbyEntitiesByType(Player::class.java, 10.0).forEach {
+                builder.buildLocation.getNearbyEntitiesByType(Player::class.java, 16.0).forEach {
                     it.addPotionEffect(PotionEffect(PotionEffectType.REGENERATION, 20 * 5, 0))
                 }
             }
