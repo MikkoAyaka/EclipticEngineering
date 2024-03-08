@@ -92,7 +92,7 @@ object StrategyDecider {
         subScheduler.runTaskLaterAsync({
             spawnTask()
             spawnTimerTask()
-        }, 20L * spawnerAttribute.spawnPeriodSecs)
+        }, (20 * spawnerAttribute.spawnPeriodSecs).toLong())
     }
 
     private fun updateStrategyMap() {
@@ -107,12 +107,14 @@ object StrategyDecider {
      * 预期总时长 30 分钟，夜晚不计入
      * 每1分钟 +6% 血量
      * 每1分钟 +4% 攻击
+     * 每1分钟 刷怪间隔 -0.2 秒
      */
     private fun updateAttribute() {
         // 夜晚不操作属性，否则会因为覆写 getter 溢出
         if(DayNightHandler.status == DayNightHandler.Status.NIGHT) return
         spawnerAttribute.healthMultiple += 0.06
         spawnerAttribute.damageMultiple += 0.04
+        spawnerAttribute.spawnPeriodSecs -= 0.2
     }
 
     private fun getSpawnEfficiency(playerAmount: Int): Double {

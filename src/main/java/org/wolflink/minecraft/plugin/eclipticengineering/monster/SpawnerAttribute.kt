@@ -15,11 +15,10 @@ import java.util.concurrent.ThreadLocalRandom
 class SpawnerAttribute(eeDifficulty: EEDifficulty) {
     // 每次生成的数量
     var spawnAmount = 0
-    var spawnPeriodSecs = 0
-        private set
+    var spawnPeriodSecs = 0.0
         get() {
             // 夜晚刷怪效率增加
-            return if(DayNightHandler.status == DayNightHandler.Status.NIGHT) (field / 2.0).toInt()
+            return if(DayNightHandler.status == DayNightHandler.Status.NIGHT) field / 2.0
             else field
         }
     private val weightMap: MutableMap<EntityType, Int> = EnumMap(EntityType::class.java)
@@ -42,11 +41,11 @@ class SpawnerAttribute(eeDifficulty: EEDifficulty) {
     init {
         when (eeDifficulty) {
             EEDifficulty.NORMAL -> { // 常规
-                spawnAmount = 2
+                spawnAmount = 1
                 healthMultiple = 3.0
                 movementMultiple = 1.05
                 damageMultiple = 1.0
-                spawnPeriodSecs = 20
+                spawnPeriodSecs = 15.0
                 weightMap[EntityType.ZOMBIE] = 60
                 weightMap[EntityType.HUSK] = 40
                 weightMap[EntityType.ZOMBIE_VILLAGER] = 50
