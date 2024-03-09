@@ -69,6 +69,7 @@ class RespawnBeacon private constructor(blueprint: RespawnBeaconBlueprint, build
             val respawnPlayers = Bukkit.getOnlinePlayers()
                 .filter { player ->
                     player.gameMode == GameMode.SPECTATOR // 观察者模式
+                            && player.world == builder.buildLocation.world // 同一个世界
                             && player.location.distance(builder.buildLocation) <= 6 // 靠近重生信标
                             && !player.location.block.isSolid && !player.location.block.getRelative(0,1,0).isSolid // 有空间复活
                 }
