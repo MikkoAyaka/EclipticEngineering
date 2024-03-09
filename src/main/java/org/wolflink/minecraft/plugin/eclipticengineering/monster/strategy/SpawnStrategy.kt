@@ -25,19 +25,15 @@ abstract class SpawnStrategy(val spawnerAttribute: SpawnerAttribute) {
     abstract fun isApplicable(player: Player): Boolean
 
     /**
-     * 具体的刷怪算法
-     * 异步计算，同步生成
-     * 异常重试 10 次
-     */
-    fun spawn(player: Player,mobAmount: Int) {
-        spawn(player, mobAmount,10)
-    }
-
-    /**
      * 生成单个怪物
      */
     protected abstract fun singleSpawn(player: Player, location: Location, mobType: EntityType)
 
+    /**
+     * 具体的刷怪算法
+     * 异步计算，同步生成
+     * 异常重试 10 次
+     */
     abstract fun spawn(player: Player, mobAmount: Int, triedTimes: Int)
 
     /**

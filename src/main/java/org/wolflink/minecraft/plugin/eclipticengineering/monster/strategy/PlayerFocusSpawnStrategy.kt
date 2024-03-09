@@ -83,7 +83,7 @@ class PlayerFocusSpawnStrategy(spawnerAttribute: SpawnerAttribute) : SpawnStrate
             val averYaw = copyList.stream().map { obj: Location -> obj.yaw }
                 .reduce(0.0f, Float::plus) / copyList.size
             // TODO 暂时忽略 pitch，未来可以考虑引入
-            val averLocation = Location(firstLoc.getWorld(), averX, averY, averZ, averYaw, 0f)
+            val averLocation = Location(firstLoc.world, averX, averY, averZ, averYaw, 0f)
             val minYaw = averYaw - 45
             val maxYaw = averYaw + 45
             val random: ThreadLocalRandom = ThreadLocalRandom.current()
@@ -92,7 +92,7 @@ class PlayerFocusSpawnStrategy(spawnerAttribute: SpawnerAttribute) : SpawnStrate
             val goalLocation: Location = LocationAPI.getLocationByAngle(averLocation, randYaw.toDouble(), randDistance)
             val summonLocation: Location? = LocationAPI.getNearestSurface(goalLocation, 16)
             if (summonLocation == null) {
-                spawn(player, triedTimes - 1)
+                spawn(player, mobAmount,triedTimes - 1)
                 return@mainR
             }
             Bukkit.getScheduler().runTask(EclipticEngineering.instance,Runnable subR@{
@@ -101,7 +101,7 @@ class PlayerFocusSpawnStrategy(spawnerAttribute: SpawnerAttribute) : SpawnStrate
                         summonLocation, 8.0, 4.0, 8.0
                     ) { entity: Entity -> entity.type == EntityType.PLAYER }.isEmpty()
                 ) {
-                    spawn(player, triedTimes - 1)
+                    spawn(player, mobAmount,triedTimes - 1)
                     return@subR
                 }
                 // 批量生成

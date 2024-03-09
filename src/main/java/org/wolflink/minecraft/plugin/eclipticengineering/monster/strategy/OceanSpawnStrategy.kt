@@ -28,8 +28,8 @@ class OceanSpawnStrategy(spawnerAttribute: SpawnerAttribute) : SpawnStrategy(spa
         val newX = x + random.nextInt(SAFE_RADIUS, SAFE_RADIUS + 10)
         val newZ = z + random.nextInt(SAFE_RADIUS, SAFE_RADIUS + 10)
         var newY = y + random.nextInt(-4, 4)
-        if (player.world.getBlockAt(newX, newY, newZ).type.isSolid()) {
-            spawn(player, triedTimes - 1)
+        if (player.world.getBlockAt(newX, newY, newZ).type.isSolid) {
+            spawn(player, mobAmount,triedTimes - 1)
             return
         }
         if (newY > player.world.getHighestBlockYAt(newX, newZ)) newY = player.world.getHighestBlockYAt(newX, newZ)
@@ -43,7 +43,7 @@ class OceanSpawnStrategy(spawnerAttribute: SpawnerAttribute) : SpawnStrategy(spa
                 ) { entity: Entity -> entity.type == EntityType.PLAYER }
                     .isEmpty()
             ) {
-                spawn(player, triedTimes - 1)
+                spawn(player,mobAmount,triedTimes - 1)
                 return@Runnable
             }
             repeat(mobAmount) {
